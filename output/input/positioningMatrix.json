@@ -13,26 +13,26 @@
     {
       "id": "pm-001",
       "gameName": "Dune: Awakening",
-      "xPosition": 8.0,
-      "yPosition": 7.0
+      "xPosition": 7.0,
+      "yPosition": 6.0
     },
     {
       "id": "pm-002",
       "gameName": "Conan Exiles",
-      "xPosition": 5.0,
-      "yPosition": 5.0
+      "xPosition": 4.0,
+      "yPosition": 4.0
     },
     {
       "id": "pm-003",
       "gameName": "Rust",
       "xPosition": 3.0,
-      "yPosition": 4.0
+      "yPosition": 5.0
     },
     {
       "id": "pm-004",
       "gameName": "Valheim",
-      "xPosition": 6.0,
-      "yPosition": 4.0
+      "xPosition": 5.0,
+      "yPosition": 3.0
     },
     {
       "id": "pm-005",
@@ -43,180 +43,216 @@
     {
       "id": "pm-006",
       "gameName": "Destiny 2",
-      "xPosition": 7.0,
+      "xPosition": 6.0,
       "yPosition": 9.0
     },
     {
       "id": "pm-007",
       "gameName": "The Elder Scrolls Online",
       "xPosition": 8.0,
-      "yPosition": 8.0
+      "yPosition": 7.0
     },
     {
       "id": "pm-008",
-      "gameName": "Ark: Survival Evolved",
-      "xPosition": 4.0,
-      "yPosition": 3.0
-    },
-    {
-      "id": "pm-009",
       "gameName": "Black Desert Online",
-      "xPosition": 7.0,
+      "xPosition": 5.0,
       "yPosition": 9.0
     },
     {
-      "id": "pm-010",
+      "id": "pm-009",
       "gameName": "Warframe",
       "xPosition": 6.0,
       "yPosition": 7.0
+    },
+    {
+      "id": "pm-010",
+      "gameName": "The Forest",
+      "xPosition": 4.0,
+      "yPosition": 2.0
+    },
+    {
+      "id": "pm-011",
+      "gameName": "Nightingale",
+      "xPosition": 7.0,
+      "yPosition": 4.0
+    },
+    {
+      "id": "pm-012",
+      "gameName": "Scum",
+      "xPosition": 3.0,
+      "yPosition": 3.0
     }
   ],
   "alternativeViews": [
     {
       "xAxis": {
         "axisName": "Monetization Model",
-        "lowLabel": "Initial Purchase Focus",
-        "highLabel": "Freemium Model"
+        "lowLabel": "Microtransactions & Battle Pass Focus",
+        "highLabel": "One-Time Purchases with Organic Updates"
       },
       "yAxis": {
         "axisName": "Content Cadence",
-        "lowLabel": "Static Experience",
-        "highLabel": "Dynamic Content Rollout"
+        "lowLabel": "Frequent Free Updates",
+        "highLabel": "Premium DLC-Driven Releases"
       },
       "positions": [
         {
-          "id": "pm-001",
+          "id": "av-001",
           "gameName": "Dune: Awakening",
-          "xPosition": 5.0,
-          "yPosition": 9.0
+          "xPosition": 6.0,
+          "yPosition": 5.0
         },
         {
-          "id": "pm-002",
+          "id": "av-002",
           "gameName": "Conan Exiles",
           "xPosition": 5.0,
-          "yPosition": 5.0
+          "yPosition": 6.0
         },
         {
-          "id": "pm-003",
+          "id": "av-003",
           "gameName": "Rust",
-          "xPosition": 2.0,
-          "yPosition": 5.0
+          "xPosition": 5.0,
+          "yPosition": 7.0
         },
         {
-          "id": "pm-004",
+          "id": "av-004",
           "gameName": "Valheim",
-          "xPosition": 2.0,
-          "yPosition": 5.0
+          "xPosition": 5.0,
+          "yPosition": 4.0
         },
         {
-          "id": "pm-005",
+          "id": "av-005",
           "gameName": "Star Wars: The Old Republic",
-          "xPosition": 10.0,
-          "yPosition": 10.0
+          "xPosition": 7.0,
+          "yPosition": 8.0
         },
         {
-          "id": "pm-006",
+          "id": "av-006",
           "gameName": "Destiny 2",
-          "xPosition": 5.0,
+          "xPosition": 8.0,
           "yPosition": 9.0
         },
         {
-          "id": "pm-007",
+          "id": "av-007",
           "gameName": "The Elder Scrolls Online",
-          "xPosition": 5.0,
-          "yPosition": 9.0
+          "xPosition": 9.0,
+          "yPosition": 7.0
         },
         {
-          "id": "pm-008",
-          "gameName": "Ark: Survival Evolved",
-          "xPosition": 2.0,
-          "yPosition": 5.0
-        },
-        {
-          "id": "pm-009",
+          "id": "av-008",
           "gameName": "Black Desert Online",
-          "xPosition": 5.0,
+          "xPosition": 7.0,
           "yPosition": 9.0
         },
         {
-          "id": "pm-010",
+          "id": "av-009",
           "gameName": "Warframe",
-          "xPosition": 2.0,
-          "yPosition": 9.0
+          "xPosition": 8.0,
+          "yPosition": 8.0
+        },
+        {
+          "id": "av-010",
+          "gameName": "The Forest",
+          "xPosition": 4.0,
+          "yPosition": 3.0
+        },
+        {
+          "id": "av-011",
+          "gameName": "Nightingale",
+          "xPosition": 5.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "av-012",
+          "gameName": "Scum",
+          "xPosition": 4.0,
+          "yPosition": 4.0
         }
       ]
     },
     {
       "xAxis": {
-        "axisName": "Accessibility",
-        "lowLabel": "Easy to Pick Up",
-        "highLabel": "Mastery Requires Effort"
+        "axisName": "Accessibility vs. Depth of Mechanics",
+        "lowLabel": "Casual Friendly Drop-In/Out Gameplay",
+        "highLabel": "Skill-Intensive Learning Curve"
       },
       "yAxis": {
-        "axisName": "Depth",
-        "lowLabel": "Casual Engagement",
-        "highLabel": "Demanding Long-Term Commitment"
+        "axisName": "Feature Complexity",
+        "lowLabel": "Surface-Level Features",
+        "highLabel": "Deep, Multi-Layered Mechanics"
       },
       "positions": [
         {
-          "id": "pm-001",
+          "id": "av-101",
           "gameName": "Dune: Awakening",
-          "xPosition": 5.0,
-          "yPosition": 9.0
+          "xPosition": 6.0,
+          "yPosition": 7.0
         },
         {
-          "id": "pm-002",
+          "id": "av-102",
           "gameName": "Conan Exiles",
           "xPosition": 5.0,
           "yPosition": 5.0
         },
         {
-          "id": "pm-003",
+          "id": "av-103",
           "gameName": "Rust",
-          "xPosition": 2.0,
-          "yPosition": 9.0
+          "xPosition": 4.0,
+          "yPosition": 6.0
         },
         {
-          "id": "pm-004",
+          "id": "av-104",
           "gameName": "Valheim",
-          "xPosition": 5.0,
-          "yPosition": 5.0
+          "xPosition": 4.0,
+          "yPosition": 4.0
         },
         {
-          "id": "pm-005",
+          "id": "av-105",
           "gameName": "Star Wars: The Old Republic",
-          "xPosition": 10.0,
-          "yPosition": 10.0
+          "xPosition": 8.0,
+          "yPosition": 9.0
         },
         {
-          "id": "pm-006",
+          "id": "av-106",
           "gameName": "Destiny 2",
-          "xPosition": 10.0,
-          "yPosition": 10.0
+          "xPosition": 7.0,
+          "yPosition": 8.0
         },
         {
-          "id": "pm-007",
+          "id": "av-107",
           "gameName": "The Elder Scrolls Online",
-          "xPosition": 5.0,
-          "yPosition": 9.0
+          "xPosition": 7.0,
+          "yPosition": 8.0
         },
         {
-          "id": "pm-008",
-          "gameName": "Ark: Survival Evolved",
-          "xPosition": 2.0,
-          "yPosition": 9.0
-        },
-        {
-          "id": "pm-009",
+          "id": "av-108",
           "gameName": "Black Desert Online",
-          "xPosition": 2.0,
+          "xPosition": 6.0,
           "yPosition": 9.0
         },
         {
-          "id": "pm-010",
+          "id": "av-109",
           "gameName": "Warframe",
-          "xPosition": 10.0,
-          "yPosition": 10.0
+          "xPosition": 7.0,
+          "yPosition": 7.0
+        },
+        {
+          "id": "av-110",
+          "gameName": "The Forest",
+          "xPosition": 3.0,
+          "yPosition": 3.0
+        },
+        {
+          "id": "av-111",
+          "gameName": "Nightingale",
+          "xPosition": 5.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "av-112",
+          "gameName": "Scum",
+          "xPosition": 4.0,
+          "yPosition": 5.0
         }
       ]
     }

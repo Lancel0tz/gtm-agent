@@ -1,41 +1,45 @@
 {
-  "summary": "The segmentation identifies key player groups for 'Dune: Awakening', focusing on their distinct motivations and behaviors, which correspond to the competitive offerings in the existing market. This includes players drawn by narrative depth, competitive survival mechanics, creative sandbox options, and persistent sci-fi MMO environments, aligning them with current games these audiences are likely to engage with.",
+  "summary": "The audience segmentation is based on four distinct player types: Hardcore Survival Enthusiasts, Sci-Fi Lore Seekers, Competitive Strategists, and Creative Crafters and Sandbox Explorers. Each segment is connected to games with similar mechanics or narratives within the competitive landscape, highlighting their primary engagement drivers.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Narrative-Driven Explorers",
-      "description": "Behaviors: Prioritize storytelling and world-building, frequently engage with lore and community discussions, seek out games with rich narratives and expansive universes. Motivations: Desire to immerse themselves in a mythos-rich environment, driven by a quest for discovery and understanding of the game world. Boundaries: Distinct from social or competitive players; less motivated by social interactions or PvP competition, preferring exploration and narrative engagement.",
+      "segmentName": "Hardcore Survival Enthusiasts",
+      "description": "This segment thrives on overcoming challenging environments and mastering complex survival mechanics. They are differentiated by their focus on survival mechanics over narrative or social engagements.",
       "selectedExistingCompetitors": [
-        "Star Wars: The Old Republic",
-        "The Elder Scrolls Online"
-      ]
-    },
-    {
-      "id": "seg-2",
-      "segmentName": "Competitive Survivalists",
-      "description": "Behaviors: Highly competitive, engaged in PvP environments, frequently involved in clan/guild activities, and enjoy competitive advantages through resource management or combat proficiency. Motivations: Thrill of competition, dominance through skill and strategic resource control. Boundaries: Distinct from purely exploration-driven or casual social players, focusing heavily on competitive mechanics and resource domination.",
-      "selectedExistingCompetitors": [
-        "Rust",
         "Conan Exiles",
-        "Ark: Survival Evolved"
-      ]
-    },
-    {
-      "id": "seg-3",
-      "segmentName": "Sandbox Creators",
-      "description": "Behaviors: Enjoy crafting, building, and customization, frequently engage with in-game systems to modify and personalize their experience extensively. Motivations: Creativity, freedom to build and alter the world, pride in creation and sharing it with others. Boundaries: Distinct from combat-focused or story-driven players, preferring to focus on creation and optimization over direct competition or narrative progression.",
-      "selectedExistingCompetitors": [
-        "Valheim",
+        "Rust",
+        "Scum",
         "The Forest"
       ]
     },
     {
-      "id": "seg-4",
-      "segmentName": "Sci-Fi Enthusiasts and MMO Loyalists",
-      "description": "Behaviors: Enjoy genre-specific lore, frequently engage with sci-fi themed community content, drawn to games with persistent worlds and MMO structures. Motivations: Exploration of vast universes, social interaction, and cooperation with a persistent community. Boundaries: Distinct from single-player enthusiasts or those solely driven by isolated narrative experiences, valuing community and persistent scalability more than niche storytelling.",
+      "id": "seg-2",
+      "segmentName": "Sci-Fi Lore Seekers",
+      "description": "Sci-Fi Lore Seekers are deeply invested in rich storytelling and world-building, motivated by uncovering lore and engaging with narrative-driven content.",
+      "selectedExistingCompetitors": [
+        "Star Wars: The Old Republic",
+        "The Elder Scrolls Online",
+        "Nightingale"
+      ]
+    },
+    {
+      "id": "seg-3",
+      "segmentName": "Competitive Strategists",
+      "description": "These players thrive in PvP environments and enjoy testing their skills against others, focusing on competitive interactions and dominance in conflict scenarios.",
       "selectedExistingCompetitors": [
         "Destiny 2",
-        "Black Desert Online"
+        "Black Desert Online",
+        "Warframe"
+      ]
+    },
+    {
+      "id": "seg-4",
+      "segmentName": "Creative Crafters and Sandbox Explorers",
+      "description": "Creative Crafters are drawn to games that allow for creativity in building and customization, focusing on self-expression and world-building.",
+      "selectedExistingCompetitors": [
+        "Valheim",
+        "Conan Exiles",
+        "The Forest"
       ]
     }
   ]

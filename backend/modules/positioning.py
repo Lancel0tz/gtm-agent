@@ -6,7 +6,7 @@ Methodology: Axis selection through competitive gap analysis.
 """
 
 import json
-from backend.llm import generate_with_reasoning
+from backend.llm import wrap_brief, generate_with_reasoning
 from backend.schemas import PositioningMatrix
 
 
@@ -43,7 +43,7 @@ async def generate(
         )
 
     reasoning_prompt = (
-        f"Game brief:\n{input_md}\n\n"
+        f"Game brief:\n{wrap_brief(input_md)}\n\n"
         f"Competitive landscape:\n{json.dumps(competitive_landscape, indent=2)}\n\n"
         f"Audience segments:\n{json.dumps(audience_overview, indent=2)}\n\n"
         "Design a 2D positioning matrix for this game:\n\n"

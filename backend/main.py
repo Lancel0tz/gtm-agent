@@ -32,7 +32,8 @@ app = FastAPI(title="GTM Agent API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    # Local dev frontend only — widen deliberately if deploying
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -72,9 +73,12 @@ def _activate_brief(filename: str) -> bool:
     return False
 
 
+from pydantic import Field
+
+
 class ChatRequest(BaseModel):
-    message: str
-    thread_id: str | None = None
+    message: str = Field(min_length=1, max_length=8000)
+    thread_id: str | None = Field(default=None, max_length=32)
 
 
 class SelectInputRequest(BaseModel):
@@ -179,7 +183,7 @@ async def select_thread(tid: str):
 
 
 class RenameRequest(BaseModel):
-    title: str
+    title: str = Field(min_length=1, max_length=120)
 
 
 @app.patch("/api/threads/{tid}")
@@ -193,8 +197,8 @@ async def rename_thread(tid: str, req: RenameRequest):
 
 
 class EditRequest(BaseModel):
-    index: int
-    message: str
+    index: int = Field(ge=0)
+    message: str = Field(min_length=1, max_length=8000)
 
 
 @app.post("/api/threads/{tid}/edit")
@@ -317,15 +321,24 @@ async def get_modules():
     }
 
 
+def _validate_module_name(module_name: str):
+    """Whitelist module names — getattr on arbitrary strings is an
+    attribute-probing vector."""
+    if module_name not in DEPENDENCY_GRAPH:
+        raise HTTPException(404, f"Unknown module '{module_name}'")
+
+
 @app.get("/api/modules/{module_name}/versions")
 async def get_module_versions(module_name: str):
     """Prior generations of a module (newest first), for the history viewer."""
+    _validate_module_name(module_name)
     versions = pipeline.get_versions(module_name)
     return {"versions": list(reversed(versions))}
 
 
 @app.get("/api/modules/{module_name}")
 async def get_module(module_name: str):
+    _validate_module_name(module_name)
     data = pipeline.get_module(module_name)
     if data is None:
         raise HTTPException(404, f"Module '{module_name}' not generated yet")

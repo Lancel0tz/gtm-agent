@@ -98,6 +98,21 @@ input.md → Pipeline Orchestrator → output/*.json
 
 **Validation retry loop**: Structured outputs are validated against Pydantic schemas; on malformed JSON or schema mismatch, the error is fed back to the model for up to 2 corrective retries, keeping the pipeline robust off the happy path.
 
+### Security Hardening
+
+- **Prompt injection defense**: brief content is wrapped in `<game_brief>` delimiters with an explicit data-not-instructions notice in every module prompt; the agent's system prompt instructs it to flag (not follow) instructions embedded in briefs or module content
+- **Tool output validation**: every module update from the agent is validated against its Pydantic schema before touching disk; audience updates additionally have cross-references checked against the landscape (invalid refs dropped and reported)
+- **API surface**: module names whitelisted (no attribute probing via `getattr`), message length capped, CORS restricted to the local frontend origin, input-file selection matched against an allowlist (no path traversal)
+- **Stop safety**: cancelling a generation rolls partial module writes back to the pre-turn snapshot and truncates dangling tool calls from the LLM history
+
+### Testing
+
+```bash
+PYTHONPATH=. pytest tests/ -v
+```
+
+23 boundary tests covering: cascade graph correctness (affected sets, acyclicity), change-log accumulation and reset semantics, version-history capping, snapshot/restore round-trips, LLM output parsing (fenced/garbage/schema-mismatch), cross-module reference integrity, injection wrapping, and API edge behavior (unknown modules/threads, oversized messages, attribute probes, path traversal, stop/undo no-ops).
+
 ### Trade-offs
 
 - **OpenAI over Anthropic**: Chose OpenAI for API availability. The LLM abstraction layer (`llm.py`) makes it easy to swap providers.

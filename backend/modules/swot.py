@@ -6,7 +6,7 @@ Methodology: Grounded SWOT with competitive evidence.
 """
 
 import json
-from backend.llm import generate_with_reasoning
+from backend.llm import wrap_brief, generate_with_reasoning
 from backend.schemas import SWOT
 
 
@@ -25,7 +25,7 @@ async def generate(
     """Generate SWOT grounded in competitive and audience context."""
 
     reasoning_prompt = (
-        f"Game brief:\n{input_md}\n\n"
+        f"Game brief:\n{wrap_brief(input_md)}\n\n"
         f"Competitive landscape:\n{json.dumps(competitive_landscape, indent=2)}\n\n"
         f"Audience segments:\n{json.dumps(audience_overview, indent=2)}\n\n"
         "Perform a SWOT analysis for the go-to-market strategy of the game in the brief.\n\n"

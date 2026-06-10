@@ -5,7 +5,7 @@ Methodology: Two-step generation with self-critique.
 2. Generate competitors with rationale, then self-critique for coverage gaps
 """
 
-from backend.llm import generate_structured, generate_with_reasoning
+from backend.llm import wrap_brief, generate_structured, generate_with_reasoning
 from backend.schemas import CompetitiveLandscape
 
 SYSTEM = (
@@ -20,7 +20,7 @@ async def generate(input_md: str) -> dict:
     # Step 1: Analyze competitive dimensions
     reasoning_prompt = (
         "Analyze this game brief and identify the competitive landscape.\n\n"
-        f"{input_md}\n\n"
+        f"{wrap_brief(input_md)}\n\n"
         "Think through these dimensions:\n"
         "1. Direct genre competitors (same core genre and mechanics as the brief)\n"
         "2. IP/theme competitors (same setting, franchise, or fantasy)\n"

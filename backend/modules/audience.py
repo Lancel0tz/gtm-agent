@@ -7,7 +7,7 @@ Methodology: Grounded segmentation with reference validation.
 """
 
 import json
-from backend.llm import generate_with_reasoning, generate_structured
+from backend.llm import wrap_brief, generate_with_reasoning, generate_structured
 from backend.schemas import AudienceOverview
 
 
@@ -24,7 +24,7 @@ async def generate(input_md: str, competitive_landscape: dict) -> dict:
     competitor_names = [c["name"] for c in competitive_landscape["existingCompetitors"]]
 
     reasoning_prompt = (
-        f"Game brief:\n{input_md}\n\n"
+        f"Game brief:\n{wrap_brief(input_md)}\n\n"
         f"Competitive landscape:\n{json.dumps(competitive_landscape, indent=2)}\n\n"
         "Identify 3-5 distinct audience segments for this game. For each segment:\n"
         "1. Define the segment by behaviors and motivations (not just demographics)\n"

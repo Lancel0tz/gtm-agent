@@ -2,15 +2,15 @@
   "competitiveLandscape": {
     "added": {
       "existingCompetitors": [
-        "Ark: Survival Evolved"
+        "Nightingale"
       ]
     },
     "removed": {
       "existingCompetitors": [
         {
           "id": "ec-018",
-          "name": "Nightingale",
-          "rationale": "Blends survival and crafting with an engaging narrative in an open-world multiplayer setup, echoing themes present in Dune: Awakening."
+          "name": "Ark: Survival Evolved",
+          "rationale": "Combines survival and resource management with a rich multiplayer element in a prehistoric setting, paralleling Dune's survival elements in an open world."
         }
       ]
     }
