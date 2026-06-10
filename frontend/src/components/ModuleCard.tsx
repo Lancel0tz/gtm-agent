@@ -135,29 +135,48 @@ export function PositioningChart({ data, compact = false }: { data: Record<strin
         <span><b className="text-gray-500">Y</b> {yAxis?.axisName}</span>
       </div>
       <div className={`relative w-full bg-gray-50 rounded-xl border border-gray-100 ${compact ? 'flex-1 min-h-44' : 'h-[420px]'}`}>
-        {/* Axis labels */}
-        <span className="absolute bottom-1 left-2 text-[9px] text-gray-300">{xAxis?.lowLabel}</span>
-        <span className="absolute bottom-1 right-2 text-[9px] text-gray-300">{xAxis?.highLabel}</span>
-        <span className="absolute top-2 left-2 text-[9px] text-gray-300">{yAxis?.highLabel}</span>
-        <span className="absolute bottom-5 left-2 text-[9px] text-gray-300">{yAxis?.lowLabel}</span>
-
         {/* Center lines */}
         <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200" />
         <div className="absolute top-1/2 left-0 right-0 h-px bg-gray-200" />
 
+        {/* X axis labels — bottom edge */}
+        <span className={`absolute bottom-1.5 left-1.5 ${compact ? 'text-[9px]' : 'text-[11px]'} font-medium text-gray-500 bg-white/90 border border-gray-100 rounded px-1.5 py-0.5 z-10`}>
+          ← {xAxis?.lowLabel}
+        </span>
+        <span className={`absolute bottom-1.5 right-1.5 ${compact ? 'text-[9px]' : 'text-[11px]'} font-medium text-gray-500 bg-white/90 border border-gray-100 rounded px-1.5 py-0.5 z-10`}>
+          {xAxis?.highLabel} →
+        </span>
+
+        {/* Y axis labels — top-left and upper-left, stacked clear of X labels */}
+        <span className={`absolute top-1.5 left-1.5 ${compact ? 'text-[9px]' : 'text-[11px]'} font-medium text-gray-500 bg-white/90 border border-gray-100 rounded px-1.5 py-0.5 z-10`}>
+          ↑ {yAxis?.highLabel}
+        </span>
+        <span className={`absolute bottom-8 left-1.5 ${compact ? 'text-[9px]' : 'text-[11px]'} font-medium text-gray-500 bg-white/90 border border-gray-100 rounded px-1.5 py-0.5 z-10`}>
+          ↓ {yAxis?.lowLabel}
+        </span>
+
         {positions.map((p, i) => {
           const isDune = p.gameName.includes('Dune');
+          // Alternate labels above/below the dot so neighbors don't collide
+          const labelAbove = !isDune && i % 2 === 1;
+          // Compact view: only label the game itself; competitors reveal on hover
+          const hoverOnly = compact && !isDune;
           return (
             <div
               key={i}
-              className="absolute transform -translate-x-1/2 translate-y-1/2 flex flex-col items-center"
+              className={`group/dot absolute transform -translate-x-1/2 translate-y-1/2 flex items-center ${labelAbove ? 'flex-col-reverse' : 'flex-col'}`}
               style={{
                 left: `${8 + (p.xPosition / 10) * 84}%`,
                 bottom: `${8 + (p.yPosition / 10) * 84}%`,
+                zIndex: isDune ? 5 : 1,
               }}
             >
-              <div className={`rounded-full ${isDune ? 'bg-black w-3 h-3 ring-4 ring-black/10' : 'bg-gray-300 w-2.5 h-2.5'}`} />
-              <span className={`mt-1 whitespace-nowrap ${compact ? 'text-[9px]' : 'text-[11px]'} ${isDune ? 'text-gray-900 font-semibold' : 'text-gray-400'}`}>
+              <div className={`rounded-full shrink-0 ${isDune ? 'bg-black w-3 h-3 ring-4 ring-black/10' : 'bg-gray-300 w-2.5 h-2.5 hover:bg-gray-400'}`} />
+              <span
+                className={`whitespace-nowrap rounded px-1 ${labelAbove ? 'mb-1' : 'mt-1'} ${compact ? 'text-[9px]' : 'text-[11px]'} ${
+                  isDune ? 'text-gray-900 font-semibold bg-white/80' : 'text-gray-500 bg-white/90'
+                } ${hoverOnly ? 'opacity-0 group-hover/dot:opacity-100 transition-opacity z-20' : ''}`}
+              >
                 {p.gameName}
               </span>
             </div>
