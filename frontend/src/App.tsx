@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { InputPanel } from './components/InputPanel';
 import { Canvas } from './components/Canvas';
 import { ChatPanel } from './components/ChatPanel';
+import { SettingsModal } from './components/SettingsModal';
+import type { ProviderInfo } from './components/SettingsModal';
 import type { AppState, GameInput, ChatMessage, ModuleName } from './types';
 
 const INITIAL_STATE: AppState = {
@@ -30,7 +32,9 @@ function App() {
   const [quote, setQuote] = useState<string | null>(null);
   const [streamingText, setStreamingText] = useState('');
   const [provider, setProvider] = useState('');
-  const [providers, setProviders] = useState<Record<string, { label: string; available: boolean }>>({});
+  const [model, setModel] = useState('');
+  const [providers, setProviders] = useState<Record<string, ProviderInfo>>({});
+  const [showSettings, setShowSettings] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>(
     () => (localStorage.getItem('theme') as 'light' | 'dark' | 'system') || 'system',
   );
@@ -75,21 +79,37 @@ function App() {
     loadModules();
     fetch('/api/settings').then(r => r.json()).then((d) => {
       setProvider(d.provider);
+      setModel(d.model);
       setProviders(d.providers);
     });
   }, [loadInput, loadModules]);
 
-  const handleSwitchProvider = useCallback(async (p: string) => {
-    const res = await fetch('/api/settings/provider', {
+  const handleSwitchModel = useCallback(async (p: string, m: string) => {
+    const res = await fetch('/api/settings/model', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ provider: p }),
+      body: JSON.stringify({ provider: p, model: m }),
     });
     if (res.ok) {
       const d = await res.json();
       setProvider(d.provider);
+      setModel(d.model);
       setProviders(d.providers);
     }
+  }, []);
+
+  const handleSaveKey = useCallback(async (p: string, apiKey: string): Promise<boolean> => {
+    const res = await fetch('/api/settings/key', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider: p, api_key: apiKey }),
+    });
+    if (res.ok) {
+      const d = await res.json();
+      setProviders(d.providers);
+      return true;
+    }
+    return false;
   }, []);
 
   useEffect(() => {
@@ -292,18 +312,35 @@ function App() {
         <div className="flex items-center gap-3">
           {Object.keys(providers).length > 0 && (
             <select
-              value={provider}
-              onChange={(e) => handleSwitchProvider(e.target.value)}
-              title="LLM provider for module generation"
-              className="appearance-none text-[11px] text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700 rounded-lg px-2 py-1 cursor-pointer hover:border-gray-300 dark:hover:border-slate-500 focus:outline-none"
+              value={`${provider}::${model}`}
+              onChange={(e) => {
+                const [p, m] = e.target.value.split('::');
+                handleSwitchModel(p, m);
+              }}
+              title="Model for analysis generation"
+              className="appearance-none text-[11px] text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700 rounded-lg px-2 py-1 cursor-pointer hover:border-gray-300 dark:hover:border-slate-500 focus:outline-none max-w-44 truncate"
             >
               {Object.entries(providers).map(([key, cfg]) => (
-                <option key={key} value={key} disabled={!cfg.available}>
-                  {cfg.label}{cfg.available ? '' : ' (no key)'}
-                </option>
+                <optgroup key={key} label={`${cfg.label}${cfg.available ? '' : ' (no key)'}`}>
+                  {cfg.models.map((m) => (
+                    <option key={m} value={`${key}::${m}`} disabled={!cfg.available}>
+                      {m}
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
           )}
+          <button
+            onClick={() => setShowSettings(true)}
+            title="API keys"
+            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:border-gray-300 dark:hover:border-slate-500 flex items-center justify-center transition-colors"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </button>
           <button
             onClick={() => window.open('/api/export', '_blank')}
             title="Export the analysis as a Markdown report"
@@ -384,6 +421,14 @@ function App() {
           />
         </div>
       </div>
+
+      {showSettings && (
+        <SettingsModal
+          providers={providers}
+          onSaveKey={handleSaveKey}
+          onClose={() => setShowSettings(false)}
+        />
+      )}
     </div>
   );
 }

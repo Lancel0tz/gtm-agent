@@ -18,7 +18,7 @@ from typing import Callable
 from pydantic import ValidationError
 
 from backend.pipeline import Pipeline
-from backend.llm import get_client, MODEL
+from backend.llm import agent_client_and_model
 from backend.schemas import CompetitiveLandscape, AudienceOverview, PositioningMatrix, SWOT
 
 MODULE_SCHEMAS = {
@@ -187,8 +187,9 @@ class Agent:
     async def _stream_completion(self, system: str, history: list, emit: Callable):
         """One streamed LLM round. Emits token events for text content in
         real-time; accumulates tool calls from deltas. Returns (text, calls)."""
-        stream = await get_client().chat.completions.create(
-            model=MODEL,
+        client, model = agent_client_and_model()
+        stream = await client.chat.completions.create(
+            model=model,
             messages=[{"role": "system", "content": system}] + history,
             tools=TOOLS,
             tool_choice="auto",

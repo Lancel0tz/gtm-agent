@@ -1,8 +1,13 @@
-"""LLM client layer — provider-agnostic structured generation.
+"""LLM client layer — multi-provider structured generation.
 
-Module generation can run on OpenAI or Anthropic (switchable at runtime via
-/api/settings/provider). The conversational agent's tool-calling loop stays
-on OpenAI function calling regardless — see agent.py.
+Providers are either OpenAI-compatible (OpenAI, DeepSeek, Gemini — same wire
+protocol, different base_url) or native-SDK (Anthropic). The active
+provider+model applies to module generation AND, when the provider speaks
+OpenAI-compatible function calling, to the agent loop too; with Anthropic
+active, the agent falls back to OpenAI.
+
+API keys come from the environment / .env, and can be set at runtime via
+the settings UI (persisted back to .env, which is gitignored).
 """
 
 import os
@@ -11,45 +16,121 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
 
-load_dotenv(Path(__file__).parent.parent / ".env")
+ENV_PATH = Path(__file__).parent.parent / ".env"
+load_dotenv(ENV_PATH)
 
-# Providers for MODULE GENERATION (plain completions)
-PROVIDERS = {
-    "openai": {"label": "GPT-4o", "model": "gpt-4o", "env": "OPENAI_API_KEY"},
-    "anthropic": {"label": "Claude Opus 4.8", "model": "claude-opus-4-8", "env": "ANTHROPIC_API_KEY"},
+PROVIDERS: dict[str, dict] = {
+    "openai": {
+        "label": "OpenAI",
+        "env": "OPENAI_API_KEY",
+        "sdk": "openai",
+        "base_url": None,
+        "models": ["gpt-4o", "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini"],
+    },
+    "anthropic": {
+        "label": "Anthropic",
+        "env": "ANTHROPIC_API_KEY",
+        "sdk": "anthropic",
+        "models": ["claude-opus-4-8", "claude-sonnet-4-6", "claude-haiku-4-5"],
+    },
+    "deepseek": {
+        "label": "DeepSeek",
+        "env": "DEEPSEEK_API_KEY",
+        "sdk": "openai",
+        "base_url": "https://api.deepseek.com",
+        "models": ["deepseek-chat", "deepseek-reasoner"],
+    },
+    "gemini": {
+        "label": "Google Gemini",
+        "env": "GEMINI_API_KEY",
+        "sdk": "openai",
+        "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+        "models": ["gemini-2.5-pro", "gemini-2.5-flash"],
+    },
 }
 
-_settings = {"provider": "openai"}
-_openai_client = None
-_anthropic_client = None
+# Models that can't drive the tool-calling agent loop; mapped to a sibling
+AGENT_MODEL_OVERRIDES = {"deepseek-reasoner": "deepseek-chat"}
 
-# Agent tool-calling model (OpenAI function calling)
-MODEL = "gpt-4o"
+_settings = {"provider": "openai", "model": "gpt-4o"}
+_clients: dict[str, object] = {}
+
+
+def _get_key(provider: str) -> str | None:
+    return os.environ.get(PROVIDERS[provider]["env"])
 
 
 def get_settings() -> dict:
     return {
         "provider": _settings["provider"],
+        "model": _settings["model"],
         "providers": {
-            key: {"label": cfg["label"], "available": bool(os.environ.get(cfg["env"]))}
+            key: {
+                "label": cfg["label"],
+                "models": cfg["models"],
+                "available": bool(_get_key(key)),
+            }
             for key, cfg in PROVIDERS.items()
         },
     }
 
 
-def set_provider(provider: str):
+def set_model(provider: str, model: str):
     if provider not in PROVIDERS:
         raise ValueError(f"Unknown provider '{provider}'")
-    if not os.environ.get(PROVIDERS[provider]["env"]):
-        raise ValueError(f"{PROVIDERS[provider]['env']} is not set")
+    if model not in PROVIDERS[provider]["models"]:
+        raise ValueError(f"Unknown model '{model}' for {provider}")
+    if not _get_key(provider):
+        raise ValueError(f"No API key configured for {PROVIDERS[provider]['label']}")
     _settings["provider"] = provider
+    _settings["model"] = model
+
+
+def set_api_key(provider: str, api_key: str):
+    """Store a user-supplied key: live env + persisted to .env (gitignored)."""
+    if provider not in PROVIDERS:
+        raise ValueError(f"Unknown provider '{provider}'")
+    api_key = api_key.strip()
+    if not api_key or len(api_key) > 300:
+        raise ValueError("Invalid API key")
+    env_var = PROVIDERS[provider]["env"]
+    os.environ[env_var] = api_key
+    _clients.pop(provider, None)  # force re-auth on next call
+    _persist_env_var(env_var, api_key)
+
+
+def _persist_env_var(name: str, value: str):
+    lines = ENV_PATH.read_text().splitlines() if ENV_PATH.exists() else []
+    lines = [l for l in lines if not l.startswith(f"{name}=")]
+    lines.append(f"{name}={value}")
+    ENV_PATH.write_text("\n".join(lines) + "\n")
+
+
+def _openai_compat_client(provider: str) -> AsyncOpenAI:
+    if provider not in _clients:
+        cfg = PROVIDERS[provider]
+        _clients[provider] = AsyncOpenAI(
+            api_key=_get_key(provider), base_url=cfg.get("base_url")
+        )
+    return _clients[provider]
 
 
 def get_client() -> AsyncOpenAI:
-    global _openai_client
-    if _openai_client is None:
-        _openai_client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    return _openai_client
+    """Back-compat: the OpenAI client (used by agent fallback)."""
+    return _openai_compat_client("openai")
+
+
+def agent_client_and_model() -> tuple[AsyncOpenAI, str]:
+    """Client+model for the agent's tool-calling loop.
+
+    OpenAI-compatible providers drive the agent directly; with Anthropic
+    active (different tool protocol), the agent falls back to OpenAI.
+    """
+    provider = _settings["provider"]
+    if PROVIDERS[provider]["sdk"] == "openai":
+        model = AGENT_MODEL_OVERRIDES.get(_settings["model"], _settings["model"])
+        return _openai_compat_client(provider), model
+    return _openai_compat_client("openai"), "gpt-4o"
 
 
 def wrap_brief(input_md: str) -> str:
@@ -68,21 +149,23 @@ def wrap_brief(input_md: str) -> str:
 
 async def _complete(system: str, messages: list[dict]) -> str:
     """One completion via the active provider. messages: [{role, content}]."""
-    if _settings["provider"] == "anthropic":
-        global _anthropic_client
-        if _anthropic_client is None:
+    provider = _settings["provider"]
+    model = _settings["model"]
+
+    if PROVIDERS[provider]["sdk"] == "anthropic":
+        if "anthropic" not in _clients:
             from anthropic import AsyncAnthropic
-            _anthropic_client = AsyncAnthropic()
-        response = await _anthropic_client.messages.create(
-            model=PROVIDERS["anthropic"]["model"],
+            _clients["anthropic"] = AsyncAnthropic(api_key=_get_key("anthropic"))
+        response = await _clients["anthropic"].messages.create(
+            model=model,
             max_tokens=8192,
             system=system,
             messages=messages,
         )
         return next(b.text for b in response.content if b.type == "text")
 
-    response = await get_client().chat.completions.create(
-        model=PROVIDERS["openai"]["model"],
+    response = await _openai_compat_client(provider).chat.completions.create(
+        model=model,
         max_tokens=4096,
         messages=[{"role": "system", "content": system}] + messages,
     )

@@ -8,9 +8,11 @@
     "removed": {
       "existingCompetitors": [
         {
-          "id": "ec-018",
+          "id": "ec-020",
           "name": "Ark: Survival Evolved",
-          "rationale": "Combines survival and resource management with a rich multiplayer element in a prehistoric setting, paralleling Dune's survival elements in an open world."
+          "rationale": "Known for its survival and open-world crafting mechanics within multiplayer environments, making it a relevant comparison for Dune's gameplay focus.",
+          "verified": true,
+          "steamAppId": 346110
         }
       ]
     }

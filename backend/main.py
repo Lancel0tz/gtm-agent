@@ -408,20 +408,37 @@ async def select_input(req: SelectInputRequest):
     raise HTTPException(404, f"Input file '{req.filename}' not found")
 
 
-class ProviderRequest(BaseModel):
-    provider: str
+class ModelRequest(BaseModel):
+    provider: str = Field(max_length=32)
+    model: str = Field(max_length=64)
+
+
+class ApiKeyRequest(BaseModel):
+    provider: str = Field(max_length=32)
+    api_key: str = Field(min_length=8, max_length=300)
 
 
 @app.get("/api/settings")
 async def get_settings():
-    """Active LLM provider for module generation + availability."""
+    """Active provider/model + per-provider model lists and key availability.
+    API keys themselves are never returned."""
     return llm.get_settings()
 
 
-@app.post("/api/settings/provider")
-async def set_provider(req: ProviderRequest):
+@app.post("/api/settings/model")
+async def set_model(req: ModelRequest):
     try:
-        llm.set_provider(req.provider)
+        llm.set_model(req.provider, req.model)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return llm.get_settings()
+
+
+@app.post("/api/settings/key")
+async def set_api_key(req: ApiKeyRequest):
+    """Store a user-supplied API key (live env + .env, which is gitignored)."""
+    try:
+        llm.set_api_key(req.provider, req.api_key)
     except ValueError as e:
         raise HTTPException(400, str(e))
     return llm.get_settings()

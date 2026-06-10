@@ -1,31 +1,31 @@
 {
-  "summary": "The audience segmentation is based on four distinct player types: Hardcore Survival Enthusiasts, Sci-Fi Lore Seekers, Competitive Strategists, and Creative Crafters and Sandbox Explorers. Each segment is connected to games with similar mechanics or narratives within the competitive landscape, highlighting their primary engagement drivers.",
+  "summary": "The audience for 'Dune: Awakening' is segmented based on primary motivations and behaviors. These segments recognize narrative depth, survival mechanics, competitive PvP, social community building, and crafting as key engagement areas. Each segment is associated with existing games in the market that cater to similar interests, highlighting Dune's position amidst established competitors and revealing its potential draw across diverse player types.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Hardcore Survival Enthusiasts",
-      "description": "This segment thrives on overcoming challenging environments and mastering complex survival mechanics. They are differentiated by their focus on survival mechanics over narrative or social engagements.",
+      "segmentName": "Narrative-Driven Explorers",
+      "description": "These players are driven by rich narrative experiences and love exploring deep lore and story. They prioritize story over survival or PvP elements, aligning with the Dune IP's deep narrative and political intrigue.",
+      "selectedExistingCompetitors": [
+        "Star Wars: The Old Republic",
+        "The Elder Scrolls Online"
+      ]
+    },
+    {
+      "id": "seg-2",
+      "segmentName": "Survival Enthusiasts",
+      "description": "Focused on surviving in harsh environments and love overcoming immersive challenges. They appreciate engaging with difficult survival mechanics rather than story or competitive elements.",
       "selectedExistingCompetitors": [
         "Conan Exiles",
         "Rust",
+        "Valheim",
         "Scum",
         "The Forest"
       ]
     },
     {
-      "id": "seg-2",
-      "segmentName": "Sci-Fi Lore Seekers",
-      "description": "Sci-Fi Lore Seekers are deeply invested in rich storytelling and world-building, motivated by uncovering lore and engaging with narrative-driven content.",
-      "selectedExistingCompetitors": [
-        "Star Wars: The Old Republic",
-        "The Elder Scrolls Online",
-        "Nightingale"
-      ]
-    },
-    {
       "id": "seg-3",
-      "segmentName": "Competitive Strategists",
-      "description": "These players thrive in PvP environments and enjoy testing their skills against others, focusing on competitive interactions and dominance in conflict scenarios.",
+      "segmentName": "Competitive PvP Gamers",
+      "description": "These players seek the thrill of competition, focusing on PvP engagements and large-scale battles. They are drawn to PvP dynamics over exploration or survival elements.",
       "selectedExistingCompetitors": [
         "Destiny 2",
         "Black Desert Online",
@@ -34,12 +34,21 @@
     },
     {
       "id": "seg-4",
-      "segmentName": "Creative Crafters and Sandbox Explorers",
-      "description": "Creative Crafters are drawn to games that allow for creativity in building and customization, focusing on self-expression and world-building.",
+      "segmentName": "Social MMO Community Builders",
+      "description": "Motivated by community and collaborative gameplay, these players thrive on social interaction within guilds and player-driven events, more than competitive combat.",
+      "selectedExistingCompetitors": [
+        "The Elder Scrolls Online",
+        "Lost Ark"
+      ]
+    },
+    {
+      "id": "seg-5",
+      "segmentName": "Crafting Enthusiasts",
+      "description": "Driven by creative freedom, these players focus on building and customizing environments and items. They enjoy craftsmanship over combat, drawn to extensive crafting systems.",
       "selectedExistingCompetitors": [
         "Valheim",
         "Conan Exiles",
-        "The Forest"
+        "Nightingale"
       ]
     }
   ]
