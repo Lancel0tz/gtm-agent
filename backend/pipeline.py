@@ -222,7 +222,9 @@ class Pipeline:
         elif module_name == "audienceOverview":
             return await audience.generate(input_md, cl)
         elif module_name == "positioningMatrix":
-            return await positioning.generate(input_md, cl, ao)
+            return await positioning.generate(
+                input_md, cl, ao, previous=self.state.positioningMatrix
+            )
         elif module_name == "swot":
             return await swot.generate(input_md, cl, ao)
         else:

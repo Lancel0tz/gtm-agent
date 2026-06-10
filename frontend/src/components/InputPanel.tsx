@@ -41,7 +41,7 @@ export function InputPanel({ input, files, active, onSwitch }: Props) {
         </div>
         {files.length === 1 && (
           <p className="text-[10px] text-gray-300 mt-1.5 leading-snug">
-            Drop more <code className="text-gray-400">input*.md</code> files in the project root to switch briefs.
+            Drop more <code className="text-gray-400">.md</code> briefs into <code className="text-gray-400">inputs/</code> to switch games.
           </p>
         )}
       </div>

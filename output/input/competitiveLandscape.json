@@ -2,11 +2,6 @@
   "summary": "This revised list of competitors for \"Dune: Awakening\" focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
   "existingCompetitors": [
     {
-      "id": "ec-001",
-      "name": "Ark: Survival Evolved",
-      "rationale": "As an open-world survival game, players must gather resources, craft items, build bases, and coexist with or compete against other players and AI dinosaurs—all features mirrored in \"Dune: Awakening.\""
-    },
-    {
       "id": "ec-002",
       "name": "Conan Exiles",
       "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune."

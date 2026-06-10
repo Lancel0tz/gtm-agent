@@ -45,7 +45,7 @@ def broadcast_event(event: dict):
 
 
 # Active input file — switchable at runtime via /api/inputs/select
-active_input = {"path": ROOT / "input.md"}
+active_input = {"path": ROOT / "inputs" / "input.md"}
 
 pipeline = Pipeline()
 agent = Agent(
@@ -53,6 +53,7 @@ agent = Agent(
     on_event=broadcast_event,
     get_input=lambda: active_input["path"].read_text(),
 )
+agent.get_input_label = lambda: active_input["path"].name
 
 
 class ChatRequest(BaseModel):
@@ -95,11 +96,10 @@ async def get_module(module_name: str):
 
 
 def _list_input_files() -> list[Path]:
-    """Input candidates: input*.md in root, plus anything in inputs/."""
-    files = sorted(ROOT.glob("input*.md"))
+    """All game briefs live in inputs/ (root input*.md kept as fallback)."""
     inputs_dir = ROOT / "inputs"
-    if inputs_dir.is_dir():
-        files += sorted(inputs_dir.glob("*.md"))
+    files = sorted(inputs_dir.glob("*.md")) if inputs_dir.is_dir() else []
+    files += [f for f in sorted(ROOT.glob("input*.md")) if f.name not in {x.name for x in files}]
     return files
 
 
@@ -149,6 +149,7 @@ async def select_input(req: SelectInputRequest):
         if f.name == req.filename:
             active_input["path"] = f
             pipeline.switch_workspace(f.stem)
+            agent.reset()  # stale chat context refers to the previous brief
             broadcast_event({"type": "input_changed", "filename": f.name})
             return {"ok": True, "active": f.name}
     raise HTTPException(404, f"Input file '{req.filename}' not found")

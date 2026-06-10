@@ -102,8 +102,14 @@ class Agent:
         self.pipeline = pipeline
         self.on_event = on_event or (lambda event: None)
         self.history: list[dict] = []
-        default_path = Path(__file__).parent.parent / "input.md"
+        default_path = Path(__file__).parent.parent / "inputs" / "input.md"
         self.get_input = get_input or (lambda: default_path.read_text())
+        self.get_input_label = lambda: "input.md"
+
+    def reset(self):
+        """Clear conversation history — called when the active brief changes,
+        so stale references to the previous game's modules don't leak in."""
+        self.history = []
 
     async def chat(self, user_message: str) -> dict:
         """Process a user message through the ReAct loop.
@@ -120,9 +126,14 @@ class Agent:
             self.on_event(event)
 
         for _ in range(8):  # max tool-use rounds, prevents infinite loops
+            system = (
+                SYSTEM_PROMPT
+                + f"\n\nThe active game brief is '{self.get_input_label()}'. "
+                "All modules and tools operate on THIS brief's workspace."
+            )
             response = await get_client().chat.completions.create(
                 model=MODEL,
-                messages=[{"role": "system", "content": SYSTEM_PROMPT}] + self.history,
+                messages=[{"role": "system", "content": system}] + self.history,
                 tools=TOOLS,
                 tool_choice="auto",
             )

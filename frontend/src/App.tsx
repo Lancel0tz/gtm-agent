@@ -76,6 +76,11 @@ function App() {
     });
     loadInput();
     loadModules();
+    // The agent's conversation context is reset server-side; mirror that here
+    setMessages([{
+      role: 'assistant',
+      content: `Switched to **${filename}**. The canvas and chat now operate on this brief's workspace.`,
+    }]);
   }, [loadInput, loadModules]);
 
   const handleSend = useCallback(async (message: string) => {

@@ -83,7 +83,7 @@ function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
                   >
                     {c.name}
                   </button>
-                  {added.has(c.name) && <span className="ml-2 align-middle"><NewBadge /></span>}
+                  {added.has(c.name) && <span className="ml-2 inline-block align-middle"><NewBadge /></span>}
                   <p className="text-sm text-gray-500 mt-0.5 leading-relaxed">{c.rationale}</p>
                 </div>
               </div>
@@ -124,7 +124,7 @@ function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
                 >
                   {s.segmentName}
                 </button>
-                {added.has(s.segmentName) && <span className="ml-2 align-middle"><NewBadge /></span>}
+                {added.has(s.segmentName) && <span className="ml-2 inline-block align-middle"><NewBadge /></span>}
                 <p className="text-sm text-gray-500 mt-1.5 leading-relaxed">{s.description}</p>
                 <div className="mt-3">
                   <span className="text-[10px] text-gray-400 uppercase tracking-widest">Plays</span>

@@ -1,6 +1,6 @@
 # GTM Agent — Go-To-Market Analysis System
 
-A multi-tier GTM analysis system for indie game publishers. Given a game brief, it produces structured analysis modules (CompetitiveLandscape, AudienceOverview, PositioningMatrix, SWOT) and supports interactive refinement through a conversational agent.
+A multi-tier GTM analysis system for indie game publishers. Given a game brief (in `inputs/`), it produces structured analysis modules (CompetitiveLandscape, AudienceOverview, PositioningMatrix, SWOT) and supports interactive refinement through a conversational agent.
 
 ## Quick Start
 

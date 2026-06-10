@@ -18,7 +18,7 @@ async def main():
         sys.exit(1)
 
     changed_module = sys.argv[1]
-    input_path = Path(__file__).parent.parent / "input.md"
+    input_path = Path(__file__).parent.parent / "inputs" / "input.md"
     input_md = input_path.read_text()
 
     pipeline = Pipeline(on_status=status_callback)

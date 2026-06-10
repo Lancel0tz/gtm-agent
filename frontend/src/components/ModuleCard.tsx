@@ -84,12 +84,12 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
           <div key={i} className="text-sm leading-snug">
             <button
               onClick={() => onEntityClick({ kind: 'competitor', name: c.name })}
-              className="text-gray-900 font-medium hover:underline underline-offset-2 decoration-gray-300"
+              className="align-middle text-gray-900 font-medium hover:underline underline-offset-2 decoration-gray-300"
             >
               {c.name}
             </button>
-            {added.has(c.name) && <span className="ml-1.5"><NewBadge /></span>}
-            <span className="text-gray-400 text-xs ml-2">{c.rationale.slice(0, 80)}…</span>
+            {added.has(c.name) && <span className="ml-1.5 inline-block align-middle"><NewBadge /></span>}
+            <span className="align-middle text-gray-400 text-xs ml-2">{c.rationale.slice(0, 80)}…</span>
           </div>
         ))}
         {removed.map((c, i) => (
@@ -111,11 +111,11 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
           <div key={i}>
             <button
               onClick={() => onEntityClick({ kind: 'segment', name: s.segmentName })}
-              className="text-sm font-medium text-gray-900 hover:underline underline-offset-2 decoration-gray-300"
+              className="align-middle text-sm font-medium text-gray-900 hover:underline underline-offset-2 decoration-gray-300"
             >
               {s.segmentName}
             </button>
-            {added.has(s.segmentName) && <span className="ml-1.5"><NewBadge /></span>}
+            {added.has(s.segmentName) && <span className="ml-1.5 inline-block align-middle"><NewBadge /></span>}
             <p className="text-xs text-gray-500 mt-1 leading-relaxed">{s.description.slice(0, 120)}…</p>
             <div className="flex flex-wrap gap-1 mt-2">
               {s.selectedExistingCompetitors.map((c, j) => (

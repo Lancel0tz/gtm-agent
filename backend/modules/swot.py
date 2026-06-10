@@ -28,7 +28,7 @@ async def generate(
         f"Game brief:\n{input_md}\n\n"
         f"Competitive landscape:\n{json.dumps(competitive_landscape, indent=2)}\n\n"
         f"Audience segments:\n{json.dumps(audience_overview, indent=2)}\n\n"
-        "Perform a SWOT analysis for Dune: Awakening's go-to-market strategy.\n\n"
+        "Perform a SWOT analysis for the go-to-market strategy of the game in the brief.\n\n"
         "Rules:\n"
         "- Each point MUST reference specific competitors or audience segments from "
         "the upstream data — no generic statements\n"

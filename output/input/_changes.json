@@ -6,9 +6,14 @@
     "removed": {
       "existingCompetitors": [
         {
-          "id": "ec-019",
+          "id": "ec-018",
           "name": "Nightingale",
-          "rationale": "This game combines survival and exploration elements set in a fantastical universe with rich lore, aligning well with Dune's own expansive world-building and narrative depth."
+          "rationale": "Features survival and crafting in a fantastical world, allowing for deep narrative exploration and multiplayer cooperation aspects that resonate with the themes in Dune."
+        },
+        {
+          "id": "ec-001",
+          "name": "Ark: Survival Evolved",
+          "rationale": "As an open-world survival game, players must gather resources, craft items, build bases, and coexist with or compete against other players and AI dinosaurs—all features mirrored in \"Dune: Awakening.\""
         }
       ]
     }

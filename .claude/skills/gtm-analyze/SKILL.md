@@ -1,15 +1,15 @@
 ---
 name: gtm-analyze
-description: Generate a complete Go-To-Market analysis (CompetitiveLandscape, AudienceOverview, PositioningMatrix, SWOT) for the game described in input.md. Use when the user asks to run the GTM pipeline, generate the GTM analysis, or analyze the game brief.
+description: Generate a complete Go-To-Market analysis (CompetitiveLandscape, AudienceOverview, PositioningMatrix, SWOT) for the game described in inputs/input.md. Use when the user asks to run the GTM pipeline, generate the GTM analysis, or analyze the game brief.
 ---
 
 # GTM Analyze
 
-Generate a complete Go-To-Market analysis for a game based on `input.md` in the project root.
+Generate a complete Go-To-Market analysis for a game based on `inputs/input.md`.
 
 ## What This Skill Does
 
-Reads `input.md` (a game brief) and produces four structured GTM analysis modules:
+Reads `inputs/input.md` (a game brief) and produces four structured GTM analysis modules:
 
 1. **CompetitiveLandscape** (Layer 1) — Identifies 10-15 real competing games with rationale
 2. **AudienceOverview** (Layer 2) — Defines 3-5 audience segments grounded in the competitive landscape
@@ -18,20 +18,20 @@ Reads `input.md` (a game brief) and produces four structured GTM analysis module
 
 ## Inputs
 
-- `input.md` in the project root — the game brief to analyze
+- `inputs/input.md` — the game brief to analyze (additional briefs can sit alongside it in `inputs/`)
 - `OPENAI_API_KEY` — read from environment or from `.env` in the project root
 
 ## Outputs
 
-JSON files written to `output/` in the project root:
-- `output/competitiveLandscape.json`
-- `output/audienceOverview.json`
-- `output/positioningMatrix.json`
-- `output/swot.json`
+JSON files written to `output/input/` (one workspace folder per brief):
+- `output/input/competitiveLandscape.json`
+- `output/input/audienceOverview.json`
+- `output/input/positioningMatrix.json`
+- `output/input/swot.json`
 
 ## How to Run
 
-From the project root (the directory containing `input.md` and `backend/`):
+From the project root (the directory containing `inputs/` and `backend/`):
 
 ```bash
 PYTHONPATH=. python3 -m backend.run_pipeline

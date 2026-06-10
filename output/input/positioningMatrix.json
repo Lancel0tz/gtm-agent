@@ -1,73 +1,61 @@
 {
   "xAxis": {
-    "axisName": "Survival Depth / Narrative Immersion",
-    "lowLabel": "Casual Survival Mechanics",
-    "highLabel": "Intricate Survival Systems"
+    "axisName": "Narrative Depth vs. Mechanical Complexity",
+    "lowLabel": "Pure Exploration/Combat",
+    "highLabel": "Rich Story Universe"
   },
   "yAxis": {
-    "axisName": "Player Interaction / Factional Dynamics",
-    "lowLabel": "Solo Oriented Gameplay",
-    "highLabel": "Complex Player Alliances"
+    "axisName": "Sandbox Creativity vs. Structured MMO Dynamics",
+    "lowLabel": "Creative Sandbox",
+    "highLabel": "Competitive Multiplayer"
   },
   "positions": [
     {
       "id": "pm-001",
       "gameName": "Dune: Awakening",
-      "xPosition": 8.0,
-      "yPosition": 9.0
+      "xPosition": 7.0,
+      "yPosition": 6.0
     },
     {
       "id": "pm-002",
-      "gameName": "Ark: Survival Evolved",
-      "xPosition": 7.0,
-      "yPosition": 5.0
+      "gameName": "Conan Exiles",
+      "xPosition": 4.0,
+      "yPosition": 3.0
     },
     {
       "id": "pm-003",
       "gameName": "Rust",
-      "xPosition": 8.0,
-      "yPosition": 6.0
+      "xPosition": 2.0,
+      "yPosition": 4.0
     },
     {
       "id": "pm-004",
       "gameName": "Valheim",
-      "xPosition": 6.0,
-      "yPosition": 4.0
+      "xPosition": 5.0,
+      "yPosition": 5.0
     },
     {
       "id": "pm-005",
       "gameName": "Star Wars: The Old Republic",
-      "xPosition": 3.0,
-      "yPosition": 8.0
+      "xPosition": 9.0,
+      "yPosition": 9.0
     },
     {
       "id": "pm-006",
-      "gameName": "The Elder Scrolls Online",
-      "xPosition": 4.0,
+      "gameName": "Destiny 2",
+      "xPosition": 6.0,
       "yPosition": 7.0
     },
     {
       "id": "pm-007",
-      "gameName": "Conan Exiles",
-      "xPosition": 7.0,
-      "yPosition": 5.0
+      "gameName": "The Elder Scrolls Online",
+      "xPosition": 8.0,
+      "yPosition": 8.0
     },
     {
       "id": "pm-008",
       "gameName": "Black Desert Online",
-      "xPosition": 5.0,
-      "yPosition": 9.0
-    },
-    {
-      "id": "pm-009",
-      "gameName": "Destiny 2",
-      "xPosition": 2.0,
-      "yPosition": 8.0
-    },
-    {
-      "id": "pm-010",
-      "gameName": "Warframe",
-      "xPosition": 3.0,
+      "xPosition": 6.0,
       "yPosition": 7.0
     }
   ]

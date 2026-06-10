@@ -12,7 +12,7 @@ def status_callback(module: str, status: str):
 
 
 async def main():
-    input_path = Path(__file__).parent.parent / "input.md"
+    input_path = Path(__file__).parent.parent / "inputs" / "input.md"
     if not input_path.exists():
         print("Error: input.md not found")
         sys.exit(1)

@@ -44,7 +44,7 @@ export function axisLabel(label: string | undefined, axisName: string | undefine
 
 export function NewBadge() {
   return (
-    <span className="inline-flex items-center align-baseline text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-px rounded-full uppercase tracking-wide leading-[1.4] relative -top-px">
+    <span className="inline-block align-middle text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full uppercase tracking-wide leading-none">
       new
     </span>
   );
