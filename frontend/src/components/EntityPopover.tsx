@@ -16,9 +16,19 @@ export function EntityPopover({ entity, state, onClose, onNavigate }: Props) {
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-lg max-h-[75vh] overflow-y-auto shadow-2xl"
+        className="relative bg-white dark:bg-slate-900 rounded-2xl w-full max-w-lg max-h-[75vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
+        <button
+          onClick={onClose}
+          title="Close (Esc)"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700/60 flex items-center justify-center text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
         {entity.kind === 'competitor' ? (
           <CompetitorDetail name={entity.name} state={state} onNavigate={onNavigate} />
         ) : (

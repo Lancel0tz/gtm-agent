@@ -120,7 +120,11 @@ input.md → Pipeline Orchestrator → output/*.json
 PYTHONPATH=. pytest tests/ -v
 ```
 
-23 boundary tests covering: cascade graph correctness (affected sets, acyclicity), change-log accumulation and reset semantics, version-history capping, snapshot/restore round-trips, LLM output parsing (fenced/garbage/schema-mismatch), cross-module reference integrity, injection wrapping, and API edge behavior (unknown modules/threads, oversized messages, attribute probes, path traversal, stop/undo no-ops).
+50 tests across three suites, all LLM-free (CI-safe):
+
+- **test_system.py** — cascade graph correctness, change-log semantics, version capping, snapshot round-trips, LLM output parsing edge cases, API misuse (404s/422s, traversal, no-op stop/undo)
+- **test_orchestration.py** — full pipeline ordering with mocked generators, **genuine Layer-3 parallelism** (cross-waiting fakes that deadlock if execution were sequential), cascade scope per layer, quality-gate regeneration with feedback, workspace isolation, diff reporting
+- **test_security.py** — API keys never echoed, key/model/title/message validation bounds, model whitelist (no arbitrary strings to upstream APIs), CORS posture, .env not served, export leak check, getattr/dunder probing, path traversal corpus, injection-wrapper ordering, agent tool schema rejection
 
 ### Trade-offs
 

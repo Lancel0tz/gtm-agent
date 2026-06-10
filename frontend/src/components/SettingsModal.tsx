@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export interface ProviderInfo {
   label: string;
@@ -14,6 +14,15 @@ interface Props {
 
 /** API key management — keys go to the local backend's .env, never echoed back. */
 export function SettingsModal({ providers, onSaveKey, onClose }: Props) {
+  // Rendered outside Canvas, so it owns its own Esc handling
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose]);
+
   return (
     <div
       className="fixed inset-0 z-[70] bg-black/30 backdrop-blur-sm flex items-center justify-center p-6"
@@ -23,11 +32,14 @@ export function SettingsModal({ providers, onSaveKey, onClose }: Props) {
         className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-md shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-slate-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-100">API Keys</h2>
-          <p className="text-xs text-gray-400 dark:text-slate-500 mt-1">
-            Keys are stored locally in the backend's <code>.env</code> (gitignored) and never sent anywhere else.
-          </p>
+        <div className="flex items-start justify-between px-6 pt-6 pb-4 border-b border-gray-100 dark:border-slate-800">
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-100">API Keys</h2>
+            <p className="text-xs text-gray-400 dark:text-slate-500 mt-1">
+              Keys are stored locally in the backend's <code>.env</code> (gitignored) and never sent anywhere else.
+            </p>
+          </div>
+          <CloseButton onClick={onClose} />
         </div>
 
         <div className="px-6 py-4 space-y-4">
@@ -108,5 +120,21 @@ function ProviderKeyRow({ provider, info, onSave }: {
         </button>
       </div>
     </div>
+  );
+}
+
+
+function CloseButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      title="Close (Esc)"
+      className="w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700/60 flex items-center justify-center text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 transition-colors shrink-0"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
   );
 }
