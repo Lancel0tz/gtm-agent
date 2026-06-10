@@ -1,0 +1,74 @@
+{
+  "strengths": [
+    {
+      "id": "sw-001",
+      "text": "Rich IP with Strong Narrative Appeal: Leveraging the Dune universe provides a significant advantage over games like Rust and Ark: Survival Evolved, appealing to Lore Enthusiasts drawn to extensive world-building like Star Wars: The Old Republic."
+    },
+    {
+      "id": "sw-002",
+      "text": "Sandbox Elements Combined with Faction Dynamics: The unique combination attracts Competitive Warriors seeking strategic depth, unlike Black Desert Online where faction dynamics are less central."
+    },
+    {
+      "id": "sw-003",
+      "text": "Immersive Exploration Opportunities: Promises expansive exploration similar to Valheim, with a sci-fi twist appealing to World Explorers, offering evolving landscapes through dynamic environment changes."
+    },
+    {
+      "id": "sw-004",
+      "text": "Engagement through Ongoing Content Updates: Quarterly DLCs and monthly updates rival Warframe's content frequency, ensuring long-term engagement from Community Builders seeking continuous new experiences."
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "wk-001",
+      "text": "Limited Platform Launch: Initially releasing on Steam only, compared to Destiny 2 or The Elder Scrolls Online available on multiple platforms, limiting engagement with Community Builders seeking broader interactions."
+    },
+    {
+      "id": "wk-002",
+      "text": "No Crossplay Feature: Lack of crossplay may deter players, unlike Destiny 2 offering seamless gameplay, potentially missing Community Builders interested in large interconnected player bases."
+    },
+    {
+      "id": "wk-003",
+      "text": "Competitive Pricing Strategy: At $50 USD plus MTX and Battle Pass, it may seem less inviting compared to free-to-play models like Lost Ark, requiring careful value communication to Hardcore Survivalists."
+    },
+    {
+      "id": "wk-004",
+      "text": "High Dependency on Dune IP Engagement: The strong reliance on the Dune IP could limit appeal to non-fans, unlike more universally recognized IPs like Star Wars: The Old Republic."
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "op-001",
+      "text": "Underserved Large-Scale MMO Survival Experience: The market gap for an MMO focused on survival mechanics can attract Hardcore Survivalists looking for expansive challenges, not fully explored by titles like The Elder Scrolls Online."
+    },
+    {
+      "id": "op-002",
+      "text": "Increased Interest in Sci-Fi Worlds: Capitalizing on the sci-fi trend can expand reach beyond fantasy settings like Hogwarts Legacy, engaging World Explorers."
+    },
+    {
+      "id": "op-003",
+      "text": "Leverage of Dynamic World Events: Weekly changing environments align with the trend of dynamic world events, appealing to players seeking novelty and challenge, an area unexplored by Conan Exiles."
+    },
+    {
+      "id": "op-004",
+      "text": "Potential for Strategic PvP and Social Alliances: With optional PvP, there's an opportunity to cater to both Competitive Warriors and Community Builders through strategic combat and social alliances."
+    }
+  ],
+  "threats": [
+    {
+      "id": "th-001",
+      "text": "High Competition in Survival Genre: Established games like Rust and Scum pose a threat with their loyal Hardcore Survivalists who may resist transitioning despite Dune's IP strength."
+    },
+    {
+      "id": "th-002",
+      "text": "Monetization Fatigue Risk: MTX and Battle Pass could lead to fatigue among players if not providing clear value compared to less monetized titles like Valheim."
+    },
+    {
+      "id": "th-003",
+      "text": "Delayed Console Strategy: Postponing the console launch could allow competitors to strengthen their positions, reducing the potential player base, especially among console-preferring Community Builders."
+    },
+    {
+      "id": "th-004",
+      "text": "High Expectations from Lore-Focused Audience: Success depends on meeting Lore Enthusiasts' high expectations, failing which could lead to reputational risks and slower adoption compared to narrative giants like Hogwarts Legacy."
+    }
+  ]
+}
