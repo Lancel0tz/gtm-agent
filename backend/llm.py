@@ -1,4 +1,9 @@
-"""LLM client wrapper for structured output generation."""
+"""LLM client layer — provider-agnostic structured generation.
+
+Module generation can run on OpenAI or Anthropic (switchable at runtime via
+/api/settings/provider). The conversational agent's tool-calling loop stays
+on OpenAI function calling regardless — see agent.py.
+"""
 
 import os
 import json
@@ -8,8 +13,43 @@ from openai import AsyncOpenAI
 
 load_dotenv(Path(__file__).parent.parent / ".env")
 
-_client = None
+# Providers for MODULE GENERATION (plain completions)
+PROVIDERS = {
+    "openai": {"label": "GPT-4o", "model": "gpt-4o", "env": "OPENAI_API_KEY"},
+    "anthropic": {"label": "Claude Opus 4.8", "model": "claude-opus-4-8", "env": "ANTHROPIC_API_KEY"},
+}
+
+_settings = {"provider": "openai"}
+_openai_client = None
+_anthropic_client = None
+
+# Agent tool-calling model (OpenAI function calling)
 MODEL = "gpt-4o"
+
+
+def get_settings() -> dict:
+    return {
+        "provider": _settings["provider"],
+        "providers": {
+            key: {"label": cfg["label"], "available": bool(os.environ.get(cfg["env"]))}
+            for key, cfg in PROVIDERS.items()
+        },
+    }
+
+
+def set_provider(provider: str):
+    if provider not in PROVIDERS:
+        raise ValueError(f"Unknown provider '{provider}'")
+    if not os.environ.get(PROVIDERS[provider]["env"]):
+        raise ValueError(f"{PROVIDERS[provider]['env']} is not set")
+    _settings["provider"] = provider
+
+
+def get_client() -> AsyncOpenAI:
+    global _openai_client
+    if _openai_client is None:
+        _openai_client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+    return _openai_client
 
 
 def wrap_brief(input_md: str) -> str:
@@ -26,11 +66,27 @@ def wrap_brief(input_md: str) -> str:
     )
 
 
-def get_client() -> AsyncOpenAI:
-    global _client
-    if _client is None:
-        _client = AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    return _client
+async def _complete(system: str, messages: list[dict]) -> str:
+    """One completion via the active provider. messages: [{role, content}]."""
+    if _settings["provider"] == "anthropic":
+        global _anthropic_client
+        if _anthropic_client is None:
+            from anthropic import AsyncAnthropic
+            _anthropic_client = AsyncAnthropic()
+        response = await _anthropic_client.messages.create(
+            model=PROVIDERS["anthropic"]["model"],
+            max_tokens=8192,
+            system=system,
+            messages=messages,
+        )
+        return next(b.text for b in response.content if b.type == "text")
+
+    response = await get_client().chat.completions.create(
+        model=PROVIDERS["openai"]["model"],
+        max_tokens=4096,
+        messages=[{"role": "system", "content": system}] + messages,
+    )
+    return response.choices[0].message.content
 
 
 async def generate_structured(
@@ -39,17 +95,12 @@ async def generate_structured(
     schema_class=None,
     max_retries: int = 2,
 ) -> dict | str:
-    """Call OpenAI API and optionally parse into a Pydantic schema.
+    """Provider-agnostic completion, optionally parsed into a Pydantic schema.
 
     On malformed JSON or schema validation failure, retries by feeding the
     error back to the model — keeps the pipeline robust off the happy path.
     """
-    response = await get_client().chat.completions.create(
-        model=MODEL,
-        max_tokens=4096,
-        messages=[{"role": "system", "content": system}] + messages,
-    )
-    text = response.choices[0].message.content
+    text = await _complete(system, messages)
 
     if schema_class is None:
         return text
@@ -72,12 +123,7 @@ async def generate_structured(
                     ),
                 },
             ]
-            response = await get_client().chat.completions.create(
-                model=MODEL,
-                max_tokens=4096,
-                messages=[{"role": "system", "content": system}] + attempt_messages,
-            )
-            text = response.choices[0].message.content
+            text = await _complete(system, attempt_messages)
 
 
 async def generate_with_reasoning(

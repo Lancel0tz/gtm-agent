@@ -22,6 +22,7 @@ interface Props {
   onClearQuote: () => void;
   onStop: () => void;
   activeBrief: string;
+  streamingText: string;
 }
 
 const MODULE_ORDER: ModuleName[] = [
@@ -34,7 +35,7 @@ const MODULE_ORDER: ModuleName[] = [
 export function ChatPanel({
   messages, onSend, isLoading, modules,
   threads, activeThread, onSelectThread, onNewThread, onDeleteThread,
-  onRegenerate, onUndo, onRenameThread, onEditMessage, quote, onClearQuote, onStop, activeBrief,
+  onRegenerate, onUndo, onRenameThread, onEditMessage, quote, onClearQuote, onStop, activeBrief, streamingText,
 }: Props) {
   const [input, setInput] = useState('');
   const [renaming, setRenaming] = useState(false);
@@ -45,7 +46,7 @@ export function ChatPanel({
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, streamingText]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,7 +252,17 @@ export function ChatPanel({
           );
         })}
 
-        {isLoading && <WorkingIndicator modules={modules} />}
+        {isLoading && streamingText && (
+          <div className="flex justify-start">
+            <div className="max-w-[85%] text-sm rounded-2xl px-4 py-2.5 bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-slate-200">
+              <div className="markdown-body">
+                <Markdown>{streamingText}</Markdown>
+              </div>
+              <span className="inline-block w-1.5 h-3.5 bg-gray-400 dark:bg-slate-500 animate-pulse ml-0.5 align-text-bottom" />
+            </div>
+          </div>
+        )}
+        {isLoading && !streamingText && <WorkingIndicator modules={modules} />}
 
         <div ref={messagesEndRef} />
       </div>
@@ -321,7 +332,7 @@ function WorkingIndicator({ modules }: { modules: AppState }) {
   const [seen, setSeen] = useState<Set<ModuleName>>(new Set());
 
   useEffect(() => {
-    const nowGenerating = MODULE_ORDER.filter((m) => modules[m].status === 'generating');
+    const nowGenerating = MODULE_ORDER.filter((m) => modules[m].status === 'generating' || modules[m].status === 'reviewing');
     if (nowGenerating.some((m) => !seen.has(m))) {
       setSeen((prev) => new Set([...prev, ...nowGenerating]));
     }
@@ -339,12 +350,15 @@ function WorkingIndicator({ modules }: { modules: AppState }) {
               const status = modules[m].status;
               return (
                 <div key={m} className="flex items-center gap-2">
-                  {status === 'generating' ? <Spinner /> : <CheckIcon />}
-                  <span className={`text-xs ${status === 'generating' ? 'text-gray-900 dark:text-slate-100 font-medium' : 'text-gray-400 dark:text-slate-500'}`}>
+                  {status === 'generating' || status === 'reviewing' ? <Spinner /> : <CheckIcon />}
+                  <span className={`text-xs ${status === 'generating' || status === 'reviewing' ? 'text-gray-900 dark:text-slate-100 font-medium' : 'text-gray-400 dark:text-slate-500'}`}>
                     {MODULE_META[m].label}
                   </span>
                   {status === 'generating' && (
                     <span className="text-[10px] text-blue-500 animate-pulse ml-auto">generating</span>
+                  )}
+                  {status === 'reviewing' && (
+                    <span className="text-[10px] text-purple-500 animate-pulse ml-auto">reviewing</span>
                   )}
                 </div>
               );
@@ -392,6 +406,7 @@ function MessageActions({ content, showTurnActions, onRegenerate, onUndo }: {
   onClearQuote: () => void;
   onStop: () => void;
   activeBrief: string;
+  streamingText: string;
 }) {
   const [copied, setCopied] = useState(false);
 

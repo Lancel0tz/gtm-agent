@@ -4,52 +4,72 @@
     {
       "id": "ec-001",
       "name": "Stardew Valley",
-      "rationale": "A leading title in the farming sim genre with a strong community presence. Its farming mechanics and life simulation elements target the same cozy gamer audience as Moonhaven."
+      "rationale": "A leading title in the farming sim genre with a strong community presence. Its farming mechanics and life simulation elements target the same cozy gamer audience as Moonhaven.",
+      "verified": true,
+      "steamAppId": 413150
     },
     {
       "id": "ec-002",
       "name": "Animal Crossing: New Horizons",
-      "rationale": "Offers life-sim and social interaction elements with a cozy appeal, drawing in players interested in non-combat, socially-oriented gameplay."
+      "rationale": "Offers life-sim and social interaction elements with a cozy appeal, drawing in players interested in non-combat, socially-oriented gameplay.",
+      "verified": false,
+      "steamAppId": null
     },
     {
       "id": "ec-003",
       "name": "My Time at Portia",
-      "rationale": "Integrates farming, crafting, and social interactions with a unique town-building element, appealing to fans of life and farming simulation."
+      "rationale": "Integrates farming, crafting, and social interactions with a unique town-building element, appealing to fans of life and farming simulation.",
+      "verified": true,
+      "steamAppId": 666140
     },
     {
       "id": "ec-004",
       "name": "Harvest Moon/Story of Seasons series",
-      "rationale": "Long-standing with deep farming and life-sim mechanics, directly competing on familiarity and loyalty within the genre."
+      "rationale": "Long-standing with deep farming and life-sim mechanics, directly competing on familiarity and loyalty within the genre.",
+      "verified": false,
+      "steamAppId": null
     },
     {
       "id": "ec-005",
       "name": "Garden Paws",
-      "rationale": "Offers co-op gameplay focusing on farming, exploration, and customization, closely aligning with Moonhaven’s mechanics."
+      "rationale": "Offers co-op gameplay focusing on farming, exploration, and customization, closely aligning with Moonhaven’s mechanics.",
+      "verified": true,
+      "steamAppId": 840010
     },
     {
       "id": "ec-006",
       "name": "Spiritfarer",
-      "rationale": "Delivers narrative-driven gameplay combined with management and exploration themes, appealing to similar audiences via platform availability and stylistic choices."
+      "rationale": "Delivers narrative-driven gameplay combined with management and exploration themes, appealing to similar audiences via platform availability and stylistic choices.",
+      "verified": true,
+      "steamAppId": 972660
     },
     {
       "id": "ec-007",
       "name": "Cozy Grove",
-      "rationale": "A cozy life sim focusing on daily activities and narrative aspects, resonating with Moonhaven’s intended target audience."
+      "rationale": "A cozy life sim focusing on daily activities and narrative aspects, resonating with Moonhaven’s intended target audience.",
+      "verified": true,
+      "steamAppId": 1458100
     },
     {
       "id": "ec-008",
       "name": "Slime Rancher 2",
-      "rationale": "Though focused on exploration and collection, its wholesome and family-friendly aesthetics appeal to those seeking non-combat, exploratory experiences."
+      "rationale": "Though focused on exploration and collection, its wholesome and family-friendly aesthetics appeal to those seeking non-combat, exploratory experiences.",
+      "verified": true,
+      "steamAppId": 1657630
     },
     {
       "id": "ec-009",
       "name": "Rune Factory Series",
-      "rationale": "Combines farming and RPG elements, drawing players interested in farming/life simulations with added narrative depth and adventure elements."
+      "rationale": "Combines farming and RPG elements, drawing players interested in farming/life simulations with added narrative depth and adventure elements.",
+      "verified": true,
+      "steamAppId": 2067360
     },
     {
       "id": "ec-010",
       "name": "Palia",
-      "rationale": "A multiplayer community sim gaining traction for its communal and cooperative gameplay, matching Moonhaven’s co-op focus."
+      "rationale": "A multiplayer community sim gaining traction for its communal and cooperative gameplay, matching Moonhaven’s co-op focus.",
+      "verified": true,
+      "steamAppId": 2707930
     }
   ]
 }

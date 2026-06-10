@@ -22,6 +22,7 @@ async def generate(
     competitive_landscape: dict,
     audience_overview: dict,
     previous: dict | None = None,
+    feedback: str | None = None,
 ) -> dict:
     """Generate PositioningMatrix using competitive and audience data.
 
@@ -74,6 +75,12 @@ async def generate(
         "Put the primary matrix in xAxis/yAxis/positions, and the two "
         "alternative lenses in alternativeViews (same structure each)."
     )
+
+    if feedback:
+        reasoning_prompt += (
+            "\n\nA quality reviewer flagged these issues with a prior attempt — "
+            f"address them explicitly:\n{feedback}"
+        )
 
     return await generate_with_reasoning(
         system=SYSTEM,

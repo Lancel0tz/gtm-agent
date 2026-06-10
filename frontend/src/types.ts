@@ -1,4 +1,4 @@
-export type ModuleStatus = 'idle' | 'pending' | 'generating' | 'done';
+export type ModuleStatus = 'idle' | 'pending' | 'generating' | 'reviewing' | 'done';
 
 export type ModuleData = Record<string, unknown>;
 
@@ -8,11 +8,18 @@ export interface ModuleChanges {
   removed: Record<string, Array<Record<string, unknown>>>;
 }
 
+export interface QualityReview {
+  score: number;
+  feedback: string;
+}
+
 export interface ModuleState {
   status: ModuleStatus;
   data: ModuleData | null;
   /** What has been added/removed across all chat interactions */
   changes?: ModuleChanges | null;
+  /** Latest LLM-as-judge review, when the quality gate has run */
+  quality?: QualityReview | null;
 }
 
 export interface AppState {

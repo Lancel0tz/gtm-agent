@@ -9,6 +9,10 @@ class Competitor(BaseModel):
     id: str = Field(description="e.g. ec-001")
     name: str
     rationale: str = Field(description="Why this title is in the competitive set")
+    # Grounding: checked against the Steam store after generation.
+    # True = found, False = not found (may be console/legacy), None = check failed
+    verified: bool | None = None
+    steamAppId: int | None = None
 
 
 class CompetitiveLandscape(BaseModel):

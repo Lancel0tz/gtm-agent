@@ -151,11 +151,43 @@ export function QuoteButton({ onClick, title = 'Quote this module in chat' }: { 
   );
 }
 
+/** LLM-judge score chip: green >= 8, amber >= 6, red below. */
+export function QualityChip({ score, feedback }: { score: number; feedback?: string }) {
+  const color = score >= 8
+    ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50'
+    : score >= 6
+      ? 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50'
+      : 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-950/50';
+  return (
+    <span
+      title={feedback ? `LLM judge: ${feedback}` : 'LLM-judge quality score'}
+      className={`inline-flex items-center gap-0.5 text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${color}`}
+    >
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4-6.2-4.6-6.2 4.6 2.4-7.4L2 9.4h7.6z" />
+      </svg>
+      {score.toFixed(1)}
+    </span>
+  );
+}
+
+export function SteamBadge() {
+  return (
+    <span
+      title="Verified on the Steam store"
+      className="inline-block align-middle relative -top-[0.5px] text-[9px] font-medium text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/50 px-1.5 py-0.5 rounded-full leading-none"
+    >
+      ✓ Steam
+    </span>
+  );
+}
+
 export function StatusDot({ status }: { status: string }) {
   const config: Record<string, { color: string; label: string }> = {
     idle: { color: 'bg-gray-300 dark:bg-slate-600', label: 'Idle' },
     pending: { color: 'bg-yellow-400', label: 'Pending' },
     generating: { color: 'bg-blue-500 animate-pulse', label: 'Generating' },
+    reviewing: { color: 'bg-purple-500 animate-pulse', label: 'Reviewing' },
     done: { color: 'bg-emerald-500', label: 'Done' },
   };
   const c = config[status] || config.idle;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
-import { MODULE_META, StatusDot, fieldChanges, NewBadge, RemovedTag, EntityText, moduleToQuote, QuoteButton } from './moduleShared';
+import { MODULE_META, StatusDot, fieldChanges, NewBadge, RemovedTag, EntityText, moduleToQuote, QuoteButton, SteamBadge } from './moduleShared';
 import type { EntityContext } from './moduleShared';
 import { PositioningChart } from './ModuleCard';
 
@@ -68,6 +68,9 @@ export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens
                   <span className="text-[10px] text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50 border border-amber-100 dark:border-amber-900 rounded-full px-2 py-0.5">
                     Viewing an earlier generation — read-only
                   </span>
+                )}
+                {viewingOld && module.data && (
+                  <VersionDiff name={name} oldData={versions[versionIdx].data} currentData={module.data} />
                 )}
               </div>
             )}
@@ -138,6 +141,7 @@ function DetailContent({ name, data, changes, onEntityClick, ctx, pmLens = 0, on
                   >
                     {c.name}
                   </button>
+                  {(c as Record<string, unknown>).verified === true && <span className="ml-2"><SteamBadge /></span>}
                   {added.has(c.name) && <span className="ml-2 inline-block align-middle"><NewBadge /></span>}
                   <p className="text-sm text-gray-500 dark:text-slate-400 mt-0.5 leading-relaxed">{c.rationale}</p>
                 </div>
@@ -349,6 +353,60 @@ function SwotCell({ q, data, changes, onEntityClick, ctx }: {
         ))}
       </div>
     </div>
+  );
+}
+
+const DIFF_FIELDS: Record<ModuleName, { field: string; label: string } | null> = {
+  competitiveLandscape: { field: 'existingCompetitors', label: 'name' },
+  audienceOverview: { field: 'segments', label: 'segmentName' },
+  positioningMatrix: { field: 'positions', label: 'gameName' },
+  swot: null, // four list fields — summarized via counts instead
+};
+
+/** Inline summary of what changed between an old version and current. */
+function VersionDiff({ name, oldData, currentData }: { name: ModuleName; oldData: ModuleData; currentData: ModuleData }) {
+  const cfg = DIFF_FIELDS[name];
+  let added: string[] = [];
+  let removed: string[] = [];
+
+  if (cfg) {
+    const labels = (d: ModuleData) =>
+      new Set(((d[cfg.field] as Array<Record<string, unknown>>) || []).map((i) => String(i[cfg.label])));
+    const oldSet = labels(oldData);
+    const curSet = labels(currentData);
+    added = [...curSet].filter((l) => !oldSet.has(l));
+    removed = [...oldSet].filter((l) => !curSet.has(l));
+  } else {
+    // SWOT: compare item texts across all four quadrants
+    const texts = (d: ModuleData) => {
+      const all = new Set<string>();
+      for (const k of ['strengths', 'weaknesses', 'opportunities', 'threats']) {
+        for (const item of (d[k] as Array<{ text: string }>) || []) all.add(item.text);
+      }
+      return all;
+    };
+    const oldSet = texts(oldData);
+    const curSet = texts(currentData);
+    added = [...curSet].filter((t) => !oldSet.has(t));
+    removed = [...oldSet].filter((t) => !curSet.has(t));
+  }
+
+  if (added.length === 0 && removed.length === 0) {
+    return <span className="text-[10px] text-gray-400 dark:text-slate-500">identical items to current</span>;
+  }
+
+  const trunc = (s: string) => (s.length > 40 ? s.slice(0, 40) + '…' : s);
+  return (
+    <span className="text-[10px] text-gray-400 dark:text-slate-500">
+      since this version:{' '}
+      {added.length > 0 && (
+        <span className="text-emerald-600 dark:text-emerald-400">+{added.length} added ({added.slice(0, 3).map(trunc).join(', ')}{added.length > 3 ? '…' : ''})</span>
+      )}
+      {added.length > 0 && removed.length > 0 && '  '}
+      {removed.length > 0 && (
+        <span className="text-red-400 line-through decoration-red-300">−{removed.length} removed ({removed.slice(0, 3).map(trunc).join(', ')}{removed.length > 3 ? '…' : ''})</span>
+      )}
+    </span>
   );
 }
 

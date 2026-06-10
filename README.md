@@ -98,6 +98,15 @@ input.md → Pipeline Orchestrator → output/*.json
 
 **Validation retry loop**: Structured outputs are validated against Pydantic schemas; on malformed JSON or schema mismatch, the error is fed back to the model for up to 2 corrective retries, keeping the pipeline robust off the happy path.
 
+### Quality & Grounding
+
+- **LLM-as-judge quality gate**: after each module generates, an independent judge call scores it 0-10 against module-specific rubrics (real games only, behavioral segmentation, insightful axes, specific SWOT items). Below 7.0, the module regenerates once with the judge's feedback folded into the prompt. Scores appear as chips on module cards; disable with `QUALITY_GATE=off`.
+- **Steam grounding**: every competitor is checked against the Steam store search API after generation — verified titles get a badge + appId, misses are flagged (not removed; console exclusives are real games too). Fail-open on network errors.
+- **Provider switch**: module generation runs on OpenAI (GPT-4o) or Anthropic (Claude Opus 4.8), switchable at runtime from the header. The agent's tool-calling loop stays on OpenAI function calling.
+- **Streaming**: agent replies stream token-by-token over SSE into the chat; module status, judge reviews, and cascades all render live.
+- **Versioning + diff**: each module keeps its last 10 generations; the detail view can browse them with an added/removed diff against the current version.
+- **Export**: one-click Markdown report (competitors with Steam verification, segments, both positioning lenses, SWOT, judge scores) via the header download button.
+
 ### Security Hardening
 
 - **Prompt injection defense**: brief content is wrapped in `<game_brief>` delimiters with an explicit data-not-instructions notice in every module prompt; the agent's system prompt instructs it to flag (not follow) instructions embedded in briefs or module content

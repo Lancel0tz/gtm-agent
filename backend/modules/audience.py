@@ -18,7 +18,7 @@ SYSTEM = (
 )
 
 
-async def generate(input_md: str, competitive_landscape: dict) -> dict:
+async def generate(input_md: str, competitive_landscape: dict, feedback: str | None = None) -> dict:
     """Generate AudienceOverview grounded in CompetitiveLandscape."""
 
     competitor_names = [c["name"] for c in competitive_landscape["existingCompetitors"]]
@@ -43,6 +43,12 @@ async def generate(input_md: str, competitive_landscape: dict) -> dict:
         "Use exact name matches. The summary should explain the segmentation logic "
         "and how it connects to the competitive landscape."
     )
+
+    if feedback:
+        reasoning_prompt += (
+            "\n\nA quality reviewer flagged these issues with a prior attempt — "
+            f"address them explicitly:\n{feedback}"
+        )
 
     result = await generate_with_reasoning(
         system=SYSTEM,

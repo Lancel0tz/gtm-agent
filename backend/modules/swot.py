@@ -21,6 +21,7 @@ async def generate(
     input_md: str,
     competitive_landscape: dict,
     audience_overview: dict,
+    feedback: str | None = None,
 ) -> dict:
     """Generate SWOT grounded in competitive and audience context."""
 
@@ -49,6 +50,12 @@ async def generate(
         "and a clear, specific text statement. Keep each statement concise but "
         "grounded — it should reference specific competitors or segments."
     )
+
+    if feedback:
+        reasoning_prompt += (
+            "\n\nA quality reviewer flagged these issues with a prior attempt — "
+            f"address them explicitly:\n{feedback}"
+        )
 
     return await generate_with_reasoning(
         system=SYSTEM,

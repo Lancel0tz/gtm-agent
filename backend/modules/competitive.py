@@ -1,9 +1,15 @@
 """CompetitiveLandscape module generation (Layer 1).
 
-Methodology: Two-step generation with self-critique.
+Methodology: Two-step generation with self-critique and grounding.
 1. Analyze the game brief to extract competitive dimensions
 2. Generate competitors with rationale, then self-critique for coverage gaps
+3. Verify each competitor against the Steam store (anti-hallucination)
 """
+
+import asyncio
+import re
+
+import httpx
 
 from backend.llm import wrap_brief, generate_structured, generate_with_reasoning
 from backend.schemas import CompetitiveLandscape
@@ -14,7 +20,7 @@ SYSTEM = (
 )
 
 
-async def generate(input_md: str) -> dict:
+async def generate(input_md: str, feedback: str | None = None) -> dict:
     """Generate CompetitiveLandscape from input.md using multi-step reasoning."""
 
     # Step 1: Analyze competitive dimensions
@@ -39,6 +45,12 @@ async def generate(input_md: str) -> dict:
         "positioning and key insight about where this game sits in the market."
     )
 
+    if feedback:
+        reasoning_prompt += (
+            "\n\nA quality reviewer flagged these issues with a prior attempt — "
+            f"address them explicitly:\n{feedback}"
+        )
+
     result = await generate_with_reasoning(
         system=SYSTEM,
         reasoning_prompt=reasoning_prompt,
@@ -47,8 +59,10 @@ async def generate(input_md: str) -> dict:
     )
 
     # Step 3: Self-critique for coverage gaps
-    critique_result = await _self_critique(input_md, result)
-    return critique_result
+    result = await _self_critique(input_md, result)
+
+    # Step 4: Ground against the Steam store (fail-open on network issues)
+    return await _verify_on_steam(result)
 
 
 async def _self_critique(input_md: str, landscape: dict) -> dict:
@@ -94,3 +108,43 @@ async def _self_critique(input_md: str, landscape: dict) -> dict:
         schema_class=CompetitiveLandscape,
     )
     return result
+
+
+def _norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+async def _verify_on_steam(landscape: dict) -> dict:
+    """Check each competitor against Steam's store search.
+
+    Marks verified=True (+steamAppId) on a fuzzy name match, False when the
+    search returns no match (console exclusives and legacy titles are real
+    games too — flagged, not removed), None when the check itself failed.
+    """
+    competitors = landscape.get("existingCompetitors", [])
+    try:
+        async with httpx.AsyncClient(timeout=6) as http:
+            async def check(c: dict):
+                c.setdefault("verified", None)
+                c.setdefault("steamAppId", None)
+                try:
+                    r = await http.get(
+                        "https://store.steampowered.com/api/storesearch/",
+                        params={"term": c["name"], "cc": "us", "l": "en"},
+                    )
+                    items = (r.json() or {}).get("items") or []
+                    target = _norm(c["name"])
+                    for item in items[:5]:
+                        found = _norm(item.get("name", ""))
+                        if target and found and (target in found or found in target):
+                            c["verified"] = True
+                            c["steamAppId"] = item.get("id")
+                            return
+                    c["verified"] = False
+                except Exception:
+                    c["verified"] = None
+
+            await asyncio.gather(*(check(c) for c in competitors))
+    except Exception:
+        pass  # grounding is best-effort; never block generation
+    return landscape

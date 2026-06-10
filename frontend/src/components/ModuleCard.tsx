@@ -1,5 +1,5 @@
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
-import { MODULE_META, StatusDot, fieldChanges, axisLabel, NewBadge, RemovedTag, EntityText, moduleToQuote, QuoteButton } from './moduleShared';
+import { MODULE_META, StatusDot, fieldChanges, axisLabel, NewBadge, RemovedTag, EntityText, moduleToQuote, QuoteButton, QualityChip, SteamBadge } from './moduleShared';
 import type { EntityContext } from './moduleShared';
 
 interface Props {
@@ -33,6 +33,7 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens 
           <span className="text-[15px] font-semibold text-gray-900 dark:text-slate-100">{meta.label}</span>
         </div>
         <div className="flex items-center gap-2">
+          {module.quality && <QualityChip score={module.quality.score} feedback={module.quality.feedback} />}
           <StatusDot status={module.status} />
           {module.data && onQuote && (
             <QuoteButton onClick={() => onQuote(moduleToQuote(name, module.data!))} />
@@ -103,6 +104,7 @@ function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0 }: 
             >
               {c.name}
             </button>
+            {(c as Record<string, unknown>).verified === true && <span className="ml-1.5"><SteamBadge /></span>}
             {added.has(c.name) && <span className="ml-1.5 inline-block align-middle"><NewBadge /></span>}
             <span className="align-middle text-gray-400 dark:text-slate-500 text-xs ml-2">{c.rationale.slice(0, 80)}…</span>
           </div>

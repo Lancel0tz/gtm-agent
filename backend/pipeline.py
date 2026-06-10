@@ -11,6 +11,7 @@ from typing import Callable
 
 from backend.schemas import PipelineState
 from backend.modules import competitive, audience, positioning, swot
+from backend import evaluator
 
 OUTPUT_ROOT = Path(__file__).parent.parent / "output"
 
@@ -66,6 +67,8 @@ class Pipeline:
         self.changes: dict[str, dict] = {m: {"added": {}, "removed": {}} for m in DEPENDENCY_GRAPH}
         # Prior generations per module: [{ts, data}], oldest first, capped
         self.versions: dict[str, list] = {m: [] for m in DEPENDENCY_GRAPH}
+        # Latest LLM-judge review per module: {score, feedback}
+        self.quality: dict[str, dict] = {}
         self._load_existing()
 
     def _load_existing(self):
@@ -79,6 +82,9 @@ class Pipeline:
         versions_path = self.output_dir / "_versions.json"
         if versions_path.exists():
             self.versions.update(json.loads(versions_path.read_text()))
+        quality_path = self.output_dir / "_quality.json"
+        if quality_path.exists():
+            self.quality.update(json.loads(quality_path.read_text()))
 
     def _save_module(self, module_name: str, data: dict, record_changes: bool = False):
         """Persist a module. Change history is recorded only for direct user
@@ -169,6 +175,35 @@ class Pipeline:
             json.dumps(self.changes, indent=2, ensure_ascii=False)
         )
 
+    async def _gated(self, module_name: str, generate_fn) -> dict:
+        """Run generation through the LLM-judge quality gate.
+
+        generate_fn(feedback) -> module dict. Below-threshold output is
+        regenerated ONCE with the judge's feedback, then re-scored.
+        """
+        result = await generate_fn(None)
+        if not evaluator.enabled():
+            return result
+
+        self.on_status(module_name, "reviewing")
+        review = await evaluator.evaluate(module_name, result)
+
+        if review["score"] < evaluator.QUALITY_THRESHOLD:
+            self.on_status(module_name, "generating")
+            result = await generate_fn(review["feedback"])
+            self.on_status(module_name, "reviewing")
+            review = await evaluator.evaluate(module_name, result)
+
+        self.quality[module_name] = review
+        (self.output_dir / "_quality.json").write_text(
+            json.dumps(self.quality, indent=2, ensure_ascii=False)
+        )
+        return result
+
+    def get_quality(self, module_name: str) -> dict | None:
+        """Latest LLM-judge review for a module, if the gate has run."""
+        return self.quality.get(module_name)
+
     def get_versions(self, module_name: str) -> list:
         """Prior generations of a module, oldest first."""
         return self.versions.get(module_name, [])
@@ -182,13 +217,15 @@ class Pipeline:
 
         # Layer 1: CompetitiveLandscape
         self.on_status("competitiveLandscape", "generating")
-        cl = await competitive.generate(input_md)
+        cl = await self._gated("competitiveLandscape",
+                               lambda fb: competitive.generate(input_md, feedback=fb))
         self._save_module("competitiveLandscape", cl)
         self.on_status("competitiveLandscape", "done")
 
         # Layer 2: AudienceOverview
         self.on_status("audienceOverview", "generating")
-        ao = await audience.generate(input_md, cl)
+        ao = await self._gated("audienceOverview",
+                               lambda fb: audience.generate(input_md, cl, feedback=fb))
         self._save_module("audienceOverview", ao)
         self.on_status("audienceOverview", "done")
 
@@ -196,8 +233,10 @@ class Pipeline:
         self.on_status("positioningMatrix", "generating")
         self.on_status("swot", "generating")
 
-        pm_task = positioning.generate(input_md, cl, ao)
-        swot_task = swot.generate(input_md, cl, ao)
+        pm_task = self._gated("positioningMatrix",
+                              lambda fb: positioning.generate(input_md, cl, ao, feedback=fb))
+        swot_task = self._gated("swot",
+                                lambda fb: swot.generate(input_md, cl, ao, feedback=fb))
         pm_result, swot_result = await asyncio.gather(pm_task, swot_task)
 
         self._save_module("positioningMatrix", pm_result)
@@ -251,20 +290,23 @@ class Pipeline:
         return regenerated
 
     async def _regenerate_module(self, module_name: str, input_md: str) -> dict:
-        """Regenerate a single module using current state for its dependencies."""
+        """Regenerate a single module (quality-gated) using current state."""
         cl = self.state.competitiveLandscape
         ao = self.state.audienceOverview
 
         if module_name == "competitiveLandscape":
-            return await competitive.generate(input_md)
+            return await self._gated(module_name,
+                                     lambda fb: competitive.generate(input_md, feedback=fb))
         elif module_name == "audienceOverview":
-            return await audience.generate(input_md, cl)
+            return await self._gated(module_name,
+                                     lambda fb: audience.generate(input_md, cl, feedback=fb))
         elif module_name == "positioningMatrix":
-            return await positioning.generate(
-                input_md, cl, ao, previous=self.state.positioningMatrix
-            )
+            prev = self.state.positioningMatrix
+            return await self._gated(module_name,
+                                     lambda fb: positioning.generate(input_md, cl, ao, previous=prev, feedback=fb))
         elif module_name == "swot":
-            return await swot.generate(input_md, cl, ao)
+            return await self._gated(module_name,
+                                     lambda fb: swot.generate(input_md, cl, ao, feedback=fb))
         else:
             raise ValueError(f"Unknown module: {module_name}")
 

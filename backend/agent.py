@@ -141,7 +141,10 @@ class Agent:
         events: list[dict] = []
 
         def emit(event: dict):
-            events.append(event)
+            # Token-level stream events go to SSE only — keeping them out of
+            # the HTTP response payload and the persisted thread
+            if event["type"] not in ("token", "text_start", "text_done"):
+                events.append(event)
             self.on_event(event)
 
         for _ in range(8):  # max tool-use rounds, prevents infinite loops
@@ -150,31 +153,29 @@ class Agent:
                 + f"\n\nThe active game brief is '{self.get_input_label()}'. "
                 "All modules and tools operate on THIS brief's workspace."
             )
-            response = await get_client().chat.completions.create(
-                model=MODEL,
-                messages=[{"role": "system", "content": system}] + history,
-                tools=TOOLS,
-                tool_choice="auto",
-            )
 
-            message = response.choices[0].message
+            content, tool_calls = await self._stream_completion(system, history, emit)
 
-            if not message.tool_calls:
-                text = message.content or ""
-                history.append({"role": "assistant", "content": text})
-                return {"response": text, "events": events}
+            if not tool_calls:
+                history.append({"role": "assistant", "content": content})
+                return {"response": content, "events": events}
 
-            history.append(message.model_dump(exclude_none=True))
+            history.append({
+                "role": "assistant",
+                "content": content or None,
+                "tool_calls": [
+                    {"id": t["id"], "type": "function",
+                     "function": {"name": t["name"], "arguments": t["arguments"]}}
+                    for t in tool_calls
+                ],
+            })
 
-            for tool_call in message.tool_calls:
-                name = tool_call.function.name
-                args = json.loads(tool_call.function.arguments) if tool_call.function.arguments else {}
-
-                result = await self._execute_tool(name, args, emit)
-
+            for t in tool_calls:
+                args = json.loads(t["arguments"]) if t["arguments"] else {}
+                result = await self._execute_tool(t["name"], args, emit)
                 history.append({
                     "role": "tool",
-                    "tool_call_id": tool_call.id,
+                    "tool_call_id": t["id"],
                     "content": result,
                 })
 
@@ -182,6 +183,47 @@ class Agent:
             "response": "I hit my tool-use limit for this request. Please try a more specific instruction.",
             "events": events,
         }
+
+    async def _stream_completion(self, system: str, history: list, emit: Callable):
+        """One streamed LLM round. Emits token events for text content in
+        real-time; accumulates tool calls from deltas. Returns (text, calls)."""
+        stream = await get_client().chat.completions.create(
+            model=MODEL,
+            messages=[{"role": "system", "content": system}] + history,
+            tools=TOOLS,
+            tool_choice="auto",
+            stream=True,
+        )
+
+        content = ""
+        calls: dict[int, dict] = {}
+        started = False
+
+        async for chunk in stream:
+            if not chunk.choices:
+                continue
+            delta = chunk.choices[0].delta
+            if delta is None:
+                continue
+            if delta.content:
+                if not started:
+                    emit({"type": "text_start"})
+                    started = True
+                content += delta.content
+                emit({"type": "token", "content": delta.content})
+            for tc in delta.tool_calls or []:
+                entry = calls.setdefault(tc.index, {"id": "", "name": "", "arguments": ""})
+                if tc.id:
+                    entry["id"] = tc.id
+                if tc.function:
+                    if tc.function.name:
+                        entry["name"] = tc.function.name
+                    if tc.function.arguments:
+                        entry["arguments"] += tc.function.arguments
+
+        if started:
+            emit({"type": "text_done"})
+        return content, [calls[i] for i in sorted(calls)]
 
     async def _execute_tool(self, name: str, args: dict, emit: Callable) -> str:
         """Execute a tool; emits events in real-time; returns the tool result string."""
@@ -202,7 +244,8 @@ class Agent:
                 data = self.pipeline.get_module(module)
                 if data:
                     emit({"type": "module_update", "module": module, "data": data,
-                          "changes": self.pipeline.get_changes(module)})
+                          "changes": self.pipeline.get_changes(module),
+                          "quality": self.pipeline.get_quality(module)})
 
         self.pipeline.on_status = on_status
         await self.pipeline.generate_all(input_md)
@@ -269,7 +312,8 @@ class Agent:
                 data = self.pipeline.get_module(module)
                 if data:
                     emit({"type": "module_update", "module": module, "data": data,
-                          "changes": self.pipeline.get_changes(module)})
+                          "changes": self.pipeline.get_changes(module),
+                          "quality": self.pipeline.get_quality(module)})
 
         self.pipeline.on_status = on_status
         regenerated = await self.pipeline.cascade_update(module_name, input_md)

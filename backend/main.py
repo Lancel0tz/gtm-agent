@@ -20,9 +20,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
+from fastapi.responses import Response
+
 from backend.pipeline import Pipeline, DEPENDENCY_GRAPH
 from backend.agent import Agent
 from backend.threads import ThreadStore
+from backend import llm
 
 import time
 
@@ -316,6 +319,7 @@ async def get_modules():
         name: {
             "data": pipeline.get_module(name),
             "changes": pipeline.get_changes(name),
+            "quality": pipeline.get_quality(name),
         }
         for name in DEPENDENCY_GRAPH
     }
@@ -402,6 +406,92 @@ async def select_input(req: SelectInputRequest):
             broadcast_event({"type": "input_changed", "filename": f.name})
             return {"ok": True, "active": f.name}
     raise HTTPException(404, f"Input file '{req.filename}' not found")
+
+
+class ProviderRequest(BaseModel):
+    provider: str
+
+
+@app.get("/api/settings")
+async def get_settings():
+    """Active LLM provider for module generation + availability."""
+    return llm.get_settings()
+
+
+@app.post("/api/settings/provider")
+async def set_provider(req: ProviderRequest):
+    try:
+        llm.set_provider(req.provider)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    return llm.get_settings()
+
+
+@app.get("/api/export")
+async def export_report():
+    """Download the full GTM analysis as a Markdown report."""
+    facts = _parse_input_facts(active_input["path"].read_text())
+    lines = [
+        f"# GTM Analysis — {facts['title']}",
+        "",
+        f"*Genre:* {facts['genre']}  |  *Platform:* {facts['platform']}  |  *Price:* {facts['price']}",
+        "",
+        f"> {facts['shortDescription']}",
+        "",
+    ]
+
+    cl = pipeline.get_module("competitiveLandscape")
+    if cl:
+        lines += ["## Competitive Landscape", "", cl["summary"], ""]
+        for c in cl["existingCompetitors"]:
+            steam = " *(Steam ✓)*" if c.get("verified") else ""
+            lines.append(f"- **{c['name']}**{steam} — {c['rationale']}")
+        lines.append("")
+
+    ao = pipeline.get_module("audienceOverview")
+    if ao:
+        lines += ["## Audience Overview", "", ao["summary"], ""]
+        for s in ao["segments"]:
+            lines += [f"### {s['segmentName']}", "", s["description"], "",
+                      f"*Plays:* {', '.join(s['selectedExistingCompetitors'])}", ""]
+
+    pm = pipeline.get_module("positioningMatrix")
+    if pm:
+        lines += ["## Positioning Matrix", "",
+                  f"**X:** {pm['xAxis']['axisName']} ({pm['xAxis']['lowLabel']} → {pm['xAxis']['highLabel']})  ",
+                  f"**Y:** {pm['yAxis']['axisName']} ({pm['yAxis']['lowLabel']} → {pm['yAxis']['highLabel']})", "",
+                  "| Game | X | Y |", "|---|---|---|"]
+        lines += [f"| {p['gameName']} | {p['xPosition']} | {p['yPosition']} |" for p in pm["positions"]]
+        lines.append("")
+        for view in pm.get("alternativeViews", []):
+            lines += [f"### Alternative lens: {view['xAxis']['axisName']} × {view['yAxis']['axisName']}", "",
+                      "| Game | X | Y |", "|---|---|---|"]
+            lines += [f"| {p['gameName']} | {p['xPosition']} | {p['yPosition']} |" for p in view["positions"]]
+            lines.append("")
+
+    sw = pipeline.get_module("swot")
+    if sw:
+        lines += ["## SWOT Analysis", ""]
+        for key, label in [("strengths", "Strengths"), ("weaknesses", "Weaknesses"),
+                           ("opportunities", "Opportunities"), ("threats", "Threats")]:
+            lines += [f"### {label}", ""]
+            lines += [f"- {item['text']}" for item in sw[key]]
+            lines.append("")
+
+    quality = {m: pipeline.get_quality(m) for m in DEPENDENCY_GRAPH}
+    if any(quality.values()):
+        lines += ["---", "", "## Quality Review (LLM-as-judge)", ""]
+        for m, q in quality.items():
+            if q:
+                lines.append(f"- **{m}**: {q['score']}/10 — {q['feedback'][:200]}")
+        lines.append("")
+
+    stem = active_input["path"].stem
+    return Response(
+        content="\n".join(lines),
+        media_type="text/markdown; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="gtm-report-{stem}.md"'},
+    )
 
 
 @app.get("/api/events")

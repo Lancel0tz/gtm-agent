@@ -4,62 +4,86 @@
     {
       "id": "ec-002",
       "name": "Conan Exiles",
-      "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune."
+      "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune.",
+      "verified": true,
+      "steamAppId": 440900
     },
     {
       "id": "ec-003",
       "name": "Rust",
-      "rationale": "With its open-world survival and crafting elements, \"Rust\" provides competitive multiplayer engagements, a core experience in \"Dune: Awakening.\""
+      "rationale": "With its open-world survival and crafting elements, \"Rust\" provides competitive multiplayer engagements, a core experience in \"Dune: Awakening.\"",
+      "verified": true,
+      "steamAppId": 252490
     },
     {
       "id": "ec-004",
       "name": "Valheim",
-      "rationale": "A survival game with crafting and exploration in a large open world, emphasizing both solo and multiplayer experiences akin to Dune's sandbox nature."
+      "rationale": "A survival game with crafting and exploration in a large open world, emphasizing both solo and multiplayer experiences akin to Dune's sandbox nature.",
+      "verified": true,
+      "steamAppId": 892970
     },
     {
       "id": "ec-005",
       "name": "Star Wars: The Old Republic",
-      "rationale": "Appeals to fans of established sci-fi universes, offering an expansive narrative and universe exploration that can appeal to Dune fans."
+      "rationale": "Appeals to fans of established sci-fi universes, offering an expansive narrative and universe exploration that can appeal to Dune fans.",
+      "verified": true,
+      "steamAppId": 1286830
     },
     {
       "id": "ec-006",
       "name": "Destiny 2",
-      "rationale": "Offers a base game with MTX and a seasonal pass model, like Dune, targeting players comfortable with ongoing monetization in multiplayer games."
+      "rationale": "Offers a base game with MTX and a seasonal pass model, like Dune, targeting players comfortable with ongoing monetization in multiplayer games.",
+      "verified": true,
+      "steamAppId": 1085660
     },
     {
       "id": "ec-007",
       "name": "The Elder Scrolls Online",
-      "rationale": "Subscription and DLC-centric monetization with initial purchase, similar to Dune's sales model, targeting gamers willing to invest in both initial and recurring content."
+      "rationale": "Subscription and DLC-centric monetization with initial purchase, similar to Dune's sales model, targeting gamers willing to invest in both initial and recurring content.",
+      "verified": true,
+      "steamAppId": 306130
     },
     {
       "id": "ec-008",
       "name": "Lost Ark",
-      "rationale": "High-profile MMOs on Steam, capturing audience focus within the MMO landscape and competing for player engagement on this platform."
+      "rationale": "High-profile MMOs on Steam, capturing audience focus within the MMO landscape and competing for player engagement on this platform.",
+      "verified": false,
+      "steamAppId": null
     },
     {
       "id": "ec-009",
       "name": "Black Desert Online",
-      "rationale": "A Steam MMO offering vibrant world exploration and PvP options, possibly drawing the same player demographic interested in MMO and open-world titles."
+      "rationale": "A Steam MMO offering vibrant world exploration and PvP options, possibly drawing the same player demographic interested in MMO and open-world titles.",
+      "verified": false,
+      "steamAppId": null
     },
     {
       "id": "ec-010",
       "name": "Warframe",
-      "rationale": "Both appeal to players looking for intricate universes with evolving narrative content and a mix of cooperative and competitive multiplayer settings."
+      "rationale": "Both appeal to players looking for intricate universes with evolving narrative content and a mix of cooperative and competitive multiplayer settings.",
+      "verified": true,
+      "steamAppId": 230410
     },
     {
       "id": "ec-016",
       "name": "Scum",
-      "rationale": "Offers a hardcore survival experience with detailed resource management elements, aligning closely with survival mechanics in Dune."
+      "rationale": "Offers a hardcore survival experience with detailed resource management elements, aligning closely with survival mechanics in Dune.",
+      "verified": true,
+      "steamAppId": 513710
     },
     {
       "id": "ec-017",
       "name": "The Forest",
-      "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune."
+      "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune.",
+      "verified": true,
+      "steamAppId": 242760
     },
     {
       "id": "ec-019",
       "name": "Nightingale",
-      "rationale": "Features survival crafting mechanics in a shared world environment with a focus on exploration and lore, similar to Dune's atmospheric and survival focus."
+      "rationale": "Features survival crafting mechanics in a shared world environment with a focus on exploration and lore, similar to Dune's atmospheric and survival focus.",
+      "verified": true,
+      "steamAppId": 1928980
     }
   ]
 }

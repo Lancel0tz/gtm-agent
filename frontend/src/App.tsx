@@ -28,6 +28,9 @@ function App() {
   const [activeThread, setActiveThread] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [quote, setQuote] = useState<string | null>(null);
+  const [streamingText, setStreamingText] = useState('');
+  const [provider, setProvider] = useState('');
+  const [providers, setProviders] = useState<Record<string, { label: string; available: boolean }>>({});
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>(
     () => (localStorage.getItem('theme') as 'light' | 'dark' | 'system') || 'system',
   );
@@ -59,7 +62,7 @@ function App() {
         const next = { ...INITIAL_STATE };
         for (const key of Object.keys(modules) as ModuleName[]) {
           if (modules[key]?.data) {
-            next[key] = { status: 'done', data: modules[key].data, changes: modules[key].changes };
+            next[key] = { status: 'done', data: modules[key].data, changes: modules[key].changes, quality: modules[key].quality };
           }
         }
         return next;
@@ -70,7 +73,24 @@ function App() {
   useEffect(() => {
     loadInput();
     loadModules();
+    fetch('/api/settings').then(r => r.json()).then((d) => {
+      setProvider(d.provider);
+      setProviders(d.providers);
+    });
   }, [loadInput, loadModules]);
+
+  const handleSwitchProvider = useCallback(async (p: string) => {
+    const res = await fetch('/api/settings/provider', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ provider: p }),
+    });
+    if (res.ok) {
+      const d = await res.json();
+      setProvider(d.provider);
+      setProviders(d.providers);
+    }
+  }, []);
 
   useEffect(() => {
     const es = new EventSource('/api/events');
@@ -84,8 +104,12 @@ function App() {
       } else if (event.type === 'module_update') {
         setState(prev => ({
           ...prev,
-          [event.module]: { status: 'done', data: event.data, changes: event.changes ?? null },
+          [event.module]: { status: 'done', data: event.data, changes: event.changes ?? null, quality: event.quality ?? prev[event.module as ModuleName].quality },
         }));
+      } else if (event.type === 'text_start') {
+        setStreamingText('');
+      } else if (event.type === 'token') {
+        setStreamingText(prev => prev + event.content);
       } else if (event.type === 'input_changed') {
         loadInput();
         loadModules();
@@ -243,7 +267,7 @@ function App() {
         if (event.type === 'module_update') {
           setState(prev => ({
             ...prev,
-            [event.module]: { status: 'done', data: event.data, changes: event.changes ?? null },
+            [event.module]: { status: 'done', data: event.data, changes: event.changes ?? null, quality: event.quality ?? prev[event.module as ModuleName].quality },
           }));
         }
       }
@@ -251,6 +275,7 @@ function App() {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Error communicating with the server.' }]);
     } finally {
       setIsLoading(false);
+      setStreamingText('');
     }
   }, [activeThread, loadThreads]);
 
@@ -265,6 +290,31 @@ function App() {
           <span className="font-semibold text-sm text-gray-900 dark:text-slate-100">GTM Agent</span>
         </div>
         <div className="flex items-center gap-3">
+          {Object.keys(providers).length > 0 && (
+            <select
+              value={provider}
+              onChange={(e) => handleSwitchProvider(e.target.value)}
+              title="LLM provider for module generation"
+              className="appearance-none text-[11px] text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700 rounded-lg px-2 py-1 cursor-pointer hover:border-gray-300 dark:hover:border-slate-500 focus:outline-none"
+            >
+              {Object.entries(providers).map(([key, cfg]) => (
+                <option key={key} value={key} disabled={!cfg.available}>
+                  {cfg.label}{cfg.available ? '' : ' (no key)'}
+                </option>
+              ))}
+            </select>
+          )}
+          <button
+            onClick={() => window.open('/api/export', '_blank')}
+            title="Export the analysis as a Markdown report"
+            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:border-gray-300 dark:hover:border-slate-500 flex items-center justify-center transition-colors"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </button>
           <button
             onClick={() => setTheme(theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light')}
             title={`Theme: ${theme} (click to cycle)`}
@@ -330,6 +380,7 @@ function App() {
             onClearQuote={() => setQuote(null)}
             onStop={handleStop}
             activeBrief={activeInput}
+            streamingText={streamingText}
           />
         </div>
       </div>
