@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
 import { MODULE_META, StatusDot, fieldChanges, NewBadge, RemovedTag, EntityText } from './moduleShared';
 import type { EntityContext } from './moduleShared';
@@ -10,9 +9,11 @@ interface Props {
   onClose: () => void;
   onEntityClick: (entity: EntityRef) => void;
   ctx?: EntityContext;
+  pmLens?: number;
+  onSelectLens?: (lens: number) => void;
 }
 
-export function ModuleDetail({ name, module, onClose, onEntityClick, ctx }: Props) {
+export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens = 0, onSelectLens }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -50,7 +51,7 @@ export function ModuleDetail({ name, module, onClose, onEntityClick, ctx }: Prop
         {/* Body */}
         <div className="px-8 py-6 overflow-y-auto">
           {module.data ? (
-            <DetailContent name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} />
+            <DetailContent name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} onSelectLens={onSelectLens} />
           ) : null}
         </div>
       </div>
@@ -64,9 +65,11 @@ interface ContentProps {
   changes?: ModuleChanges | null;
   onEntityClick: (entity: EntityRef) => void;
   ctx?: EntityContext;
+  pmLens?: number;
+  onSelectLens?: (lens: number) => void;
 }
 
-function DetailContent({ name, data, changes, onEntityClick, ctx }: ContentProps) {
+function DetailContent({ name, data, changes, onEntityClick, ctx, pmLens = 0, onSelectLens }: ContentProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ id: string; name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -157,7 +160,7 @@ function DetailContent({ name, data, changes, onEntityClick, ctx }: ContentProps
   }
 
   if (name === 'positioningMatrix') {
-    return <PositioningDetail data={data} changes={changes} onEntityClick={onEntityClick} />;
+    return <PositioningDetail data={data} changes={changes} onEntityClick={onEntityClick} selected={pmLens} onSelect={onSelectLens} />;
   }
 
   if (name === 'swot') {
@@ -173,8 +176,9 @@ interface ViewLike {
   positions: Array<{ id: string; gameName: string; xPosition: number; yPosition: number }>;
 }
 
-/** Positioning with selectable axis lenses (primary + alternatives). */
-function PositioningDetail({ data, changes, onEntityClick }: { data: ModuleData; changes?: ModuleChanges | null; onEntityClick: (e: EntityRef) => void }) {
+/** Positioning with selectable axis lenses (primary + alternatives).
+ *  Selection is lifted to Canvas so the card preview follows it. */
+function PositioningDetail({ data, changes, onEntityClick, selected = 0, onSelect }: { data: ModuleData; changes?: ModuleChanges | null; onEntityClick: (e: EntityRef) => void; selected?: number; onSelect?: (lens: number) => void }) {
   const primary: ViewLike = {
     xAxis: data.xAxis as ViewLike['xAxis'],
     yAxis: data.yAxis as ViewLike['yAxis'],
@@ -182,7 +186,6 @@ function PositioningDetail({ data, changes, onEntityClick }: { data: ModuleData;
   };
   const alternatives = (data.alternativeViews as ViewLike[] | undefined) || [];
   const views = [primary, ...alternatives];
-  const [selected, setSelected] = useState(0);
   const view = views[selected] ?? primary;
 
   return (
@@ -192,7 +195,7 @@ function PositioningDetail({ data, changes, onEntityClick }: { data: ModuleData;
           {views.map((v, i) => (
             <button
               key={i}
-              onClick={() => setSelected(i)}
+              onClick={() => onSelect?.(i)}
               className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
                 i === selected
                   ? 'bg-black text-white border-black'

@@ -18,6 +18,8 @@ const MODULE_ORDER: ModuleName[] = [
 export function Canvas({ state }: Props) {
   const [expanded, setExpanded] = useState<ModuleName | null>(null);
   const [entity, setEntity] = useState<EntityRef | null>(null);
+  // Which positioning lens is active — shared by the card and the detail view
+  const [pmLens, setPmLens] = useState(0);
 
   // Known entity names, for linkifying competitor/segment mentions in text
   const ctx = {
@@ -50,6 +52,7 @@ export function Canvas({ state }: Props) {
             onExpand={() => setExpanded(name)}
             onEntityClick={setEntity}
             ctx={ctx}
+            pmLens={pmLens}
           />
         ))}
       </div>
@@ -61,6 +64,8 @@ export function Canvas({ state }: Props) {
           onClose={() => setExpanded(null)}
           onEntityClick={setEntity}
           ctx={ctx}
+          pmLens={pmLens}
+          onSelectLens={setPmLens}
         />
       )}
 

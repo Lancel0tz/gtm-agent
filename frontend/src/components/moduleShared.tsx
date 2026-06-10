@@ -52,7 +52,7 @@ export function NewBadge() {
 
 export function RemovedTag() {
   return (
-    <span className="inline-block align-middle relative -top-[1.5px] text-[9px] text-red-300 uppercase tracking-wide leading-none shrink-0">
+    <span className="inline-block align-middle relative -top-[0.5px] text-[9px] text-red-300 uppercase tracking-wide leading-none shrink-0">
       removed
     </span>
   );

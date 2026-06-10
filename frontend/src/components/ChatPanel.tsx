@@ -14,6 +14,8 @@ interface Props {
   onSelectThread: (tid: string) => void;
   onNewThread: () => void;
   onDeleteThread: (tid: string) => void;
+  onRegenerate: () => void;
+  onUndo: () => void;
 }
 
 const MODULE_ORDER: ModuleName[] = [
@@ -26,6 +28,7 @@ const MODULE_ORDER: ModuleName[] = [
 export function ChatPanel({
   messages, onSend, isLoading, modules,
   threads, activeThread, onSelectThread, onNewThread, onDeleteThread,
+  onRegenerate, onUndo,
 }: Props) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -123,25 +126,36 @@ export function ChatPanel({
           </div>
         )}
 
-        {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div
-              className={`max-w-[85%] text-sm rounded-2xl px-4 py-2.5 ${
-                msg.role === 'user'
-                  ? 'bg-black text-white'
-                  : 'bg-gray-100 text-gray-800'
-              }`}
-            >
-              {msg.role === 'assistant' ? (
-                <div className="markdown-body">
-                  <Markdown>{msg.content}</Markdown>
-                </div>
-              ) : (
-                <p>{msg.content}</p>
+        {messages.map((msg, i) => {
+          const isLast = i === messages.length - 1;
+          return (
+            <div key={i} className={`group/msg flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+              <div
+                className={`max-w-[85%] text-sm rounded-2xl px-4 py-2.5 ${
+                  msg.role === 'user'
+                    ? 'bg-black text-white'
+                    : 'bg-gray-100 text-gray-800'
+                }`}
+              >
+                {msg.role === 'assistant' ? (
+                  <div className="markdown-body">
+                    <Markdown>{msg.content}</Markdown>
+                  </div>
+                ) : (
+                  <p>{msg.content}</p>
+                )}
+              </div>
+              {msg.role === 'assistant' && !isLoading && (
+                <MessageActions
+                  content={msg.content}
+                  showTurnActions={isLast}
+                  onRegenerate={onRegenerate}
+                  onUndo={onUndo}
+                />
               )}
             </div>
-          </div>
-        ))}
+          );
+        })}
 
         {isLoading && <WorkingIndicator modules={modules} />}
 
@@ -239,5 +253,68 @@ function CheckIcon() {
     <svg className="w-3.5 h-3.5 text-emerald-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12" />
     </svg>
+  );
+}
+
+
+/** Hover action row under assistant messages: copy always; regenerate +
+ *  undo only on the latest reply (they operate on the last turn). */
+function MessageActions({ content, showTurnActions, onRegenerate, onUndo }: {
+  content: string;
+  showTurnActions: boolean;
+  onRegenerate: () => void;
+  onUndo: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    await navigator.clipboard.writeText(content);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <div className="flex items-center gap-0.5 mt-1 opacity-0 group-hover/msg:opacity-100 transition-opacity">
+      <ActionButton title={copied ? 'Copied!' : 'Copy'} onClick={copy}>
+        {copied ? (
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        ) : (
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+        )}
+      </ActionButton>
+      {showTurnActions && (
+        <>
+          <ActionButton title="Regenerate response (re-runs the request)" onClick={onRegenerate}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="23 4 23 10 17 10" />
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+            </svg>
+          </ActionButton>
+          <ActionButton title="Undo this turn (reverts module changes too)" onClick={onUndo}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 14 4 9 9 4" />
+              <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
+            </svg>
+          </ActionButton>
+        </>
+      )}
+    </div>
+  );
+}
+
+function ActionButton({ title, onClick, children }: { title: string; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      title={title}
+      onClick={onClick}
+      className="w-6 h-6 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors"
+    >
+      {children}
+    </button>
   );
 }

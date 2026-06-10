@@ -109,6 +109,31 @@ function App() {
     }
   }, [activeThread, loadThreads, handleSelectThread]);
 
+  const handleRegenerate = useCallback(async () => {
+    if (!activeThread || isLoading) return;
+    setIsLoading(true);
+    // Optimistically drop the last assistant reply
+    setMessages(prev => {
+      const idx = prev.map(m => m.role).lastIndexOf('assistant');
+      return idx >= 0 ? prev.slice(0, idx) : prev;
+    });
+    try {
+      const d = await fetch(`/api/threads/${activeThread}/regenerate`, { method: 'POST' }).then(r => r.json());
+      if (d.messages) setMessages(d.messages);
+      loadThreads();
+    } finally {
+      setIsLoading(false);
+    }
+  }, [activeThread, isLoading, loadThreads]);
+
+  const handleUndo = useCallback(async () => {
+    if (!activeThread || isLoading) return;
+    const d = await fetch(`/api/threads/${activeThread}/undo`, { method: 'POST' }).then(r => r.json());
+    if (d.messages) setMessages(d.messages);
+    loadThreads();
+    // Restored module states arrive via SSE module_update events
+  }, [activeThread, isLoading, loadThreads]);
+
   // Restore the last active thread on page load
   useEffect(() => {
     fetch('/api/threads').then(r => r.json()).then((d) => {
@@ -218,6 +243,8 @@ function App() {
             onSelectThread={handleSelectThread}
             onNewThread={handleNewThread}
             onDeleteThread={handleDeleteThread}
+            onRegenerate={handleRegenerate}
+            onUndo={handleUndo}
           />
         </div>
       </div>

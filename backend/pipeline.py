@@ -135,6 +135,28 @@ class Pipeline:
             log["added"][field] = sorted(added_log & new_labels)
             log["removed"][field] = removed_log[-5:]  # cap the strikethrough list
 
+    def snapshot(self) -> dict:
+        """Deep snapshot of all modules + change logs, for undo."""
+        import copy
+        return {
+            "modules": {m: copy.deepcopy(getattr(self.state, m, None)) for m in DEPENDENCY_GRAPH},
+            "changes": copy.deepcopy(self.changes),
+        }
+
+    def restore(self, snap: dict):
+        """Restore a snapshot taken by snapshot() — modules, files, and logs."""
+        for name, data in snap["modules"].items():
+            setattr(self.state, name, data)
+            path = self.output_dir / f"{name}.json"
+            if data is None:
+                path.unlink(missing_ok=True)
+            else:
+                path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        self.changes = snap["changes"]
+        (self.output_dir / "_changes.json").write_text(
+            json.dumps(self.changes, indent=2, ensure_ascii=False)
+        )
+
     def get_changes(self, module_name: str) -> dict:
         """Accumulated additions/removals for a module across chat rounds."""
         return self.changes.get(module_name, {"added": {}, "removed": {}})

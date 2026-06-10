@@ -95,6 +95,10 @@ async def chat(req: ChatRequest):
     # A thread is bound to its brief — selecting it follows the brief
     _activate_brief(thread["brief"])
 
+    # Snapshot module state so this turn can be undone or regenerated
+    thread.setdefault("snapshots", []).append(pipeline.snapshot())
+    thread["snapshots"] = thread["snapshots"][-5:]
+
     thread["messages"].append({"role": "user", "content": req.message})
     if thread["title"] == "New chat":
         thread["title"] = req.message[:48]
@@ -132,6 +136,72 @@ async def select_thread(tid: str):
 async def delete_thread(tid: str):
     threads.delete(tid)
     return {"ok": True}
+
+
+def _truncate_last_exchange(thread: dict) -> str | None:
+    """Drop the last user→assistant exchange. Returns the user message text."""
+    msgs = thread["messages"]
+    idx = max((i for i, m in enumerate(msgs) if m["role"] == "user"), default=None)
+    if idx is None:
+        return None
+    user_text = msgs[idx]["content"]
+    thread["messages"] = msgs[:idx]
+
+    hist = thread["history"]
+    hidx = max((i for i, h in enumerate(hist) if h.get("role") == "user"), default=None)
+    if hidx is not None:
+        thread["history"] = hist[:hidx]
+    return user_text
+
+
+def _restore_and_broadcast(snap: dict):
+    pipeline.restore(snap)
+    for name, data in snap["modules"].items():
+        if data is not None:
+            broadcast_event({
+                "type": "module_update", "module": name, "data": data,
+                "changes": snap["changes"].get(name, {"added": {}, "removed": {}}),
+            })
+
+
+@app.post("/api/threads/{tid}/undo")
+async def undo_turn(tid: str):
+    """Revert the last exchange: module state AND conversation."""
+    thread = threads.get(tid)
+    if thread is None:
+        raise HTTPException(404, "Thread not found")
+    if not thread.get("snapshots"):
+        raise HTTPException(400, "Nothing to undo")
+    _activate_brief(thread["brief"])
+    _restore_and_broadcast(thread["snapshots"].pop())
+    _truncate_last_exchange(thread)
+    thread["updated"] = time.time()
+    threads.save()
+    return {"messages": thread["messages"]}
+
+
+@app.post("/api/threads/{tid}/regenerate")
+async def regenerate_turn(tid: str):
+    """Re-run the last user message: restore pre-turn module state, then
+    answer again. The snapshot stays on the stack — it still represents
+    the state before this (re-run) turn."""
+    thread = threads.get(tid)
+    if thread is None:
+        raise HTTPException(404, "Thread not found")
+    if not thread.get("snapshots"):
+        raise HTTPException(400, "Nothing to regenerate")
+    _activate_brief(thread["brief"])
+    _restore_and_broadcast(thread["snapshots"][-1])
+    user_text = _truncate_last_exchange(thread)
+    if user_text is None:
+        raise HTTPException(400, "No user message to re-run")
+
+    thread["messages"].append({"role": "user", "content": user_text})
+    result = await agent.chat(user_text, history=thread["history"])
+    thread["messages"].append({"role": "assistant", "content": result["response"]})
+    thread["updated"] = time.time()
+    threads.save()
+    return {**result, "messages": thread["messages"], "thread_id": tid}
 
 
 @app.get("/api/modules")

@@ -1,9 +1,7 @@
 {
   "competitiveLandscape": {
     "added": {
-      "existingCompetitors": [
-        "Nightingale"
-      ]
+      "existingCompetitors": []
     },
     "removed": {
       "existingCompetitors": [
@@ -11,6 +9,11 @@
           "id": "ec-001",
           "name": "Ark: Survival Evolved",
           "rationale": "As an open-world survival game, players must gather resources, craft items, build bases, and coexist with or compete against other players and AI dinosaurs—all features mirrored in \"Dune: Awakening.\""
+        },
+        {
+          "id": "ec-018",
+          "name": "Nightingale",
+          "rationale": "Blends survival and crafting with an engaging narrative in an open-world multiplayer setup, echoing themes present in Dune: Awakening."
         }
       ]
     }

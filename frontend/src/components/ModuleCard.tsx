@@ -8,9 +8,10 @@ interface Props {
   onExpand: () => void;
   onEntityClick: (entity: EntityRef) => void;
   ctx?: EntityContext;
+  pmLens?: number;
 }
 
-export function ModuleCard({ name, module, onExpand, onEntityClick, ctx }: Props) {
+export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0 }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -57,7 +58,7 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx }: Props
       {/* Body */}
       <div className={`px-5 py-4 h-72 overflow-y-auto transition-opacity ${module.status === 'generating' ? 'opacity-40' : ''}`}>
         {module.data ? (
-          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} />
+          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} />
         ) : (
           <div className="h-full flex items-center justify-center">
             <p className="text-sm text-gray-300 italic">Awaiting generation</p>
@@ -74,9 +75,16 @@ interface PreviewProps {
   changes?: ModuleChanges | null;
   onEntityClick: (entity: EntityRef) => void;
   ctx?: EntityContext;
+  pmLens?: number;
 }
 
-function ModulePreview({ name, data, changes, onEntityClick, ctx }: PreviewProps) {
+export function selectLensView(data: ModuleData, lens: number): ModuleData {
+  const alts = (data.alternativeViews as ModuleData[] | undefined) || [];
+  if (lens > 0 && alts[lens - 1]) return alts[lens - 1];
+  return data;
+}
+
+function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0 }: PreviewProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -144,7 +152,8 @@ function ModulePreview({ name, data, changes, onEntityClick, ctx }: PreviewProps
   }
 
   if (name === 'positioningMatrix') {
-    return <PositioningChart data={data} changes={changes} compact onEntityClick={onEntityClick} />;
+    const view = selectLensView(data, pmLens);
+    return <PositioningChart data={view} changes={pmLens === 0 ? changes : undefined} compact onEntityClick={onEntityClick} />;
   }
 
   if (name === 'swot') {

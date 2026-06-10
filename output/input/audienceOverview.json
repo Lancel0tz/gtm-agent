@@ -1,43 +1,53 @@
 {
-  "summary": "The audience segmentation for 'Dune: Awakening' addresses four distinct types of players, each with unique motivations and game interaction preferences. 'Sci-Fi Lore Enthusiasts' are drawn by narrative depth and lore; 'Survival Strategists' seek challenges in resource management and environmental adaptation; 'Competitive MMO Fighters' focus on PvP, guild interaction, and competitive dominance; 'Crafting and Customization Enthusiasts' are driven by creativity in crafting and customization. These segments align with competitors that offer similar experiences, showcasing where 'Dune: Awakening' fits in the current gaming landscape.",
+  "summary": "The audience segments for 'Dune: Awakening' have been strategically identified based on distinct player motivations and behaviors, offering a diverse landscape of interests that overlap with existing competitors. The audience is segmented into Survival Enthusiasts, drawn by intense survival mechanics; Sci-fi Narrative Explorers, who seek rich storytelling; Sandbox Masterminds, thriving on creative freedom; Competitive Collaborators, engaged in PvE and PvP dynamics; and Dune Devotees, fans of the Dune franchise. These segments are compared against existing competitors in the market that share similar features, helping identify the game's unique appeal and target demographic.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Sci-Fi Lore Enthusiasts",
-      "description": "Players focused on narrative depth and immersive world-building. They are drawn to lore-rich environments and enjoy exploring complex stories. Their primary motivation is engaging with the Dune universe's political and character dynamics.",
+      "segmentName": "Survival Enthusiasts",
+      "description": "These players are deeply engaged with survival mechanics, prioritizing mastering survival over narrative or large-scale MMO experiences.",
       "selectedExistingCompetitors": [
-        "Star Wars: The Old Republic",
-        "The Elder Scrolls Online"
+        "Conan Exiles",
+        "Rust",
+        "Scum"
       ]
     },
     {
       "id": "seg-2",
-      "segmentName": "Survival Strategists",
-      "description": "Players who thrive on resource management, strategic thinking, and overcoming environmental challenges. They are motivated by the need to survive in harsh conditions and optimize gameplay strategies.",
+      "segmentName": "Sci-fi Narrative Explorers",
+      "description": "Players who are drawn to rich lore and storytelling, focusing on narratives over gameplay mechanics or multiplayer environments.",
       "selectedExistingCompetitors": [
-        "Conan Exiles",
-        "Rust",
-        "The Forest"
+        "Star Wars: The Old Republic",
+        "Destiny 2",
+        "Warframe"
       ]
     },
     {
       "id": "seg-3",
-      "segmentName": "Competitive MMO Fighters",
-      "description": "Players invested in PvP, guilds, and competition within multiplayer settings. Motivated by achieving notoriety and strategic power, they prefer games with robust PvP and community dynamics.",
+      "segmentName": "Sandbox Masterminds",
+      "description": "Players thrive on creative freedom and strategic planning in expansive worlds, focused on building and exploration.",
       "selectedExistingCompetitors": [
-        "Black Desert Online",
-        "Lost Ark",
-        "Destiny 2"
+        "Valheim",
+        "The Forest",
+        "Black Desert Online"
       ]
     },
     {
       "id": "seg-4",
-      "segmentName": "Crafting and Customization Enthusiasts",
-      "description": "Players who enjoy intricate crafting and customization systems. They focus on resource gathering and creating personalized in-game environments, valuing creativity over competitiveness.",
+      "segmentName": "Competitive Collaborators",
+      "description": "Players who enjoy competitive multiplayer environments, with a focus on teamwork and strategic engagement in PvP and PvE.",
       "selectedExistingCompetitors": [
-        "Valheim",
-        "Nightingale",
-        "Conan Exiles"
+        "Destiny 2",
+        "Lost Ark",
+        "The Elder Scrolls Online"
+      ]
+    },
+    {
+      "id": "seg-5",
+      "segmentName": "Dune Devotees",
+      "description": "Fans deeply invested in the Dune franchise, seeking authentic experiences and direct engagement with its lore and themes.",
+      "selectedExistingCompetitors": [
+        "Star Wars: The Old Republic",
+        "Warframe"
       ]
     }
   ]
