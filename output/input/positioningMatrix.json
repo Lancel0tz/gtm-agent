@@ -1,92 +1,74 @@
 {
   "xAxis": {
-    "axisName": "Survival Complexity",
-    "lowLabel": "Basic",
-    "highLabel": "Highly Complex"
+    "axisName": "Survival Depth / Narrative Immersion",
+    "lowLabel": "Casual Survival Mechanics",
+    "highLabel": "Intricate Survival Systems"
   },
   "yAxis": {
-    "axisName": "Narrative Depth",
-    "lowLabel": "Minimal",
-    "highLabel": "Rich"
+    "axisName": "Player Interaction / Factional Dynamics",
+    "lowLabel": "Solo Oriented Gameplay",
+    "highLabel": "Complex Player Alliances"
   },
   "positions": [
     {
       "id": "pm-001",
-      "gameName": "Rust",
-      "xPosition": 3.0,
-      "yPosition": 0.0
+      "gameName": "Dune: Awakening",
+      "xPosition": 8.0,
+      "yPosition": 9.0
     },
     {
       "id": "pm-002",
       "gameName": "Ark: Survival Evolved",
-      "xPosition": 2.0,
-      "yPosition": 1.0
+      "xPosition": 7.0,
+      "yPosition": 5.0
     },
     {
       "id": "pm-003",
-      "gameName": "Conan Exiles",
-      "xPosition": 4.0,
-      "yPosition": 2.0
+      "gameName": "Rust",
+      "xPosition": 8.0,
+      "yPosition": 6.0
     },
     {
       "id": "pm-004",
-      "gameName": "Scum",
-      "xPosition": 4.0,
-      "yPosition": 2.0
-    },
-    {
-      "id": "pm-005",
-      "gameName": "The Forest",
-      "xPosition": 2.0,
-      "yPosition": 2.0
-    },
-    {
-      "id": "pm-006",
       "gameName": "Valheim",
-      "xPosition": 4.0,
+      "xPosition": 6.0,
       "yPosition": 4.0
     },
     {
+      "id": "pm-005",
+      "gameName": "Star Wars: The Old Republic",
+      "xPosition": 3.0,
+      "yPosition": 8.0
+    },
+    {
+      "id": "pm-006",
+      "gameName": "The Elder Scrolls Online",
+      "xPosition": 4.0,
+      "yPosition": 7.0
+    },
+    {
       "id": "pm-007",
-      "gameName": "Dune: Awakening",
-      "xPosition": 6.0,
+      "gameName": "Conan Exiles",
+      "xPosition": 7.0,
       "yPosition": 5.0
     },
     {
       "id": "pm-008",
-      "gameName": "Nightingale",
-      "xPosition": 6.0,
-      "yPosition": 8.0
-    },
-    {
-      "id": "pm-009",
-      "gameName": "The Elder Scrolls Online",
-      "xPosition": 4.0,
+      "gameName": "Black Desert Online",
+      "xPosition": 5.0,
       "yPosition": 9.0
     },
     {
-      "id": "pm-010",
-      "gameName": "Star Wars: The Old Republic",
-      "xPosition": 4.0,
-      "yPosition": 10.0
-    },
-    {
-      "id": "pm-011",
-      "gameName": "Black Desert Online",
-      "xPosition": 6.0,
-      "yPosition": 7.0
-    },
-    {
-      "id": "pm-012",
-      "gameName": "Warframe",
-      "xPosition": 5.0,
-      "yPosition": 5.0
-    },
-    {
-      "id": "pm-013",
+      "id": "pm-009",
       "gameName": "Destiny 2",
-      "xPosition": 6.0,
-      "yPosition": 6.0
+      "xPosition": 2.0,
+      "yPosition": 8.0
+    },
+    {
+      "id": "pm-010",
+      "gameName": "Warframe",
+      "xPosition": 3.0,
+      "yPosition": 7.0
     }
   ]
 }

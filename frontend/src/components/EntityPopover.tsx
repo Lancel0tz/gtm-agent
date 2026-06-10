@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import type { AppState, EntityRef } from '../types';
 
 interface Props {
@@ -10,14 +9,6 @@ interface Props {
 
 /** Cross-module detail card for a competitor or audience segment. */
 export function EntityPopover({ entity, state, onClose, onNavigate }: Props) {
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [onClose]);
-
   return (
     <div
       className="fixed inset-0 z-[60] bg-black/20 backdrop-blur-[2px] flex items-center justify-center p-6"

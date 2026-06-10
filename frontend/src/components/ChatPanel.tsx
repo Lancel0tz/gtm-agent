@@ -1,14 +1,23 @@
 import { useState, useRef, useEffect } from 'react';
 import Markdown from 'react-markdown';
-import type { ChatMessage } from '../types';
+import type { ChatMessage, AppState, ModuleName } from '../types';
+import { MODULE_META } from './moduleShared';
 
 interface Props {
   messages: ChatMessage[];
   onSend: (message: string) => void;
   isLoading: boolean;
+  modules: AppState;
 }
 
-export function ChatPanel({ messages, onSend, isLoading }: Props) {
+const MODULE_ORDER: ModuleName[] = [
+  'competitiveLandscape',
+  'audienceOverview',
+  'positioningMatrix',
+  'swot',
+];
+
+export function ChatPanel({ messages, onSend, isLoading, modules }: Props) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -81,15 +90,7 @@ export function ChatPanel({ messages, onSend, isLoading }: Props) {
           </div>
         ))}
 
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-2xl px-4 py-2.5 flex gap-1">
-              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-            </div>
-          </div>
-        )}
+        {isLoading && <WorkingIndicator modules={modules} />}
 
         <div ref={messagesEndRef} />
       </div>
@@ -120,5 +121,70 @@ export function ChatPanel({ messages, onSend, isLoading }: Props) {
         </div>
       </div>
     </div>
+  );
+}
+
+
+/** Shown while the agent works. Lists only the modules touched THIS turn
+ *  with their live status; before any module starts, shows a thinking row.
+ *  Mounted only while isLoading, so the seen-set resets every turn. */
+function WorkingIndicator({ modules }: { modules: AppState }) {
+  const [seen, setSeen] = useState<Set<ModuleName>>(new Set());
+
+  useEffect(() => {
+    const nowGenerating = MODULE_ORDER.filter((m) => modules[m].status === 'generating');
+    if (nowGenerating.some((m) => !seen.has(m))) {
+      setSeen((prev) => new Set([...prev, ...nowGenerating]));
+    }
+  }, [modules, seen]);
+
+  const rows = MODULE_ORDER.filter((m) => seen.has(m));
+
+  return (
+    <div className="flex justify-start">
+      <div className="bg-gray-100 rounded-2xl px-4 py-3 mr-8 min-w-[220px]">
+        {rows.length > 0 ? (
+          <div className="space-y-2">
+            <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Updating modules</p>
+            {rows.map((m) => {
+              const status = modules[m].status;
+              return (
+                <div key={m} className="flex items-center gap-2">
+                  {status === 'generating' ? <Spinner /> : <CheckIcon />}
+                  <span className={`text-xs ${status === 'generating' ? 'text-gray-900 font-medium' : 'text-gray-400'}`}>
+                    {MODULE_META[m].label}
+                  </span>
+                  {status === 'generating' && (
+                    <span className="text-[10px] text-blue-500 animate-pulse ml-auto">generating</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Spinner />
+            <span className="text-xs text-gray-500">Thinking…</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Spinner() {
+  return (
+    <svg className="w-3.5 h-3.5 animate-spin text-blue-500 shrink-0" viewBox="0 0 24 24" fill="none">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg className="w-3.5 h-3.5 text-emerald-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
   );
 }

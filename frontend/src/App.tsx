@@ -141,7 +141,7 @@ function App() {
 
         {/* Right: Chat */}
         <div className="w-96 shrink-0 border-l border-gray-200 flex flex-col min-h-0">
-          <ChatPanel messages={messages} onSend={handleSend} isLoading={isLoading} />
+          <ChatPanel messages={messages} onSend={handleSend} isLoading={isLoading} modules={state} />
         </div>
       </div>
     </div>

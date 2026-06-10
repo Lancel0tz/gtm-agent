@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { AppState, ModuleName, EntityRef } from '../types';
 import { ModuleCard } from './ModuleCard';
 import { ModuleDetail } from './ModuleDetail';
@@ -18,6 +18,17 @@ const MODULE_ORDER: ModuleName[] = [
 export function Canvas({ state }: Props) {
   const [expanded, setExpanded] = useState<ModuleName | null>(null);
   const [entity, setEntity] = useState<EntityRef | null>(null);
+
+  // Esc closes the TOP layer only: entity popover first, then module detail
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (entity) setEntity(null);
+      else if (expanded) setExpanded(null);
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [entity, expanded]);
 
   return (
     <div className="p-8 max-w-5xl mx-auto">

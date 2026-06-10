@@ -1,50 +1,54 @@
 {
-  "summary": "The segmentation logic identifies distinct audience segments based on their behaviors and motivations, highlighting their potential attraction to 'Dune: Awakening' and their current involvement with competitors in the gaming landscape. This enables tailored marketing strategies to engage each segment effectively.",
+  "summary": "The segmentation logic categorizes the audience into distinct groups based on their primary motivations and gameplay preferences, which align with the competitive landscape. 'Sandbox Survivors' thrive on survival mechanics, sharing similarities with players of Ark: Survival Evolved, Rust, and Scum. 'Sci-Fi Lore Seekers' prioritize narrative depth found in Star Wars: The Old Republic, The Elder Scrolls Online, and Warframe. 'Competitive PvP Enthusiasts' are driven by skillful competition, akin to players of Conan Exiles, Black Desert Online, and Destiny 2. 'Social Role-Players' focus on interaction and collaboration, resonating with The Elder Scrolls Online, Lost Ark, and Valheim. 'Exploration and Discovery Enthusiasts' are drawn to vast worlds, paralleling experiences in Valheim, The Forest, and Black Desert Online.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Sci-Fi Survival Enthusiasts",
-      "description": "This segment includes players who are drawn to the immersive experience of surviving in a sci-fi setting. They thrive on resource management, crafting, and building in harsh environments. Their primary interest lies in the survival and crafting mechanics enhanced by a sci-fi narrative.",
+      "segmentName": "Sandbox Survivors",
+      "description": "Players motivated by mastering survival mechanics, crafting, and optimizing resources. They enjoy creating and sustaining in-game spaces and are drawn to the survival challenges and resource management on Arrakis. Their focus is less on narrative depth and more on environmental mastery and creativity.",
       "selectedExistingCompetitors": [
         "Ark: Survival Evolved",
-        "Conan Exiles",
-        "Rust"
+        "Rust",
+        "Scum"
       ]
     },
     {
       "id": "seg-2",
-      "segmentName": "Sandbox Explorers and Builders",
-      "description": "These players are motivated by open-world exploration and the creativity involved in building structures and environments to show off to others or for strategic advantage. They focus on world-building and environmental creativity over combat or purely competitive elements.",
+      "segmentName": "Sci-Fi Lore Seekers",
+      "description": "This segment craves deep, immersive narratives in sci-fi universes, engaging frequently with storylines, character development, and lore. They are drawn to Dune: Awakening's expansive narrative and socio-political dynamics, focusing primarily on narrative depth and exploration.",
       "selectedExistingCompetitors": [
-        "Valheim",
-        "The Forest"
+        "Star Wars: The Old Republic",
+        "The Elder Scrolls Online",
+        "Warframe"
       ]
     },
     {
       "id": "seg-3",
-      "segmentName": "Narrative-driven MMO Players",
-      "description": "Players within this group seek expansive, lore-rich worlds that offer narrative depth alongside MMO elements, allowing them to be part of a larger story while interacting with others. They prioritize narrative immersion and story impact within a multiplayer environment.",
+      "segmentName": "Competitive PvP Enthusiasts",
+      "description": "Players driven by competitive environments that allow them to demonstrate skill and strategy, especially in PvP settings. They are attracted to the PvP elements in Dune: Awakening, which support factional warfare and tactical superiority.",
       "selectedExistingCompetitors": [
-        "Star Wars: The Old Republic",
-        "The Elder Scrolls Online",
-        "Black Desert Online"
+        "Conan Exiles",
+        "Black Desert Online",
+        "Destiny 2"
       ]
     },
     {
       "id": "seg-4",
-      "segmentName": "Competitive PvP Strategists",
-      "description": "This segment consists of players who are motivated by strategic, competitive multiplayer engagements, and the thrill of influencing and controlling larger game systems and communities. They focus on strategic, long-term planning and competitive multiplayer dominance.",
+      "segmentName": "Social Role-Players",
+      "description": "Motivated by social interaction and collaborative play, these players enjoy role-playing and building alliances. They are attracted to forming guilds and engaging in the political and community dynamics of Dune: Awakening.",
       "selectedExistingCompetitors": [
-        "Destiny 2",
-        "Black Desert Online"
+        "The Elder Scrolls Online",
+        "Lost Ark",
+        "Valheim"
       ]
     },
     {
       "id": "seg-5",
-      "segmentName": "Lore-driven RPG Fans",
-      "description": "These players are deeply invested in the lore and narrative aspect, with an affinity for role-playing and character development within a consistently evolving world. They value a rich storyline and character intricacy over straightforward gameplay mechanics or competitive elements.",
+      "segmentName": "Exploration and Discovery Enthusiasts",
+      "description": "These players are driven by the thrill of exploration and discovery in vast, open worlds. They are drawn to the dynamic landscapes and evolving challenges in Dune: Awakening, focused on uncovering secrets and experiencing new adventures.",
       "selectedExistingCompetitors": [
-        "The Elder Scrolls Online"
+        "Valheim",
+        "The Forest",
+        "Black Desert Online"
       ]
     }
   ]

@@ -1,0 +1,28 @@
+{
+  "competitiveLandscape": {
+    "added": {
+      "existingCompetitors": []
+    },
+    "removed": {
+      "existingCompetitors": [
+        {
+          "id": "ec-019",
+          "name": "Nightingale",
+          "rationale": "This game combines survival and exploration elements set in a fantastical universe with rich lore, aligning well with Dune's own expansive world-building and narrative depth."
+        }
+      ]
+    }
+  },
+  "audienceOverview": {
+    "added": {},
+    "removed": {}
+  },
+  "positioningMatrix": {
+    "added": {},
+    "removed": {}
+  },
+  "swot": {
+    "added": {},
+    "removed": {}
+  }
+}

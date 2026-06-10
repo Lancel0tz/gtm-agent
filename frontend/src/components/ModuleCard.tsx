@@ -45,8 +45,15 @@ export function ModuleCard({ name, module, onExpand, onEntityClick }: Props) {
         </div>
       </div>
 
+      {/* Indeterminate progress bar while generating */}
+      {module.status === 'generating' && (
+        <div className="h-0.5 overflow-hidden bg-blue-50">
+          <div className="h-full w-1/3 bg-blue-500 rounded-full animate-shimmer" />
+        </div>
+      )}
+
       {/* Body */}
-      <div className="px-5 py-4 h-72 overflow-y-auto">
+      <div className={`px-5 py-4 h-72 overflow-y-auto transition-opacity ${module.status === 'generating' ? 'opacity-40' : ''}`}>
         {module.data ? (
           <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} />
         ) : (
@@ -81,14 +88,14 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
             >
               {c.name}
             </button>
-            {added.has(c.name) && <span className="ml-1.5 align-middle"><NewBadge /></span>}
+            {added.has(c.name) && <span className="ml-1.5"><NewBadge /></span>}
             <span className="text-gray-400 text-xs ml-2">{c.rationale.slice(0, 80)}…</span>
           </div>
         ))}
         {removed.map((c, i) => (
-          <div key={`removed-${i}`} className="text-sm leading-snug opacity-60">
+          <div key={`removed-${i}`} className="flex items-baseline gap-1.5 text-sm leading-snug opacity-60">
             <span className="text-red-400 line-through font-medium">{String(c.name)}</span>
-            <span className="text-[9px] text-red-300 ml-1.5 uppercase tracking-wide">removed</span>
+            <span className="text-[9px] text-red-300 uppercase tracking-wide shrink-0">removed</span>
           </div>
         ))}
       </div>
@@ -108,7 +115,7 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
             >
               {s.segmentName}
             </button>
-            {added.has(s.segmentName) && <span className="ml-1.5 align-middle"><NewBadge /></span>}
+            {added.has(s.segmentName) && <span className="ml-1.5"><NewBadge /></span>}
             <p className="text-xs text-gray-500 mt-1 leading-relaxed">{s.description.slice(0, 120)}…</p>
             <div className="flex flex-wrap gap-1 mt-2">
               {s.selectedExistingCompetitors.map((c, j) => (
@@ -124,9 +131,9 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
           </div>
         ))}
         {removed.map((s, i) => (
-          <div key={`removed-${i}`} className="opacity-60">
+          <div key={`removed-${i}`} className="flex items-baseline gap-1.5 opacity-60">
             <span className="text-sm text-red-400 line-through font-medium">{String(s.segmentName)}</span>
-            <span className="text-[9px] text-red-300 ml-1.5 uppercase tracking-wide">removed</span>
+            <span className="text-[9px] text-red-300 uppercase tracking-wide shrink-0">removed</span>
           </div>
         ))}
       </div>

@@ -75,10 +75,15 @@ class Pipeline:
         if changes_path.exists():
             self.changes.update(json.loads(changes_path.read_text()))
 
-    def _save_module(self, module_name: str, data: dict):
-        """Persist a module and accumulate its change log."""
+    def _save_module(self, module_name: str, data: dict, record_changes: bool = False):
+        """Persist a module. Change history is recorded only for direct user
+        edits — a regenerated module is re-derived from scratch, so item-level
+        diffs against its old version are noise, and its log is reset."""
         old = getattr(self.state, module_name, None)
-        self._record_changes(module_name, old, data)
+        if record_changes:
+            self._record_changes(module_name, old, data)
+        else:
+            self.changes[module_name] = {"added": {}, "removed": {}}
         setattr(self.state, module_name, data)
         path = self.output_dir / f"{module_name}.json"
         path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
@@ -249,5 +254,5 @@ class Pipeline:
         return getattr(self.state, module_name, None)
 
     def update_module(self, module_name: str, data: dict):
-        """Directly update a module (for user edits)."""
-        self._save_module(module_name, data)
+        """Directly update a module (for user edits) — records change history."""
+        self._save_module(module_name, data, record_changes=True)

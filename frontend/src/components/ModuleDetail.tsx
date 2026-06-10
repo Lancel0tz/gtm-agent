@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
 import { MODULE_META, StatusDot, fieldChanges, NewBadge } from './moduleShared';
 import { PositioningChart } from './ModuleCard';
@@ -12,14 +11,6 @@ interface Props {
 
 export function ModuleDetail({ name, module, onClose, onEntityClick }: Props) {
   const meta = MODULE_META[name];
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, [onClose]);
 
   return (
     <div
@@ -101,8 +92,10 @@ function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
               <div key={`removed-${i}`} className="flex gap-4 opacity-50">
                 <span className="text-[10px] font-mono text-red-200 pt-1 shrink-0 w-12">{String(c.id ?? '')}</span>
                 <div>
-                  <span className="text-sm font-semibold text-red-400 line-through">{String(c.name)}</span>
-                  <span className="text-[9px] text-red-300 ml-2 uppercase tracking-wide">removed</span>
+                  <span className="inline-flex items-baseline gap-1.5">
+                    <span className="text-sm font-semibold text-red-400 line-through">{String(c.name)}</span>
+                    <span className="text-[9px] text-red-300 uppercase tracking-wide">removed</span>
+                  </span>
                   <p className="text-sm text-gray-400 line-through mt-0.5 leading-relaxed">{String(c.rationale ?? '')}</p>
                 </div>
               </div>
@@ -151,8 +144,10 @@ function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
             ))}
             {removed.map((s, i) => (
               <div key={`removed-${i}`} className="border border-red-50 rounded-xl p-5 opacity-50">
-                <span className="text-sm font-semibold text-red-400 line-through">{String(s.segmentName)}</span>
-                <span className="text-[9px] text-red-300 ml-2 uppercase tracking-wide">removed</span>
+                <span className="inline-flex items-baseline gap-1.5">
+                  <span className="text-sm font-semibold text-red-400 line-through">{String(s.segmentName)}</span>
+                  <span className="text-[9px] text-red-300 uppercase tracking-wide">removed</span>
+                </span>
               </div>
             ))}
           </div>

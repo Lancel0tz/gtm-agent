@@ -38,6 +38,15 @@ body {
 }
 .markdown-body strong { font-weight: 600; }
 
+/* Indeterminate progress sweep for generating cards */
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(400%); }
+}
+.animate-shimmer {
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
