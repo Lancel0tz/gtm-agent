@@ -1,0 +1,51 @@
+{
+  "summary": "The segmentation logic identifies distinct audience segments based on their behaviors and motivations, highlighting their potential attraction to 'Dune: Awakening' and their current involvement with competitors in the gaming landscape. This enables tailored marketing strategies to engage each segment effectively.",
+  "segments": [
+    {
+      "id": "seg-1",
+      "segmentName": "Sci-Fi Survival Enthusiasts",
+      "description": "This segment includes players who are drawn to the immersive experience of surviving in a sci-fi setting. They thrive on resource management, crafting, and building in harsh environments. Their primary interest lies in the survival and crafting mechanics enhanced by a sci-fi narrative.",
+      "selectedExistingCompetitors": [
+        "Ark: Survival Evolved",
+        "Conan Exiles",
+        "Rust"
+      ]
+    },
+    {
+      "id": "seg-2",
+      "segmentName": "Sandbox Explorers and Builders",
+      "description": "These players are motivated by open-world exploration and the creativity involved in building structures and environments to show off to others or for strategic advantage. They focus on world-building and environmental creativity over combat or purely competitive elements.",
+      "selectedExistingCompetitors": [
+        "Valheim",
+        "The Forest"
+      ]
+    },
+    {
+      "id": "seg-3",
+      "segmentName": "Narrative-driven MMO Players",
+      "description": "Players within this group seek expansive, lore-rich worlds that offer narrative depth alongside MMO elements, allowing them to be part of a larger story while interacting with others. They prioritize narrative immersion and story impact within a multiplayer environment.",
+      "selectedExistingCompetitors": [
+        "Star Wars: The Old Republic",
+        "The Elder Scrolls Online",
+        "Black Desert Online"
+      ]
+    },
+    {
+      "id": "seg-4",
+      "segmentName": "Competitive PvP Strategists",
+      "description": "This segment consists of players who are motivated by strategic, competitive multiplayer engagements, and the thrill of influencing and controlling larger game systems and communities. They focus on strategic, long-term planning and competitive multiplayer dominance.",
+      "selectedExistingCompetitors": [
+        "Destiny 2",
+        "Black Desert Online"
+      ]
+    },
+    {
+      "id": "seg-5",
+      "segmentName": "Lore-driven RPG Fans",
+      "description": "These players are deeply invested in the lore and narrative aspect, with an affinity for role-playing and character development within a consistently evolving world. They value a rich storyline and character intricacy over straightforward gameplay mechanics or competitive elements.",
+      "selectedExistingCompetitors": [
+        "The Elder Scrolls Online"
+      ]
+    }
+  ]
+}

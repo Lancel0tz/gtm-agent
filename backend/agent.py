@@ -93,11 +93,17 @@ Keep responses concise. After updates, summarize the change and the cascade in 2
 
 
 class Agent:
-    def __init__(self, pipeline: Pipeline, on_event: Callable[[dict], None] | None = None):
+    def __init__(
+        self,
+        pipeline: Pipeline,
+        on_event: Callable[[dict], None] | None = None,
+        get_input: Callable[[], str] | None = None,
+    ):
         self.pipeline = pipeline
         self.on_event = on_event or (lambda event: None)
         self.history: list[dict] = []
-        self.input_md = Path(__file__).parent.parent / "input.md"
+        default_path = Path(__file__).parent.parent / "input.md"
+        self.get_input = get_input or (lambda: default_path.read_text())
 
     async def chat(self, user_message: str) -> dict:
         """Process a user message through the ReAct loop.
@@ -158,14 +164,15 @@ class Agent:
         return f"Unknown tool: {name}"
 
     async def _run_pipeline(self, emit: Callable) -> str:
-        input_md = self.input_md.read_text()
+        input_md = self.get_input()
 
         def on_status(module: str, status: str):
             emit({"type": "status", "module": module, "status": status})
             if status == "done":
                 data = self.pipeline.get_module(module)
                 if data:
-                    emit({"type": "module_update", "module": module, "data": data})
+                    emit({"type": "module_update", "module": module, "data": data,
+                          "changes": self.pipeline.get_changes(module)})
 
         self.pipeline.on_status = on_status
         await self.pipeline.generate_all(input_md)
@@ -187,17 +194,19 @@ class Agent:
         diff_summary = _diff_modules(module_name, old_data, updated_data)
 
         self.pipeline.update_module(module_name, updated_data)
-        emit({"type": "module_update", "module": module_name, "data": updated_data})
+        emit({"type": "module_update", "module": module_name, "data": updated_data,
+              "changes": self.pipeline.get_changes(module_name)})
 
         # Cascade downstream
-        input_md = self.input_md.read_text()
+        input_md = self.get_input()
 
         def on_status(module: str, status: str):
             emit({"type": "status", "module": module, "status": status})
             if status == "done":
                 data = self.pipeline.get_module(module)
                 if data:
-                    emit({"type": "module_update", "module": module, "data": data})
+                    emit({"type": "module_update", "module": module, "data": data,
+                          "changes": self.pipeline.get_changes(module)})
 
         self.pipeline.on_status = on_status
         regenerated = await self.pipeline.cascade_update(module_name, input_md)

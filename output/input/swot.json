@@ -1,0 +1,74 @@
+{
+  "strengths": [
+    {
+      "id": "sw-001",
+      "text": "'Dune: Awakening' benefits from a deeply established lore and world-building, attracting Lore-driven RPG Fans and Narrative-driven MMO Players."
+    },
+    {
+      "id": "sw-002",
+      "text": "Innovative exploration mechanics with dynamic environments and iconic Dune vehicles distinguish it from competitors like 'Valheim' and 'Rust'."
+    },
+    {
+      "id": "sw-003",
+      "text": "Persistent world dynamics with Landsraad mechanics appeal to Competitive PvP Strategists seeking strategic gameplay."
+    },
+    {
+      "id": "sw-004",
+      "text": "Diverse gameplay with mastering Great Schools and avatar customization surpasses linear progression in games like 'Scum' and 'Destiny 2'."
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "wk-001",
+      "text": "Lack of crossplay limits audience reach compared to multi-platform games like 'Destiny 2' and 'The Elder Scrolls Online'."
+    },
+    {
+      "id": "wk-002",
+      "text": "High entry price with ongoing MTX and Battle Pass potentially deters players engaging with lower-cost alternatives like 'Warframe'."
+    },
+    {
+      "id": "wk-003",
+      "text": "Mix of survival, MMO, and open-world elements may dilute focus, challenging appeal to any single segment effectively."
+    },
+    {
+      "id": "wk-004",
+      "text": "NDA-protected beta limits marketing momentum and community-driven adjustments compared to open feedback models like 'Valheim'."
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "op-001",
+      "text": "Focus on lore-rich multiplayer experiences could attract Narrative-driven MMO Players not fully exploited by 'Star Wars: The Old Republic'."
+    },
+    {
+      "id": "op-002",
+      "text": "Strengthening survival mechanics with sci-fi lore enhances appeal to Sci-Fi Survival Enthusiasts not satisfied with 'Rust' or 'Scum'."
+    },
+    {
+      "id": "op-003",
+      "text": "Quarterly narrative-driven DLCs can continuously expand its rich universe, drawing players from games with established narratives."
+    },
+    {
+      "id": "op-004",
+      "text": "Unique setting of Arrakis offers fresh engagement hooks to players bored with traditional environments in games like 'Conan Exiles'."
+    }
+  ],
+  "threats": [
+    {
+      "id": "th-001",
+      "text": "Market saturation from established games like 'Black Desert Online' and 'Lost Ark' poses challenges in securing a player base."
+    },
+    {
+      "id": "th-002",
+      "text": "Steam-only exclusivity risks neglecting players reached by multi-platform titles like 'Destiny 2' until console support is added."
+    },
+    {
+      "id": "th-003",
+      "text": "High expectations for frequent content updates set by games like 'Warframe' pressure development teams post-launch."
+    },
+    {
+      "id": "th-004",
+      "text": "Economic pressures and new monetization models may impact sales if perceived negatively compared to more value-friendly models."
+    }
+  ]
+}

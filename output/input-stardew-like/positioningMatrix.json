@@ -1,0 +1,62 @@
+{
+  "xAxis": {
+    "axisName": "Cooperative Engagement / Solo Immersion",
+    "lowLabel": "Solo Immersion",
+    "highLabel": "Cooperative Engagement"
+  },
+  "yAxis": {
+    "axisName": "Narrative Mystery / Creative Sandbox",
+    "lowLabel": "Creative Sandbox",
+    "highLabel": "Narrative Mystery"
+  },
+  "positions": [
+    {
+      "id": "pm-001",
+      "gameName": "Stardew Valley",
+      "xPosition": 3.0,
+      "yPosition": 8.0
+    },
+    {
+      "id": "pm-002",
+      "gameName": "Animal Crossing: New Horizons",
+      "xPosition": 7.0,
+      "yPosition": 2.0
+    },
+    {
+      "id": "pm-003",
+      "gameName": "Spiritfarer",
+      "xPosition": 4.0,
+      "yPosition": 9.0
+    },
+    {
+      "id": "pm-004",
+      "gameName": "Palia",
+      "xPosition": 9.0,
+      "yPosition": 3.0
+    },
+    {
+      "id": "pm-005",
+      "gameName": "Garden Paws",
+      "xPosition": 8.0,
+      "yPosition": 4.0
+    },
+    {
+      "id": "pm-006",
+      "gameName": "Rune Factory Series",
+      "xPosition": 5.0,
+      "yPosition": 7.0
+    },
+    {
+      "id": "pm-007",
+      "gameName": "The Sims 4",
+      "xPosition": 2.0,
+      "yPosition": 1.0
+    },
+    {
+      "id": "pm-008",
+      "gameName": "Moonhaven",
+      "xPosition": 7.0,
+      "yPosition": 8.0
+    }
+  ]
+}

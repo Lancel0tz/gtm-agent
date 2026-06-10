@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import type { AppState, ModuleName } from '../types';
+import type { AppState, ModuleName, EntityRef } from '../types';
 import { ModuleCard } from './ModuleCard';
 import { ModuleDetail } from './ModuleDetail';
+import { EntityPopover } from './EntityPopover';
 
 interface Props {
   state: AppState;
@@ -16,6 +17,7 @@ const MODULE_ORDER: ModuleName[] = [
 
 export function Canvas({ state }: Props) {
   const [expanded, setExpanded] = useState<ModuleName | null>(null);
+  const [entity, setEntity] = useState<EntityRef | null>(null);
 
   return (
     <div className="p-8 max-w-5xl mx-auto">
@@ -29,6 +31,7 @@ export function Canvas({ state }: Props) {
             name={name}
             module={state[name]}
             onExpand={() => setExpanded(name)}
+            onEntityClick={setEntity}
           />
         ))}
       </div>
@@ -38,6 +41,16 @@ export function Canvas({ state }: Props) {
           name={expanded}
           module={state[expanded]}
           onClose={() => setExpanded(null)}
+          onEntityClick={setEntity}
+        />
+      )}
+
+      {entity && (
+        <EntityPopover
+          entity={entity}
+          state={state}
+          onClose={() => setEntity(null)}
+          onNavigate={setEntity}
         />
       )}
     </div>

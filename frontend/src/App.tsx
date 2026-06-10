@@ -14,23 +14,37 @@ const INITIAL_STATE: AppState = {
 function App() {
   const [state, setState] = useState<AppState>(INITIAL_STATE);
   const [gameInput, setGameInput] = useState<GameInput | null>(null);
+  const [inputFiles, setInputFiles] = useState<string[]>([]);
+  const [activeInput, setActiveInput] = useState<string>('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const loadInput = useCallback(() => {
     fetch('/api/input').then(r => r.json()).then(setGameInput);
+    fetch('/api/inputs').then(r => r.json()).then((d) => {
+      setInputFiles(d.files);
+      setActiveInput(d.active);
+    });
+  }, []);
+
+  const loadModules = useCallback(() => {
     fetch('/api/modules').then(r => r.json()).then((modules) => {
-      setState(prev => {
-        const next = { ...prev };
+      setState(() => {
+        const next = { ...INITIAL_STATE };
         for (const key of Object.keys(modules) as ModuleName[]) {
-          if (modules[key]) {
-            next[key] = { status: 'done', data: modules[key] };
+          if (modules[key]?.data) {
+            next[key] = { status: 'done', data: modules[key].data, changes: modules[key].changes };
           }
         }
         return next;
       });
     });
   }, []);
+
+  useEffect(() => {
+    loadInput();
+    loadModules();
+  }, [loadInput, loadModules]);
 
   useEffect(() => {
     const es = new EventSource('/api/events');
@@ -44,12 +58,25 @@ function App() {
       } else if (event.type === 'module_update') {
         setState(prev => ({
           ...prev,
-          [event.module]: { status: 'done', data: event.data },
+          [event.module]: { status: 'done', data: event.data, changes: event.changes ?? null },
         }));
+      } else if (event.type === 'input_changed') {
+        loadInput();
+        loadModules();
       }
     };
     return () => es.close();
-  }, []);
+  }, [loadInput, loadModules]);
+
+  const handleSwitchInput = useCallback(async (filename: string) => {
+    await fetch('/api/inputs/select', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename }),
+    });
+    loadInput();
+    loadModules();
+  }, [loadInput, loadModules]);
 
   const handleSend = useCallback(async (message: string) => {
     setMessages(prev => [...prev, { role: 'user', content: message }]);
@@ -71,7 +98,7 @@ function App() {
         if (event.type === 'module_update') {
           setState(prev => ({
             ...prev,
-            [event.module]: { status: 'done', data: event.data },
+            [event.module]: { status: 'done', data: event.data, changes: event.changes ?? null },
           }));
         }
       }
@@ -99,7 +126,12 @@ function App() {
       <div className="flex-1 flex min-h-0">
         {/* Left: Input Panel */}
         <div className="w-64 shrink-0 border-r border-gray-200 overflow-y-auto">
-          <InputPanel input={gameInput} />
+          <InputPanel
+            input={gameInput}
+            files={inputFiles}
+            active={activeInput}
+            onSwitch={handleSwitchInput}
+          />
         </div>
 
         {/* Middle: Canvas */}

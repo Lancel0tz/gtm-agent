@@ -1,0 +1,74 @@
+{
+  "strengths": [
+    {
+      "id": "sw-001",
+      "text": "Unique thematic setting with mystery elements differentiates Moonhaven from competitors like Stardew Valley."
+    },
+    {
+      "id": "sw-002",
+      "text": "Crossplay functionality between Steam and Switch attracts players preferring multiplayer experiences over platform-exclusive games like Animal Crossing."
+    },
+    {
+      "id": "sw-003",
+      "text": "Supports up to 4 players in co-op gameplay, appealing to groups, unlike many single-player focused titles."
+    },
+    {
+      "id": "sw-004",
+      "text": "Affordable pricing at $25 with no microtransactions offers value compared to premium-priced games with MTX."
+    }
+  ],
+  "weaknesses": [
+    {
+      "id": "wk-001",
+      "text": "Lacks established brand recognition compared to well-known titles like Stardew Valley."
+    },
+    {
+      "id": "wk-002",
+      "text": "Limited creative customization options compared to The Sims 4 and My Time at Portia."
+    },
+    {
+      "id": "wk-003",
+      "text": "Narrative depth may fall short against highly praised storytelling games like Spiritfarer."
+    },
+    {
+      "id": "wk-004",
+      "text": "Limited to Steam and Switch platforms, missing broader reach on consoles like PlayStation or Xbox."
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "op-001",
+      "text": "Potential to exploit the interest in narrative-driven gaming with interactive world-building unmet by Cozy Grove."
+    },
+    {
+      "id": "op-002",
+      "text": "Offering seasonal content updates to enhance player engagement, unlike less frequently updated Stardew Valley."
+    },
+    {
+      "id": "op-003",
+      "text": "Growing demand for cooperative games presents a chance to stand out in a single-player-focused market."
+    },
+    {
+      "id": "op-004",
+      "text": "Ability to attract new audiences in the expanding cozy gaming niche, not directly targeted by series like Harvest Moon."
+    }
+  ],
+  "threats": [
+    {
+      "id": "th-001",
+      "text": "Existing competitors like Stardew Valley maintain strong community support, possibly overshadowing Moonhaven."
+    },
+    {
+      "id": "th-002",
+      "text": "Rapid market saturation from games like Palia can increase competition in the co-op game segment."
+    },
+    {
+      "id": "th-003",
+      "text": "High expectations for narrative quality among Narrative Explorers could challenge word-of-mouth growth."
+    },
+    {
+      "id": "th-004",
+      "text": "Economic uncertainties might affect Moonhaven's ability to sustain momentum as a new IP."
+    }
+  ]
+}

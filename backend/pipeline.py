@@ -12,7 +12,7 @@ from typing import Callable
 from backend.schemas import PipelineState
 from backend.modules import competitive, audience, positioning, swot
 
-OUTPUT_DIR = Path(__file__).parent.parent / "output"
+OUTPUT_ROOT = Path(__file__).parent.parent / "output"
 
 DEPENDENCY_GRAPH: dict[str, list[str]] = {
     "competitiveLandscape": [],
@@ -21,27 +21,118 @@ DEPENDENCY_GRAPH: dict[str, list[str]] = {
     "swot": ["competitiveLandscape", "audienceOverview"],
 }
 
+# Which key identifies an item in each list field, for change tracking
+LIST_LABEL_KEYS: dict[str, str] = {
+    "existingCompetitors": "name",
+    "segments": "segmentName",
+    "positions": "gameName",
+    "strengths": "text",
+    "weaknesses": "text",
+    "opportunities": "text",
+    "threats": "text",
+}
+
 
 class Pipeline:
-    def __init__(self, on_status: Callable | None = None):
-        self.state = PipelineState()
+    """One Pipeline serves multiple input briefs. Each brief gets its own
+    workspace directory under output/<input-stem>/ holding its module JSONs
+    and an accumulated change log."""
+
+    def __init__(self, on_status: Callable | None = None, workspace: str = "input"):
         self.on_status = on_status or (lambda module, status: None)
-        OUTPUT_DIR.mkdir(exist_ok=True)
+        OUTPUT_ROOT.mkdir(exist_ok=True)
+        self._migrate_legacy_layout()
+        self.switch_workspace(workspace)
+
+    @staticmethod
+    def _migrate_legacy_layout():
+        """Move flat output/*.json (pre-workspace layout) into output/input/."""
+        legacy = [OUTPUT_ROOT / f"{m}.json" for m in DEPENDENCY_GRAPH]
+        if any(p.exists() for p in legacy):
+            target = OUTPUT_ROOT / "input"
+            target.mkdir(exist_ok=True)
+            for p in legacy:
+                if p.exists():
+                    p.rename(target / p.name)
+
+    def switch_workspace(self, workspace: str):
+        """Point the pipeline at a different input brief's module set."""
+        self.workspace = workspace
+        self.output_dir = OUTPUT_ROOT / workspace
+        self.output_dir.mkdir(exist_ok=True)
+        self.state = PipelineState()
+        # Accumulated change log per module: {"added": {field: [labels]},
+        # "removed": {field: [items]}} — survives across chat rounds
+        self.changes: dict[str, dict] = {m: {"added": {}, "removed": {}} for m in DEPENDENCY_GRAPH}
         self._load_existing()
 
     def _load_existing(self):
-        """Load any previously generated modules from output/."""
         for module_name in DEPENDENCY_GRAPH:
-            path = OUTPUT_DIR / f"{module_name}.json"
+            path = self.output_dir / f"{module_name}.json"
             if path.exists():
-                data = json.loads(path.read_text())
-                setattr(self.state, module_name, data)
+                setattr(self.state, module_name, json.loads(path.read_text()))
+        changes_path = self.output_dir / "_changes.json"
+        if changes_path.exists():
+            self.changes.update(json.loads(changes_path.read_text()))
 
     def _save_module(self, module_name: str, data: dict):
-        """Persist a module to disk."""
+        """Persist a module and accumulate its change log."""
+        old = getattr(self.state, module_name, None)
+        self._record_changes(module_name, old, data)
         setattr(self.state, module_name, data)
-        path = OUTPUT_DIR / f"{module_name}.json"
+        path = self.output_dir / f"{module_name}.json"
         path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        (self.output_dir / "_changes.json").write_text(
+            json.dumps(self.changes, indent=2, ensure_ascii=False)
+        )
+
+    def _record_changes(self, module_name: str, old: dict | None, new: dict):
+        """Track added labels and removed items per list field, accumulated
+        across rounds. A wholesale regeneration (less than half the items
+        surviving) resets the log for that field — diffs against content
+        that no longer exists are noise, not history."""
+        log = self.changes[module_name]
+        if old is None:
+            return
+
+        for field, label_key in LIST_LABEL_KEYS.items():
+            old_list = old.get(field)
+            new_list = new.get(field)
+            if not isinstance(old_list, list) or not isinstance(new_list, list):
+                continue
+
+            old_labels = {str(i[label_key]) for i in old_list if isinstance(i, dict)}
+            new_labels = {str(i[label_key]) for i in new_list if isinstance(i, dict)}
+            if old_labels == new_labels:
+                continue
+
+            surviving = len(old_labels & new_labels)
+            if old_labels and surviving / len(old_labels) < 0.5:
+                # Regeneration — reset history for this field
+                log["added"].pop(field, None)
+                log["removed"].pop(field, None)
+                continue
+
+            added_now = new_labels - old_labels
+            removed_now = [i for i in old_list
+                           if isinstance(i, dict) and str(i[label_key]) not in new_labels]
+
+            added_log = set(log["added"].get(field, [])) | added_now
+            # An item re-added later is no longer "removed"; one removed later
+            # is no longer "new"
+            added_log -= {str(i[label_key]) for i in removed_now}
+            removed_log = [i for i in log["removed"].get(field, [])
+                           if str(i[label_key]) not in new_labels]
+            existing_removed = {str(i[label_key]) for i in removed_log}
+            removed_log += [i for i in removed_now
+                            if str(i[label_key]) not in existing_removed]
+
+            log["added"][field] = sorted(added_log & new_labels)
+            log["removed"][field] = removed_log[-5:]  # cap the strikethrough list
+
+    def get_changes(self, module_name: str) -> dict:
+        """Accumulated additions/removals for a module across chat rounds."""
+        return self.changes.get(module_name, {"added": {}, "removed": {}})
 
     async def generate_all(self, input_md: str) -> PipelineState:
         """Run the full pipeline: L1 → L2 → L3 (parallel)."""
