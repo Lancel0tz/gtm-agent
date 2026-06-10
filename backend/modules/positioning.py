@@ -58,7 +58,11 @@ async def generate(
         "competitors. For each, justify the x,y placement (0-10 scale) based on "
         "concrete game features, not subjective quality judgments.\n\n"
         "3. GAP ANALYSIS: Identify where the game sits relative to "
-        "competitors and what strategic opportunity the positioning reveals."
+        "competitors and what strategic opportunity the positioning reveals.\n\n"
+        "4. ALTERNATIVE LENSES: After the primary matrix, propose TWO additional "
+        "axis pairs that reveal DIFFERENT strategic insights (e.g. monetization "
+        "model vs content cadence, accessibility vs depth). Plot the same games "
+        "on each. Each lens should answer a different strategic question."
         + stability_note
     )
 
@@ -66,7 +70,9 @@ async def generate(
         "Convert your positioning analysis into a PositioningMatrix. "
         "Include the game from the brief itself and 6-10 competitors. Positions should be "
         "numbers from 0 to 10. Make sure the chosen axes meaningfully "
-        "differentiate the games and reveal a strategic insight."
+        "differentiate the games and reveal a strategic insight. "
+        "Put the primary matrix in xAxis/yAxis/positions, and the two "
+        "alternative lenses in alternativeViews (same structure each)."
     )
 
     return await generate_with_reasoning(

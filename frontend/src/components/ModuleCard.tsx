@@ -1,14 +1,16 @@
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
-import { MODULE_META, StatusDot, fieldChanges, axisLabel, NewBadge } from './moduleShared';
+import { MODULE_META, StatusDot, fieldChanges, axisLabel, NewBadge, RemovedTag, EntityText } from './moduleShared';
+import type { EntityContext } from './moduleShared';
 
 interface Props {
   name: ModuleName;
   module: ModuleState;
   onExpand: () => void;
   onEntityClick: (entity: EntityRef) => void;
+  ctx?: EntityContext;
 }
 
-export function ModuleCard({ name, module, onExpand, onEntityClick }: Props) {
+export function ModuleCard({ name, module, onExpand, onEntityClick, ctx }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -55,7 +57,7 @@ export function ModuleCard({ name, module, onExpand, onEntityClick }: Props) {
       {/* Body */}
       <div className={`px-5 py-4 h-72 overflow-y-auto transition-opacity ${module.status === 'generating' ? 'opacity-40' : ''}`}>
         {module.data ? (
-          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} />
+          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} />
         ) : (
           <div className="h-full flex items-center justify-center">
             <p className="text-sm text-gray-300 italic">Awaiting generation</p>
@@ -71,9 +73,10 @@ interface PreviewProps {
   data: ModuleData;
   changes?: ModuleChanges | null;
   onEntityClick: (entity: EntityRef) => void;
+  ctx?: EntityContext;
 }
 
-function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
+function ModulePreview({ name, data, changes, onEntityClick, ctx }: PreviewProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -93,9 +96,9 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
           </div>
         ))}
         {removed.map((c, i) => (
-          <div key={`removed-${i}`} className="flex items-baseline gap-1.5 text-sm leading-snug opacity-60">
-            <span className="text-red-400 line-through font-medium">{String(c.name)}</span>
-            <span className="text-[9px] text-red-300 uppercase tracking-wide shrink-0">removed</span>
+          <div key={`removed-${i}`} className="text-sm leading-snug opacity-60">
+            <span className="align-middle text-red-400 line-through font-medium">{String(c.name)}</span>
+            <span className="ml-1.5"><RemovedTag /></span>
           </div>
         ))}
       </div>
@@ -131,9 +134,9 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
           </div>
         ))}
         {removed.map((s, i) => (
-          <div key={`removed-${i}`} className="flex items-baseline gap-1.5 opacity-60">
-            <span className="text-sm text-red-400 line-through font-medium">{String(s.segmentName)}</span>
-            <span className="text-[9px] text-red-300 uppercase tracking-wide shrink-0">removed</span>
+          <div key={`removed-${i}`} className="opacity-60">
+            <span className="align-middle text-sm text-red-400 line-through font-medium">{String(s.segmentName)}</span>
+            <span className="ml-1.5"><RemovedTag /></span>
           </div>
         ))}
       </div>
@@ -163,7 +166,7 @@ function ModulePreview({ name, data, changes, onEntityClick }: PreviewProps) {
               </span>
               {items.slice(0, 3).map((item, i) => (
                 <p key={i} className="text-xs text-gray-500 mb-1.5 leading-snug">
-                  {item.text.slice(0, 90)}…
+                  <EntityText text={item.text.slice(0, 90) + '…'} ctx={ctx} onEntityClick={onEntityClick} />
                   {added.has(item.text) && <span className="ml-1"><NewBadge /></span>}
                 </p>
               ))}
@@ -182,9 +185,11 @@ interface ChartProps {
   changes?: ModuleChanges | null;
   compact?: boolean;
   onEntityClick?: (entity: EntityRef) => void;
+  /** Names to emphasize; all other competitor dots are dimmed */
+  highlight?: string[];
 }
 
-export function PositioningChart({ data, changes, compact = false, onEntityClick }: ChartProps) {
+export function PositioningChart({ data, changes, compact = false, onEntityClick, highlight }: ChartProps) {
   const positions = (data.positions as Array<{ gameName: string; xPosition: number; yPosition: number }>) || [];
   const xAxis = data.xAxis as { axisName: string; lowLabel: string; highLabel: string };
   const yAxis = data.yAxis as { axisName: string; lowLabel: string; highLabel: string };
@@ -218,9 +223,11 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
         </span>
 
         {positions.map((p, i) => {
-          const isDune = p.gameName.includes('Dune');
+          const isDune = i === 0 || p.gameName.includes('Dune');
+          const isHighlighted = highlight?.includes(p.gameName) ?? false;
+          const isDimmed = !!highlight && !isHighlighted && !isDune;
           const labelAbove = !isDune && i % 2 === 1;
-          const hoverOnly = compact && !isDune;
+          const hoverOnly = compact && !isDune && !isHighlighted;
           return (
             <div
               key={i}
@@ -236,13 +243,17 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
               <div className={`rounded-full shrink-0 transition-all ${
                 isDune
                   ? 'bg-black w-3 h-3 ring-4 ring-black/10'
-                  : 'bg-gray-300 w-2.5 h-2.5 group-hover/dot:bg-gray-700 group-hover/dot:scale-125 group-hover/dot:ring-4 group-hover/dot:ring-gray-200'
+                  : isHighlighted
+                    ? 'bg-blue-500 w-3 h-3 ring-4 ring-blue-100'
+                    : `bg-gray-300 w-2.5 h-2.5 group-hover/dot:bg-gray-700 group-hover/dot:scale-125 group-hover/dot:ring-4 group-hover/dot:ring-gray-200 ${isDimmed ? 'opacity-30' : ''}`
               }`} />
               <span
                 className={`whitespace-nowrap rounded px-1 transition-all ${labelAbove ? 'mb-1' : 'mt-1'} ${compact ? 'text-[9px]' : 'text-[11px]'} ${
                   isDune
                     ? 'text-gray-900 font-semibold bg-white/80'
-                    : 'text-gray-500 bg-white/90 group-hover/dot:text-gray-900 group-hover/dot:font-medium group-hover/dot:bg-white group-hover/dot:shadow-md group-hover/dot:border group-hover/dot:border-gray-200'
+                    : isHighlighted
+                      ? 'text-blue-600 font-semibold bg-white/90'
+                      : `text-gray-500 bg-white/90 group-hover/dot:text-gray-900 group-hover/dot:font-medium group-hover/dot:bg-white group-hover/dot:shadow-md group-hover/dot:border group-hover/dot:border-gray-200 ${isDimmed ? 'opacity-30' : ''}`
                 } ${hoverOnly ? 'opacity-0 group-hover/dot:opacity-100' : ''}`}
               >
                 {p.gameName}

@@ -22,6 +22,9 @@ from pydantic import BaseModel
 
 from backend.pipeline import Pipeline, DEPENDENCY_GRAPH
 from backend.agent import Agent
+from backend.threads import ThreadStore
+
+import time
 
 ROOT = Path(__file__).parent.parent
 
@@ -54,10 +57,24 @@ agent = Agent(
     get_input=lambda: active_input["path"].read_text(),
 )
 agent.get_input_label = lambda: active_input["path"].name
+threads = ThreadStore()
+
+
+def _activate_brief(filename: str) -> bool:
+    """Switch the active brief + pipeline workspace. Returns False if unknown."""
+    for f in _list_input_files():
+        if f.name == filename:
+            if active_input["path"] != f:
+                active_input["path"] = f
+                pipeline.switch_workspace(f.stem)
+                broadcast_event({"type": "input_changed", "filename": f.name})
+            return True
+    return False
 
 
 class ChatRequest(BaseModel):
     message: str
+    thread_id: str | None = None
 
 
 class SelectInputRequest(BaseModel):
@@ -66,13 +83,55 @@ class SelectInputRequest(BaseModel):
 
 @app.post("/api/chat")
 async def chat(req: ChatRequest):
-    """Send a message to the agent.
+    """Send a message to the agent within a thread.
 
     Module status/update events are broadcast over SSE in real-time while
     the agent works; the HTTP response carries the final text + event log.
     """
-    result = await agent.chat(req.message)
-    return result
+    thread = threads.get(req.thread_id) if req.thread_id else threads.get(threads.active_id or "")
+    if thread is None:
+        thread = threads.create(active_input["path"].name)
+
+    # A thread is bound to its brief — selecting it follows the brief
+    _activate_brief(thread["brief"])
+
+    thread["messages"].append({"role": "user", "content": req.message})
+    if thread["title"] == "New chat":
+        thread["title"] = req.message[:48]
+
+    result = await agent.chat(req.message, history=thread["history"])
+
+    thread["messages"].append({"role": "assistant", "content": result["response"]})
+    thread["updated"] = time.time()
+    threads.set_active(thread["id"])
+    return {**result, "thread_id": thread["id"]}
+
+
+@app.get("/api/threads")
+async def list_threads():
+    return {"threads": threads.summaries(), "active": threads.active_id}
+
+
+@app.post("/api/threads")
+async def create_thread():
+    thread = threads.create(active_input["path"].name)
+    return {"id": thread["id"], "brief": thread["brief"], "messages": []}
+
+
+@app.post("/api/threads/{tid}/select")
+async def select_thread(tid: str):
+    thread = threads.get(tid)
+    if thread is None:
+        raise HTTPException(404, "Thread not found")
+    threads.set_active(tid)
+    _activate_brief(thread["brief"])
+    return {"id": tid, "brief": thread["brief"], "messages": thread["messages"]}
+
+
+@app.delete("/api/threads/{tid}")
+async def delete_thread(tid: str):
+    threads.delete(tid)
+    return {"ok": True}
 
 
 @app.get("/api/modules")
@@ -149,7 +208,6 @@ async def select_input(req: SelectInputRequest):
         if f.name == req.filename:
             active_input["path"] = f
             pipeline.switch_workspace(f.stem)
-            agent.reset()  # stale chat context refers to the previous brief
             broadcast_event({"type": "input_changed", "filename": f.name})
             return {"ok": True, "active": f.name}
     raise HTTPException(404, f"Input file '{req.filename}' not found")

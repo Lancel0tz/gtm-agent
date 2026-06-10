@@ -44,9 +44,67 @@ export function axisLabel(label: string | undefined, axisName: string | undefine
 
 export function NewBadge() {
   return (
-    <span className="inline-block align-middle text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full uppercase tracking-wide leading-none">
+    <span className="inline-block align-middle relative -top-[1.5px] text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full uppercase tracking-wide leading-none">
       new
     </span>
+  );
+}
+
+export function RemovedTag() {
+  return (
+    <span className="inline-block align-middle relative -top-[1.5px] text-[9px] text-red-300 uppercase tracking-wide leading-none shrink-0">
+      removed
+    </span>
+  );
+}
+
+/** Context for cross-module entity links: known competitor/segment names. */
+export interface EntityContext {
+  competitors: string[];
+  segments: string[];
+}
+
+/** Render text with known competitor/segment names as clickable links. */
+export function EntityText({
+  text,
+  ctx,
+  onEntityClick,
+}: {
+  text: string;
+  ctx?: EntityContext;
+  onEntityClick?: (e: { kind: 'competitor' | 'segment'; name: string }) => void;
+}) {
+  if (!ctx || !onEntityClick) return <>{text}</>;
+
+  const names = [
+    ...ctx.competitors.map((n) => ({ name: n, kind: 'competitor' as const })),
+    ...ctx.segments.map((n) => ({ name: n, kind: 'segment' as const })),
+  ].sort((a, b) => b.name.length - a.name.length);
+  if (names.length === 0) return <>{text}</>;
+
+  const escaped = names.map((n) => n.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const regex = new RegExp(`(${escaped.join('|')})`, 'g');
+  const parts = text.split(regex);
+
+  return (
+    <>
+      {parts.map((part, i) => {
+        const match = names.find((n) => n.name === part);
+        if (!match) return <span key={i}>{part}</span>;
+        return (
+          <button
+            key={i}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEntityClick({ kind: match.kind, name: match.name });
+            }}
+            className="text-gray-900 font-medium underline decoration-dotted decoration-gray-300 underline-offset-2 hover:decoration-gray-500"
+          >
+            {part}
+          </button>
+        );
+      })}
+    </>
   );
 }
 

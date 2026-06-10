@@ -11,12 +11,21 @@ const INITIAL_STATE: AppState = {
   swot: { status: 'idle', data: null },
 };
 
+export interface ThreadSummary {
+  id: string;
+  title: string;
+  brief: string;
+  updated: number;
+}
+
 function App() {
   const [state, setState] = useState<AppState>(INITIAL_STATE);
   const [gameInput, setGameInput] = useState<GameInput | null>(null);
   const [inputFiles, setInputFiles] = useState<string[]>([]);
   const [activeInput, setActiveInput] = useState<string>('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [threads, setThreads] = useState<ThreadSummary[]>([]);
+  const [activeThread, setActiveThread] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const loadInput = useCallback(() => {
@@ -68,6 +77,54 @@ function App() {
     return () => es.close();
   }, [loadInput, loadModules]);
 
+  const loadThreads = useCallback(async (): Promise<ThreadSummary[]> => {
+    const d = await fetch('/api/threads').then(r => r.json());
+    setThreads(d.threads);
+    return d.threads;
+  }, []);
+
+  const handleSelectThread = useCallback(async (tid: string) => {
+    const d = await fetch(`/api/threads/${tid}/select`, { method: 'POST' }).then(r => r.json());
+    setActiveThread(tid);
+    setMessages(d.messages);
+    // The thread may belong to a different brief — refresh everything
+    loadInput();
+    loadModules();
+  }, [loadInput, loadModules]);
+
+  const handleNewThread = useCallback(async () => {
+    const d = await fetch('/api/threads', { method: 'POST' }).then(r => r.json());
+    setActiveThread(d.id);
+    setMessages([]);
+    loadThreads();
+  }, [loadThreads]);
+
+  const handleDeleteThread = useCallback(async (tid: string) => {
+    await fetch(`/api/threads/${tid}`, { method: 'DELETE' });
+    const remaining = await loadThreads();
+    if (tid === activeThread) {
+      setActiveThread(null);
+      setMessages([]);
+      if (remaining.length > 0) handleSelectThread(remaining[0].id);
+    }
+  }, [activeThread, loadThreads, handleSelectThread]);
+
+  // Restore the last active thread on page load
+  useEffect(() => {
+    fetch('/api/threads').then(r => r.json()).then((d) => {
+      setThreads(d.threads);
+      if (d.active) {
+        const t = d.threads.find((x: ThreadSummary) => x.id === d.active);
+        if (t) {
+          setActiveThread(d.active);
+          fetch(`/api/threads/${d.active}/select`, { method: 'POST' })
+            .then(r => r.json())
+            .then((td) => setMessages(td.messages));
+        }
+      }
+    });
+  }, []);
+
   const handleSwitchInput = useCallback(async (filename: string) => {
     await fetch('/api/inputs/select', {
       method: 'POST',
@@ -76,12 +133,15 @@ function App() {
     });
     loadInput();
     loadModules();
-    // The agent's conversation context is reset server-side; mirror that here
-    setMessages([{
-      role: 'assistant',
-      content: `Switched to **${filename}**. The canvas and chat now operate on this brief's workspace.`,
-    }]);
-  }, [loadInput, loadModules]);
+    // Continue this brief's most recent thread, or start a fresh one
+    const all = await loadThreads();
+    const existing = all.find((t) => t.brief === filename);
+    if (existing) {
+      handleSelectThread(existing.id);
+    } else {
+      handleNewThread();
+    }
+  }, [loadInput, loadModules, loadThreads, handleSelectThread, handleNewThread]);
 
   const handleSend = useCallback(async (message: string) => {
     setMessages(prev => [...prev, { role: 'user', content: message }]);
@@ -91,13 +151,15 @@ function App() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ message, thread_id: activeThread }),
       });
       const data = await res.json();
 
+      if (data.thread_id) setActiveThread(data.thread_id);
       if (data.response) {
         setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
       }
+      loadThreads();
 
       for (const event of data.events || []) {
         if (event.type === 'module_update') {
@@ -112,7 +174,7 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [activeThread, loadThreads]);
 
   return (
     <div className="h-screen flex flex-col">
@@ -146,7 +208,17 @@ function App() {
 
         {/* Right: Chat */}
         <div className="w-96 shrink-0 border-l border-gray-200 flex flex-col min-h-0">
-          <ChatPanel messages={messages} onSend={handleSend} isLoading={isLoading} modules={state} />
+          <ChatPanel
+            messages={messages}
+            onSend={handleSend}
+            isLoading={isLoading}
+            modules={state}
+            threads={threads}
+            activeThread={activeThread}
+            onSelectThread={handleSelectThread}
+            onNewThread={handleNewThread}
+            onDeleteThread={handleDeleteThread}
+          />
         </div>
       </div>
     </div>

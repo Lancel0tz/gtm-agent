@@ -47,10 +47,20 @@ class Position(BaseModel):
     yPosition: float = Field(ge=0, le=10)
 
 
+class MatrixView(BaseModel):
+    """An alternative axis pair with its own positions."""
+    xAxis: Axis
+    yAxis: Axis
+    positions: list[Position]
+
+
 class PositioningMatrix(BaseModel):
     xAxis: Axis
     yAxis: Axis
     positions: list[Position]
+    # Optional extra lenses on the same competitive set — the primary
+    # xAxis/yAxis/positions above remain the spec-required fields
+    alternativeViews: list[MatrixView] = []
 
 
 # --- SWOT (Layer 3) ---

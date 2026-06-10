@@ -1,15 +1,12 @@
 {
   "competitiveLandscape": {
     "added": {
-      "existingCompetitors": []
+      "existingCompetitors": [
+        "Nightingale"
+      ]
     },
     "removed": {
       "existingCompetitors": [
-        {
-          "id": "ec-018",
-          "name": "Nightingale",
-          "rationale": "Features survival and crafting in a fantastical world, allowing for deep narrative exploration and multiplayer cooperation aspects that resonate with the themes in Dune."
-        },
         {
           "id": "ec-001",
           "name": "Ark: Survival Evolved",

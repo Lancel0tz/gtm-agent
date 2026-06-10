@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Markdown from 'react-markdown';
 import type { ChatMessage, AppState, ModuleName } from '../types';
+import type { ThreadSummary } from '../App';
 import { MODULE_META } from './moduleShared';
 
 interface Props {
@@ -8,6 +9,11 @@ interface Props {
   onSend: (message: string) => void;
   isLoading: boolean;
   modules: AppState;
+  threads: ThreadSummary[];
+  activeThread: string | null;
+  onSelectThread: (tid: string) => void;
+  onNewThread: () => void;
+  onDeleteThread: (tid: string) => void;
 }
 
 const MODULE_ORDER: ModuleName[] = [
@@ -17,7 +23,10 @@ const MODULE_ORDER: ModuleName[] = [
   'swot',
 ];
 
-export function ChatPanel({ messages, onSend, isLoading, modules }: Props) {
+export function ChatPanel({
+  messages, onSend, isLoading, modules,
+  threads, activeThread, onSelectThread, onNewThread, onDeleteThread,
+}: Props) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -42,9 +51,53 @@ export function ChatPanel({ messages, onSend, isLoading, modules }: Props) {
 
   return (
     <div className="h-full flex flex-col">
-      {/* Header */}
-      <div className="px-5 py-3 border-b border-gray-100 shrink-0">
-        <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Chat</h2>
+      {/* Header: thread switcher */}
+      <div className="px-4 py-2.5 border-b border-gray-100 shrink-0 flex items-center gap-1.5">
+        <div className="relative flex-1 min-w-0">
+          <select
+            value={activeThread ?? ''}
+            onChange={(e) => e.target.value && onSelectThread(e.target.value)}
+            disabled={isLoading}
+            className="w-full appearance-none text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-lg pl-2.5 pr-7 py-1.5 cursor-pointer hover:border-gray-300 focus:outline-none focus:border-gray-400 transition-colors truncate disabled:opacity-50"
+          >
+            {!activeThread && <option value="">New chat</option>}
+            {threads.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.title}{t.brief ? ` — ${t.brief.replace(/\.md$/, '')}` : ''}
+              </option>
+            ))}
+          </select>
+          <svg
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+        <button
+          onClick={onNewThread}
+          disabled={isLoading}
+          title="New chat"
+          className="w-7 h-7 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-700 hover:border-gray-300 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+        </button>
+        {activeThread && (
+          <button
+            onClick={() => onDeleteThread(activeThread)}
+            disabled={isLoading}
+            title="Delete this chat"
+            className="w-7 h-7 rounded-lg border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-200 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Messages */}

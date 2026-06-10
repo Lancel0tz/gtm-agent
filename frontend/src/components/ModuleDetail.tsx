@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
-import { MODULE_META, StatusDot, fieldChanges, NewBadge } from './moduleShared';
+import { MODULE_META, StatusDot, fieldChanges, NewBadge, RemovedTag, EntityText } from './moduleShared';
+import type { EntityContext } from './moduleShared';
 import { PositioningChart } from './ModuleCard';
 
 interface Props {
@@ -7,9 +9,10 @@ interface Props {
   module: ModuleState;
   onClose: () => void;
   onEntityClick: (entity: EntityRef) => void;
+  ctx?: EntityContext;
 }
 
-export function ModuleDetail({ name, module, onClose, onEntityClick }: Props) {
+export function ModuleDetail({ name, module, onClose, onEntityClick, ctx }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -47,7 +50,7 @@ export function ModuleDetail({ name, module, onClose, onEntityClick }: Props) {
         {/* Body */}
         <div className="px-8 py-6 overflow-y-auto">
           {module.data ? (
-            <DetailContent name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} />
+            <DetailContent name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} />
           ) : null}
         </div>
       </div>
@@ -60,9 +63,10 @@ interface ContentProps {
   data: ModuleData;
   changes?: ModuleChanges | null;
   onEntityClick: (entity: EntityRef) => void;
+  ctx?: EntityContext;
 }
 
-function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
+function DetailContent({ name, data, changes, onEntityClick, ctx }: ContentProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ id: string; name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -92,10 +96,8 @@ function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
               <div key={`removed-${i}`} className="flex gap-4 opacity-50">
                 <span className="text-[10px] font-mono text-red-200 pt-1 shrink-0 w-12">{String(c.id ?? '')}</span>
                 <div>
-                  <span className="inline-flex items-baseline gap-1.5">
-                    <span className="text-sm font-semibold text-red-400 line-through">{String(c.name)}</span>
-                    <span className="text-[9px] text-red-300 uppercase tracking-wide">removed</span>
-                  </span>
+                  <span className="align-middle text-sm font-semibold text-red-400 line-through">{String(c.name)}</span>
+                  <span className="ml-2"><RemovedTag /></span>
                   <p className="text-sm text-gray-400 line-through mt-0.5 leading-relaxed">{String(c.rationale ?? '')}</p>
                 </div>
               </div>
@@ -144,10 +146,8 @@ function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
             ))}
             {removed.map((s, i) => (
               <div key={`removed-${i}`} className="border border-red-50 rounded-xl p-5 opacity-50">
-                <span className="inline-flex items-baseline gap-1.5">
-                  <span className="text-sm font-semibold text-red-400 line-through">{String(s.segmentName)}</span>
-                  <span className="text-[9px] text-red-300 uppercase tracking-wide">removed</span>
-                </span>
+                <span className="align-middle text-sm font-semibold text-red-400 line-through">{String(s.segmentName)}</span>
+                <span className="ml-2"><RemovedTag /></span>
               </div>
             ))}
           </div>
@@ -157,63 +157,148 @@ function DetailContent({ name, data, changes, onEntityClick }: ContentProps) {
   }
 
   if (name === 'positioningMatrix') {
-    const xAxis = data.xAxis as { axisName: string; lowLabel: string; highLabel: string };
-    const yAxis = data.yAxis as { axisName: string; lowLabel: string; highLabel: string };
-    return (
-      <div>
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="border border-gray-100 rounded-xl p-4">
-            <span className="text-[10px] text-gray-400 uppercase tracking-widest">X Axis</span>
-            <p className="text-sm font-semibold text-gray-900 mt-1">{xAxis?.axisName}</p>
-            <p className="text-xs text-gray-400 mt-0.5">{xAxis?.lowLabel} → {xAxis?.highLabel}</p>
-          </div>
-          <div className="border border-gray-100 rounded-xl p-4">
-            <span className="text-[10px] text-gray-400 uppercase tracking-widest">Y Axis</span>
-            <p className="text-sm font-semibold text-gray-900 mt-1">{yAxis?.axisName}</p>
-            <p className="text-xs text-gray-400 mt-0.5">{yAxis?.lowLabel} → {yAxis?.highLabel}</p>
-          </div>
-        </div>
-        <PositioningChart data={data} changes={changes} onEntityClick={onEntityClick} />
-      </div>
-    );
+    return <PositioningDetail data={data} changes={changes} onEntityClick={onEntityClick} />;
   }
 
   if (name === 'swot') {
-    const categories = [
-      { key: 'strengths', label: 'Strengths', color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
-      { key: 'weaknesses', label: 'Weaknesses', color: 'text-red-500', bg: 'bg-red-50', border: 'border-red-100' },
-      { key: 'opportunities', label: 'Opportunities', color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
-      { key: 'threats', label: 'Threats', color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-100' },
-    ];
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {categories.map(({ key, label, color, bg, border }) => {
-          const items = (data[key] as Array<{ id: string; text: string }>) || [];
-          const { added, removed } = fieldChanges(changes, key);
-          return (
-            <div key={key} className={`rounded-xl border ${border} ${bg} p-5`}>
-              <p className={`text-sm font-semibold ${color} mb-3`}>{label}</p>
-              <div className="space-y-2.5">
-                {items.map((item) => (
-                  <p key={item.id} className="text-sm text-gray-600 leading-relaxed">
-                    {item.text}
-                    {added.has(item.text) && <span className="ml-1.5"><NewBadge /></span>}
-                  </p>
-                ))}
-                {removed.map((item, i) => (
-                  <p key={`removed-${i}`} className="text-sm text-red-300 line-through leading-relaxed opacity-70">
-                    {String(item.text)}
-                  </p>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
+    return <SwotQuadrant data={data} changes={changes} onEntityClick={onEntityClick} ctx={ctx} />;
   }
 
   return null;
+}
+
+interface ViewLike {
+  xAxis: { axisName: string; lowLabel: string; highLabel: string };
+  yAxis: { axisName: string; lowLabel: string; highLabel: string };
+  positions: Array<{ id: string; gameName: string; xPosition: number; yPosition: number }>;
+}
+
+/** Positioning with selectable axis lenses (primary + alternatives). */
+function PositioningDetail({ data, changes, onEntityClick }: { data: ModuleData; changes?: ModuleChanges | null; onEntityClick: (e: EntityRef) => void }) {
+  const primary: ViewLike = {
+    xAxis: data.xAxis as ViewLike['xAxis'],
+    yAxis: data.yAxis as ViewLike['yAxis'],
+    positions: data.positions as ViewLike['positions'],
+  };
+  const alternatives = (data.alternativeViews as ViewLike[] | undefined) || [];
+  const views = [primary, ...alternatives];
+  const [selected, setSelected] = useState(0);
+  const view = views[selected] ?? primary;
+
+  return (
+    <div>
+      {views.length > 1 && (
+        <div className="flex gap-1.5 mb-5 flex-wrap">
+          {views.map((v, i) => (
+            <button
+              key={i}
+              onClick={() => setSelected(i)}
+              className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                i === selected
+                  ? 'bg-black text-white border-black'
+                  : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400'
+              }`}
+            >
+              {v.xAxis?.axisName} × {v.yAxis?.axisName}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="border border-gray-100 rounded-xl p-4">
+          <span className="text-[10px] text-gray-400 uppercase tracking-widest">X Axis</span>
+          <p className="text-sm font-semibold text-gray-900 mt-1">{view.xAxis?.axisName}</p>
+          <p className="text-xs text-gray-400 mt-0.5">{view.xAxis?.lowLabel} → {view.xAxis?.highLabel}</p>
+        </div>
+        <div className="border border-gray-100 rounded-xl p-4">
+          <span className="text-[10px] text-gray-400 uppercase tracking-widest">Y Axis</span>
+          <p className="text-sm font-semibold text-gray-900 mt-1">{view.yAxis?.axisName}</p>
+          <p className="text-xs text-gray-400 mt-0.5">{view.yAxis?.lowLabel} → {view.yAxis?.highLabel}</p>
+        </div>
+      </div>
+      <PositioningChart
+        data={view as unknown as ModuleData}
+        changes={selected === 0 ? changes : undefined}
+        onEntityClick={onEntityClick}
+      />
+    </div>
+  );
+}
+
+/** Classic SWOT 2x2 quadrant: Internal/External × Helpful/Harmful. */
+function SwotQuadrant({ data, changes, onEntityClick, ctx }: { data: ModuleData; changes?: ModuleChanges | null; onEntityClick: (e: EntityRef) => void; ctx?: EntityContext }) {
+  const quadrants = [
+    { key: 'strengths', label: 'Strengths', color: 'text-emerald-700', bg: 'bg-emerald-50/70', border: 'border-emerald-100', dot: 'bg-emerald-500' },
+    { key: 'weaknesses', label: 'Weaknesses', color: 'text-red-600', bg: 'bg-red-50/70', border: 'border-red-100', dot: 'bg-red-400' },
+    { key: 'opportunities', label: 'Opportunities', color: 'text-blue-700', bg: 'bg-blue-50/70', border: 'border-blue-100', dot: 'bg-blue-500' },
+    { key: 'threats', label: 'Threats', color: 'text-amber-700', bg: 'bg-amber-50/70', border: 'border-amber-100', dot: 'bg-amber-500' },
+  ];
+
+  return (
+    <div>
+      {/* Axis annotations: columns = Helpful/Harmful, rows = Internal/External */}
+      <div className="grid grid-cols-[auto_1fr_1fr] gap-2">
+        <div />
+        <p className="text-center text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Helpful</p>
+        <p className="text-center text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Harmful</p>
+
+        <div className="flex items-center">
+          <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest -rotate-90 whitespace-nowrap origin-center w-4">Internal</p>
+        </div>
+        {quadrants.slice(0, 2).map((q) => (
+          <SwotCell key={q.key} q={q} data={data} changes={changes} onEntityClick={onEntityClick} ctx={ctx} />
+        ))}
+
+        <div className="flex items-center">
+          <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest -rotate-90 whitespace-nowrap origin-center w-4">External</p>
+        </div>
+        {quadrants.slice(2, 4).map((q) => (
+          <SwotCell key={q.key} q={q} data={data} changes={changes} onEntityClick={onEntityClick} ctx={ctx} />
+        ))}
+      </div>
+      <p className="text-[10px] text-gray-300 mt-4">
+        Tip: dotted-underlined names are clickable — they open the cross-module detail card.
+      </p>
+    </div>
+  );
+}
+
+function SwotCell({ q, data, changes, onEntityClick, ctx }: {
+  q: { key: string; label: string; color: string; bg: string; border: string; dot: string };
+  data: ModuleData;
+  changes?: ModuleChanges | null;
+  onEntityClick: (e: EntityRef) => void;
+  ctx?: EntityContext;
+}) {
+  const items = (data[q.key] as Array<{ id: string; text: string }>) || [];
+  const { added, removed } = fieldChanges(changes, q.key);
+
+  return (
+    <div className={`rounded-xl border ${q.border} ${q.bg} p-4`}>
+      <div className="flex items-center justify-between mb-2.5">
+        <p className={`text-sm font-semibold ${q.color}`}>{q.label}</p>
+        <span className="text-[10px] text-gray-400 bg-white/70 rounded-full px-2 py-0.5">{items.length}</span>
+      </div>
+      <div className="space-y-2">
+        {items.map((item) => (
+          <div key={item.id} className="flex gap-2 items-start">
+            <span className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${q.dot}`} />
+            <p className="text-[13px] text-gray-600 leading-relaxed">
+              <EntityText text={item.text} ctx={ctx} onEntityClick={onEntityClick} />
+              {added.has(item.text) && <span className="ml-1.5"><NewBadge /></span>}
+            </p>
+          </div>
+        ))}
+        {removed.map((item, i) => (
+          <div key={`removed-${i}`} className="flex gap-2 items-start opacity-60">
+            <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 bg-red-200" />
+            <p className="text-[13px] text-red-300 line-through leading-relaxed">{String(item.text)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

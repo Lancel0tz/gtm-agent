@@ -19,6 +19,12 @@ export function Canvas({ state }: Props) {
   const [expanded, setExpanded] = useState<ModuleName | null>(null);
   const [entity, setEntity] = useState<EntityRef | null>(null);
 
+  // Known entity names, for linkifying competitor/segment mentions in text
+  const ctx = {
+    competitors: ((state.competitiveLandscape.data?.existingCompetitors as Array<{ name: string }> | undefined) || []).map((c) => c.name),
+    segments: ((state.audienceOverview.data?.segments as Array<{ segmentName: string }> | undefined) || []).map((s) => s.segmentName),
+  };
+
   // Esc closes the TOP layer only: entity popover first, then module detail
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -43,6 +49,7 @@ export function Canvas({ state }: Props) {
             module={state[name]}
             onExpand={() => setExpanded(name)}
             onEntityClick={setEntity}
+            ctx={ctx}
           />
         ))}
       </div>
@@ -53,6 +60,7 @@ export function Canvas({ state }: Props) {
           module={state[expanded]}
           onClose={() => setExpanded(null)}
           onEntityClick={setEntity}
+          ctx={ctx}
         />
       )}
 

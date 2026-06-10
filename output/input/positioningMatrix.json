@@ -13,50 +13,212 @@
     {
       "id": "pm-001",
       "gameName": "Dune: Awakening",
-      "xPosition": 7.0,
-      "yPosition": 6.0
+      "xPosition": 9.0,
+      "yPosition": 7.0
     },
     {
       "id": "pm-002",
       "gameName": "Conan Exiles",
       "xPosition": 4.0,
-      "yPosition": 3.0
+      "yPosition": 8.0
     },
     {
       "id": "pm-003",
       "gameName": "Rust",
       "xPosition": 2.0,
-      "yPosition": 4.0
+      "yPosition": 9.0
     },
     {
       "id": "pm-004",
       "gameName": "Valheim",
       "xPosition": 5.0,
-      "yPosition": 5.0
+      "yPosition": 8.0
     },
     {
       "id": "pm-005",
       "gameName": "Star Wars: The Old Republic",
-      "xPosition": 9.0,
-      "yPosition": 9.0
+      "xPosition": 10.0,
+      "yPosition": 4.0
     },
     {
       "id": "pm-006",
       "gameName": "Destiny 2",
-      "xPosition": 6.0,
-      "yPosition": 7.0
+      "xPosition": 7.0,
+      "yPosition": 6.0
     },
     {
       "id": "pm-007",
       "gameName": "The Elder Scrolls Online",
-      "xPosition": 8.0,
-      "yPosition": 8.0
+      "xPosition": 9.0,
+      "yPosition": 5.0
     },
     {
       "id": "pm-008",
+      "gameName": "Lost Ark",
+      "xPosition": 6.0,
+      "yPosition": 5.0
+    },
+    {
+      "id": "pm-009",
       "gameName": "Black Desert Online",
       "xPosition": 6.0,
       "yPosition": 7.0
+    },
+    {
+      "id": "pm-010",
+      "gameName": "The Forest",
+      "xPosition": 3.0,
+      "yPosition": 8.0
+    }
+  ],
+  "alternativeViews": [
+    {
+      "xAxis": {
+        "axisName": "Monetization Model vs. Content Cadence",
+        "lowLabel": "One-Time Purchase + MTX",
+        "highLabel": "Subscription/DLC Model"
+      },
+      "yAxis": {
+        "axisName": "Frequent Content Updates vs. Stable Releases",
+        "lowLabel": "Frequent Content Updates",
+        "highLabel": "Stable Releases"
+      },
+      "positions": [
+        {
+          "id": "pm-001",
+          "gameName": "Dune: Awakening",
+          "xPosition": 4.0,
+          "yPosition": 2.0
+        },
+        {
+          "id": "pm-002",
+          "gameName": "Conan Exiles",
+          "xPosition": 3.0,
+          "yPosition": 4.0
+        },
+        {
+          "id": "pm-003",
+          "gameName": "Rust",
+          "xPosition": 3.0,
+          "yPosition": 3.0
+        },
+        {
+          "id": "pm-004",
+          "gameName": "Valheim",
+          "xPosition": 2.0,
+          "yPosition": 5.0
+        },
+        {
+          "id": "pm-005",
+          "gameName": "Star Wars: The Old Republic",
+          "xPosition": 8.0,
+          "yPosition": 7.0
+        },
+        {
+          "id": "pm-006",
+          "gameName": "Destiny 2",
+          "xPosition": 7.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "pm-007",
+          "gameName": "The Elder Scrolls Online",
+          "xPosition": 9.0,
+          "yPosition": 7.0
+        },
+        {
+          "id": "pm-008",
+          "gameName": "Lost Ark",
+          "xPosition": 6.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "pm-009",
+          "gameName": "Black Desert Online",
+          "xPosition": 5.0,
+          "yPosition": 5.0
+        },
+        {
+          "id": "pm-010",
+          "gameName": "The Forest",
+          "xPosition": 2.0,
+          "yPosition": 4.0
+        }
+      ]
+    },
+    {
+      "xAxis": {
+        "axisName": "Accessibility vs. Game Depth",
+        "lowLabel": "Casual Friendly",
+        "highLabel": "Skill Intensive"
+      },
+      "yAxis": {
+        "axisName": "Linear Progression vs. Exploration Freedom",
+        "lowLabel": "Linear Progression",
+        "highLabel": "Exploration Freedom"
+      },
+      "positions": [
+        {
+          "id": "pm-001",
+          "gameName": "Dune: Awakening",
+          "xPosition": 6.0,
+          "yPosition": 8.0
+        },
+        {
+          "id": "pm-002",
+          "gameName": "Conan Exiles",
+          "xPosition": 6.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "pm-003",
+          "gameName": "Rust",
+          "xPosition": 7.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "pm-004",
+          "gameName": "Valheim",
+          "xPosition": 5.0,
+          "yPosition": 8.0
+        },
+        {
+          "id": "pm-005",
+          "gameName": "Star Wars: The Old Republic",
+          "xPosition": 5.0,
+          "yPosition": 4.0
+        },
+        {
+          "id": "pm-006",
+          "gameName": "Destiny 2",
+          "xPosition": 4.0,
+          "yPosition": 5.0
+        },
+        {
+          "id": "pm-007",
+          "gameName": "The Elder Scrolls Online",
+          "xPosition": 6.0,
+          "yPosition": 5.0
+        },
+        {
+          "id": "pm-008",
+          "gameName": "Lost Ark",
+          "xPosition": 5.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "pm-009",
+          "gameName": "Black Desert Online",
+          "xPosition": 7.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "pm-010",
+          "gameName": "The Forest",
+          "xPosition": 6.0,
+          "yPosition": 8.0
+        }
+      ]
     }
   ]
 }

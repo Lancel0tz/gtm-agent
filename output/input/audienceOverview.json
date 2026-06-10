@@ -1,10 +1,10 @@
 {
-  "summary": "The audience analysis identifies four distinct segments for Dune: Awakening, each with unique motivations and overlapping interest with existing competitors. Sci-Fi Story Seekers are drawn by narrative-rich experiences, engaging with titles like Star Wars: The Old Republic. Sandbox Survival Enthusiasts seek creative, open-world gameplay similar to Conan Exiles and Rust. Competitive MMO Strategists thrive in multiplayer PvP environments, playing games like Black Desert Online. Lore-Driven Builders and Creators focus on crafting within a narrative universe, also engaging with Conan Exiles. These segments reflect varying player priorities, from narrative immersion to competitive strategy.",
+  "summary": "The audience segmentation for 'Dune: Awakening' addresses four distinct types of players, each with unique motivations and game interaction preferences. 'Sci-Fi Lore Enthusiasts' are drawn by narrative depth and lore; 'Survival Strategists' seek challenges in resource management and environmental adaptation; 'Competitive MMO Fighters' focus on PvP, guild interaction, and competitive dominance; 'Crafting and Customization Enthusiasts' are driven by creativity in crafting and customization. These segments align with competitors that offer similar experiences, showcasing where 'Dune: Awakening' fits in the current gaming landscape.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Sci-Fi Story Seekers",
-      "description": "Players passionate about deep, narrative-rich experiences set in expansive sci-fi universes. They are drawn by storytelling, world-building, and thematic immersion. Distinct from gameplay-focused or PvP-driven players.",
+      "segmentName": "Sci-Fi Lore Enthusiasts",
+      "description": "Players focused on narrative depth and immersive world-building. They are drawn to lore-rich environments and enjoy exploring complex stories. Their primary motivation is engaging with the Dune universe's political and character dynamics.",
       "selectedExistingCompetitors": [
         "Star Wars: The Old Republic",
         "The Elder Scrolls Online"
@@ -12,18 +12,18 @@
     },
     {
       "id": "seg-2",
-      "segmentName": "Sandbox Survival Enthusiasts",
-      "description": "Players who enjoy sandbox environments for creativity in survival strategies and exploration. They favor emergent gameplay and the ability to shape their environment over narrative-driven structures.",
+      "segmentName": "Survival Strategists",
+      "description": "Players who thrive on resource management, strategic thinking, and overcoming environmental challenges. They are motivated by the need to survive in harsh conditions and optimize gameplay strategies.",
       "selectedExistingCompetitors": [
         "Conan Exiles",
         "Rust",
-        "Valheim"
+        "The Forest"
       ]
     },
     {
       "id": "seg-3",
-      "segmentName": "Competitive MMO Strategists",
-      "description": "Players engaged by structured multiplayer experiences and competitive gameplay. They value strategic gameplay and social status, focusing on PvP and large-scale battles rather than narrative content.",
+      "segmentName": "Competitive MMO Fighters",
+      "description": "Players invested in PvP, guilds, and competition within multiplayer settings. Motivated by achieving notoriety and strategic power, they prefer games with robust PvP and community dynamics.",
       "selectedExistingCompetitors": [
         "Black Desert Online",
         "Lost Ark",
@@ -32,11 +32,12 @@
     },
     {
       "id": "seg-4",
-      "segmentName": "Lore-Driven Builders and Creators",
-      "description": "Players interested in crafting and customization that reflect the game's lore. They focus on building mechanics within a narrative universe, distinct from those motivated by gameplay or PvP elements.",
+      "segmentName": "Crafting and Customization Enthusiasts",
+      "description": "Players who enjoy intricate crafting and customization systems. They focus on resource gathering and creating personalized in-game environments, valuing creativity over competitiveness.",
       "selectedExistingCompetitors": [
-        "Conan Exiles",
-        "The Elder Scrolls Online"
+        "Valheim",
+        "Nightingale",
+        "Conan Exiles"
       ]
     }
   ]

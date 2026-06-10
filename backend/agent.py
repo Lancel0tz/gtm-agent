@@ -111,14 +111,18 @@ class Agent:
         so stale references to the previous game's modules don't leak in."""
         self.history = []
 
-    async def chat(self, user_message: str) -> dict:
+    async def chat(self, user_message: str, history: list | None = None) -> dict:
         """Process a user message through the ReAct loop.
 
+        history: the conversation to continue (a thread's LLM history).
+        Mutated in place so the caller's thread persists tool context.
         Returns {"response": str, "events": list[dict]}.
         Events are ALSO emitted in real-time via on_event as they happen,
         so SSE clients see progress before this method returns.
         """
-        self.history.append({"role": "user", "content": user_message})
+        if history is None:
+            history = self.history
+        history.append({"role": "user", "content": user_message})
         events: list[dict] = []
 
         def emit(event: dict):
@@ -133,7 +137,7 @@ class Agent:
             )
             response = await get_client().chat.completions.create(
                 model=MODEL,
-                messages=[{"role": "system", "content": system}] + self.history,
+                messages=[{"role": "system", "content": system}] + history,
                 tools=TOOLS,
                 tool_choice="auto",
             )
@@ -142,10 +146,10 @@ class Agent:
 
             if not message.tool_calls:
                 text = message.content or ""
-                self.history.append({"role": "assistant", "content": text})
+                history.append({"role": "assistant", "content": text})
                 return {"response": text, "events": events}
 
-            self.history.append(message.model_dump(exclude_none=True))
+            history.append(message.model_dump(exclude_none=True))
 
             for tool_call in message.tool_calls:
                 name = tool_call.function.name
@@ -153,7 +157,7 @@ class Agent:
 
                 result = await self._execute_tool(name, args, emit)
 
-                self.history.append({
+                history.append({
                     "role": "tool",
                     "tool_call_id": tool_call.id,
                     "content": result,

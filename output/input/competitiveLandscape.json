@@ -55,6 +55,11 @@
       "id": "ec-017",
       "name": "The Forest",
       "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune."
+    },
+    {
+      "id": "ec-018",
+      "name": "Nightingale",
+      "rationale": "Blends survival and crafting with an engaging narrative in an open-world multiplayer setup, echoing themes present in Dune: Awakening."
     }
   ]
 }

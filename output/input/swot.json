@@ -2,89 +2,89 @@
   "strengths": [
     {
       "id": "sw-001",
-      "text": "Leveraging the Dune IP, the game offers a rich narrative and thematic depth that appeals to Sci-Fi Story Seekers, providing a more engaging storytelling experience compared to Rust and Valheim."
+      "text": "Rich narrative environment leveraging deep IP with political intrigue appeals to Sci-Fi Lore Enthusiasts, similarly drawn to Star Wars: The Old Republic and The Elder Scrolls Online."
     },
     {
       "id": "sw-002",
-      "text": "The game combines MMO elements with survival and open-world mechanics, attracting Sandbox Survival Enthusiasts and Competitive MMO Strategists, offering a broader approach than games like Conan Exiles."
+      "text": "Unique IP and setting offer a thematic edge over generic settings in competitors like Black Desert Online and Lost Ark, attracting a dedicated fan base seeking authenticity."
     },
     {
       "id": "sw-003",
-      "text": "The ability to join factions like Atreides and Harkonnen with unique rewards appeals to players in Black Desert Online and Lost Ark who value strategic multiplayer engagement."
+      "text": "Diverse gameplay mechanics combining survival, strategy, and MMO elements provide a multi-faceted experience rivaling Valheim and Conan Exiles, attracting Survival Strategists."
     },
     {
       "id": "sw-004",
-      "text": "Featuring both MTX and Battle Pass options, Dune: Awakening can provide more tailored monetization compared to Destiny 2, appealing to a wider audience preferring diverse spending choices."
+      "text": "Persistent online world with optional PvP offers flexibility similar to Warframe, appealing to Competitive MMO Fighters who avoid mandatory PvP-centric titles like Rust."
     },
     {
       "id": "sw-005",
-      "text": "With crafting systems and a vast range of customization, it attracts Lore-Driven Builders and Creators seeking nuanced personalization compared to Warframe."
+      "text": "Robust customization and crafting surpass Nightingale, offering more depth for Crafting and Customization Enthusiasts focused on creativity-driven gameplay."
     }
   ],
   "weaknesses": [
     {
       "id": "wk-001",
-      "text": "Being exclusive to Steam initially limits access compared to cross-platform competitors like Destiny 2, potentially deterring console gamers or those preferring other PC platforms."
+      "text": "Lack of crossplay limits audience reach and undermines competitive activities, unlike Destiny 2, which supports multiple platforms."
     },
     {
       "id": "wk-002",
-      "text": "The lack of crossplay is a disadvantage in fostering community growth compared to The Elder Scrolls Online, which benefits from cross-platform functionality."
+      "text": "Platform exclusivity to Steam limits access compared to The Elder Scrolls Online, potentially alienating console-preferring players."
     },
     {
       "id": "wk-003",
-      "text": "Entering a market with heavyweights like Star Wars: The Old Republic might struggle to capture the Sci-Fi Story Seekers segment due to established narratives."
+      "text": "Facing competition from well-established MMOs like The Elder Scrolls Online and Star Wars: The Old Republic which dominate the market."
     },
     {
       "id": "wk-004",
-      "text": "The combination of a $50 purchase cost with MTX and Battle Pass could alienate players used to the free access models of games like Warframe."
+      "text": "High dependency on Dune IP risks alienating non-IP familiar players, unlike games attracting broader audiences solely on gameplay appeal."
     },
     {
       "id": "wk-005",
-      "text": "The closed beta under NDA restricts early word-of-mouth promotion, unlike Valheim, which capitalized on community-driven early access to build hype."
+      "text": "Niche target audience of Dune fans may limit appeal compared to games like Rust or Conan Exiles with broader thematic universality."
     }
   ],
   "opportunities": [
     {
       "id": "op-001",
-      "text": "With dynamic sandbox features, Dune: Awakening can capture Sandbox Survival Enthusiasts seeking new emergent gameplay experiences not emphasized in games like Scum."
+      "text": "Growing demand for narrative-rich MMOs offers engagement opportunities, outpacing storytelling depth in Black Desert Online and Lost Ark."
     },
     {
       "id": "op-002",
-      "text": "There is increasing interest in narrative-rich MMOs by audience segments like Sci-Fi Story Seekers, offering a niche demand unmet by games like Rust."
+      "text": "Underserved sci-fi MMO market leaves space for Dune: Awakening to attract fans desiring a mix of sci-fi and survival elements."
     },
     {
       "id": "op-003",
-      "text": "The ability to play politics and impact outcomes could attract players interested in strategic elements not fully explored in Lost Ark."
+      "text": "Enhancing crafting and customization can capture Crafting Enthusiasts, surpassing offerings in Valheim and Nightingale, boosting engagement."
     },
     {
       "id": "op-004",
-      "text": "Dune's cultural backdrop offers potential for unique cosmetic items and lore-rich customization, appealing to Lore-Driven Builders beyond what Conan Exiles offers."
+      "text": "Regular DLCs and updates provide chances to refine gameplay and attract players from competitors with less frequent updates like Conan Exiles."
     },
     {
       "id": "op-005",
-      "text": "Private servers that maintain MMO mechanics offer a unique blend not widely available from competitors, catering to players wanting both custom experiences and larger dynamics."
+      "text": "Unique faction system offering strategic depth akin to The Elder Scrolls Online can draw Competitive MMO Fighters seeking long-term engagement."
     }
   ],
   "threats": [
     {
       "id": "th-001",
-      "text": "Strong brand loyalty in games like Star Wars: The Old Republic could make converting long-time players drawn to the sci-fi MMO genre difficult."
+      "text": "High competition from entrenched communities in The Elder Scrolls Online and Lost Ark threatens player retention and acquisition."
     },
     {
       "id": "th-002",
-      "text": "The rapid evolution of the survival genre, with updates in games like The Forest, could overshadow new entrants if they fail to innovate quickly."
+      "text": "Microtransaction and battle pass inclusion, similar to Destiny 2, may deter players wary of paywall progressions in premium-priced games."
     },
     {
       "id": "th-003",
-      "text": "Opposition to the monetization strategy amidst scrutiny of MTX and Battle Pass practices may drive negative market perceptions compared to free access games like Warframe."
+      "text": "Entering a saturated survival market with competitors like Rust and Conan Exiles makes differentiation challenging for Survival Strategists."
     },
     {
       "id": "th-004",
-      "text": "Launching on consoles a year after PC could lead to reduced momentum, missing broad audiences competitors like Destiny 2 tapped successfully."
+      "text": "Delayed console launch may reduce initial momentum, risking loss of console-centric players to alternative titles during the gap."
     },
     {
       "id": "th-005",
-      "text": "Reliance on the Dune IP could pose a risk if interest wanes, similar to media-tied games faltering beyond peak popularity periods."
+      "text": "Cultural and localization challenges risk alienating diverse global audiences where games like Lost Ark and Black Desert Online thrive."
     }
   ]
 }
