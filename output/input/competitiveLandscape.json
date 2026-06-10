@@ -55,6 +55,11 @@
       "id": "ec-017",
       "name": "The Forest",
       "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune."
+    },
+    {
+      "id": "ec-018",
+      "name": "Ark: Survival Evolved",
+      "rationale": "Combines survival with multiplayer and open-world exploration, incorporating elements such as resource gathering and crafting that align with the gameplay in Dune."
     }
   ]
 }

@@ -20,19 +20,19 @@
       "id": "pm-002",
       "gameName": "Conan Exiles",
       "xPosition": 4.0,
-      "yPosition": 3.0
+      "yPosition": 5.0
     },
     {
       "id": "pm-003",
       "gameName": "Rust",
       "xPosition": 3.0,
-      "yPosition": 2.0
+      "yPosition": 4.0
     },
     {
       "id": "pm-004",
       "gameName": "Valheim",
       "xPosition": 5.0,
-      "yPosition": 3.0
+      "yPosition": 5.0
     },
     {
       "id": "pm-005",
@@ -43,8 +43,8 @@
     {
       "id": "pm-006",
       "gameName": "Destiny 2",
-      "xPosition": 8.0,
-      "yPosition": 9.0
+      "xPosition": 6.0,
+      "yPosition": 7.0
     },
     {
       "id": "pm-007",
@@ -54,169 +54,109 @@
     },
     {
       "id": "pm-008",
+      "gameName": "Ark: Survival Evolved",
+      "xPosition": 4.0,
+      "yPosition": 5.0
+    },
+    {
+      "id": "pm-009",
       "gameName": "Warframe",
       "xPosition": 6.0,
       "yPosition": 7.0
     },
     {
-      "id": "pm-009",
-      "gameName": "Lost Ark",
-      "xPosition": 5.0,
-      "yPosition": 8.0
-    },
-    {
       "id": "pm-010",
       "gameName": "Black Desert Online",
-      "xPosition": 4.0,
+      "xPosition": 5.0,
       "yPosition": 7.0
     }
   ],
   "alternativeViews": [
     {
       "xAxis": {
-        "axisName": "Monetization Model vs. Content Cadence",
-        "lowLabel": "Upfront No Extras",
-        "highLabel": "Daily Transactions & Updates"
+        "axisName": "Monetization vs. Content Cadence",
+        "lowLabel": "One-Time Purchase",
+        "highLabel": "Subscription/MTX"
       },
       "yAxis": {
-        "axisName": "Accessibility vs. Core Complexity",
-        "lowLabel": "Casually Accessible",
-        "highLabel": "Niche Hardcore Mechanics"
+        "axisName": "Frequent Content Updates vs. Feature Stability",
+        "lowLabel": "Frequent Content Updates",
+        "highLabel": "Feature Stability"
       },
       "positions": [
         {
-          "id": "alt1-001",
+          "id": "av1-001",
           "gameName": "Dune: Awakening",
           "xPosition": 8.0,
-          "yPosition": 7.0
+          "yPosition": 6.0
         },
         {
-          "id": "alt1-002",
+          "id": "av1-002",
           "gameName": "Conan Exiles",
           "xPosition": 5.0,
           "yPosition": 5.0
         },
         {
-          "id": "alt1-003",
+          "id": "av1-003",
           "gameName": "Rust",
-          "xPosition": 4.0,
-          "yPosition": 8.0
-        },
-        {
-          "id": "alt1-004",
-          "gameName": "Valheim",
-          "xPosition": 3.0,
+          "xPosition": 5.0,
           "yPosition": 6.0
         },
         {
-          "id": "alt1-005",
+          "id": "av1-004",
           "gameName": "Star Wars: The Old Republic",
-          "xPosition": 8.0,
-          "yPosition": 5.0
+          "xPosition": 9.0,
+          "yPosition": 7.0
         },
         {
-          "id": "alt1-006",
+          "id": "av1-005",
           "gameName": "Destiny 2",
-          "xPosition": 9.0,
-          "yPosition": 6.0
-        },
-        {
-          "id": "alt1-007",
-          "gameName": "The Elder Scrolls Online",
-          "xPosition": 9.0,
-          "yPosition": 5.0
-        },
-        {
-          "id": "alt1-008",
-          "gameName": "Warframe",
-          "xPosition": 10.0,
-          "yPosition": 7.0
-        },
-        {
-          "id": "alt1-009",
-          "gameName": "Lost Ark",
-          "xPosition": 6.0,
-          "yPosition": 6.0
-        },
-        {
-          "id": "alt1-010",
-          "gameName": "Black Desert Online",
-          "xPosition": 7.0,
-          "yPosition": 7.0
+          "xPosition": 8.0,
+          "yPosition": 8.0
         }
       ]
     },
     {
       "xAxis": {
-        "axisName": "Technological Immersion vs. Story Immersion",
-        "lowLabel": "Tech-Savvy Gameplay",
-        "highLabel": "Rich Narrative Environment"
+        "axisName": "Accessibility vs. Game Depth",
+        "lowLabel": "Casual Friendly",
+        "highLabel": "Hardcore Difficulty"
       },
       "yAxis": {
-        "axisName": "Open Exploration vs. Faction-War Dynamics",
-        "lowLabel": "Exploration & Building",
-        "highLabel": "Faction-Based Competitive Control"
+        "axisName": "Mechanically Deep vs. Superficial Gameplay",
+        "lowLabel": "Superficial Gameplay",
+        "highLabel": "Mechanically Deep"
       },
       "positions": [
         {
-          "id": "alt2-001",
+          "id": "av2-001",
           "gameName": "Dune: Awakening",
-          "xPosition": 8.0,
+          "xPosition": 6.0,
+          "yPosition": 8.0
+        },
+        {
+          "id": "av2-002",
+          "gameName": "Conan Exiles",
+          "xPosition": 7.0,
           "yPosition": 7.0
         },
         {
-          "id": "alt2-002",
-          "gameName": "Conan Exiles",
-          "xPosition": 5.0,
-          "yPosition": 4.0
-        },
-        {
-          "id": "alt2-003",
-          "gameName": "Rust",
-          "xPosition": 4.0,
-          "yPosition": 3.0
-        },
-        {
-          "id": "alt2-004",
+          "id": "av2-003",
           "gameName": "Valheim",
           "xPosition": 6.0,
-          "yPosition": 3.0
-        },
-        {
-          "id": "alt2-005",
-          "gameName": "Star Wars: The Old Republic",
-          "xPosition": 9.0,
-          "yPosition": 8.0
-        },
-        {
-          "id": "alt2-006",
-          "gameName": "Destiny 2",
-          "xPosition": 8.0,
-          "yPosition": 9.0
-        },
-        {
-          "id": "alt2-007",
-          "gameName": "The Elder Scrolls Online",
-          "xPosition": 8.0,
-          "yPosition": 8.0
-        },
-        {
-          "id": "alt2-008",
-          "gameName": "Warframe",
-          "xPosition": 7.0,
-          "yPosition": 6.0
-        },
-        {
-          "id": "alt2-009",
-          "gameName": "Lost Ark",
-          "xPosition": 5.0,
           "yPosition": 7.0
         },
         {
-          "id": "alt2-010",
-          "gameName": "Black Desert Online",
-          "xPosition": 6.0,
+          "id": "av2-004",
+          "gameName": "Star Wars: The Old Republic",
+          "xPosition": 5.0,
           "yPosition": 8.0
+        },
+        {
+          "id": "av2-005",
+          "gameName": "Warframe",
+          "xPosition": 7.0,
+          "yPosition": 7.0
         }
       ]
     }

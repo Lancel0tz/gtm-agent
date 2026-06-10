@@ -20,6 +20,7 @@ interface Props {
   onEditMessage: (index: number, message: string) => void;
   quote: string | null;
   onClearQuote: () => void;
+  onStop: () => void;
 }
 
 const MODULE_ORDER: ModuleName[] = [
@@ -32,7 +33,7 @@ const MODULE_ORDER: ModuleName[] = [
 export function ChatPanel({
   messages, onSend, isLoading, modules,
   threads, activeThread, onSelectThread, onNewThread, onDeleteThread,
-  onRegenerate, onUndo, onRenameThread, onEditMessage, quote, onClearQuote,
+  onRegenerate, onUndo, onRenameThread, onEditMessage, quote, onClearQuote, onStop,
 }: Props) {
   const [input, setInput] = useState('');
   const [renaming, setRenaming] = useState(false);
@@ -285,17 +286,30 @@ export function ChatPanel({
             disabled={isLoading}
             className="flex-1 bg-transparent text-sm text-gray-900 placeholder-gray-400 outline-none disabled:opacity-50"
           />
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={isLoading || !input.trim()}
-            className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 transition-colors shrink-0"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="19" x2="12" y2="5" />
-              <polyline points="5 12 12 5 19 12" />
-            </svg>
-          </button>
+          {isLoading ? (
+            <button
+              type="button"
+              onClick={onStop}
+              title="Stop generating"
+              className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center hover:bg-gray-700 transition-colors shrink-0"
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="5" y="5" width="14" height="14" rx="2" />
+              </svg>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={!input.trim()}
+              className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 transition-colors shrink-0"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="19" x2="12" y2="5" />
+                <polyline points="5 12 12 5 19 12" />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -379,6 +393,7 @@ function MessageActions({ content, showTurnActions, onRegenerate, onUndo }: {
   onEditMessage: (index: number, message: string) => void;
   quote: string | null;
   onClearQuote: () => void;
+  onStop: () => void;
 }) {
   const [copied, setCopied] = useState(false);
 

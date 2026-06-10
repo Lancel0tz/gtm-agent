@@ -1,5 +1,5 @@
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
-import { MODULE_META, StatusDot, fieldChanges, NewBadge, RemovedTag, EntityText } from './moduleShared';
+import { MODULE_META, StatusDot, fieldChanges, NewBadge, RemovedTag, EntityText, moduleToQuote, QuoteButton } from './moduleShared';
 import type { EntityContext } from './moduleShared';
 import { PositioningChart } from './ModuleCard';
 
@@ -11,9 +11,10 @@ interface Props {
   ctx?: EntityContext;
   pmLens?: number;
   onSelectLens?: (lens: number) => void;
+  onQuote?: (text: string) => void;
 }
 
-export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens = 0, onSelectLens }: Props) {
+export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens = 0, onSelectLens, onQuote }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -37,6 +38,10 @@ export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens
             <h2 className="text-xl font-semibold text-gray-900">{meta.label}</h2>
             <p className="text-sm text-gray-400 mt-1">{meta.description}</p>
           </div>
+          <div className="flex items-center gap-1 shrink-0">
+          {module.data && onQuote && (
+            <QuoteButton onClick={() => onQuote(moduleToQuote(name, module.data!))} />
+          )}
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors shrink-0"
@@ -46,6 +51,7 @@ export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
+          </div>
         </div>
 
         {/* Body */}

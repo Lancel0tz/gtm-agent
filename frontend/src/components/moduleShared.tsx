@@ -108,6 +108,49 @@ export function EntityText({
   );
 }
 
+/** Serialize a module into readable text for quoting in chat. */
+export function moduleToQuote(name: ModuleName, data: Record<string, unknown>): string {
+  if (name === 'competitiveLandscape') {
+    const items = (data.existingCompetitors as Array<{ name: string }>) || [];
+    return `Competitive Landscape (${items.length} competitors): ${items.map((c) => c.name).join(', ')}`;
+  }
+  if (name === 'audienceOverview') {
+    const segs = (data.segments as Array<{ segmentName: string }>) || [];
+    return `Audience Overview (${segs.length} segments): ${segs.map((s) => s.segmentName).join(', ')}`;
+  }
+  if (name === 'positioningMatrix') {
+    const x = data.xAxis as { axisName: string };
+    const y = data.yAxis as { axisName: string };
+    const pos = (data.positions as Array<{ gameName: string; xPosition: number; yPosition: number }>) || [];
+    return `Positioning Matrix — X: ${x?.axisName}, Y: ${y?.axisName}. Positions: ${pos.map((p) => `${p.gameName} (${p.xPosition}, ${p.yPosition})`).join('; ')}`;
+  }
+  if (name === 'swot') {
+    const part = (key: string, label: string) => {
+      const items = (data[key] as Array<{ text: string }>) || [];
+      return `${label}: ${items.map((i) => i.text).join(' | ')}`;
+    };
+    return `SWOT — ${part('strengths', 'S')}\n${part('weaknesses', 'W')}\n${part('opportunities', 'O')}\n${part('threats', 'T')}`.slice(0, 1200);
+  }
+  return JSON.stringify(data).slice(0, 600);
+}
+
+export function QuoteButton({ onClick, title = 'Quote this module in chat' }: { onClick: () => void; title?: string }) {
+  return (
+    <button
+      title={title}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+      className="w-6 h-6 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors shrink-0"
+    >
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
+      </svg>
+    </button>
+  );
+}
+
 export function StatusDot({ status }: { status: string }) {
   const config: Record<string, { color: string; label: string }> = {
     idle: { color: 'bg-gray-300', label: 'Idle' },

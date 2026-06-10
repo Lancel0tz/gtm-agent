@@ -68,6 +68,7 @@ export function Canvas({ state, onQuote }: Props) {
             onEntityClick={setEntity}
             ctx={ctx}
             pmLens={pmLens}
+            onQuote={onQuote}
           />
         ))}
       </div>
@@ -81,6 +82,7 @@ export function Canvas({ state, onQuote }: Props) {
           ctx={ctx}
           pmLens={pmLens}
           onSelectLens={setPmLens}
+          onQuote={onQuote}
         />
       )}
 

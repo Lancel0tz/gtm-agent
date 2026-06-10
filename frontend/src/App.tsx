@@ -127,6 +127,15 @@ function App() {
     }
   }, [activeThread, isLoading, loadThreads]);
 
+  const handleStop = useCallback(async () => {
+    await fetch('/api/chat/stop', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ thread_id: activeThread }),
+    });
+    // The pending /api/chat request resolves with the stopped response
+  }, [activeThread]);
+
   const handleRenameThread = useCallback(async (tid: string, title: string) => {
     await fetch(`/api/threads/${tid}`, {
       method: 'PATCH',
@@ -277,6 +286,7 @@ function App() {
             onEditMessage={handleEditMessage}
             quote={quote}
             onClearQuote={() => setQuote(null)}
+            onStop={handleStop}
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } from '../types';
-import { MODULE_META, StatusDot, fieldChanges, axisLabel, NewBadge, RemovedTag, EntityText } from './moduleShared';
+import { MODULE_META, StatusDot, fieldChanges, axisLabel, NewBadge, RemovedTag, EntityText, moduleToQuote, QuoteButton } from './moduleShared';
 import type { EntityContext } from './moduleShared';
 
 interface Props {
@@ -9,9 +9,10 @@ interface Props {
   onEntityClick: (entity: EntityRef) => void;
   ctx?: EntityContext;
   pmLens?: number;
+  onQuote?: (text: string) => void;
 }
 
-export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0 }: Props) {
+export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0, onQuote }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -31,8 +32,11 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens 
           </span>
           <span className="text-[15px] font-semibold text-gray-900">{meta.label}</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <StatusDot status={module.status} />
+          {module.data && onQuote && (
+            <QuoteButton onClick={() => onQuote(moduleToQuote(name, module.data!))} />
+          )}
           {module.data && (
             <svg
               className="w-4 h-4 text-gray-300 group-hover:text-gray-500 transition-colors"

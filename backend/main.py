@@ -99,21 +99,62 @@ async def chat(req: ChatRequest):
     return {**result, "thread_id": thread["id"], "messages": thread["messages"]}
 
 
+# In-flight generation tasks, per thread — lets /api/chat/stop cancel them
+_running_turns: dict[str, asyncio.Task] = {}
+
+
 async def _execute_turn(thread: dict, message: str) -> dict:
-    """One chat turn: snapshot for undo, run the agent, persist."""
+    """One chat turn: snapshot for undo, run the agent (cancellable), persist.
+
+    On stop, partial module changes are rolled back to the pre-turn snapshot
+    and the LLM history is truncated — a stopped turn can leave dangling
+    tool calls that would corrupt the next API request otherwise.
+    """
     thread.setdefault("snapshots", []).append(pipeline.snapshot())
     thread["snapshots"] = thread["snapshots"][-5:]
+    pre_history_len = len(thread["history"])
 
     thread["messages"].append({"role": "user", "content": message})
     if thread["title"] == "New chat":
         thread["title"] = message.lstrip("> ").splitlines()[0][:48] if message.strip() else "New chat"
 
-    result = await agent.chat(message, history=thread["history"])
+    task = asyncio.create_task(agent.chat(message, history=thread["history"]))
+    _running_turns[thread["id"]] = task
+    try:
+        result = await task
+    except asyncio.CancelledError:
+        snap = thread["snapshots"].pop()
+        _restore_and_broadcast(snap)
+        del thread["history"][pre_history_len:]
+        thread["history"].append({"role": "user", "content": message})
+        thread["history"].append({"role": "assistant", "content": "(The user stopped this response before completion.)"})
+        result = {
+            "response": "Generation stopped. Any partial module changes were rolled back.",
+            "events": [],
+            "stopped": True,
+        }
+    finally:
+        _running_turns.pop(thread["id"], None)
 
     thread["messages"].append({"role": "assistant", "content": result["response"]})
     thread["updated"] = time.time()
     threads.set_active(thread["id"])
     return result
+
+
+class StopRequest(BaseModel):
+    thread_id: str | None = None
+
+
+@app.post("/api/chat/stop")
+async def stop_chat(req: StopRequest):
+    """Cancel the in-flight generation for a thread (or the active one)."""
+    tid = req.thread_id or threads.active_id
+    task = _running_turns.get(tid or "")
+    if task and not task.done():
+        task.cancel()
+        return {"ok": True}
+    return {"ok": False, "reason": "no generation in progress"}
 
 
 @app.get("/api/threads")
