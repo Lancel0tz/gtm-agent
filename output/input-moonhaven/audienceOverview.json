@@ -1,20 +1,20 @@
 {
-  "summary": "The audience segmentation for Moonhaven focuses on four main segments: Narrative Explorers, Social Co-op Enthusiasts, Cozy Escapists, and Creative Builders. Each segment is defined by specific behaviors, motivations, and preferences which inform their gaming choices. These segments intersect with the competitive landscape by identifying primary and secondary competitors, allowing for a targeted marketing approach. Games like Spiritfarer and Cozy Grove draw Narrative Explorers with their narrative depth, while Social Co-op Enthusiasts are attracted to titles such as Palia and Garden Paws for their multiplayer aspects. Cozy Escapists find solace in games like Stardew Valley and Animal Crossing: New Horizons that offer relaxing gameplay, and Creative Builders are drawn to The Sims 4 and My Time at Portia for the creative freedom they offer. By understanding these dynamics, Moonhaven can position itself effectively within the market.",
+  "summary": "The audience is segmented based on player motivations and engagement preferences with Moonhaven aligning with various gaming experiences. Segments range from those seeking relaxation and aesthetics, social cooperative play, narrative engagement, and simulation, to aesthetic customizations. Each segment aligns naturally with established competitors, showcasing a spectrum from tranquil farm-life games to rich narrative adventures and social interaction-driven titles.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Narrative Explorers",
-      "description": "This segment is drawn to games that offer rich narratives and mysterious plots. They enjoy exploring new worlds and uncovering stories within them. Motivated by the desire to solve mysteries and engage deeply with narrative elements. Distinct from others by their primary focus on a rich narrative rather than solely gameplay mechanics or social interactions.",
+      "segmentName": "Cozy Game Enthusiasts",
+      "description": "This segment consists of players who seek relaxing, non-stressful gameplay experiences, valuing aesthetics and peaceful environments. They are attracted to Moonhaven's soothing mechanics and visually calming spaces, but prioritize tranquility over complex mechanics.",
       "selectedExistingCompetitors": [
-        "Spiritfarer",
-        "Cozy Grove",
-        "Rune Factory Series"
+        "Stardew Valley",
+        "Animal Crossing: New Horizons",
+        "Cozy Grove"
       ]
     },
     {
       "id": "seg-2",
-      "segmentName": "Social Co-op Enthusiasts",
-      "description": "These players prioritize multiplayer and cooperative experiences, often playing with friends or family. Their main drive is the social aspect of gaming, enjoying shared activities and building virtual communities with others. Distinct for their focus on multiplayer and collaborative gameplay experiences.",
+      "segmentName": "Social Cooperative Gamers",
+      "description": "Players in this segment seek engaging ways to connect and cooperate with friends. Moonhaven's co-op features and crossplay functionality attract them, as they prioritize multiplayer interaction over solo experiences.",
       "selectedExistingCompetitors": [
         "Palia",
         "Garden Paws",
@@ -23,22 +23,32 @@
     },
     {
       "id": "seg-3",
-      "segmentName": "Cozy Escapists",
-      "description": "These players use gaming as a means of relaxation and escape from daily stress. They often enjoy single-player modes where they can proceed at their own pace, driven by the need for comfort and relaxation. Unlike Social Co-op Enthusiasts, their focus is on solitary play.",
+      "segmentName": "Narrative-driven Explorers",
+      "description": "These players are drawn to games with rich stories and immersive worlds. Moonhaven's mysterious narrative about the fallen moon offers a depth that engages this segment, who prioritize storytelling over pure simulation mechanics.",
       "selectedExistingCompetitors": [
-        "Stardew Valley",
-        "Animal Crossing: New Horizons",
-        "Cozy Grove"
+        "Spiritfarer",
+        "My Time at Portia",
+        "Rune Factory Series"
       ]
     },
     {
       "id": "seg-4",
-      "segmentName": "Creative Builders",
-      "description": "These players love games that allow them to create and customize environments or characters. They enjoy exploring their artistic side through design and creativity, with a primary drive of creative freedom and personal expression. Differentiated by their emphasis on creative freedom and personalization.",
+      "segmentName": "Simulation Aficionados",
+      "description": "These players are passionate about systems within simulation games. They appreciate Moonhaven for its structured gameplay and strategic management, focusing heavily on optimizing mechanics.",
       "selectedExistingCompetitors": [
-        "The Sims 4",
-        "My Time at Portia",
-        "Harvest Moon/Story of Seasons series"
+        "Stardew Valley",
+        "Harvest Moon/Story of Seasons series",
+        "My Time at Portia"
+      ]
+    },
+    {
+      "id": "seg-5",
+      "segmentName": "Aesthetic-centric Players",
+      "description": "Players who prioritize creative expression and customization in their gaming worlds. They are attracted to Moonhaven's visual charm and customization opportunities, focusing on creating aesthetically pleasing spaces.",
+      "selectedExistingCompetitors": [
+        "Animal Crossing: New Horizons",
+        "Garden Paws",
+        "Cozy Grove"
       ]
     }
   ]

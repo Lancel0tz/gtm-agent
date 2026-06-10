@@ -1,7 +1,17 @@
 {
   "competitiveLandscape": {
-    "added": {},
-    "removed": {}
+    "added": {
+      "existingCompetitors": []
+    },
+    "removed": {
+      "existingCompetitors": [
+        {
+          "id": "ec-011",
+          "name": "The Sims 4",
+          "rationale": "Prominent life sim with extensive customization features, attracting creative players who appreciate community-building mechanics."
+        }
+      ]
+    }
   },
   "audienceOverview": {
     "added": {},

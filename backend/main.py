@@ -293,15 +293,14 @@ async def regenerate_turn(tid: str):
     if not thread.get("snapshots"):
         raise HTTPException(400, "Nothing to regenerate")
     _activate_brief(thread["brief"])
-    _restore_and_broadcast(thread["snapshots"][-1])
+    # Pop + restore the pre-turn snapshot; _execute_turn re-pushes an
+    # equivalent one, and routes through the cancellable task registry
+    _restore_and_broadcast(thread["snapshots"].pop())
     user_text = _truncate_last_exchange(thread)
     if user_text is None:
         raise HTTPException(400, "No user message to re-run")
 
-    thread["messages"].append({"role": "user", "content": user_text})
-    result = await agent.chat(user_text, history=thread["history"])
-    thread["messages"].append({"role": "assistant", "content": result["response"]})
-    thread["updated"] = time.time()
+    result = await _execute_turn(thread, user_text)
     threads.save()
     return {**result, "messages": thread["messages"], "thread_id": tid}
 
@@ -316,6 +315,13 @@ async def get_modules():
         }
         for name in DEPENDENCY_GRAPH
     }
+
+
+@app.get("/api/modules/{module_name}/versions")
+async def get_module_versions(module_name: str):
+    """Prior generations of a module (newest first), for the history viewer."""
+    versions = pipeline.get_versions(module_name)
+    return {"versions": list(reversed(versions))}
 
 
 @app.get("/api/modules/{module_name}")

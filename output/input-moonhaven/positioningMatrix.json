@@ -1,11 +1,11 @@
 {
   "xAxis": {
-    "axisName": "Cooperative Engagement / Solo Immersion",
+    "axisName": "Solo Immersion / Cooperative Engagement",
     "lowLabel": "Solo Immersion",
     "highLabel": "Cooperative Engagement"
   },
   "yAxis": {
-    "axisName": "Narrative Mystery / Creative Sandbox",
+    "axisName": "Creative Sandbox / Narrative Mystery",
     "lowLabel": "Creative Sandbox",
     "highLabel": "Narrative Mystery"
   },
@@ -13,174 +13,96 @@
     {
       "id": "pm-001",
       "gameName": "Moonhaven",
-      "xPosition": 7.0,
-      "yPosition": 6.0
+      "xPosition": 7.5,
+      "yPosition": 6.5
     },
     {
       "id": "pm-002",
       "gameName": "Stardew Valley",
-      "xPosition": 3.0,
-      "yPosition": 4.0
+      "xPosition": 4.0,
+      "yPosition": 5.0
     },
     {
       "id": "pm-003",
-      "gameName": "Spiritfarer",
-      "xPosition": 2.0,
-      "yPosition": 9.0
+      "gameName": "Animal Crossing: New Horizons",
+      "xPosition": 5.0,
+      "yPosition": 3.0
     },
     {
       "id": "pm-004",
-      "gameName": "Animal Crossing: New Horizons",
-      "xPosition": 5.0,
-      "yPosition": 5.0
+      "gameName": "My Time at Portia",
+      "xPosition": 3.0,
+      "yPosition": 5.5
     },
     {
       "id": "pm-005",
-      "gameName": "Palia",
-      "xPosition": 9.0,
-      "yPosition": 5.0
+      "gameName": "Spiritfarer",
+      "xPosition": 5.0,
+      "yPosition": 7.0
     },
     {
       "id": "pm-006",
-      "gameName": "My Time at Portia",
-      "xPosition": 4.0,
-      "yPosition": 5.0
+      "gameName": "Garden Paws",
+      "xPosition": 7.0,
+      "yPosition": 3.5
     },
     {
       "id": "pm-007",
       "gameName": "Cozy Grove",
-      "xPosition": 3.0,
-      "yPosition": 7.0
+      "xPosition": 4.0,
+      "yPosition": 6.0
     },
     {
       "id": "pm-008",
-      "gameName": "Garden Paws",
-      "xPosition": 8.0,
-      "yPosition": 3.0
+      "gameName": "Rune Factory Series",
+      "xPosition": 4.5,
+      "yPosition": 5.5
     },
     {
       "id": "pm-009",
-      "gameName": "The Sims 4",
-      "xPosition": 2.0,
-      "yPosition": 3.0
-    },
-    {
-      "id": "pm-010",
-      "gameName": "Rune Factory Series",
-      "xPosition": 4.0,
-      "yPosition": 7.0
+      "gameName": "Palia",
+      "xPosition": 9.0,
+      "yPosition": 4.5
     }
   ],
   "alternativeViews": [
     {
       "xAxis": {
-        "axisName": "One-Time Purchase / Microtransactions",
+        "axisName": "Seasonal Content/One-Time Purchase",
         "lowLabel": "One-Time Purchase",
-        "highLabel": "Microtransactions"
+        "highLabel": "Seasonal Content"
       },
       "yAxis": {
-        "axisName": "Seasonal Updates / Regular DLC",
-        "lowLabel": "Seasonal Updates",
-        "highLabel": "Regular DLC"
+        "axisName": "Fully-Priced Experience / Free-to-Play",
+        "lowLabel": "Free-to-Play",
+        "highLabel": "Fully-Priced Experience"
       },
       "positions": [
         {
-          "id": "pm-001",
+          "id": "av1-pm-001",
           "gameName": "Moonhaven",
-          "xPosition": 3.0,
-          "yPosition": 4.0
-        },
-        {
-          "id": "pm-002",
-          "gameName": "Stardew Valley",
-          "xPosition": 3.0,
-          "yPosition": 2.0
-        },
-        {
-          "id": "pm-003",
-          "gameName": "Animal Crossing: New Horizons",
-          "xPosition": 3.0,
-          "yPosition": 3.0
-        },
-        {
-          "id": "pm-004",
-          "gameName": "Spiritfarer",
-          "xPosition": 3.0,
-          "yPosition": 4.0
-        },
-        {
-          "id": "pm-005",
-          "gameName": "Palia",
           "xPosition": 8.0,
-          "yPosition": 6.0
-        },
-        {
-          "id": "pm-006",
-          "gameName": "The Sims 4",
-          "xPosition": 7.0,
-          "yPosition": 5.0
-        },
-        {
-          "id": "pm-007",
-          "gameName": "Garden Paws",
-          "xPosition": 3.0,
-          "yPosition": 3.0
+          "yPosition": 9.0
         }
       ]
     },
     {
       "xAxis": {
-        "axisName": "Casual Friendly / Complex Systems",
-        "lowLabel": "Casual Friendly",
-        "highLabel": "Complex Systems"
+        "axisName": "Casual Accessibility / Complex Strategy",
+        "lowLabel": "Casual Accessibility",
+        "highLabel": "Complex Strategy"
       },
       "yAxis": {
-        "axisName": "Entry-Level Content / Layered Exploration",
-        "lowLabel": "Entry-Level Content",
-        "highLabel": "Layered Exploration"
+        "axisName": "Visual Simplicity / Artistic Complexity",
+        "lowLabel": "Visual Simplicity",
+        "highLabel": "Artistic Complexity"
       },
       "positions": [
         {
-          "id": "pm-001",
+          "id": "av2-pm-001",
           "gameName": "Moonhaven",
-          "xPosition": 4.0,
-          "yPosition": 7.0
-        },
-        {
-          "id": "pm-002",
-          "gameName": "Stardew Valley",
-          "xPosition": 4.0,
-          "yPosition": 6.0
-        },
-        {
-          "id": "pm-003",
-          "gameName": "Animal Crossing: New Horizons",
-          "xPosition": 4.0,
-          "yPosition": 4.0
-        },
-        {
-          "id": "pm-004",
-          "gameName": "Spiritfarer",
           "xPosition": 6.0,
-          "yPosition": 8.0
-        },
-        {
-          "id": "pm-005",
-          "gameName": "Palia",
-          "xPosition": 5.0,
-          "yPosition": 6.0
-        },
-        {
-          "id": "pm-006",
-          "gameName": "The Sims 4",
-          "xPosition": 5.0,
-          "yPosition": 3.0
-        },
-        {
-          "id": "pm-007",
-          "gameName": "Garden Paws",
-          "xPosition": 3.0,
-          "yPosition": 4.0
+          "yPosition": 7.0
         }
       ]
     }

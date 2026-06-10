@@ -55,7 +55,7 @@ export function Canvas({ state, onQuote }: Props) {
 
   return (
     <div ref={containerRef} onMouseUp={handleMouseUp} className="p-8 max-w-5xl mx-auto">
-      <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-6">
+      <h2 className="text-xs font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-widest mb-6">
         Analysis Modules
       </h2>
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
@@ -97,7 +97,7 @@ export function Canvas({ state, onQuote }: Props) {
 
       {quoteBtn && onQuote && (
         <button
-          className="fixed z-[70] -translate-x-1/2 -translate-y-full bg-black text-white text-xs px-3 py-1.5 rounded-lg shadow-lg hover:bg-gray-800 transition-colors flex items-center gap-1.5"
+          className="fixed z-[70] -translate-x-1/2 -translate-y-full bg-black text-white dark:bg-slate-200 dark:text-slate-900 text-xs px-3 py-1.5 rounded-lg shadow-lg hover:bg-gray-800 dark:hover:bg-white transition-colors flex items-center gap-1.5"
           style={{ left: quoteBtn.x, top: quoteBtn.y - 6 }}
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => {

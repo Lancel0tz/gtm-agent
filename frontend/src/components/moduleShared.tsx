@@ -44,7 +44,7 @@ export function axisLabel(label: string | undefined, axisName: string | undefine
 
 export function NewBadge() {
   return (
-    <span className="inline-block align-middle relative -top-[1.5px] text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full uppercase tracking-wide leading-none">
+    <span className="inline-block align-middle relative -top-[1.5px] text-[9px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-1.5 py-0.5 rounded-full uppercase tracking-wide leading-none">
       new
     </span>
   );
@@ -98,7 +98,7 @@ export function EntityText({
               e.stopPropagation();
               onEntityClick({ kind: match.kind, name: match.name });
             }}
-            className="text-gray-900 font-medium underline decoration-dotted decoration-gray-300 underline-offset-2 hover:decoration-gray-500"
+            className="text-gray-900 dark:text-slate-100 font-medium underline decoration-dotted decoration-gray-300 dark:decoration-slate-500 underline-offset-2 hover:decoration-gray-500 dark:hover:decoration-slate-300"
           >
             {part}
           </button>
@@ -142,7 +142,7 @@ export function QuoteButton({ onClick, title = 'Quote this module in chat' }: { 
         e.stopPropagation();
         onClick();
       }}
-      className="w-6 h-6 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors shrink-0"
+      className="w-6 h-6 rounded-md text-gray-300 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700/60 flex items-center justify-center transition-colors shrink-0"
     >
       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
         <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z" />
@@ -153,7 +153,7 @@ export function QuoteButton({ onClick, title = 'Quote this module in chat' }: { 
 
 export function StatusDot({ status }: { status: string }) {
   const config: Record<string, { color: string; label: string }> = {
-    idle: { color: 'bg-gray-300', label: 'Idle' },
+    idle: { color: 'bg-gray-300 dark:bg-slate-600', label: 'Idle' },
     pending: { color: 'bg-yellow-400', label: 'Pending' },
     generating: { color: 'bg-blue-500 animate-pulse', label: 'Generating' },
     done: { color: 'bg-emerald-500', label: 'Done' },
@@ -163,7 +163,7 @@ export function StatusDot({ status }: { status: string }) {
   return (
     <div className="flex items-center gap-1.5">
       <div className={`w-2 h-2 rounded-full ${c.color}`} />
-      <span className="text-[11px] text-gray-400">{c.label}</span>
+      <span className="text-[11px] text-gray-400 dark:text-slate-500">{c.label}</span>
     </div>
   );
 }

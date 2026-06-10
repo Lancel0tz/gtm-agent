@@ -64,6 +64,8 @@ class Pipeline:
         # Accumulated change log per module: {"added": {field: [labels]},
         # "removed": {field: [items]}} — survives across chat rounds
         self.changes: dict[str, dict] = {m: {"added": {}, "removed": {}} for m in DEPENDENCY_GRAPH}
+        # Prior generations per module: [{ts, data}], oldest first, capped
+        self.versions: dict[str, list] = {m: [] for m in DEPENDENCY_GRAPH}
         self._load_existing()
 
     def _load_existing(self):
@@ -74,12 +76,22 @@ class Pipeline:
         changes_path = self.output_dir / "_changes.json"
         if changes_path.exists():
             self.changes.update(json.loads(changes_path.read_text()))
+        versions_path = self.output_dir / "_versions.json"
+        if versions_path.exists():
+            self.versions.update(json.loads(versions_path.read_text()))
 
     def _save_module(self, module_name: str, data: dict, record_changes: bool = False):
         """Persist a module. Change history is recorded only for direct user
         edits — a regenerated module is re-derived from scratch, so item-level
         diffs against its old version are noise, and its log is reset."""
+        import time as _time
         old = getattr(self.state, module_name, None)
+        if old is not None and old != data:
+            self.versions[module_name].append({"ts": _time.time(), "data": old})
+            self.versions[module_name] = self.versions[module_name][-10:]
+            (self.output_dir / "_versions.json").write_text(
+                json.dumps(self.versions, indent=2, ensure_ascii=False)
+            )
         if record_changes:
             self._record_changes(module_name, old, data)
         else:
@@ -156,6 +168,10 @@ class Pipeline:
         (self.output_dir / "_changes.json").write_text(
             json.dumps(self.changes, indent=2, ensure_ascii=False)
         )
+
+    def get_versions(self, module_name: str) -> list:
+        """Prior generations of a module, oldest first."""
+        return self.versions.get(module_name, [])
 
     def get_changes(self, module_name: str) -> dict:
         """Accumulated additions/removals for a module across chat rounds."""

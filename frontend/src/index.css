@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 *,
 *::before,
 *::after {
@@ -12,6 +14,12 @@ body {
   background-color: #ffffff;
   color: #1a1a1a;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease;
+}
+
+.dark body {
+  background-color: #0f172a;
+  color: #e2e8f0;
 }
 
 #root {
@@ -29,6 +37,9 @@ body {
   border-radius: 4px;
   font-size: 0.85em;
 }
+.dark .markdown-body code { background: #1e293b; }
+.dark .markdown-body pre { background: #1e293b; }
+.dark .markdown-body blockquote { border-left-color: #475569; color: #94a3b8; }
 .markdown-body pre {
   background: #f9fafb;
   padding: 0.75em;
@@ -50,6 +61,12 @@ body {
   color: rgba(255, 255, 255, 0.75);
 }
 .markdown-user code { background: rgba(255, 255, 255, 0.15); }
+/* In dark mode the user bubble is light, so flip its quote styling */
+.dark .markdown-user blockquote {
+  border-left-color: rgba(15, 23, 42, 0.3);
+  color: rgba(15, 23, 42, 0.65);
+}
+.dark .markdown-user code { background: rgba(15, 23, 42, 0.1); }
 
 /* Indeterminate progress sweep for generating cards */
 @keyframes shimmer {
@@ -65,3 +82,5 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+.dark ::-webkit-scrollbar-thumb { background: #334155; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #475569; }

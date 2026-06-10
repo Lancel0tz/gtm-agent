@@ -28,6 +28,22 @@ function App() {
   const [activeThread, setActiveThread] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [quote, setQuote] = useState<string | null>(null);
+  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>(
+    () => (localStorage.getItem('theme') as 'light' | 'dark' | 'system') || 'system',
+  );
+
+  // Apply theme: toggle .dark on <html>, follow OS when set to system
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const apply = () => {
+      const dark = theme === 'dark' || (theme === 'system' && mq.matches);
+      document.documentElement.classList.toggle('dark', dark);
+    };
+    apply();
+    localStorage.setItem('theme', theme);
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, [theme]);
 
   const loadInput = useCallback(() => {
     fetch('/api/input').then(r => r.json()).then(setGameInput);
@@ -241,20 +257,46 @@ function App() {
   return (
     <div className="h-screen flex flex-col">
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-3 border-b border-gray-200 shrink-0">
+      <header className="flex items-center justify-between px-6 py-3 border-b border-gray-200 dark:border-slate-700 shrink-0">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-black rounded-md flex items-center justify-center">
-            <span className="text-white text-xs font-bold">G</span>
+          <div className="w-6 h-6 bg-black dark:bg-slate-200 rounded-md flex items-center justify-center">
+            <span className="text-white dark:text-slate-900 text-xs font-bold">G</span>
           </div>
-          <span className="font-semibold text-sm text-gray-900">GTM Agent</span>
+          <span className="font-semibold text-sm text-gray-900 dark:text-slate-100">GTM Agent</span>
         </div>
-        <span className="text-xs text-gray-400">Go-To-Market Analysis</span>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setTheme(theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light')}
+            title={`Theme: ${theme} (click to cycle)`}
+            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:border-gray-300 dark:hover:border-slate-500 flex items-center justify-center transition-colors"
+          >
+            {theme === 'light' ? (
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+            ) : theme === 'dark' ? (
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            ) : (
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            )}
+          </button>
+          <span className="text-xs text-gray-400 dark:text-slate-500">Go-To-Market Analysis</span>
+        </div>
       </header>
 
       {/* Main content */}
       <div className="flex-1 flex min-h-0">
         {/* Left: Input Panel */}
-        <div className="w-64 shrink-0 border-r border-gray-200 overflow-y-auto">
+        <div className="w-64 shrink-0 border-r border-gray-200 dark:border-slate-700 overflow-y-auto">
           <InputPanel
             input={gameInput}
             files={inputFiles}
@@ -269,7 +311,7 @@ function App() {
         </div>
 
         {/* Right: Chat */}
-        <div className="w-96 shrink-0 border-l border-gray-200 flex flex-col min-h-0">
+        <div className="w-96 shrink-0 border-l border-gray-200 dark:border-slate-700 flex flex-col min-h-0">
           <ChatPanel
             messages={messages}
             onSend={handleSend}
@@ -287,6 +329,7 @@ function App() {
             quote={quote}
             onClearQuote={() => setQuote(null)}
             onStop={handleStop}
+            activeBrief={activeInput}
           />
         </div>
       </div>

@@ -21,6 +21,7 @@ interface Props {
   quote: string | null;
   onClearQuote: () => void;
   onStop: () => void;
+  activeBrief: string;
 }
 
 const MODULE_ORDER: ModuleName[] = [
@@ -33,7 +34,7 @@ const MODULE_ORDER: ModuleName[] = [
 export function ChatPanel({
   messages, onSend, isLoading, modules,
   threads, activeThread, onSelectThread, onNewThread, onDeleteThread,
-  onRegenerate, onUndo, onRenameThread, onEditMessage, quote, onClearQuote, onStop,
+  onRegenerate, onUndo, onRenameThread, onEditMessage, quote, onClearQuote, onStop, activeBrief,
 }: Props) {
   const [input, setInput] = useState('');
   const [renaming, setRenaming] = useState(false);
@@ -68,7 +69,7 @@ export function ChatPanel({
   return (
     <div className="h-full flex flex-col">
       {/* Header: thread switcher */}
-      <div className="px-4 py-2.5 border-b border-gray-100 shrink-0 flex items-center gap-1.5">
+      <div className="px-4 py-2.5 border-b border-gray-100 dark:border-slate-800 shrink-0 flex items-center gap-1.5">
         <div className="relative flex-1 min-w-0">
           {renaming && activeThread ? (
             <input
@@ -83,14 +84,14 @@ export function ChatPanel({
                 if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
                 if (e.key === 'Escape') setRenaming(false);
               }}
-              className="w-full text-xs text-gray-800 bg-white border border-gray-400 rounded-lg px-2.5 py-1.5 focus:outline-none"
+              className="w-full text-xs text-gray-800 dark:text-slate-200 bg-white dark:bg-slate-900 border border-gray-400 dark:border-slate-500 rounded-lg px-2.5 py-1.5 focus:outline-none"
             />
           ) : (
           <select
             value={activeThread ?? ''}
             onChange={(e) => e.target.value && onSelectThread(e.target.value)}
             disabled={isLoading}
-            className="w-full appearance-none text-xs text-gray-600 bg-gray-50 border border-gray-200 rounded-lg pl-2.5 pr-7 py-1.5 cursor-pointer hover:border-gray-300 focus:outline-none focus:border-gray-400 transition-colors truncate disabled:opacity-50"
+            className="w-full appearance-none text-xs text-gray-600 dark:text-slate-300 bg-gray-50 dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700 rounded-lg pl-2.5 pr-7 py-1.5 cursor-pointer hover:border-gray-300 dark:hover:border-slate-500 focus:outline-none focus:border-gray-400 dark:focus:border-slate-400 transition-colors truncate disabled:opacity-50"
           >
             {!activeThread && <option value="">New chat</option>}
             {threads.map((t) => (
@@ -102,7 +103,7 @@ export function ChatPanel({
           )}
           {!renaming && (
             <svg
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 dark:text-slate-500 pointer-events-none"
               viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
             >
               <polyline points="6 9 12 15 18 9" />
@@ -118,7 +119,7 @@ export function ChatPanel({
             }}
             disabled={isLoading}
             title="Rename this chat"
-            className="w-7 h-7 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-700 hover:border-gray-300 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
+            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:border-gray-300 dark:hover:border-slate-500 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
@@ -129,7 +130,7 @@ export function ChatPanel({
           onClick={onNewThread}
           disabled={isLoading}
           title="New chat"
-          className="w-7 h-7 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-700 hover:border-gray-300 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
+          className="w-7 h-7 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-slate-200 hover:border-gray-300 dark:hover:border-slate-500 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
         >
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <line x1="12" y1="5" x2="12" y2="19" />
@@ -141,7 +142,7 @@ export function ChatPanel({
             onClick={() => onDeleteThread(activeThread)}
             disabled={isLoading}
             title="Delete this chat"
-            className="w-7 h-7 rounded-lg border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-200 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
+            className="w-7 h-7 rounded-lg border border-gray-200 dark:border-slate-700 text-gray-400 dark:text-slate-500 hover:text-red-500 dark:hover:text-red-400 hover:border-red-200 dark:hover:border-red-800 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
           >
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="3 6 5 6 21 6" />
@@ -155,17 +156,13 @@ export function ChatPanel({
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 min-h-0">
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <p className="text-sm text-gray-400 mb-4">Ask me anything about the GTM analysis</p>
+            <p className="text-sm text-gray-400 dark:text-slate-500 mb-4">Ask me anything about the GTM analysis</p>
             <div className="space-y-2">
-              {[
-                'Generate the full GTM analysis',
-                'What does the positioning say?',
-                'Add Nightingale as a competitor',
-              ].map((text) => (
+              {buildSuggestions(modules, activeBrief).map((text) => (
                 <button
                   key={text}
                   onClick={() => onSend(text)}
-                  className="block w-full text-left text-sm text-gray-500 border border-gray-200 rounded-lg px-3 py-2 hover:bg-gray-50 hover:border-gray-300 transition-colors"
+                  className="block w-full text-left text-sm text-gray-500 dark:text-slate-400 border border-gray-200 dark:border-slate-700 rounded-lg px-3 py-2 hover:bg-gray-50 dark:hover:bg-slate-800 hover:border-gray-300 dark:hover:border-slate-500 transition-colors"
                 >
                   {text}
                 </button>
@@ -180,18 +177,18 @@ export function ChatPanel({
           if (editingIndex === i) {
             return (
               <div key={i} className="flex flex-col items-end">
-                <div className="w-[85%] bg-gray-50 border border-gray-300 rounded-2xl p-3">
+                <div className="w-[85%] bg-gray-50 dark:bg-slate-800/60 border border-gray-300 dark:border-slate-600 rounded-2xl p-3">
                   <textarea
                     autoFocus
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
                     rows={Math.min(6, editText.split('\n').length + 1)}
-                    className="w-full bg-transparent text-sm text-gray-900 outline-none resize-none"
+                    className="w-full bg-transparent text-sm text-gray-900 dark:text-slate-100 outline-none resize-none"
                   />
                   <div className="flex justify-end gap-2 mt-1">
                     <button
                       onClick={() => setEditingIndex(null)}
-                      className="text-xs text-gray-400 hover:text-gray-600 px-2.5 py-1 rounded-lg transition-colors"
+                      className="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 px-2.5 py-1 rounded-lg transition-colors"
                     >
                       Cancel
                     </button>
@@ -203,7 +200,7 @@ export function ChatPanel({
                           setEditingIndex(null);
                         }
                       }}
-                      className="text-xs bg-black text-white px-2.5 py-1 rounded-lg hover:bg-gray-800 transition-colors"
+                      className="text-xs bg-black text-white dark:bg-slate-200 dark:text-slate-900 px-2.5 py-1 rounded-lg hover:bg-gray-800 dark:hover:bg-white transition-colors"
                     >
                       Save & resend
                     </button>
@@ -218,8 +215,8 @@ export function ChatPanel({
               <div
                 className={`max-w-[85%] text-sm rounded-2xl px-4 py-2.5 ${
                   msg.role === 'user'
-                    ? 'bg-black text-white'
-                    : 'bg-gray-100 text-gray-800'
+                    ? 'bg-black text-white dark:bg-slate-200 dark:text-slate-900'
+                    : 'bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-slate-200'
                 }`}
               >
                 <div className={msg.role === 'user' ? 'markdown-body markdown-user' : 'markdown-body'}>
@@ -260,13 +257,13 @@ export function ChatPanel({
       </div>
 
       {/* Input */}
-      <div className="p-4 border-t border-gray-100 shrink-0">
+      <div className="p-4 border-t border-gray-100 dark:border-slate-800 shrink-0">
         {quote && (
-          <div className="flex items-start gap-2 mb-2 bg-gray-50 border-l-2 border-gray-300 rounded-r-lg px-3 py-2">
-            <p className="flex-1 text-xs text-gray-500 italic line-clamp-3">{quote}</p>
+          <div className="flex items-start gap-2 mb-2 bg-gray-50 dark:bg-slate-800/60 border-l-2 border-gray-300 dark:border-slate-600 rounded-r-lg px-3 py-2">
+            <p className="flex-1 text-xs text-gray-500 dark:text-slate-400 italic line-clamp-3">{quote}</p>
             <button
               onClick={onClearQuote}
-              className="text-gray-300 hover:text-gray-500 shrink-0 transition-colors"
+              className="text-gray-300 dark:text-slate-600 hover:text-gray-500 dark:hover:text-slate-400 shrink-0 transition-colors"
               title="Remove quote"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -276,7 +273,7 @@ export function ChatPanel({
             </button>
           </div>
         )}
-        <div className="flex items-center gap-2 bg-gray-50 rounded-xl border border-gray-200 px-3 py-2 focus-within:border-gray-400 transition-colors">
+        <div className="flex items-center gap-2 bg-gray-50 dark:bg-slate-800/60 rounded-xl border border-gray-200 dark:border-slate-700 px-3 py-2 focus-within:border-gray-400 dark:focus-within:border-slate-400 transition-colors">
           <input
             type="text"
             value={input}
@@ -284,14 +281,14 @@ export function ChatPanel({
             onKeyDown={handleKeyDown}
             placeholder="Message..."
             disabled={isLoading}
-            className="flex-1 bg-transparent text-sm text-gray-900 placeholder-gray-400 outline-none disabled:opacity-50"
+            className="flex-1 bg-transparent text-sm text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 outline-none disabled:opacity-50"
           />
           {isLoading ? (
             <button
               type="button"
               onClick={onStop}
               title="Stop generating"
-              className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center hover:bg-gray-700 transition-colors shrink-0"
+              className="w-7 h-7 rounded-lg bg-black text-white dark:bg-slate-200 dark:text-slate-900 flex items-center justify-center hover:bg-gray-700 dark:hover:bg-white transition-colors shrink-0"
             >
               <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
                 <rect x="5" y="5" width="14" height="14" rx="2" />
@@ -302,7 +299,7 @@ export function ChatPanel({
               type="button"
               onClick={handleSubmit}
               disabled={!input.trim()}
-              className="w-7 h-7 rounded-lg bg-black text-white flex items-center justify-center hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400 transition-colors shrink-0"
+              className="w-7 h-7 rounded-lg bg-black text-white dark:bg-slate-200 dark:text-slate-900 flex items-center justify-center hover:bg-gray-800 dark:hover:bg-white disabled:bg-gray-200 dark:disabled:bg-slate-700 disabled:text-gray-400 dark:disabled:text-slate-500 transition-colors shrink-0"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="12" y1="19" x2="12" y2="5" />
@@ -334,16 +331,16 @@ function WorkingIndicator({ modules }: { modules: AppState }) {
 
   return (
     <div className="flex justify-start">
-      <div className="bg-gray-100 rounded-2xl px-4 py-3 mr-8 min-w-[220px]">
+      <div className="bg-gray-100 dark:bg-slate-800 rounded-2xl px-4 py-3 mr-8 min-w-[220px]">
         {rows.length > 0 ? (
           <div className="space-y-2">
-            <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Updating modules</p>
+            <p className="text-[10px] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-widest">Updating modules</p>
             {rows.map((m) => {
               const status = modules[m].status;
               return (
                 <div key={m} className="flex items-center gap-2">
                   {status === 'generating' ? <Spinner /> : <CheckIcon />}
-                  <span className={`text-xs ${status === 'generating' ? 'text-gray-900 font-medium' : 'text-gray-400'}`}>
+                  <span className={`text-xs ${status === 'generating' ? 'text-gray-900 dark:text-slate-100 font-medium' : 'text-gray-400 dark:text-slate-500'}`}>
                     {MODULE_META[m].label}
                   </span>
                   {status === 'generating' && (
@@ -356,7 +353,7 @@ function WorkingIndicator({ modules }: { modules: AppState }) {
         ) : (
           <div className="flex items-center gap-2">
             <Spinner />
-            <span className="text-xs text-gray-500">Thinking…</span>
+            <span className="text-xs text-gray-500 dark:text-slate-400">Thinking…</span>
           </div>
         )}
       </div>
@@ -394,6 +391,7 @@ function MessageActions({ content, showTurnActions, onRegenerate, onUndo }: {
   quote: string | null;
   onClearQuote: () => void;
   onStop: () => void;
+  activeBrief: string;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -442,9 +440,30 @@ function ActionButton({ title, onClick, children }: { title: string; onClick: ()
     <button
       title={title}
       onClick={onClick}
-      className="w-6 h-6 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors"
+      className="w-6 h-6 rounded-md text-gray-300 dark:text-slate-600 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700/60 flex items-center justify-center transition-colors"
     >
       {children}
     </button>
   );
+}
+
+
+/** Suggestion prompts adapted to the current brief and module state. */
+function buildSuggestions(modules: AppState, activeBrief: string): string[] {
+  const hasModules = MODULE_ORDER.some((m) => modules[m].data);
+  if (!hasModules) {
+    return ['Generate the full GTM analysis for this game'];
+  }
+  const suggestions = ['What does the positioning say?'];
+  // The spec's sample cascade case applies to the Dune brief specifically
+  if (activeBrief === 'input.md') {
+    suggestions.push('Add Nightingale as a competitor');
+  } else {
+    const competitors = (modules.competitiveLandscape.data?.existingCompetitors as Array<{ name: string }> | undefined) || [];
+    if (competitors.length > 0) {
+      suggestions.push(`Why is ${competitors[0].name} in the competitive set?`);
+    }
+  }
+  suggestions.push('Summarize the SWOT analysis');
+  return suggestions;
 }

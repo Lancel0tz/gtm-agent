@@ -2,73 +2,81 @@
   "strengths": [
     {
       "id": "sw-001",
-      "text": "Unique thematic setting with mystery elements differentiates Moonhaven from competitors like Stardew Valley."
+      "text": "Moonhaven's co-op features and Steam↔Switch crossplay cater to 'Social Cooperative Gamers' unlike games like 'Stardew Valley'."
     },
     {
       "id": "sw-002",
-      "text": "Crossplay functionality between Steam and Switch attracts players preferring multiplayer experiences over platform-exclusive games like Animal Crossing."
+      "text": "The mystery of the fallen moon provides a unique narrative for 'Narrative-driven Explorers', distinct from 'Garden Paws'."
     },
     {
       "id": "sw-003",
-      "text": "Supports up to 4 players in co-op gameplay, appealing to groups, unlike many single-player focused titles."
+      "text": "The game’s floating island setting appeals to 'Aesthetic-centric Players' more than settings in 'Harvest Moon'."
     },
     {
       "id": "sw-004",
-      "text": "Affordable pricing at $25 with no microtransactions offers value compared to premium-priced games with MTX."
+      "text": "At $25 USD, Moonhaven is competitively priced compared to 'Spiritfarer', attractive to 'Cozy Game Enthusiasts'."
+    },
+    {
+      "id": "sw-005",
+      "text": "Seasonal free updates enhance engagement and replayability, similar to but less costly than 'Animal Crossing: New Horizons'."
     }
   ],
   "weaknesses": [
     {
       "id": "wk-001",
-      "text": "Lacks established brand recognition compared to well-known titles like Stardew Valley."
+      "text": "Moonhaven lacks brand recognition in the farming sim genre compared to 'Harvest Moon'."
     },
     {
       "id": "wk-002",
-      "text": "Limited creative customization options compared to The Sims 4 and My Time at Portia."
+      "text": "As an Early Access title, it may deter buyers seeking complete experiences like 'Stardew Valley'."
     },
     {
       "id": "wk-003",
-      "text": "Narrative depth may fall short against highly praised storytelling games like Spiritfarer."
+      "text": "Limited to Steam and Switch, Moonhaven has less platform reach than 'Slime Rancher 2'."
     },
     {
       "id": "wk-004",
-      "text": "Limited to Steam and Switch platforms, missing broader reach on consoles like PlayStation or Xbox."
+      "text": "The absence of microtransactions may limit monetization compared to 'My Time at Portia'."
     }
   ],
   "opportunities": [
     {
       "id": "op-001",
-      "text": "Potential to exploit the interest in narrative-driven gaming with interactive world-building unmet by Cozy Grove."
+      "text": "Increasing demand for cooperative gaming post-pandemic targets 'Social Cooperative Gamers', as seen with 'Palia'."
     },
     {
       "id": "op-002",
-      "text": "Offering seasonal content updates to enhance player engagement, unlike less frequently updated Stardew Valley."
+      "text": "The blend of mystery and aesthetics could draw 'Narrative-driven Explorers' and 'Aesthetic-centric Players'."
     },
     {
       "id": "op-003",
-      "text": "Growing demand for cooperative games presents a chance to stand out in a single-player-focused market."
+      "text": "The growth of cozy gaming offers a chance to attract new players post-'Animal Crossing' popularity."
     },
     {
       "id": "op-004",
-      "text": "Ability to attract new audiences in the expanding cozy gaming niche, not directly targeted by series like Harvest Moon."
+      "text": "Crossplay features present an opportunity where games like 'Stardew Valley' are less focused."
     }
   ],
   "threats": [
     {
       "id": "th-001",
-      "text": "Existing competitors like Stardew Valley maintain strong community support, possibly overshadowing Moonhaven."
+      "text": "Strong communities in 'Stardew Valley' and 'Animal Crossing' can dominate target audience mindshare."
     },
     {
       "id": "th-002",
-      "text": "Rapid market saturation from games like Palia can increase competition in the co-op game segment."
+      "text": "'Palia's emergence poses competitive pressure in cooperative gaming targeting similar audiences."
     },
     {
       "id": "th-003",
-      "text": "High expectations for narrative quality among Narrative Explorers could challenge word-of-mouth growth."
+      "text": "Lack of narrative depth may unfavorably compare to 'Spiritfarer', known for rich narratives."
     },
     {
       "id": "th-004",
-      "text": "Economic uncertainties might affect Moonhaven's ability to sustain momentum as a new IP."
+      "text": "'Slime Rancher 2's multi-platform availability may attract players seeking cross-device experiences."
+    },
+    {
+      "id": "th-005",
+      "text": "The volatile indie game market risks Moonhaven being overshadowed by new titles."
     }
   ]
 }

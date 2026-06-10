@@ -16,7 +16,7 @@ export function EntityPopover({ entity, state, onClose, onNavigate }: Props) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl w-full max-w-lg max-h-[75vh] overflow-y-auto shadow-2xl"
+        className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-lg max-h-[75vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {entity.kind === 'competitor' ? (
@@ -27,7 +27,7 @@ export function EntityPopover({ entity, state, onClose, onNavigate }: Props) {
         <div className="px-6 pb-5">
           <button
             onClick={onClose}
-            className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-xs text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 transition-colors"
           >
             Close (Esc)
           </button>
@@ -38,10 +38,10 @@ export function EntityPopover({ entity, state, onClose, onNavigate }: Props) {
 }
 
 const SWOT_CATEGORIES = [
-  { key: 'strengths', label: 'S', color: 'text-emerald-600 bg-emerald-50' },
-  { key: 'weaknesses', label: 'W', color: 'text-red-500 bg-red-50' },
-  { key: 'opportunities', label: 'O', color: 'text-blue-600 bg-blue-50' },
-  { key: 'threats', label: 'T', color: 'text-amber-600 bg-amber-50' },
+  { key: 'strengths', label: 'S', color: 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50' },
+  { key: 'weaknesses', label: 'W', color: 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-950/50' },
+  { key: 'opportunities', label: 'O', color: 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50' },
+  { key: 'threats', label: 'T', color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50' },
 ];
 
 /** SWOT items that mention any of the given names. */
@@ -83,15 +83,15 @@ function CompetitorDetail({ name, state, onNavigate }: { name: string; state: Ap
 
   return (
     <div className="px-6 pt-6 pb-3">
-      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Competitor</span>
-      <h3 className="text-lg font-semibold text-gray-900 mt-1">{name}</h3>
+      <span className="text-[10px] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-widest">Competitor</span>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mt-1">{name}</h3>
 
       {competitor ? (
         <Section title="Why it competes">
-          <p className="text-sm text-gray-600 leading-relaxed">{competitor.rationale}</p>
+          <p className="text-sm text-gray-600 dark:text-slate-300 leading-relaxed">{competitor.rationale}</p>
         </Section>
       ) : (
-        <p className="text-sm text-gray-400 italic mt-3">Not in the current competitive landscape.</p>
+        <p className="text-sm text-gray-400 dark:text-slate-500 italic mt-3">Not in the current competitive landscape.</p>
       )}
 
       {segments.length > 0 && (
@@ -101,7 +101,7 @@ function CompetitorDetail({ name, state, onNavigate }: { name: string; state: Ap
               <button
                 key={s.segmentName}
                 onClick={() => onNavigate({ kind: 'segment', name: s.segmentName })}
-                className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full hover:bg-gray-200 transition-colors"
+                className="text-xs bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 px-2.5 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
               >
                 {s.segmentName}
               </button>
@@ -124,7 +124,7 @@ function CompetitorDetail({ name, state, onNavigate }: { name: string; state: Ap
                 <span className={`text-[10px] font-bold ${m.color} w-4 h-4 rounded inline-flex items-center justify-center shrink-0 mt-0.5`}>
                   {m.label}
                 </span>
-                <p className="text-xs text-gray-500 leading-relaxed">{m.text}</p>
+                <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{m.text}</p>
               </div>
             ))}
           </div>
@@ -143,13 +143,13 @@ function SegmentDetail({ name, state, onNavigate }: { name: string; state: AppSt
 
   return (
     <div className="px-6 pt-6 pb-3">
-      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Audience Segment</span>
-      <h3 className="text-lg font-semibold text-gray-900 mt-1">{name}</h3>
+      <span className="text-[10px] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-widest">Audience Segment</span>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mt-1">{name}</h3>
 
       {segment ? (
         <>
           <Section title="Profile">
-            <p className="text-sm text-gray-600 leading-relaxed">{segment.description}</p>
+            <p className="text-sm text-gray-600 dark:text-slate-300 leading-relaxed">{segment.description}</p>
           </Section>
 
           <Section title="Currently plays">
@@ -158,7 +158,7 @@ function SegmentDetail({ name, state, onNavigate }: { name: string; state: AppSt
                 <button
                   key={c}
                   onClick={() => onNavigate({ kind: 'competitor', name: c })}
-                  className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full hover:bg-gray-200 transition-colors"
+                  className="text-xs bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 px-2.5 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
                 >
                   {c}
                 </button>
@@ -169,7 +169,7 @@ function SegmentDetail({ name, state, onNavigate }: { name: string; state: AppSt
           {competitors.length > 0 && state.positioningMatrix.data && (
             <Section title="Where this segment's games sit">
               <MiniMatrix state={state} highlight={competitors} />
-              <p className="text-[10px] text-gray-300 mt-1.5">
+              <p className="text-[10px] text-gray-300 dark:text-slate-600 mt-1.5">
                 Blue dots = games this segment plays. The cluster shows the territory this segment occupies.
               </p>
             </Section>
@@ -183,7 +183,7 @@ function SegmentDetail({ name, state, onNavigate }: { name: string; state: AppSt
                     <span className={`text-[10px] font-bold ${m.color} w-4 h-4 rounded inline-flex items-center justify-center shrink-0 mt-0.5`}>
                       {m.label}
                     </span>
-                    <p className="text-xs text-gray-500 leading-relaxed">{m.text}</p>
+                    <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{m.text}</p>
                   </div>
                 ))}
               </div>
@@ -191,7 +191,7 @@ function SegmentDetail({ name, state, onNavigate }: { name: string; state: AppSt
           )}
         </>
       ) : (
-        <p className="text-sm text-gray-400 italic mt-3">Not in the current audience overview.</p>
+        <p className="text-sm text-gray-400 dark:text-slate-500 italic mt-3">Not in the current audience overview.</p>
       )}
     </div>
   );
@@ -200,7 +200,7 @@ function SegmentDetail({ name, state, onNavigate }: { name: string; state: AppSt
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mt-4">
-      <h4 className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-2">{title}</h4>
+      <h4 className="text-[10px] font-semibold text-gray-400 dark:text-slate-500 uppercase tracking-widest mb-2">{title}</h4>
       {children}
     </div>
   );
