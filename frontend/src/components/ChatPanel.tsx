@@ -16,6 +16,10 @@ interface Props {
   onDeleteThread: (tid: string) => void;
   onRegenerate: () => void;
   onUndo: () => void;
+  onRenameThread: (tid: string, title: string) => void;
+  onEditMessage: (index: number, message: string) => void;
+  quote: string | null;
+  onClearQuote: () => void;
 }
 
 const MODULE_ORDER: ModuleName[] = [
@@ -28,9 +32,13 @@ const MODULE_ORDER: ModuleName[] = [
 export function ChatPanel({
   messages, onSend, isLoading, modules,
   threads, activeThread, onSelectThread, onNewThread, onDeleteThread,
-  onRegenerate, onUndo,
+  onRegenerate, onUndo, onRenameThread, onEditMessage, quote, onClearQuote,
 }: Props) {
   const [input, setInput] = useState('');
+  const [renaming, setRenaming] = useState(false);
+  const [renameText, setRenameText] = useState('');
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editText, setEditText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,8 +49,12 @@ export function ChatPanel({
     e.preventDefault();
     const trimmed = input.trim();
     if (!trimmed || isLoading) return;
-    onSend(trimmed);
+    const full = quote
+      ? `> ${quote.replace(/\n/g, '\n> ')}\n\n${trimmed}`
+      : trimmed;
+    onSend(full);
     setInput('');
+    onClearQuote();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -57,6 +69,22 @@ export function ChatPanel({
       {/* Header: thread switcher */}
       <div className="px-4 py-2.5 border-b border-gray-100 shrink-0 flex items-center gap-1.5">
         <div className="relative flex-1 min-w-0">
+          {renaming && activeThread ? (
+            <input
+              autoFocus
+              value={renameText}
+              onChange={(e) => setRenameText(e.target.value)}
+              onBlur={() => {
+                if (renameText.trim()) onRenameThread(activeThread, renameText.trim());
+                setRenaming(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
+                if (e.key === 'Escape') setRenaming(false);
+              }}
+              className="w-full text-xs text-gray-800 bg-white border border-gray-400 rounded-lg px-2.5 py-1.5 focus:outline-none"
+            />
+          ) : (
           <select
             value={activeThread ?? ''}
             onChange={(e) => e.target.value && onSelectThread(e.target.value)}
@@ -70,13 +98,32 @@ export function ChatPanel({
               </option>
             ))}
           </select>
-          <svg
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
+          )}
+          {!renaming && (
+            <svg
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-gray-400 pointer-events-none"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          )}
         </div>
+        {activeThread && !renaming && (
+          <button
+            onClick={() => {
+              const t = threads.find((x) => x.id === activeThread);
+              setRenameText(t?.title ?? '');
+              setRenaming(true);
+            }}
+            disabled={isLoading}
+            title="Rename this chat"
+            className="w-7 h-7 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-700 hover:border-gray-300 flex items-center justify-center transition-colors shrink-0 disabled:opacity-50"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+            </svg>
+          </button>
+        )}
         <button
           onClick={onNewThread}
           disabled={isLoading}
@@ -128,8 +175,45 @@ export function ChatPanel({
 
         {messages.map((msg, i) => {
           const isLast = i === messages.length - 1;
+
+          if (editingIndex === i) {
+            return (
+              <div key={i} className="flex flex-col items-end">
+                <div className="w-[85%] bg-gray-50 border border-gray-300 rounded-2xl p-3">
+                  <textarea
+                    autoFocus
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)}
+                    rows={Math.min(6, editText.split('\n').length + 1)}
+                    className="w-full bg-transparent text-sm text-gray-900 outline-none resize-none"
+                  />
+                  <div className="flex justify-end gap-2 mt-1">
+                    <button
+                      onClick={() => setEditingIndex(null)}
+                      className="text-xs text-gray-400 hover:text-gray-600 px-2.5 py-1 rounded-lg transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={() => {
+                        const t = editText.trim();
+                        if (t) {
+                          onEditMessage(i, t);
+                          setEditingIndex(null);
+                        }
+                      }}
+                      className="text-xs bg-black text-white px-2.5 py-1 rounded-lg hover:bg-gray-800 transition-colors"
+                    >
+                      Save & resend
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
           return (
-            <div key={i} className={`group/msg flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+            <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
               <div
                 className={`max-w-[85%] text-sm rounded-2xl px-4 py-2.5 ${
                   msg.role === 'user'
@@ -137,21 +221,33 @@ export function ChatPanel({
                     : 'bg-gray-100 text-gray-800'
                 }`}
               >
-                {msg.role === 'assistant' ? (
-                  <div className="markdown-body">
-                    <Markdown>{msg.content}</Markdown>
-                  </div>
-                ) : (
-                  <p>{msg.content}</p>
-                )}
+                <div className={msg.role === 'user' ? 'markdown-body markdown-user' : 'markdown-body'}>
+                  <Markdown>{msg.content}</Markdown>
+                </div>
               </div>
-              {msg.role === 'assistant' && !isLoading && (
-                <MessageActions
-                  content={msg.content}
-                  showTurnActions={isLast}
-                  onRegenerate={onRegenerate}
-                  onUndo={onUndo}
-                />
+              {!isLoading && (
+                msg.role === 'assistant' ? (
+                  <MessageActions
+                    content={msg.content}
+                    showTurnActions={isLast}
+                    onRegenerate={onRegenerate}
+                    onUndo={onUndo}
+                  />
+                ) : (
+                  <div className="flex items-center gap-0.5 mt-1">
+                    <ActionButton
+                      title="Edit & resend (discards everything after)"
+                      onClick={() => {
+                        setEditText(msg.content);
+                        setEditingIndex(i);
+                      }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                      </svg>
+                    </ActionButton>
+                  </div>
+                )
               )}
             </div>
           );
@@ -164,6 +260,21 @@ export function ChatPanel({
 
       {/* Input */}
       <div className="p-4 border-t border-gray-100 shrink-0">
+        {quote && (
+          <div className="flex items-start gap-2 mb-2 bg-gray-50 border-l-2 border-gray-300 rounded-r-lg px-3 py-2">
+            <p className="flex-1 text-xs text-gray-500 italic line-clamp-3">{quote}</p>
+            <button
+              onClick={onClearQuote}
+              className="text-gray-300 hover:text-gray-500 shrink-0 transition-colors"
+              title="Remove quote"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        )}
         <div className="flex items-center gap-2 bg-gray-50 rounded-xl border border-gray-200 px-3 py-2 focus-within:border-gray-400 transition-colors">
           <input
             type="text"
@@ -264,6 +375,10 @@ function MessageActions({ content, showTurnActions, onRegenerate, onUndo }: {
   showTurnActions: boolean;
   onRegenerate: () => void;
   onUndo: () => void;
+  onRenameThread: (tid: string, title: string) => void;
+  onEditMessage: (index: number, message: string) => void;
+  quote: string | null;
+  onClearQuote: () => void;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -274,7 +389,7 @@ function MessageActions({ content, showTurnActions, onRegenerate, onUndo }: {
   };
 
   return (
-    <div className="flex items-center gap-0.5 mt-1 opacity-0 group-hover/msg:opacity-100 transition-opacity">
+    <div className="flex items-center gap-0.5 mt-1">
       <ActionButton title={copied ? 'Copied!' : 'Copy'} onClick={copy}>
         {copied ? (
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

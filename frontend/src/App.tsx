@@ -27,6 +27,7 @@ function App() {
   const [threads, setThreads] = useState<ThreadSummary[]>([]);
   const [activeThread, setActiveThread] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [quote, setQuote] = useState<string | null>(null);
 
   const loadInput = useCallback(() => {
     fetch('/api/input').then(r => r.json()).then(setGameInput);
@@ -119,6 +120,33 @@ function App() {
     });
     try {
       const d = await fetch(`/api/threads/${activeThread}/regenerate`, { method: 'POST' }).then(r => r.json());
+      if (d.messages) setMessages(d.messages);
+      loadThreads();
+    } finally {
+      setIsLoading(false);
+    }
+  }, [activeThread, isLoading, loadThreads]);
+
+  const handleRenameThread = useCallback(async (tid: string, title: string) => {
+    await fetch(`/api/threads/${tid}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title }),
+    });
+    loadThreads();
+  }, [loadThreads]);
+
+  const handleEditMessage = useCallback(async (index: number, message: string) => {
+    if (!activeThread || isLoading) return;
+    setIsLoading(true);
+    // Optimistically truncate at the edited message and show it
+    setMessages(prev => [...prev.slice(0, index), { role: 'user', content: message }]);
+    try {
+      const d = await fetch(`/api/threads/${activeThread}/edit`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ index, message }),
+      }).then(r => r.json());
       if (d.messages) setMessages(d.messages);
       loadThreads();
     } finally {
@@ -228,7 +256,7 @@ function App() {
 
         {/* Middle: Canvas */}
         <div className="flex-1 overflow-y-auto min-w-0">
-          <Canvas state={state} />
+          <Canvas state={state} onQuote={setQuote} />
         </div>
 
         {/* Right: Chat */}
@@ -245,6 +273,10 @@ function App() {
             onDeleteThread={handleDeleteThread}
             onRegenerate={handleRegenerate}
             onUndo={handleUndo}
+            onRenameThread={handleRenameThread}
+            onEditMessage={handleEditMessage}
+            quote={quote}
+            onClearQuote={() => setQuote(null)}
           />
         </div>
       </div>

@@ -95,20 +95,25 @@ async def chat(req: ChatRequest):
     # A thread is bound to its brief — selecting it follows the brief
     _activate_brief(thread["brief"])
 
-    # Snapshot module state so this turn can be undone or regenerated
+    result = await _execute_turn(thread, req.message)
+    return {**result, "thread_id": thread["id"], "messages": thread["messages"]}
+
+
+async def _execute_turn(thread: dict, message: str) -> dict:
+    """One chat turn: snapshot for undo, run the agent, persist."""
     thread.setdefault("snapshots", []).append(pipeline.snapshot())
     thread["snapshots"] = thread["snapshots"][-5:]
 
-    thread["messages"].append({"role": "user", "content": req.message})
+    thread["messages"].append({"role": "user", "content": message})
     if thread["title"] == "New chat":
-        thread["title"] = req.message[:48]
+        thread["title"] = message.lstrip("> ").splitlines()[0][:48] if message.strip() else "New chat"
 
-    result = await agent.chat(req.message, history=thread["history"])
+    result = await agent.chat(message, history=thread["history"])
 
     thread["messages"].append({"role": "assistant", "content": result["response"]})
     thread["updated"] = time.time()
     threads.set_active(thread["id"])
-    return {**result, "thread_id": thread["id"]}
+    return result
 
 
 @app.get("/api/threads")
@@ -130,6 +135,62 @@ async def select_thread(tid: str):
     threads.set_active(tid)
     _activate_brief(thread["brief"])
     return {"id": tid, "brief": thread["brief"], "messages": thread["messages"]}
+
+
+class RenameRequest(BaseModel):
+    title: str
+
+
+@app.patch("/api/threads/{tid}")
+async def rename_thread(tid: str, req: RenameRequest):
+    thread = threads.get(tid)
+    if thread is None:
+        raise HTTPException(404, "Thread not found")
+    thread["title"] = req.title.strip()[:60] or thread["title"]
+    threads.save()
+    return {"ok": True, "title": thread["title"]}
+
+
+class EditRequest(BaseModel):
+    index: int
+    message: str
+
+
+@app.post("/api/threads/{tid}/edit")
+async def edit_message(tid: str, req: EditRequest):
+    """Edit a past user message and re-run from that point (ChatGPT-style).
+
+    Everything after the edited message is discarded; module state is
+    restored to the snapshot taken before that turn when still available.
+    """
+    thread = threads.get(tid)
+    if thread is None:
+        raise HTTPException(404, "Thread not found")
+    msgs = thread["messages"]
+    if not (0 <= req.index < len(msgs)) or msgs[req.index]["role"] != "user":
+        raise HTTPException(400, "Index does not point at a user message")
+
+    _activate_brief(thread["brief"])
+
+    # How many turns (user messages) from the edited one to the end
+    turns_back = sum(1 for m in msgs[req.index:] if m["role"] == "user")
+    snaps = thread.get("snapshots", [])
+    k = len(snaps) - turns_back
+    if k >= 0:
+        _restore_and_broadcast(snaps[k])
+        thread["snapshots"] = snaps[:k]
+    # else: the turn is older than our snapshot window — conversation is
+    # still truncated, but module state stays as-is
+
+    thread["messages"] = msgs[:req.index]
+    hist = thread["history"]
+    user_idxs = [i for i, h in enumerate(hist) if h.get("role") == "user"]
+    if len(user_idxs) >= turns_back:
+        thread["history"] = hist[:user_idxs[-turns_back]]
+
+    result = await _execute_turn(thread, req.message)
+    threads.save()
+    return {**result, "messages": thread["messages"], "thread_id": tid}
 
 
 @app.delete("/api/threads/{tid}")

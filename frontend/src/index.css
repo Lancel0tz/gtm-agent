@@ -37,6 +37,19 @@ body {
   font-size: 0.85em;
 }
 .markdown-body strong { font-weight: 600; }
+.markdown-body blockquote {
+  margin: 0.3em 0;
+  padding: 0.2em 0.8em;
+  border-left: 3px solid #d1d5db;
+  color: #6b7280;
+  font-style: italic;
+  font-size: 0.9em;
+}
+.markdown-user blockquote {
+  border-left-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.75);
+}
+.markdown-user code { background: rgba(255, 255, 255, 0.15); }
 
 /* Indeterminate progress sweep for generating cards */
 @keyframes shimmer {
