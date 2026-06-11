@@ -1,37 +1,43 @@
 {
-  "summary": "The audience is segmented into three main groups based on their primary motivations and gameplay preferences, each group aligning with different aspects of the competitive landscape. Hardcore Survival Enthusiasts focus on intensive survival mechanics, Sci-Fi Universe Explorers are drawn to deep narrative and world-building, while MMO Sandbox Architects prioritize creative freedom and social interaction within large multiplayer environments. This segmentation allows 'Dune: Awakening' to tailor its design and marketing efforts to meet the specific needs of each audience group, leveraging its unique setting and gameplay features.",
+  "summary": "The audience segments for Dune: Awakening have been identified based on their core gaming motivations and how they align with competitors. Each segment corresponds to distinct gaming preferences that are represented in the current market by specific titles. Hardcore Survivalists appreciate difficult survival mechanics and are drawn to similar games like Rust and Conan Exiles. Sci-Fi Explorers and World-builders are captivated by expansive narratives and rich world-building, similar to offerings from The Elder Scrolls Online and Star Wars: The Old Republic. MMO and Competitive Strategists favor strategic and social dynamics, akin to Destiny 2 and Black Desert Online. Lastly, Narrative-Driven Sci-Fi Enthusiasts are engrossed in profound storytelling, much like found in Star Wars: The Old Republic and Warframe.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Hardcore Survival Enthusiasts",
-      "description": "These players thrive on challenging survival mechanics, resource management, and need strategic planning. They enjoy intense PvE interactions and seek accomplishment from overcoming difficult gameplay scenarios. This segment is distinct due to its primary focus on survival mechanics and resource management as opposed to narrative engagement or social interactions.",
+      "segmentName": "Hardcore Survivalists",
+      "description": "These players thrive in challenging environments, driven by the need for mastery over survival mechanics and resource management. They are particularly attracted to Dune's extreme survival conditions on Arrakis. Their distinction lies in their commitment to hardcore challenges over social or narrative elements.",
       "selectedExistingCompetitors": [
-        "Conan Exiles",
         "Rust",
-        "Scum",
-        "The Forest"
+        "Conan Exiles",
+        "Scum"
       ]
     },
     {
       "id": "seg-2",
-      "segmentName": "Sci-Fi Universe Explorers",
-      "description": "Motivated by immersive world-building, deep lore, and narrative-driven experiences, this segment appreciates exploring vast universes and engaging with complex settings. They prioritize story immersion and world intricacies over purely gameplay-focused elements. These players are distinct by their focus on narrative depth and universe exploration.",
+      "segmentName": "Sci-Fi Explorers and World-builders",
+      "description": "These players are drawn to the exploration and expansion of vast worlds rich in lore and history. They value crafting and world-building as central activities. The opportunity to delve into the rich, sci-fi universe of Dune is strongly appealing. This segment is distinct in their emphasis on narrative and exploration over competitive survival or PvP engagements.",
       "selectedExistingCompetitors": [
-        "Star Wars: The Old Republic",
-        "Destiny 2",
-        "Warframe",
-        "The Elder Scrolls Online"
+        "Valheim",
+        "The Elder Scrolls Online",
+        "Star Wars: The Old Republic"
       ]
     },
     {
       "id": "seg-3",
-      "segmentName": "MMO Sandbox Architects",
-      "description": "These players are driven by creating, building, and social interactions in a multiplayer setting. They thrive on construction, customization, and community involvement, prioritizing creative expression and social play over combat or narrative focus. This group is characterized by their interest in creation and social engagement.",
+      "segmentName": "MMO and Competitive Strategists",
+      "description": "This group thrives in massively multiplayer settings where strategic depth and factional gameplay play a crucial role. They are motivated by competing for dominance, teamwork, and strategic planning. The political intrigue and competitive dynamics of Dune: Awakening appeal to them. Their distinction is in their focus on large-scale social interactions and strategic battles.",
       "selectedExistingCompetitors": [
-        "Valheim",
+        "Destiny 2",
         "The Elder Scrolls Online",
-        "Black Desert Online",
-        "Lost Ark"
+        "Black Desert Online"
+      ]
+    },
+    {
+      "id": "seg-4",
+      "segmentName": "Narrative-Driven Sci-Fi Enthusiasts",
+      "description": "These players are deeply invested in storytelling and the immersive experience of existing within a beloved universe. They are motivated by narratives, character development, and thematic exploration. Engaging with the Dune universe provides a unique and rich narrative. Unlike other segments, they prioritize immersive storytelling above gameplay challenges or competitive elements.",
+      "selectedExistingCompetitors": [
+        "Star Wars: The Old Republic",
+        "Warframe"
       ]
     }
   ]

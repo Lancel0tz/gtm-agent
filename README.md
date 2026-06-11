@@ -9,9 +9,9 @@
 
 The analysis isn't a static report. It's a **living document you talk to**: tell the chat agent *"add Nightingale as a competitor"* and it updates the competitive landscape, then automatically rewrites every downstream section that depends on it — while you watch each card regenerate in real time. Disagree with a change? One click undoes it, modules and all.
 
-> 🎬 **Demo** — one message removes a competitor and adds another; the agent edits the landscape, then the audience, positioning, and SWOT sections regenerate live (the last two in parallel), with quality reviews and Steam verification streaming to the canvas:
+> 🎬 **Full demo (4 min, with narration)** — generating the analysis, chat-driven cascade updates with live parallel regeneration, quality reviews and Steam verification, cross-module exploration, quoting, undo, and export:
 
-![Demo — chat-driven cascade with live module regeneration](docs/demo.gif)
+https://github.com/user-attachments/assets/ab85ec69-2070-409f-a655-0ab848491838
 
 ### What makes it more than a wrapper around an LLM
 

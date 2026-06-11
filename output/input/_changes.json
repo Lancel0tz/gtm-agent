@@ -2,17 +2,17 @@
   "competitiveLandscape": {
     "added": {
       "existingCompetitors": [
-        "Nightingale"
+        "Ark: Survival Evolved"
       ]
     },
     "removed": {
       "existingCompetitors": [
         {
-          "id": "ec-019",
-          "name": "Ark: Survival Evolved",
-          "rationale": "A leading open-world survival game featuring crafting, base building, and taming mechanics in a prehistoric setting. Competes directly for survival MMO players interested in large-scale multiplayer sandboxes.",
+          "id": "ec-020",
+          "name": "Nightingale",
+          "rationale": "This game offers open-world survival and crafting mechanics amidst realms influenced by Victorian fantasy. It aligns with Dune’s thematic focus on innovative survival within expansive and lore-rich settings.",
           "verified": true,
-          "steamAppId": 346110
+          "steamAppId": 1132520
         }
       ]
     }

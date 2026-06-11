@@ -79,11 +79,11 @@
       "steamAppId": 242760
     },
     {
-      "id": "ec-020",
-      "name": "Nightingale",
-      "rationale": "This game offers open-world survival and crafting mechanics amidst realms influenced by Victorian fantasy. It aligns with Dune’s thematic focus on innovative survival within expansive and lore-rich settings.",
+      "id": "ec-018",
+      "name": "Ark: Survival Evolved",
+      "rationale": "Offers open-world survival within a prehistoric setting, integrating crafting, and exploration mechanics aligned with Dune’s survival themes.",
       "verified": true,
-      "steamAppId": 1132520
+      "steamAppId": 346110
     }
   ]
 }
