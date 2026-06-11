@@ -1,33 +1,35 @@
 # GTM Agent — Go-To-Market Analysis System
 
-> Give it a game brief. Get a grounded, judge-reviewed, fully interactive go-to-market analysis — and a conversational agent that keeps every module consistent as you refine it.
-
 ![tests](https://img.shields.io/badge/tests-50%20passed-brightgreen)
 ![python](https://img.shields.io/badge/backend-FastAPI%20%2B%20Python%203.11-blue)
 ![react](https://img.shields.io/badge/frontend-React%20%2B%20TypeScript%20%2B%20Tailwind-61dafb)
 ![providers](https://img.shields.io/badge/LLM-OpenAI%20·%20Anthropic%20·%20DeepSeek%20·%20Gemini-8A2BE2)
 
-![GTM Agent — three-column canvas with live quality scores, Steam verification, and a streaming agent](docs/screenshot.png)
+**GTM Agent is an AI analyst for game publishers.** Drop in a short brief describing a game — its genre, platform, price — and it researches the competitive market and writes a complete go-to-market analysis: who you're competing with, who your players are, where you sit on the strategic map, and your strengths, weaknesses, opportunities, and threats.
 
-### 🎬 Live demo — cascade update through chat
+The analysis isn't a static report. It's a **living document you talk to**: tell the chat agent *"add Nightingale as a competitor"* and it updates the competitive landscape, then automatically rewrites every downstream section that depends on it — while you watch each card regenerate in real time. Disagree with a change? One click undoes it, modules and all.
 
-> Removing one competitor and adding another in a single message: the agent edits the landscape, then AudienceOverview, PositioningMatrix, and SWOT regenerate live — Layer 3 in parallel — with judge reviews and Steam checks streaming to the canvas.
+> 🎬 **Demo** — one message removes a competitor and adds another; the agent edits the landscape, then the audience, positioning, and SWOT sections regenerate live (the last two in parallel), with quality reviews and Steam verification streaming to the canvas:
 
 ![Demo — chat-driven cascade with live module regeneration](docs/demo.gif)
 
-<details>
-<summary>🌙 Dark mode</summary>
+### What makes it more than a wrapper around an LLM
 
-![Dark mode](docs/screenshot-dark.png)
+- **It checks its own work.** Every section is scored by an independent AI judge against a per-section rubric; weak output is regenerated with the judge's feedback. Scores are shown on each card.
+- **It doesn't hallucinate games.** Every competitor is verified against the real Steam store — verified titles get a ✓ badge, misses get flagged (not deleted: console exclusives are real competitors too).
+- **It understands dependencies.** The four sections form a dependency graph. Edits cascade to exactly the affected sections, in the right order, never more.
+- **Every change is accountable.** Removed items stay visible as strikethrough, new items get badges, every section keeps its last 10 versions with diffs, and any chat turn can be undone, regenerated, or edited — state and conversation revert together.
+- **The chat feels like ChatGPT.** Streaming replies, multiple named conversations, quote anything on the page (select text or click a section), stop generation mid-flight — with partial changes safely rolled back.
+- **Bring your own model.** Eleven models across OpenAI, Anthropic, DeepSeek, and Gemini, switchable at runtime; paste API keys in the UI (stored locally, never echoed back).
+- **It's hardened and proven.** Prompt-injection defenses, schema validation on every write, path-traversal and key-leak protections — each one verified by a named test in the 50-test suite, including one that *deadlocks if parallel execution were faked*.
 
-Light / dark / system theme, persisted and OS-aware.
-</details>
+Everything below is the technical deep-dive.
 
 ---
 
 ## Table of Contents
 
-- [What This Is](#what-this-is) · [Assignment Coverage](#assignment-coverage)
+- [System Overview](#system-overview) · [Assignment Coverage](#assignment-coverage)
 - [Architecture](#architecture) · [Generation Methodology](#generation-methodology) · [Cascade Engine](#cascade-engine)
 - [The Chat System's Three Primitives](#the-chat-systems-three-primitives)
 - [Multi-Provider Design](#multi-provider-design) · [Security Model](#security-model) · [Testing](#testing)
@@ -36,7 +38,7 @@ Light / dark / system theme, persisted and OS-aware.
 
 ---
 
-## What This Is
+## System Overview
 
 Given a game brief (`inputs/*.md`), the system generates four structured GTM modules with a **fixed dependency DAG**, then lets you refine them through a chat agent that understands the graph — change an upstream module and every affected downstream module regenerates, in topological order, with Layer 3 in parallel.
 
