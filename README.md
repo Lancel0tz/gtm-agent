@@ -114,7 +114,7 @@ Try, in order: **"Generate the full GTM analysis"** → watch the four cards str
 |---|---|
 | 1 — Pipeline / skill | `PYTHONPATH=. python -m backend.run_pipeline` (or `/gtm-analyze` in Claude Code; skill at [`.claude/skills/gtm-analyze/`](.claude/skills/gtm-analyze/SKILL.md)) |
 | 2 — Cascade CLI | `PYTHONPATH=. python -m backend.run_cascade competitiveLandscape` |
-| 3 — Agent API | `PYTHONPATH=. uvicorn backend.main:app --port 8000` then `POST /api/chat` |
+| 3 — Agent API | backend running, then: `curl -X POST localhost:8000/api/chat -H 'Content-Type: application/json' -d '{"message": "What does the positioning say?"}'` |
 | 4 — Frontend | backend + `cd frontend && npm run dev` |
 
 Sample outputs for two briefs (Dune: Awakening and a contrasting cozy farming sim, Moonhaven) are committed under [`output/`](output) so the result quality is inspectable without running anything.
