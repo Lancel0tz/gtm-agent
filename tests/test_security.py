@@ -185,3 +185,25 @@ def test_chat_without_api_key_friendly_message(client, monkeypatch):
         assert "⚙" in r.json()["response"]
     finally:
         client.delete(f"/api/threads/{tid}")
+
+
+def test_chat_with_invalid_key_friendly_message(client, monkeypatch):
+    """A provider 401 becomes in-chat guidance, not a 500."""
+    import backend.main as main_mod
+
+    class FakeAuthError(Exception):
+        pass
+    FakeAuthError.__name__ = "AuthenticationError"
+
+    async def boom(message, history=None):
+        raise FakeAuthError("Error code: 401 - invalid_api_key")
+
+    monkeypatch.setattr(main_mod.agent, "chat", boom)
+    tid = client.post("/api/threads").json()["id"]
+    try:
+        r = client.post("/api/chat", json={"message": "hello", "thread_id": tid})
+        assert r.status_code == 200
+        assert "401" in r.json()["response"]
+        assert "⚙" in r.json()["response"]
+    finally:
+        client.delete(f"/api/threads/{tid}")

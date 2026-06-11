@@ -144,6 +144,28 @@ async def _execute_turn(thread: dict, message: str) -> dict:
     _running_turns[thread["id"]] = task
     try:
         result = await task
+    except Exception as e:
+        # Provider auth/HTTP failures become guidance, not a 500
+        if type(e).__name__ == "CancelledError":
+            raise
+        del thread["history"][pre_history_len:]
+        thread["snapshots"].pop()
+        err_name = type(e).__name__
+        if "Authentication" in err_name or "401" in str(e):
+            reply = (
+                "⚠️ The provider rejected your API key (401). Open the ⚙ "
+                "settings and double-check the key — it may be revoked, "
+                "truncated, or from the wrong account."
+            )
+        elif "RateLimit" in err_name or "429" in str(e):
+            reply = "⚠️ The provider rate-limited the request (429). Wait a moment and try again, or switch models."
+        else:
+            reply = f"⚠️ The LLM request failed ({err_name}). Check the backend logs, your network, and the provider's status page."
+        thread["messages"].append({"role": "assistant", "content": reply})
+        thread["updated"] = time.time()
+        threads.set_active(thread["id"])
+        _running_turns.pop(thread["id"], None)
+        return {"response": reply, "events": [], "error": err_name}
     except asyncio.CancelledError:
         snap = thread["snapshots"].pop()
         _restore_and_broadcast(snap)
