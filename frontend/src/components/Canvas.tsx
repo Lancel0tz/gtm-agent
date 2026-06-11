@@ -37,6 +37,14 @@ export function Canvas({ state, onQuote, pmPrevPositions }: Props) {
     }
   };
 
+  // The user's explicit landscape edits — the ONLY things the matrix
+  // colors green/red. Model-driven selection churn stays neutral.
+  const lcChanges = state.competitiveLandscape.changes;
+  const pmIntent = {
+    added: lcChanges?.added?.existingCompetitors ?? [],
+    removed: (lcChanges?.removed?.existingCompetitors ?? []).map((i) => String(i.name)),
+  };
+
   // Known entity names, for linkifying competitor/segment mentions in text
   const ctx = {
     competitors: ((state.competitiveLandscape.data?.existingCompetitors as Array<{ name: string }> | undefined) || []).map((c) => c.name),
@@ -71,6 +79,7 @@ export function Canvas({ state, onQuote, pmPrevPositions }: Props) {
             pmLens={pmLens}
             onQuote={onQuote}
             pmPrevPositions={pmPrevPositions}
+            pmIntent={pmIntent}
           />
         ))}
       </div>
@@ -86,6 +95,7 @@ export function Canvas({ state, onQuote, pmPrevPositions }: Props) {
           onSelectLens={setPmLens}
           onQuote={onQuote}
           pmPrevPositions={pmPrevPositions}
+          pmIntent={pmIntent}
         />
       )}
 

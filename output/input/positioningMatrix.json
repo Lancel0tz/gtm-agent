@@ -1,11 +1,11 @@
 {
   "xAxis": {
-    "axisName": "Authored Progression vs. Emergent Systems",
+    "axisName": "Authored Progression to Emergent Systems",
     "lowLabel": "Authored Progression",
     "highLabel": "Emergent Systems"
   },
   "yAxis": {
-    "axisName": "Survival Intimacy vs. Political Scale",
+    "axisName": "Survival Intimacy to Political Scale",
     "lowLabel": "Survival Intimacy",
     "highLabel": "Political Scale"
   },
@@ -19,167 +19,203 @@
     {
       "id": "pm-002",
       "gameName": "Conan Exiles",
-      "xPosition": 6.0,
+      "xPosition": 5.0,
       "yPosition": 5.0
     },
     {
       "id": "pm-003",
       "gameName": "Rust",
       "xPosition": 8.0,
-      "yPosition": 3.0
+      "yPosition": 4.0
     },
     {
       "id": "pm-004",
       "gameName": "Valheim",
-      "xPosition": 7.0,
+      "xPosition": 6.0,
       "yPosition": 4.0
     },
     {
       "id": "pm-005",
       "gameName": "Star Wars: The Old Republic",
       "xPosition": 4.0,
-      "yPosition": 8.0
+      "yPosition": 7.0
     },
     {
       "id": "pm-006",
       "gameName": "Destiny 2",
-      "xPosition": 5.0,
-      "yPosition": 7.0
+      "xPosition": 3.0,
+      "yPosition": 6.0
     },
     {
       "id": "pm-007",
       "gameName": "The Elder Scrolls Online",
-      "xPosition": 4.0,
+      "xPosition": 5.0,
       "yPosition": 7.0
     },
     {
       "id": "pm-008",
-      "gameName": "Scum",
-      "xPosition": 7.0,
-      "yPosition": 2.0
+      "gameName": "Lost Ark",
+      "xPosition": 4.0,
+      "yPosition": 5.0
+    },
+    {
+      "id": "pm-009",
+      "gameName": "Warframe",
+      "xPosition": 5.0,
+      "yPosition": 5.0
+    },
+    {
+      "id": "pm-010",
+      "gameName": "Nightingale",
+      "xPosition": 6.0,
+      "yPosition": 3.0
     }
   ],
   "alternativeViews": [
     {
       "xAxis": {
-        "axisName": "Monetization Focus",
-        "lowLabel": "Low",
-        "highLabel": "High"
+        "axisName": "One-Time Purchase to Recurring Monetization",
+        "lowLabel": "One-Time Purchase",
+        "highLabel": "Recurring Monetization"
       },
       "yAxis": {
-        "axisName": "Narrative Depth",
-        "lowLabel": "Low",
-        "highLabel": "High"
+        "axisName": "Static Content to Frequent Updates",
+        "lowLabel": "Static Content",
+        "highLabel": "Frequent Updates"
       },
       "positions": [
         {
-          "id": "pm-001",
+          "id": "alt-001",
           "gameName": "Dune: Awakening",
-          "xPosition": 9.0,
+          "xPosition": 8.0,
           "yPosition": 8.0
         },
         {
-          "id": "pm-002",
+          "id": "alt-002",
           "gameName": "Conan Exiles",
-          "xPosition": 8.0,
+          "xPosition": 6.0,
           "yPosition": 6.0
         },
         {
-          "id": "pm-003",
+          "id": "alt-003",
           "gameName": "Rust",
-          "xPosition": 9.0,
-          "yPosition": 4.0
+          "xPosition": 5.0,
+          "yPosition": 5.0
         },
         {
-          "id": "pm-004",
+          "id": "alt-004",
           "gameName": "Valheim",
           "xPosition": 5.0,
           "yPosition": 5.0
         },
         {
-          "id": "pm-005",
+          "id": "alt-005",
           "gameName": "Star Wars: The Old Republic",
-          "xPosition": 9.0,
-          "yPosition": 10.0
-        },
-        {
-          "id": "pm-006",
-          "gameName": "Destiny 2",
           "xPosition": 9.0,
           "yPosition": 7.0
         },
         {
-          "id": "pm-007",
-          "gameName": "The Elder Scrolls Online",
+          "id": "alt-006",
+          "gameName": "Destiny 2",
           "xPosition": 9.0,
           "yPosition": 9.0
         },
         {
-          "id": "pm-008",
-          "gameName": "Scum",
-          "xPosition": 7.0,
-          "yPosition": 3.0
+          "id": "alt-007",
+          "gameName": "The Elder Scrolls Online",
+          "xPosition": 9.0,
+          "yPosition": 8.0
+        },
+        {
+          "id": "alt-008",
+          "gameName": "Lost Ark",
+          "xPosition": 8.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "alt-009",
+          "gameName": "Warframe",
+          "xPosition": 9.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "alt-010",
+          "gameName": "Nightingale",
+          "xPosition": 3.0,
+          "yPosition": 5.0
         }
       ]
     },
     {
       "xAxis": {
-        "axisName": "Community Engagement",
-        "lowLabel": "Low",
-        "highLabel": "High"
+        "axisName": "Casual Friendly to Complex Systems",
+        "lowLabel": "Casual Friendly",
+        "highLabel": "Complex Systems"
       },
       "yAxis": {
-        "axisName": "Innovation in Gameplay",
-        "lowLabel": "Low",
-        "highLabel": "High"
+        "axisName": "Approachable Mechanics to Deep Mechanics",
+        "lowLabel": "Approachable Mechanics",
+        "highLabel": "Deep Mechanics"
       },
       "positions": [
         {
-          "id": "pm-001",
+          "id": "alt2-001",
           "gameName": "Dune: Awakening",
-          "xPosition": 8.0,
-          "yPosition": 9.0
+          "xPosition": 7.0,
+          "yPosition": 8.0
         },
         {
-          "id": "pm-002",
+          "id": "alt2-002",
           "gameName": "Conan Exiles",
           "xPosition": 6.0,
           "yPosition": 7.0
         },
         {
-          "id": "pm-003",
+          "id": "alt2-003",
           "gameName": "Rust",
-          "xPosition": 9.0,
-          "yPosition": 6.0
-        },
-        {
-          "id": "pm-004",
-          "gameName": "Valheim",
-          "xPosition": 8.0,
-          "yPosition": 8.0
-        },
-        {
-          "id": "pm-005",
-          "gameName": "Star Wars: The Old Republic",
-          "xPosition": 8.0,
-          "yPosition": 5.0
-        },
-        {
-          "id": "pm-006",
-          "gameName": "Destiny 2",
-          "xPosition": 9.0,
+          "xPosition": 5.0,
           "yPosition": 7.0
         },
         {
-          "id": "pm-007",
-          "gameName": "The Elder Scrolls Online",
-          "xPosition": 8.0,
+          "id": "alt2-004",
+          "gameName": "Valheim",
+          "xPosition": 4.0,
           "yPosition": 6.0
         },
         {
-          "id": "pm-008",
-          "gameName": "Scum",
-          "xPosition": 7.0,
+          "id": "alt2-005",
+          "gameName": "Star Wars: The Old Republic",
+          "xPosition": 5.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "alt2-006",
+          "gameName": "Destiny 2",
+          "xPosition": 5.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "alt2-007",
+          "gameName": "The Elder Scrolls Online",
+          "xPosition": 6.0,
+          "yPosition": 7.0
+        },
+        {
+          "id": "alt2-008",
+          "gameName": "Lost Ark",
+          "xPosition": 5.0,
+          "yPosition": 8.0
+        },
+        {
+          "id": "alt2-009",
+          "gameName": "Warframe",
+          "xPosition": 6.0,
+          "yPosition": 8.0
+        },
+        {
+          "id": "alt2-010",
+          "gameName": "Nightingale",
+          "xPosition": 5.0,
           "yPosition": 6.0
         }
       ]

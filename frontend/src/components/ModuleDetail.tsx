@@ -3,7 +3,7 @@ import type { ModuleState, ModuleName, ModuleData, ModuleChanges, EntityRef } fr
 import { MODULE_META, StatusDot, fieldChanges, NewBadge, RemovedTag, EntityText, moduleToQuote, QuoteButton, SteamBadge } from './moduleShared';
 import type { EntityContext } from './moduleShared';
 import { PositioningChart } from './ModuleCard';
-import type { PrevPositions } from './ModuleCard';
+import type { PrevPositions, PmIntent } from './ModuleCard';
 
 interface Props {
   name: ModuleName;
@@ -15,9 +15,10 @@ interface Props {
   onSelectLens?: (lens: number) => void;
   onQuote?: (text: string) => void;
   pmPrevPositions?: PrevPositions;
+  pmIntent?: PmIntent;
 }
 
-export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens = 0, onSelectLens, onQuote, pmPrevPositions }: Props) {
+export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens = 0, onSelectLens, onQuote, pmPrevPositions, pmIntent }: Props) {
   const meta = MODULE_META[name];
   const [versions, setVersions] = useState<Array<{ ts: number; data: ModuleData }>>([]);
   const [versionIdx, setVersionIdx] = useState(-1); // -1 = current
@@ -105,6 +106,7 @@ export function ModuleDetail({ name, module, onClose, onEntityClick, ctx, pmLens
               pmLens={pmLens}
               onSelectLens={onSelectLens}
               pmPrevPositions={pmPrevPositions}
+              pmIntent={pmIntent}
             />
           ) : null}
         </div>
@@ -122,9 +124,10 @@ interface ContentProps {
   pmLens?: number;
   onSelectLens?: (lens: number) => void;
   pmPrevPositions?: PrevPositions;
+  pmIntent?: PmIntent;
 }
 
-function DetailContent({ name, data, changes, onEntityClick, ctx, pmLens = 0, onSelectLens, pmPrevPositions }: ContentProps) {
+function DetailContent({ name, data, changes, onEntityClick, ctx, pmLens = 0, onSelectLens, pmPrevPositions, pmIntent }: ContentProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ id: string; name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -216,7 +219,7 @@ function DetailContent({ name, data, changes, onEntityClick, ctx, pmLens = 0, on
   }
 
   if (name === 'positioningMatrix') {
-    return <PositioningDetail data={data} changes={changes} onEntityClick={onEntityClick} selected={pmLens} onSelect={onSelectLens} prevPositions={pmPrevPositions} />;
+    return <PositioningDetail data={data} changes={changes} onEntityClick={onEntityClick} selected={pmLens} onSelect={onSelectLens} prevPositions={pmPrevPositions} intent={pmIntent} />;
   }
 
   if (name === 'swot') {
@@ -234,7 +237,7 @@ interface ViewLike {
 
 /** Positioning with selectable axis lenses (primary + alternatives).
  *  Selection is lifted to Canvas so the card preview follows it. */
-function PositioningDetail({ data, changes, onEntityClick, selected = 0, onSelect, prevPositions }: { data: ModuleData; changes?: ModuleChanges | null; onEntityClick: (e: EntityRef) => void; selected?: number; onSelect?: (lens: number) => void; prevPositions?: PrevPositions }) {
+function PositioningDetail({ data, changes, onEntityClick, selected = 0, onSelect, prevPositions, intent }: { data: ModuleData; changes?: ModuleChanges | null; onEntityClick: (e: EntityRef) => void; selected?: number; onSelect?: (lens: number) => void; prevPositions?: PrevPositions; intent?: PmIntent }) {
   const primary: ViewLike = {
     xAxis: data.xAxis as ViewLike['xAxis'],
     yAxis: data.yAxis as ViewLike['yAxis'],
@@ -281,6 +284,7 @@ function PositioningDetail({ data, changes, onEntityClick, selected = 0, onSelec
         changes={selected === 0 ? changes : undefined}
         onEntityClick={onEntityClick}
         prevPositions={selected === 0 ? prevPositions : undefined}
+        intent={selected === 0 ? intent : undefined}
       />
     </div>
   );

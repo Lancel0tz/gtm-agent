@@ -11,9 +11,10 @@ interface Props {
   pmLens?: number;
   onQuote?: (text: string) => void;
   pmPrevPositions?: PrevPositions;
+  pmIntent?: PmIntent;
 }
 
-export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0, onQuote, pmPrevPositions }: Props) {
+export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0, onQuote, pmPrevPositions, pmIntent }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -64,7 +65,7 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens 
       {/* Body */}
       <div className={`px-5 py-4 h-72 overflow-y-auto transition-opacity ${module.status === 'generating' ? 'opacity-40' : ''}`}>
         {module.data ? (
-          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} pmPrevPositions={pmPrevPositions} />
+          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} pmPrevPositions={pmPrevPositions} pmIntent={pmIntent} />
         ) : (
           <div className="h-full flex items-center justify-center">
             <p className="text-sm text-gray-300 dark:text-slate-600 italic">Awaiting generation</p>
@@ -77,6 +78,14 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens 
 
 export type PrevPositions = Array<{ gameName: string; xPosition: number; yPosition: number }> | null;
 
+/** The user's explicit landscape additions/removals — the only names the
+ *  matrix colors. Model-driven re-selection of which games to plot is not
+ *  the user's doing and stays neutral gray. */
+export interface PmIntent {
+  added: string[];
+  removed: string[];
+}
+
 interface PreviewProps {
   name: ModuleName;
   data: ModuleData;
@@ -85,6 +94,7 @@ interface PreviewProps {
   ctx?: EntityContext;
   pmLens?: number;
   pmPrevPositions?: PrevPositions;
+  pmIntent?: PmIntent;
 }
 
 export function selectLensView(data: ModuleData, lens: number): ModuleData {
@@ -93,7 +103,7 @@ export function selectLensView(data: ModuleData, lens: number): ModuleData {
   return data;
 }
 
-function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0, pmPrevPositions }: PreviewProps) {
+function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0, pmPrevPositions, pmIntent }: PreviewProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -170,6 +180,7 @@ function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0, pm
         compact
         onEntityClick={onEntityClick}
         prevPositions={pmLens === 0 ? pmPrevPositions : undefined}
+        intent={pmLens === 0 ? pmIntent : undefined}
       />
     );
   }
@@ -214,23 +225,31 @@ interface ChartProps {
   onEntityClick?: (entity: EntityRef) => void;
   /** Names to emphasize; all other competitor dots are dimmed */
   highlight?: string[];
-  /** Positions from the previous generation — powers green(new)/red(gone) dots */
+  /** Positions from the previous generation — used to place red ghosts */
   prevPositions?: PrevPositions;
+  /** User's explicit landscape adds/removes — the only names colored */
+  intent?: PmIntent;
 }
 
-export function PositioningChart({ data, changes, compact = false, onEntityClick, highlight, prevPositions }: ChartProps) {
+export function PositioningChart({ data, changes, compact = false, onEntityClick, highlight, prevPositions, intent }: ChartProps) {
   const positions = (data.positions as Array<{ gameName: string; xPosition: number; yPosition: number }>) || [];
   const xAxis = data.xAxis as { axisName: string; lowLabel: string; highLabel: string };
   const yAxis = data.yAxis as { axisName: string; lowLabel: string; highLabel: string };
   const { removed } = fieldChanges(changes, 'positions');
 
-  // Plot diff vs the previous generation (suppressed in highlight mode —
-  // the entity popover's mini matrix has its own color language)
-  const diffOn = !highlight && Array.isArray(prevPositions) && prevPositions.length > 0;
-  const prevNames = diffOn ? new Set(prevPositions!.map((p) => p.gameName)) : new Set<string>();
+  // Color ONLY the user's explicit edits (suppressed in highlight mode —
+  // the entity popover's mini matrix has its own color language).
+  // Green: a competitor the user ADDED, now on the map.
+  // Red ghost: a competitor the user REMOVED, shown at its old coordinates.
+  // Games the model merely re-selected in/out stay neutral.
+  const diffOn = !highlight && !!intent && (intent.added.length > 0 || intent.removed.length > 0);
+  const addedSet = diffOn ? new Set(intent!.added) : new Set<string>();
+  const removedSet = diffOn ? new Set(intent!.removed) : new Set<string>();
   const curNames = new Set(positions.map((p) => p.gameName));
-  const ghosts = diffOn ? prevPositions!.filter((p) => !curNames.has(p.gameName)) : [];
-  const hasNew = diffOn && positions.some((p, i) => !(i === 0 || p.gameName.includes('Dune')) && !prevNames.has(p.gameName));
+  const ghosts = diffOn && Array.isArray(prevPositions)
+    ? prevPositions.filter((p) => removedSet.has(p.gameName) && !curNames.has(p.gameName))
+    : [];
+  const hasNew = diffOn && positions.some((p, i) => !(i === 0 || p.gameName.includes('Dune')) && addedSet.has(p.gameName));
 
   return (
     <div className="h-full flex flex-col">
@@ -278,7 +297,7 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
 
         {positions.map((p, i) => {
           const isDune = i === 0 || p.gameName.includes('Dune');
-          const isNew = diffOn && !isDune && !prevNames.has(p.gameName);
+          const isNew = diffOn && !isDune && addedSet.has(p.gameName);
           const isHighlighted = highlight?.includes(p.gameName) ?? false;
           const isDimmed = !!highlight && !isHighlighted && !isDune;
           const labelAbove = !isDune && i % 2 === 1;
@@ -325,12 +344,12 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
         <p className={`${compact ? 'text-[9px]' : 'text-[10px]'} text-gray-400 dark:text-slate-500 mt-1.5 flex items-center gap-3`}>
           {hasNew && (
             <span className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" /> new this generation
+              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" /> added by you
             </span>
           )}
           {ghosts.length > 0 && (
             <span className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-red-400 inline-block" /> no longer plotted
+              <span className="w-2 h-2 rounded-full bg-red-400 inline-block" /> removed by you
             </span>
           )}
         </p>
