@@ -23,18 +23,19 @@ https://github.com/user-attachments/assets/ab85ec69-2070-409f-a655-0ab848491838
 - **Bring your own model.** Eleven models across OpenAI, Anthropic, DeepSeek, and Gemini, switchable at runtime; paste API keys in the UI (stored locally, never echoed back).
 - **It's hardened and proven.** Prompt-injection defenses, schema validation on every write, path-traversal and key-leak protections — each one verified by a named test in the 50-test suite, including one that *deadlocks if parallel execution were faked*.
 
-Everything below is the technical deep-dive.
+Below: how to run it, then the technical deep-dive.
 
 ---
 
 ## Table of Contents
 
-- [System Overview](#system-overview) · [Assignment Coverage](#assignment-coverage)
-- [Architecture](#architecture) · [Generation Methodology](#generation-methodology) · [Cascade Engine](#cascade-engine) · [How the Agent Decides What to Do](#how-the-agent-decides-what-to-do)
-- [The Chat System's Three Primitives](#the-chat-systems-three-primitives)
-- [Multi-Provider Design](#multi-provider-design) · [Security Model](#security-model) · [Testing](#testing)
-- [Quick Start](#quick-start) · [Running Each Tier](#running-each-tier)
-- [Design Details Worth Noticing](#design-details-worth-noticing) · [Trade-offs](#trade-offs)
+| | |
+|---|---|
+| **Get oriented** | [System Overview](#system-overview) · [Assignment Coverage](#assignment-coverage) |
+| **Run it** | [Quick Start](#quick-start) · [Running Each Tier](#running-each-tier) |
+| **How it works** | [Architecture](#architecture) · [Generation Methodology](#generation-methodology) · [Cascade Engine](#cascade-engine) · [How the Agent Decides What to Do](#how-the-agent-decides-what-to-do) · [Chat Primitives](#the-chat-systems-three-primitives) · [Multi-Provider Design](#multi-provider-design) |
+| **Verified** | [Security Model](#security-model) · [Testing](#testing) |
+| **Reflections** | [Design Details Worth Noticing](#design-details-worth-noticing) · [Trade-offs](#trade-offs) |
 
 ---
 
@@ -81,6 +82,32 @@ flowchart LR
 | **4** | Three-column real-time frontend | [`frontend/src/`](frontend/src) | Multi-thread chat with undo/regenerate/edit/quote/stop; dark mode; version history with diffs |
 
 ---
+
+## Quick Start
+
+```bash
+git clone https://github.com/Lancel0tz/gtm-agent.git && cd gtm-agent
+
+pip install openai anthropic httpx pydantic python-dotenv fastapi uvicorn
+cd frontend && npm install && cd ..
+
+export OPENAI_API_KEY="sk-..."   # or paste keys later in the in-app settings (⚙)
+
+# Terminal 1 — backend
+PYTHONPATH=. uvicorn backend.main:app --reload --port 8000
+# Terminal 2 — frontend
+cd frontend && npm run dev       # → http://localhost:5173
+```
+
+Try, in order: **"Generate the full GTM analysis"** → watch the four cards stream through generating/reviewing → **"Add Nightingale as a competitor"** → watch the cascade → click a competitor for its cross-module card → select any text → **Quote in chat** → hit **undo** under the agent's reply.
+
+## Running Each Tier
+
+| Tier | Command |
+|
+
+---
+
 
 ## Architecture
 
@@ -277,28 +304,7 @@ All suites mock the LLM layer — the full matrix runs in CI with no API keys an
 
 ---
 
-## Quick Start
-
-```bash
-git clone https://github.com/Lancel0tz/gtm-agent.git && cd gtm-agent
-
-pip install openai anthropic httpx pydantic python-dotenv fastapi uvicorn
-cd frontend && npm install && cd ..
-
-export OPENAI_API_KEY="sk-..."   # or paste keys later in the in-app settings (⚙)
-
-# Terminal 1 — backend
-PYTHONPATH=. uvicorn backend.main:app --reload --port 8000
-# Terminal 2 — frontend
-cd frontend && npm run dev       # → http://localhost:5173
-```
-
-Try, in order: **"Generate the full GTM analysis"** → watch the four cards stream through generating/reviewing → **"Add Nightingale as a competitor"** → watch the cascade → click a competitor for its cross-module card → select any text → **Quote in chat** → hit **undo** under the agent's reply.
-
-## Running Each Tier
-
-| Tier | Command |
-|---|---|
+---|
 | 1 — Pipeline / skill | `PYTHONPATH=. python -m backend.run_pipeline` (or `/gtm-analyze` in Claude Code; skill at [`.claude/skills/gtm-analyze/`](.claude/skills/gtm-analyze/SKILL.md)) |
 | 2 — Cascade CLI | `PYTHONPATH=. python -m backend.run_cascade competitiveLandscape` |
 | 3 — Agent API | `PYTHONPATH=. uvicorn backend.main:app --port 8000` then `POST /api/chat` |
