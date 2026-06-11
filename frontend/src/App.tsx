@@ -153,6 +153,15 @@ function App() {
     return () => es.close();
   }, [loadInput, loadModules]);
 
+  // Re-pull the authoritative message list from the server — heals any
+  // divergence between optimistic local state and the persisted thread
+  const resyncThread = useCallback(async (tid: string) => {
+    try {
+      const d = await fetch(`/api/threads/${tid}/select`, { method: 'POST' }).then(r => r.json());
+      if (Array.isArray(d.messages)) setMessages(d.messages);
+    } catch { /* server unreachable — keep local view */ }
+  }, []);
+
   const loadThreads = useCallback(async (): Promise<ThreadSummary[]> => {
     const d = await fetch('/api/threads').then(r => r.json());
     setThreads(d.threads);
@@ -233,17 +242,25 @@ function App() {
     // Optimistically truncate at the edited message and show it
     setMessages(prev => [...prev.slice(0, index), { role: 'user', content: message }]);
     try {
-      const d = await fetch(`/api/threads/${activeThread}/edit`, {
+      const res = await fetch(`/api/threads/${activeThread}/edit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ index, message }),
-      }).then(r => r.json());
-      if (d.messages) setMessages(d.messages);
+      });
+      if (res.ok) {
+        const d = await res.json();
+        if (d.messages) setMessages(d.messages);
+      } else {
+        // Stale index or server error — restore the authoritative view
+        await resyncThread(activeThread);
+      }
       loadThreads();
+    } catch {
+      await resyncThread(activeThread);
     } finally {
       setIsLoading(false);
     }
-  }, [activeThread, isLoading, loadThreads]);
+  }, [activeThread, isLoading, loadThreads, resyncThread]);
 
   const handleUndo = useCallback(async () => {
     if (!activeThread || isLoading) return;
@@ -300,7 +317,10 @@ function App() {
       const data = await res.json();
 
       if (data.thread_id) setActiveThread(data.thread_id);
-      if (data.response) {
+      if (Array.isArray(data.messages)) {
+        // Authoritative sync — local indices always match the server's
+        setMessages(data.messages);
+      } else if (data.response) {
         setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
       }
       loadThreads();
@@ -314,12 +334,14 @@ function App() {
         }
       }
     } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Error communicating with the server.' }]);
+      // Heal from the server's truth first, then surface the failure
+      if (activeThread) await resyncThread(activeThread);
+      setMessages(prev => [...prev, { role: 'assistant', content: '⚠️ Could not reach the backend. Is it still running on port 8000?' }]);
     } finally {
       setIsLoading(false);
       setStreamingText('');
     }
-  }, [activeThread, loadThreads]);
+  }, [activeThread, loadThreads, resyncThread]);
 
   return (
     <div className="h-screen flex flex-col">
