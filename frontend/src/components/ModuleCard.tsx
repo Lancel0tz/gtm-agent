@@ -10,11 +10,11 @@ interface Props {
   ctx?: EntityContext;
   pmLens?: number;
   onQuote?: (text: string) => void;
-  pmPrevPositions?: PrevPositions;
+  pmPrevData?: Record<string, unknown> | null;
   pmIntent?: PmIntent;
 }
 
-export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0, onQuote, pmPrevPositions, pmIntent }: Props) {
+export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0, onQuote, pmPrevData, pmIntent }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -65,7 +65,7 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens 
       {/* Body */}
       <div className={`px-5 py-4 h-72 overflow-y-auto transition-opacity ${module.status === 'generating' ? 'opacity-40' : ''}`}>
         {module.data ? (
-          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} pmPrevPositions={pmPrevPositions} pmIntent={pmIntent} />
+          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} pmPrevData={pmPrevData} pmIntent={pmIntent} />
         ) : (
           <div className="h-full flex items-center justify-center">
             <p className="text-sm text-gray-300 dark:text-slate-600 italic">Awaiting generation</p>
@@ -93,7 +93,7 @@ interface PreviewProps {
   onEntityClick: (entity: EntityRef) => void;
   ctx?: EntityContext;
   pmLens?: number;
-  pmPrevPositions?: PrevPositions;
+  pmPrevData?: Record<string, unknown> | null;
   pmIntent?: PmIntent;
 }
 
@@ -103,7 +103,20 @@ export function selectLensView(data: ModuleData, lens: number): ModuleData {
   return data;
 }
 
-function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0, pmPrevPositions, pmIntent }: PreviewProps) {
+/** Previous generation's positions for a given lens; null when that lens
+ *  didn't exist in the previous version (no coordinates to ghost at). */
+export function lensPrevPositions(prevData: Record<string, unknown> | null | undefined, lens: number): PrevPositions {
+  if (!prevData) return null;
+  if (lens === 0) {
+    const pos = prevData.positions;
+    return Array.isArray(pos) ? pos as NonNullable<PrevPositions> : null;
+  }
+  const alts = prevData.alternativeViews as Array<Record<string, unknown>> | undefined;
+  const pos = alts?.[lens - 1]?.positions;
+  return Array.isArray(pos) ? pos as NonNullable<PrevPositions> : null;
+}
+
+function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0, pmPrevData, pmIntent }: PreviewProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -179,8 +192,8 @@ function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0, pm
         changes={pmLens === 0 ? changes : undefined}
         compact
         onEntityClick={onEntityClick}
-        prevPositions={pmLens === 0 ? pmPrevPositions : undefined}
-        intent={pmLens === 0 ? pmIntent : undefined}
+        prevPositions={lensPrevPositions(pmPrevData, pmLens)}
+        intent={pmIntent}
       />
     );
   }

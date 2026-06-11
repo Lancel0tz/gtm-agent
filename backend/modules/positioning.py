@@ -37,7 +37,8 @@ async def generate(
         must_include_note = (
             f"\n\nMANDATORY INCLUSIONS: The following competitors were just added "
             f"to the landscape and are likely the reason for this update — they MUST "
-            f"appear in the plotted positions of the PRIMARY matrix: {names}."
+            f"appear in EVERY plotted view: the primary matrix AND each of the two "
+            f"alternative lenses: {names}."
         )
 
     stability_note = ""
@@ -85,7 +86,8 @@ async def generate(
         "differentiate the games and reveal a strategic insight. "
         "Put the primary matrix in xAxis/yAxis/positions, and the two "
         "alternative lenses in alternativeViews (same structure each)."
-        + (f" The primary positions MUST include: {', '.join(must_include)}." if must_include else "")
+        + (f" The primary positions AND the positions of EVERY alternativeViews "
+           f"entry MUST each include: {', '.join(must_include)}." if must_include else "")
     )
 
     if feedback:

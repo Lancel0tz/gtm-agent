@@ -7,7 +7,7 @@ import { EntityPopover } from './EntityPopover';
 interface Props {
   state: AppState;
   onQuote?: (text: string) => void;
-  pmPrevPositions?: Array<{ gameName: string; xPosition: number; yPosition: number }> | null;
+  pmPrevData?: Record<string, unknown> | null;
 }
 
 const MODULE_ORDER: ModuleName[] = [
@@ -17,7 +17,7 @@ const MODULE_ORDER: ModuleName[] = [
   'swot',
 ];
 
-export function Canvas({ state, onQuote, pmPrevPositions }: Props) {
+export function Canvas({ state, onQuote, pmPrevData }: Props) {
   const [expanded, setExpanded] = useState<ModuleName | null>(null);
   const [entity, setEntity] = useState<EntityRef | null>(null);
   // Which positioning lens is active — shared by the card and the detail view
@@ -78,7 +78,7 @@ export function Canvas({ state, onQuote, pmPrevPositions }: Props) {
             ctx={ctx}
             pmLens={pmLens}
             onQuote={onQuote}
-            pmPrevPositions={pmPrevPositions}
+            pmPrevData={pmPrevData}
             pmIntent={pmIntent}
           />
         ))}
@@ -94,7 +94,7 @@ export function Canvas({ state, onQuote, pmPrevPositions }: Props) {
           pmLens={pmLens}
           onSelectLens={setPmLens}
           onQuote={onQuote}
-          pmPrevPositions={pmPrevPositions}
+          pmPrevData={pmPrevData}
           pmIntent={pmIntent}
         />
       )}
