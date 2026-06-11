@@ -88,7 +88,11 @@ flowchart LR
 ```bash
 git clone https://github.com/Lancel0tz/gtm-agent.git && cd gtm-agent
 
-pip install openai anthropic httpx pydantic python-dotenv fastapi uvicorn
+# Python 3.11+ required (tested on 3.12) — conda recommended:
+conda create -n gtm-agent python=3.12 -y && conda activate gtm-agent
+pip install openai anthropic httpx pydantic python-dotenv fastapi uvicorn pytest
+
+# Frontend (Node 18+)
 cd frontend && npm install && cd ..
 
 export OPENAI_API_KEY="sk-..."   # or paste keys later in the in-app settings (⚙)
@@ -98,6 +102,8 @@ PYTHONPATH=. uvicorn backend.main:app --reload --port 8000
 # Terminal 2 — frontend
 cd frontend && npm run dev       # → http://localhost:5173
 ```
+
+> No conda? Any Python 3.11+ works: `python3 -m venv .venv && source .venv/bin/activate`, then the same `pip install`.
 
 Try, in order: **"Generate the full GTM analysis"** → watch the four cards stream through generating/reviewing → **"Add Nightingale as a competitor"** → watch the cascade → click a competitor for its cross-module card → select any text → **Quote in chat** → hit **undo** under the agent's reply.
 
