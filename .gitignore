@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 .vite/
 .DS_Store
+demo-script.md
