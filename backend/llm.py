@@ -60,6 +60,20 @@ def _get_key(provider: str) -> str | None:
     return os.environ.get(PROVIDERS[provider]["env"])
 
 
+def missing_key_for_chat() -> str | None:
+    """Human-readable label of the key the chat path needs but lacks.
+
+    OpenAI-compatible providers drive both generation and the agent loop;
+    with Anthropic active, the agent loop additionally needs an OpenAI key.
+    """
+    provider = _settings["provider"]
+    if not _get_key(provider):
+        return PROVIDERS[provider]["label"]
+    if PROVIDERS[provider]["sdk"] != "openai" and not _get_key("openai"):
+        return "OpenAI (the chat agent's tool-calling runs on it when Anthropic is active)"
+    return None
+
+
 def get_settings() -> dict:
     return {
         "provider": _settings["provider"],

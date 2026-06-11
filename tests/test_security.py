@@ -168,3 +168,20 @@ def test_tool_update_rejects_malformed_schema():
     good = {"summary": "ok", "existingCompetitors": [
         {"id": "1", "name": "Rust", "rationale": "r", "verified": True, "steamAppId": 252490}]}
     MODULE_SCHEMAS["competitiveLandscape"].model_validate(good)
+
+
+def test_chat_without_api_key_friendly_message(client, monkeypatch):
+    """Sending a message with no key configured returns guidance, not a 500."""
+    import backend.llm as llm
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.setitem(llm._settings, "provider", "openai")
+    monkeypatch.setitem(llm._settings, "model", "gpt-4o")
+
+    tid = client.post("/api/threads").json()["id"]
+    try:
+        r = client.post("/api/chat", json={"message": "hello", "thread_id": tid})
+        assert r.status_code == 200
+        assert "API key" in r.json()["response"]
+        assert "⚙" in r.json()["response"]
+    finally:
+        client.delete(f"/api/threads/{tid}")

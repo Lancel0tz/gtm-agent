@@ -117,6 +117,21 @@ async def _execute_turn(thread: dict, message: str) -> dict:
     and the LLM history is truncated — a stopped turn can leave dangling
     tool calls that would corrupt the next API request otherwise.
     """
+    # Friendly guard: no key configured → tell the user how to fix it
+    # instead of surfacing a provider auth exception
+    missing = llm.missing_key_for_chat()
+    if missing:
+        reply = (
+            f"⚠️ No API key is configured for **{missing}**. "
+            "Click the ⚙ settings icon in the header to paste a key, "
+            "or switch to a configured model in the model dropdown."
+        )
+        thread["messages"].append({"role": "user", "content": message})
+        thread["messages"].append({"role": "assistant", "content": reply})
+        thread["updated"] = time.time()
+        threads.set_active(thread["id"])
+        return {"response": reply, "events": []}
+
     thread.setdefault("snapshots", []).append(pipeline.snapshot())
     thread["snapshots"] = thread["snapshots"][-5:]
     pre_history_len = len(thread["history"])
