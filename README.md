@@ -104,10 +104,15 @@ Try, in order: **"Generate the full GTM analysis"** → watch the four cards str
 ## Running Each Tier
 
 | Tier | Command |
-|
+|---|---|
+| 1 — Pipeline / skill | `PYTHONPATH=. python -m backend.run_pipeline` (or `/gtm-analyze` in Claude Code; skill at [`.claude/skills/gtm-analyze/`](.claude/skills/gtm-analyze/SKILL.md)) |
+| 2 — Cascade CLI | `PYTHONPATH=. python -m backend.run_cascade competitiveLandscape` |
+| 3 — Agent API | `PYTHONPATH=. uvicorn backend.main:app --port 8000` then `POST /api/chat` |
+| 4 — Frontend | backend + `cd frontend && npm run dev` |
+
+Sample outputs for two briefs (Dune: Awakening and a contrasting cozy farming sim, Moonhaven) are committed under [`output/`](output) so the result quality is inspectable without running anything.
 
 ---
-
 
 ## Architecture
 
@@ -301,16 +306,6 @@ PYTHONPATH=. pytest tests/ -v        # 50 tests, ~0.7s, zero LLM calls
 | `test_security.py` (16) | The entire table above | Key-handling test asserts the *exact* response field set, so a future field addition that leaks data fails CI |
 
 All suites mock the LLM layer — the full matrix runs in CI with no API keys and no cost.
-
----
-
----|
-| 1 — Pipeline / skill | `PYTHONPATH=. python -m backend.run_pipeline` (or `/gtm-analyze` in Claude Code; skill at [`.claude/skills/gtm-analyze/`](.claude/skills/gtm-analyze/SKILL.md)) |
-| 2 — Cascade CLI | `PYTHONPATH=. python -m backend.run_cascade competitiveLandscape` |
-| 3 — Agent API | `PYTHONPATH=. uvicorn backend.main:app --port 8000` then `POST /api/chat` |
-| 4 — Frontend | backend + `cd frontend && npm run dev` |
-
-Sample outputs for two briefs (Dune: Awakening and a contrasting cozy farming sim, Moonhaven) are committed under [`output/`](output) so the result quality is inspectable without running anything.
 
 ---
 
