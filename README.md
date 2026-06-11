@@ -92,7 +92,8 @@ git clone https://github.com/Lancel0tz/gtm-agent.git && cd gtm-agent
 conda create -n gtm-agent python=3.12 -y && conda activate gtm-agent
 pip install openai anthropic httpx pydantic python-dotenv fastapi uvicorn pytest
 
-# Frontend (Node 18+)
+# Frontend (Node 18+) — if zsh says "command not found: npm" and you use nvm,
+# load it first: source ~/.nvm/nvm.sh
 cd frontend && npm install && cd ..
 
 export OPENAI_API_KEY="sk-..."   # or paste keys later in the in-app settings (⚙)
