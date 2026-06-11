@@ -77,7 +77,7 @@ flowchart LR
 |------|-------------|-------|------------------------|
 | **1** | Pipeline as a Claude Code skill, L1→L2→L3 order, L3 parallel | [`.claude/skills/gtm-analyze/`](.claude/skills/gtm-analyze/SKILL.md), [`backend/pipeline.py`](backend/pipeline.py) | Parallelism is **proven by a test that deadlocks if execution were sequential** |
 | **2** | Cascade updates, topological order, affected-only | [`backend/pipeline.py`](backend/pipeline.py) `cascade_update` | Field-level diff reporting; accumulated change history rendered as strikethrough/new badges |
-| **3** | Conversational agent from raw LLM API | [`backend/agent.py`](backend/agent.py) | Custom ReAct loop, streamed; handles ambiguous & out-of-scope requests by design |
+| **3** | Conversational agent from raw LLM API | [`backend/agent.py`](backend/agent.py) | Custom ReAct loop, streamed. All four required scenarios: *generate full analysis* / *update field → cascade* / *read a module* ("what does the positioning say?") / ambiguous & out-of-scope requests answered gracefully |
 | **4** | Three-column real-time frontend | [`frontend/src/`](frontend/src) | Multi-thread chat with undo/regenerate/edit/quote/stop; dark mode; version history with diffs |
 
 ---
@@ -265,7 +265,7 @@ All suites mock the LLM layer — the full matrix runs in CI with no API keys an
 ## Quick Start
 
 ```bash
-git clone git@github.com:Lancel0tz/gtm-agent.git && cd gtm-agent
+git clone https://github.com/Lancel0tz/gtm-agent.git && cd gtm-agent
 
 pip install openai anthropic httpx pydantic python-dotenv fastapi uvicorn
 cd frontend && npm install && cd ..
