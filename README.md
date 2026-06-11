@@ -9,9 +9,19 @@
 
 ![GTM Agent — three-column canvas with live quality scores, Steam verification, and a streaming agent](docs/screenshot.png)
 
-<!-- To add a demo GIF: record with QuickTime / Kap, save as docs/demo.gif, then uncomment:
-![Demo](docs/demo.gif)
--->
+### 🎬 Live demo — cascade update through chat
+
+> Removing one competitor and adding another in a single message: the agent edits the landscape, then AudienceOverview, PositioningMatrix, and SWOT regenerate live — Layer 3 in parallel — with judge reviews and Steam checks streaming to the canvas.
+
+![Demo — chat-driven cascade with live module regeneration](docs/demo.gif)
+
+<details>
+<summary>🌙 Dark mode</summary>
+
+![Dark mode](docs/screenshot-dark.png)
+
+Light / dark / system theme, persisted and OS-aware.
+</details>
 
 ---
 

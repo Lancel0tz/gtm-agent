@@ -2,73 +2,73 @@
   "strengths": [
     {
       "id": "sw-001",
-      "text": "Leveraging the Dune IP offers narrative depth that appeals to 'Narrative-Driven Explorers', distinguishing it from 'Rust' and 'Conan Exiles'."
+      "text": "'Dune: Awakening' leverages the Dune universe for narrative depth, appealing to 'Sci-Fi Story-driven Explorers,' unlike mechanically focused games like 'Conan Exiles' and 'Rust.'"
     },
     {
       "id": "sw-002",
-      "text": "Integration of optional PvP and strong PvE content attracts both 'Competitive PvP Gamers' and 'Social MMO Community Builders', more versatile than 'Destiny 2' or 'Valheim'."
+      "text": "With extensive crafting systems, 'Dune: Awakening' attracts 'Crafting and Customization Enthusiasts' more than 'Valheim' and 'Ark: Survival Evolved.'"
     },
     {
       "id": "sw-003",
-      "text": "A robust GaaS model with quarterly DLCs and monthly updates aligns with 'The Elder Scrolls Online', providing sustained player value."
+      "text": "The game's guild and political systems offer complex interactions, appealing to 'Social and Competitive MMO Players,' unlike 'Destiny 2's' limited systems."
     },
     {
       "id": "sw-004",
-      "text": "The game's crafting and building mechanics offer depth to 'Crafting Enthusiasts', similar to 'Conan Exiles' and 'Valheim'."
+      "text": "Dynamic environment with weekly events in 'Dune: Awakening' offers engagement surpassing static games like 'The Elder Scrolls Online.'"
     }
   ],
   "weaknesses": [
     {
       "id": "wk-001",
-      "text": "Restriction to Steam only, without crossplay, is a disadvantage versus multi-platform 'Destiny 2' and 'Warframe'."
+      "text": "Initial PC-only launch limits platform reach compared to 'Destiny 2' and 'The Elder Scrolls Online,' available on multiple platforms."
     },
     {
       "id": "wk-002",
-      "text": "Delayed console launch may lose initial momentum against cross-platform competitors launching concurrently."
+      "text": "Lack of crossplay hampers connectivity, affecting game appeal compared to 'Warframe.'"
     },
     {
       "id": "wk-003",
-      "text": "Deep narrative could alienate players focused on survival and competitive aspects, unlike 'Rust' and 'Scum'."
+      "text": "Console version delays allow games like 'Ark: Survival Evolved' to capture similar audiences before 'Dune: Awakening' launches."
     },
     {
       "id": "wk-004",
-      "text": "NDA restrictions on persistent beta could slow down community engagement compared to open betas in 'Black Desert Online'."
+      "text": "Closed beta with NDA limits early community engagement unlike 'Rust's' open betas that drive hype."
     }
   ],
   "opportunities": [
     {
       "id": "op-001",
-      "text": "Emphasizing Dune's rich storytelling can capture 'Narrative-Driven Explorers', underserved by 'Rust' and 'Scum'."
+      "text": "A market gap exists for narrative-driven sci-fi MMOs, which 'Dune: Awakening' can fill, unlike IP-bound 'Star Wars: The Old Republic.'"
     },
     {
       "id": "op-002",
-      "text": "Opportunity to penetrate the sci-fi market with intricate storytelling, complimenting fans of 'Star Wars: The Old Republic'."
+      "text": "Integrating Dune's lore within survival mechanics could set a storytelling standard, unlike 'Scum' and 'Conan Exiles.'"
     },
     {
       "id": "op-003",
-      "text": "The sandbox nature and customization of playstyle can attract players from heavily PvP-focused games like 'Destiny 2'."
+      "text": "'Dune: Awakening's' dynamic events can attract 'Hardcore Survival Enthusiasts,' unlike static environments in 'Lost Ark' and 'Black Desert Online.'"
     },
     {
       "id": "op-004",
-      "text": "Plans for diverse localization can help penetrate non-English markets more efficiently than competitors with fewer options."
+      "text": "Console market post-2025 remains underserved; strategic partnerships can capture new audiences not served by 'Valheim' or 'The Forest.'"
     }
   ],
   "threats": [
     {
       "id": "th-001",
-      "text": "Competitors 'The Elder Scrolls Online' and 'Destiny 2' possess established player bases and content cycles, requiring a strong marketing push."
+      "text": "Strong established games like 'Destiny 2' and 'The Elder Scrolls Online' may attract players if 'Dune: Awakening's' content falls short."
     },
     {
       "id": "th-002",
-      "text": "The crowded survival genre with titles like 'Conan Exiles' and 'Valheim' makes it challenging to maintain visibility."
+      "text": "New entries like 'Lost Ark' increase competition for player attention on Steam, targeting similar audiences."
     },
     {
       "id": "th-003",
-      "text": "Aggressive monetization could face backlash compared to free-to-play models like 'Warframe'."
+      "text": "MTX model scrutiny, as seen with 'Warframe,' might cause friction or backlash if not managed well in 'Dune: Awakening.'"
     },
     {
       "id": "th-004",
-      "text": "The influx of new sci-fi and MMO titles, such as 'Nightingale', could fragment the audience attention before establishing a foothold."
+      "text": "Closed beta limitations can hinder early momentum compared to successful feedback-driven strategies by 'Rust.'"
     }
   ]
 }

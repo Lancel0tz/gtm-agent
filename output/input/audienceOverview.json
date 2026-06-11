@@ -1,10 +1,10 @@
 {
-  "summary": "The audience for 'Dune: Awakening' is segmented based on primary motivations and behaviors. These segments recognize narrative depth, survival mechanics, competitive PvP, social community building, and crafting as key engagement areas. Each segment is associated with existing games in the market that cater to similar interests, highlighting Dune's position amidst established competitors and revealing its potential draw across diverse player types.",
+  "summary": "The audience segmentation is crafted to align with the specific preferences and motivations of potential players for 'Dune: Awakening'. Each segment mirrors distinct player behaviors, whether it's a focus on narrative immersion, survival mechanics, social and competitive gameplay, or crafting and customization. The segmentation also considers the competitive gaming landscape, especially identifying competitors offering similar experiences within each audience's interest area.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Narrative-Driven Explorers",
-      "description": "These players are driven by rich narrative experiences and love exploring deep lore and story. They prioritize story over survival or PvP elements, aligning with the Dune IP's deep narrative and political intrigue.",
+      "segmentName": "Sci-Fi Story-driven Explorers",
+      "description": "These players are motivated by deep storytelling and narrative exploration within expansive sci-fi worlds. They're drawn to Dune: Awakening for its rich lore and the opportunity to engage with faction-based politics and a narrative-rich environment. Unlike survivalists or PvP enthusiasts, their primary motivation is a compelling sci-fi narrative.",
       "selectedExistingCompetitors": [
         "Star Wars: The Old Republic",
         "The Elder Scrolls Online"
@@ -12,43 +12,30 @@
     },
     {
       "id": "seg-2",
-      "segmentName": "Survival Enthusiasts",
-      "description": "Focused on surviving in harsh environments and love overcoming immersive challenges. They appreciate engaging with difficult survival mechanics rather than story or competitive elements.",
+      "segmentName": "Hardcore Survival Enthusiasts",
+      "description": "Motivated by challenging gameplay with elements of survival and resource management. They enjoy mastering hostile environments, which is why the survival challenges of Dune's Arrakis appeal to them. They prioritize survival aspects over story or social interactions.",
       "selectedExistingCompetitors": [
         "Conan Exiles",
-        "Rust",
-        "Valheim",
         "Scum",
-        "The Forest"
+        "Rust"
       ]
     },
     {
       "id": "seg-3",
-      "segmentName": "Competitive PvP Gamers",
-      "description": "These players seek the thrill of competition, focusing on PvP engagements and large-scale battles. They are drawn to PvP dynamics over exploration or survival elements.",
+      "segmentName": "Social and Competitive MMO Players",
+      "description": "Primarily driven by social interactions and competition. They appreciate cooperative gameplay and are drawn to the opportunities in Dune: Awakening for forming alliances and engaging in guild-based politics. They differ from solo explorers, focusing on community dynamics and PvP.",
       "selectedExistingCompetitors": [
         "Destiny 2",
-        "Black Desert Online",
-        "Warframe"
+        "Black Desert Online"
       ]
     },
     {
       "id": "seg-4",
-      "segmentName": "Social MMO Community Builders",
-      "description": "Motivated by community and collaborative gameplay, these players thrive on social interaction within guilds and player-driven events, more than competitive combat.",
-      "selectedExistingCompetitors": [
-        "The Elder Scrolls Online",
-        "Lost Ark"
-      ]
-    },
-    {
-      "id": "seg-5",
-      "segmentName": "Crafting Enthusiasts",
-      "description": "Driven by creative freedom, these players focus on building and customizing environments and items. They enjoy craftsmanship over combat, drawn to extensive crafting systems.",
+      "segmentName": "Crafting and Customization Enthusiasts",
+      "description": "Driven by the ability to craft and personalize within an open-world environment, they find satisfaction in customization. Dune: Awakening's crafting options, from building fortresses to customizing characters, appeal to their creative desires. They stand apart from those focused on narrative or pure survival.",
       "selectedExistingCompetitors": [
         "Valheim",
-        "Conan Exiles",
-        "Nightingale"
+        "Ark: Survival Evolved"
       ]
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "summary": "This revised list of competitors for \"Dune: Awakening\" focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
+  "summary": "This revised list of competitors for 'Dune: Awakening' focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
   "existingCompetitors": [
     {
       "id": "ec-002",
@@ -11,7 +11,7 @@
     {
       "id": "ec-003",
       "name": "Rust",
-      "rationale": "With its open-world survival and crafting elements, \"Rust\" provides competitive multiplayer engagements, a core experience in \"Dune: Awakening.\"",
+      "rationale": "With its open-world survival and crafting elements, 'Rust' provides competitive multiplayer engagements, a core experience in 'Dune: Awakening.'",
       "verified": true,
       "steamAppId": 252490
     },
@@ -79,11 +79,11 @@
       "steamAppId": 242760
     },
     {
-      "id": "ec-019",
-      "name": "Nightingale",
-      "rationale": "Features survival crafting mechanics in a shared world environment with a focus on exploration and lore, similar to Dune's atmospheric and survival focus.",
+      "id": "ec-020",
+      "name": "Ark: Survival Evolved",
+      "rationale": "A well-known survival game with multiplayer engagement, crafting, and exploration features, aligning with the survival elements in Dune.",
       "verified": true,
-      "steamAppId": 1928980
+      "steamAppId": 346110
     }
   ]
 }
