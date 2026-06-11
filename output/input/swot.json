@@ -2,77 +2,73 @@
   "strengths": [
     {
       "id": "sw-001",
-      "text": "Unique IP differentiation in a homogenous survival market — no competitor like Conan Exiles (fantasy), Rust (modern/post-apoc), or Scum (island prison) offers the Dune sci-fi universe, giving the Dune IP Fan segment zero survival alternatives that deliver authentic Arrakis."
+      "text": "\"Dune: Awakening\" leverages rich lore appealing to Sci-Fi Narrative Enthusiasts, contrasting competitors like \"Conan Exiles\"."
     },
     {
       "id": "sw-002",
-      "text": "Optional PvP creates a wider funnel than Rust or Conan Exiles by directly addressing the ~40% of the audience (Open-World Explorer and Social-Collector Sandbox Player) underserved by mandatory PvP in those games."
+      "text": "Dune-specific mechanics like sandstorms differ from \"Rust,\" attracting Survival and Crafting Aficionados."
     },
     {
       "id": "sw-003",
-      "text": "Dynamic world with Coriolis storms reshaping terrain offers recurring discovery loops that no competitor matches — Valheim has static biomes, Conan Exiles fixed maps, Rust identical wipes — targeting the Open-World Explorer segment's need for novelty."
+      "text": "Faction gameplay (Atreides vs. Harkonnen) engages Competitive PvP Strategists better than games like \"Valheim.\""
     },
     {
       "id": "sw-004",
-      "text": "Faction politics with server-wide consequences (Landsraad) provides asymmetric warfare and status recognition beyond Rust's shallow clan cycle or Conan Exiles' PvE-only purge, directly appealing to Competitive Faction Players."
+      "text": "GaaS infrastructure resembles \"Destiny 2,\" supporting player engagement without a subscription model."
     }
   ],
   "weaknesses": [
     {
       "id": "wk-001",
-      "text": "$50 purchase price plus MTX/Battle Pass is a higher barrier than free-to-play MMO competitors like Lost Ark, Warframe, and Destiny 2, particularly risking the Social-Collector Sandbox Player segment accustomed to free entry."
+      "text": "Initial Steam exclusivity limits reach compared to multi-platform games like \"Destiny 2.\""
     },
     {
       "id": "wk-002",
-      "text": "No crossplay and Steam-only launch severely limits addressable audience compared to Rust and Conan Exiles, which both have console versions, leaving Dune IP Fans and Competitive Faction Players on console with no path to entry until 2026."
+      "text": "Lack of crossplay may impact community size versus cross-platform competitors \"Warframe\" and \"Destiny 2.\""
     },
     {
       "id": "wk-003",
-      "text": "NDA-locked beta with limited participants (10,000 → 2,000 → 12,000) creates a visibility gap versus open-beta competitors like Warframe and Destiny 2, minimizing pre-launch content and preventing Open-World Explorer influencer engagement."
+      "text": "Complex narrative appeal might alienate those unfamiliar with Dune, unlike \"Valheim\" and \"Rust.\""
     },
     {
       "id": "wk-004",
-      "text": "Survival systems risk feeling generic to the Survival Hardcore segment because crafting stillsuits and extracting water are mechanically similar to Conan Exiles, and if depth is lower, the IP alone won't retain players from Rust or Scum."
+      "text": "Delayed console launch risks losing momentum to competitors like \"The Elder Scrolls Online.\""
     }
   ],
   "opportunities": [
     {
       "id": "op-001",
-      "text": "No survival game currently serves the narrative-driven MMO survival niche — The Elder Scrolls Online and Star Wars: The Old Republic offer story but no survival; Conan Exiles has lore but no structured quests, leaving a white space for Dune IP Fans and Open-World Explorers."
+      "text": "Gap for survival games with deep narrative, positioning itself uniquely against \"Star Wars: The Old Republic.\""
     },
     {
       "id": "op-002",
-      "text": "The Social-Collector Sandbox Player segment lacks a survival game with safe social hubs, player economy, and cosmetic display — Destiny 2 and Warframe offer hubs but not survival, while Conan Exiles lacks robust trading; Dune's social hubs with transmog target this gap, and its Battle Pass aligns with conditioned players."
+      "text": "High immersion potential in Dune’s universe attracts Multiplayer Social Explorers seeking more than \"Conan Exiles.\""
     },
     {
       "id": "op-003",
-      "text": "Private servers with shared Worlds create a hybrid model no competitor offers — Rust and Conan Exiles have binary official/private choices; Dune's model of private servers plus shared social hubs and Deep Desert attracts Open-World Explorers seeking safe bases with optional large-scale events and supports community RP servers."
+      "text": "Rising sci-fi interest can establish Dune as a new narrative leader, surpassing \"Star Wars: The Old Republic.\""
     },
     {
       "id": "op-004",
-      "text": "The Dune movie franchise momentum (2021, 2024) provides a cultural tailwind — Dune: Part Two released March 2024, 14 months before PC launch, at peak Dune IP Fan awareness; a $1-2M marketing budget can leverage Warner Bros.' global film spend, unlike Star Wars: The Old Republic which launched during a content drought."
+      "text": "Strategic marketing and localization can capture global player bases, unlike \"The Forest\" or \"Nightingale.\""
     }
   ],
   "threats": [
     {
       "id": "th-001",
-      "text": "Conan Exiles' Age of War chapter system (2023-2024) directly threatens Dune's faction warfare USP with siege warfare, clan alliances, and server-wide events — if it adds political factions before May 2025, Competitive Faction Players have no reason to switch."
+      "text": "New entries like \"Nightingale\" increase competition, affecting Dune’s market entry in the survival genre."
     },
     {
       "id": "th-002",
-      "text": "The Survival Hardcore segment is hostile to MTX/Battle Pass systems — Rust has no Battle Pass and Scum no MTX — and expecting a one-time purchase model; aggressive monetization risks review-bombing that turns away Dune IP Fans before they evaluate the game."
+      "text": "\"Dune: Awakening\" faces audience saturation in MMOs, needing differentiation from \"Black Desert Online.\""
     },
     {
       "id": "th-003",
-      "text": "Destiny 2 and Warframe have already captured the sci-fi shooter with seasons and MTX player — the Social-Collector Sandbox Player and Competitive Faction Player segments have sunk cost in established accounts, making conversion from a $50 entry fee with no cross-save challenging."
+      "text": "Scrutinized MTX models could alienate players, similar to reactions seen with \"Destiny 2.\""
     },
     {
       "id": "th-004",
-      "text": "Steam-only launch makes the game vulnerable to ecosystem risks like algorithm changes, server outages, or Valve promoting competitors (e.g., Rust update or Nightingale), whereas Conan Exiles mitigated by launching on GOG, Epic, and consoles sequentially."
-    },
-    {
-      "id": "th-005",
-      "text": "Localization into 14 languages without crossplay or console presence creates support overhead without proportional revenue, especially in Korean and Japanese markets where Competitive Faction Players already have established MMOs like Lost Ark and Black Desert with decades of content."
+      "text": "High DLC expectations from \"The Elder Scrolls Online\" demand continuous quality content delivery."
     }
   ]
 }

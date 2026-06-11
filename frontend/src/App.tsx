@@ -31,6 +31,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [quote, setQuote] = useState<string | null>(null);
   const [streamingText, setStreamingText] = useState('');
+  // Previous generation's positions — powers green(new)/red(gone) dots on the matrix
+  const [pmPrevPositions, setPmPrevPositions] = useState<Array<{ gameName: string; xPosition: number; yPosition: number }> | null>(null);
   const [provider, setProvider] = useState('');
   const [model, setModel] = useState('');
   const [providers, setProviders] = useState<Record<string, ProviderInfo>>({});
@@ -73,6 +75,21 @@ function App() {
       });
     });
   }, []);
+
+  // Refresh the prior matrix snapshot whenever the matrix itself changes
+  useEffect(() => {
+    if (!state.positioningMatrix.data) {
+      setPmPrevPositions(null);
+      return;
+    }
+    fetch('/api/modules/positioningMatrix/versions')
+      .then(r => r.json())
+      .then((d) => {
+        const prev = d.versions?.[0]?.data?.positions;
+        setPmPrevPositions(Array.isArray(prev) ? prev : null);
+      })
+      .catch(() => setPmPrevPositions(null));
+  }, [state.positioningMatrix.data]);
 
   useEffect(() => {
     loadInput();
@@ -401,7 +418,7 @@ function App() {
 
         {/* Middle: Canvas */}
         <div className="flex-1 overflow-y-auto min-w-0">
-          <Canvas state={state} onQuote={setQuote} />
+          <Canvas state={state} onQuote={setQuote} pmPrevPositions={pmPrevPositions} />
         </div>
 
         {/* Right: Chat */}

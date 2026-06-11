@@ -45,7 +45,7 @@ def _fake_modules(monkeypatch, log: list, overlap: dict | None = None):
             {"id": "s1", "segmentName": "Seg", "description": "d",
              "selectedExistingCompetitors": ["A"]}]}
 
-    async def fake_pm(input_md, cl, ao, previous=None, feedback=None):
+    async def fake_pm(input_md, cl, ao, previous=None, feedback=None, must_include=None):
         log.append("pm:start")
         if overlap is not None:
             overlap["pm_started"].set()

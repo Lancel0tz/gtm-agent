@@ -23,6 +23,7 @@ async def generate(
     audience_overview: dict,
     previous: dict | None = None,
     feedback: str | None = None,
+    must_include: list[str] | None = None,
 ) -> dict:
     """Generate PositioningMatrix using competitive and audience data.
 
@@ -30,6 +31,15 @@ async def generate(
     let users compare positions across updates, so they are kept unless the
     upstream change clearly invalidates them.
     """
+    must_include_note = ""
+    if must_include:
+        names = ", ".join(must_include)
+        must_include_note = (
+            f"\n\nMANDATORY INCLUSIONS: The following competitors were just added "
+            f"to the landscape and are likely the reason for this update — they MUST "
+            f"appear in the plotted positions of the PRIMARY matrix: {names}."
+        )
+
     stability_note = ""
     if previous and previous.get("xAxis") and previous.get("yAxis"):
         px, py = previous["xAxis"], previous["yAxis"]
@@ -65,6 +75,7 @@ async def generate(
         "model vs content cadence, accessibility vs depth). Plot the same games "
         "on each. Each lens should answer a different strategic question."
         + stability_note
+        + must_include_note
     )
 
     structuring_prompt = (
@@ -74,6 +85,7 @@ async def generate(
         "differentiate the games and reveal a strategic insight. "
         "Put the primary matrix in xAxis/yAxis/positions, and the two "
         "alternative lenses in alternativeViews (same structure each)."
+        + (f" The primary positions MUST include: {', '.join(must_include)}." if must_include else "")
     )
 
     if feedback:

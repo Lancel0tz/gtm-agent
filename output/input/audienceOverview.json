@@ -1,20 +1,30 @@
 {
-  "summary": "The analysis segments the potential audience for Dune: Awakening into five distinct groups based on primary motivations and behaviors. The segmentation logic grounds each segment in the competitive landscape by identifying existing games that currently satisfy similar needs. The Survival Hardcore segment competes with Rust, Scum, and Conan Exiles; the Open-World Explorer competes with Valheim, The Elder Scrolls Online, and Black Desert Online; the Competitive Faction Player competes with Rust, Conan Exiles, Lost Ark, and Black Desert Online; the Dune IP Fan competes with Star Wars: The Old Republic and Warframe; and the Social-Collector Sandbox Player competes with The Elder Scrolls Online, Warframe, Destiny 2, and Conan Exiles. This mapping ensures the game's features uniquely address gaps or overlaps with these existing experiences.",
+  "summary": "The segmentation logic for Dune: Awakening focuses on identifying player motivations and behaviors, aligning them with existing competitors in the gaming landscape. Sci-Fi Narrative Enthusiasts gravitate towards rich storytelling and lore, similar to games like Star Wars: The Old Republic and The Elder Scrolls Online. Survival and Crafting Aficionados are attracted to resource management and base building, akin to experiences found in Conan Exiles, Rust, Scum, and The Forest. Multiplayer Social Explorers are motivated by co-op gameplay and social interactions, reminiscent of games such as Valheim, The Elder Scrolls Online, and Black Desert Online. Competitive PvP Strategists thrive on strategic combat and competitive dynamics, aligning with Destiny 2, Warframe, and Rust.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Survival Hardcore",
-      "description": "Driven by mastery of systems, thrives on tension and resource scarcity. Seeks punishing environments where poor planning equals death. Motivated by progression through skill and knowledge. Values permaloss or semi-permaloss mechanics and the wipe cycle. Plays daily in 3-6 hour sessions and is highly engaged in server politics.",
+      "segmentName": "Sci-Fi Narrative Enthusiasts",
+      "description": "Motivated by immersive storytelling and lore-driven settings, focusing on exploration and narrative over competitive play. This segment appreciates rich game worlds and narratives like those found in Dune, with an emphasis on engaging political and social dynamics. They are less interested in direct competition or PvP, unless it enhances storytelling.",
       "selectedExistingCompetitors": [
-        "Rust",
-        "Scum",
-        "Conan Exiles"
+        "Star Wars: The Old Republic",
+        "The Elder Scrolls Online"
       ]
     },
     {
       "id": "seg-2",
-      "segmentName": "Open-World Explorer",
-      "description": "Driven by curiosity and discovery. Prefers solo or small-group gameplay over large-scale conflict. Values verticality, mobility, and traversal tools. Engages with crafting to enable further exploration. Less concerned with endgame; journeys over destinations. Plays 2-4 sessions per week, 2-3 hours each.",
+      "segmentName": "Survival and Crafting Aficionados",
+      "description": "Driven by survival mechanics, resource management, and base building. They enjoy strategic planning and maintaining ecosystems, attracted to Dune's unique survival challenges such as harsh environments and unique crafting systems. They engage in PvP for resource control but focus more on survival strategy.",
+      "selectedExistingCompetitors": [
+        "Conan Exiles",
+        "Rust",
+        "Scum",
+        "The Forest"
+      ]
+    },
+    {
+      "id": "seg-3",
+      "segmentName": "Multiplayer Social Explorers",
+      "description": "Value social aspects and cooperative play, engaging with large-scale communities and in-game collaborations. They enjoy exploring with friends and participating in both PvE and PvP for social bonding. Key motivators include alliances and shared achievements in a multiplayer context.",
       "selectedExistingCompetitors": [
         "Valheim",
         "The Elder Scrolls Online",
@@ -22,34 +32,13 @@
       ]
     },
     {
-      "id": "seg-3",
-      "segmentName": "Competitive Faction Player",
-      "description": "Motivated by territory control, resource dominance, and server-wide influence. Drawn to guild/clan structures with defined hierarchies. Enjoys asymmetric warfare and metagame systems (politics, economy, alliances). Plays in organized groups, values recognition and status markers.",
-      "selectedExistingCompetitors": [
-        "Rust",
-        "Conan Exiles",
-        "Lost Ark",
-        "Black Desert Online"
-      ]
-    },
-    {
       "id": "seg-4",
-      "segmentName": "Dune IP Fan",
-      "description": "Primary motivation is fidelity to the source material. Seeks authentic immersion in Herbert's universe. Values narrative depth and environmental storytelling. Often less experienced with survival/MMO gameplay but willing to learn for the IP. Plays irregularly, driven by content drops or narrative updates.",
+      "segmentName": "Competitive PvP Strategists",
+      "description": "Motivated by competition, PvP combat, and strategic gameplay. They focus on control of resources and faction warfare, seeking to outsmart and overpower opponents. They prioritize gameplay that challenges their strategic and combat skills, prevalent in Dune's faction-based and resource-driven conflicts.",
       "selectedExistingCompetitors": [
-        "Star Wars: The Old Republic",
-        "Warframe"
-      ]
-    },
-    {
-      "id": "seg-5",
-      "segmentName": "Social-Collector Sandbox Player",
-      "description": "Motivated by ownership, customization, and social visibility. Core loop: gather resources, craft/earn cosmetics, display them, gain social validation. Enjoys player hubs, trade economies, and showing off rare items. Engages with Battle Pass/MTX for cosmetic/status value. Plays 1-2 hours, 4-5 sessions per week. Prefers safety and opt-in PvP.",
-      "selectedExistingCompetitors": [
-        "The Elder Scrolls Online",
-        "Warframe",
         "Destiny 2",
-        "Conan Exiles"
+        "Warframe",
+        "Rust"
       ]
     }
   ]

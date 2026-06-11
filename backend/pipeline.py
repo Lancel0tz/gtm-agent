@@ -302,8 +302,15 @@ class Pipeline:
                                      lambda fb: audience.generate(input_md, cl, feedback=fb))
         elif module_name == "positioningMatrix":
             prev = self.state.positioningMatrix
+            # Competitors just added to the landscape must make it onto the map
+            just_added = list(
+                self.changes.get("competitiveLandscape", {})
+                    .get("added", {}).get("existingCompetitors", [])
+            )
             return await self._gated(module_name,
-                                     lambda fb: positioning.generate(input_md, cl, ao, previous=prev, feedback=fb))
+                                     lambda fb: positioning.generate(
+                                         input_md, cl, ao, previous=prev,
+                                         feedback=fb, must_include=just_added))
         elif module_name == "swot":
             return await self._gated(module_name,
                                      lambda fb: swot.generate(input_md, cl, ao, feedback=fb))

@@ -1,142 +1,6 @@
 {
   "competitiveLandscape": [
     {
-      "ts": 1781108186.384418,
-      "data": {
-        "summary": "This revised list of competitors for \"Dune: Awakening\" focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
-        "existingCompetitors": [
-          {
-            "id": "ec-002",
-            "name": "Conan Exiles",
-            "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune."
-          },
-          {
-            "id": "ec-003",
-            "name": "Rust",
-            "rationale": "With its open-world survival and crafting elements, \"Rust\" provides competitive multiplayer engagements, a core experience in \"Dune: Awakening.\""
-          },
-          {
-            "id": "ec-004",
-            "name": "Valheim",
-            "rationale": "A survival game with crafting and exploration in a large open world, emphasizing both solo and multiplayer experiences akin to Dune's sandbox nature."
-          },
-          {
-            "id": "ec-005",
-            "name": "Star Wars: The Old Republic",
-            "rationale": "Appeals to fans of established sci-fi universes, offering an expansive narrative and universe exploration that can appeal to Dune fans."
-          },
-          {
-            "id": "ec-006",
-            "name": "Destiny 2",
-            "rationale": "Offers a base game with MTX and a seasonal pass model, like Dune, targeting players comfortable with ongoing monetization in multiplayer games."
-          },
-          {
-            "id": "ec-007",
-            "name": "The Elder Scrolls Online",
-            "rationale": "Subscription and DLC-centric monetization with initial purchase, similar to Dune's sales model, targeting gamers willing to invest in both initial and recurring content."
-          },
-          {
-            "id": "ec-008",
-            "name": "Lost Ark",
-            "rationale": "High-profile MMOs on Steam, capturing audience focus within the MMO landscape and competing for player engagement on this platform."
-          },
-          {
-            "id": "ec-009",
-            "name": "Black Desert Online",
-            "rationale": "A Steam MMO offering vibrant world exploration and PvP options, possibly drawing the same player demographic interested in MMO and open-world titles."
-          },
-          {
-            "id": "ec-010",
-            "name": "Warframe",
-            "rationale": "Both appeal to players looking for intricate universes with evolving narrative content and a mix of cooperative and competitive multiplayer settings."
-          },
-          {
-            "id": "ec-016",
-            "name": "Scum",
-            "rationale": "Offers a hardcore survival experience with detailed resource management elements, aligning closely with survival mechanics in Dune."
-          },
-          {
-            "id": "ec-017",
-            "name": "The Forest",
-            "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune."
-          },
-          {
-            "id": "ec-018",
-            "name": "Ark: Survival Evolved",
-            "rationale": "Combines survival and resource management with a rich multiplayer element in a prehistoric setting, paralleling Dune's survival elements in an open world."
-          }
-        ]
-      }
-    },
-    {
-      "ts": 1781108331.281155,
-      "data": {
-        "summary": "This revised list of competitors for \"Dune: Awakening\" focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
-        "existingCompetitors": [
-          {
-            "id": "ec-002",
-            "name": "Conan Exiles",
-            "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune."
-          },
-          {
-            "id": "ec-003",
-            "name": "Rust",
-            "rationale": "With its open-world survival and crafting elements, \"Rust\" provides competitive multiplayer engagements, a core experience in \"Dune: Awakening.\""
-          },
-          {
-            "id": "ec-004",
-            "name": "Valheim",
-            "rationale": "A survival game with crafting and exploration in a large open world, emphasizing both solo and multiplayer experiences akin to Dune's sandbox nature."
-          },
-          {
-            "id": "ec-005",
-            "name": "Star Wars: The Old Republic",
-            "rationale": "Appeals to fans of established sci-fi universes, offering an expansive narrative and universe exploration that can appeal to Dune fans."
-          },
-          {
-            "id": "ec-006",
-            "name": "Destiny 2",
-            "rationale": "Offers a base game with MTX and a seasonal pass model, like Dune, targeting players comfortable with ongoing monetization in multiplayer games."
-          },
-          {
-            "id": "ec-007",
-            "name": "The Elder Scrolls Online",
-            "rationale": "Subscription and DLC-centric monetization with initial purchase, similar to Dune's sales model, targeting gamers willing to invest in both initial and recurring content."
-          },
-          {
-            "id": "ec-008",
-            "name": "Lost Ark",
-            "rationale": "High-profile MMOs on Steam, capturing audience focus within the MMO landscape and competing for player engagement on this platform."
-          },
-          {
-            "id": "ec-009",
-            "name": "Black Desert Online",
-            "rationale": "A Steam MMO offering vibrant world exploration and PvP options, possibly drawing the same player demographic interested in MMO and open-world titles."
-          },
-          {
-            "id": "ec-010",
-            "name": "Warframe",
-            "rationale": "Both appeal to players looking for intricate universes with evolving narrative content and a mix of cooperative and competitive multiplayer settings."
-          },
-          {
-            "id": "ec-016",
-            "name": "Scum",
-            "rationale": "Offers a hardcore survival experience with detailed resource management elements, aligning closely with survival mechanics in Dune."
-          },
-          {
-            "id": "ec-017",
-            "name": "The Forest",
-            "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune."
-          },
-          {
-            "id": "ec-018",
-            "name": "Ark: Survival Evolved",
-            "rationale": "Combines survival and resource management with a rich multiplayer element in a prehistoric setting, paralleling Dune's survival elements in an open world."
-          }
-        ]
-      }
-    },
-    {
       "ts": 1781108411.107002,
       "data": {
         "summary": "This revised list of competitors for \"Dune: Awakening\" focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
@@ -719,144 +583,285 @@
           }
         ]
       }
+    },
+    {
+      "ts": 1781177541.079653,
+      "data": {
+        "summary": "This revised list of competitors for 'Dune: Awakening' focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
+        "existingCompetitors": [
+          {
+            "id": "ec-002",
+            "name": "Conan Exiles",
+            "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune.",
+            "verified": true,
+            "steamAppId": 440900
+          },
+          {
+            "id": "ec-003",
+            "name": "Rust",
+            "rationale": "With its open-world survival and crafting elements, 'Rust' provides competitive multiplayer engagements, a core experience in 'Dune: Awakening.'",
+            "verified": true,
+            "steamAppId": 252490
+          },
+          {
+            "id": "ec-004",
+            "name": "Valheim",
+            "rationale": "A survival game with crafting and exploration in a large open world, emphasizing both solo and multiplayer experiences akin to Dune's sandbox nature.",
+            "verified": true,
+            "steamAppId": 892970
+          },
+          {
+            "id": "ec-005",
+            "name": "Star Wars: The Old Republic",
+            "rationale": "Appeals to fans of established sci-fi universes, offering an expansive narrative and universe exploration that can appeal to Dune fans.",
+            "verified": true,
+            "steamAppId": 1286830
+          },
+          {
+            "id": "ec-006",
+            "name": "Destiny 2",
+            "rationale": "Offers a base game with MTX and a seasonal pass model, like Dune, targeting players comfortable with ongoing monetization in multiplayer games.",
+            "verified": true,
+            "steamAppId": 1085660
+          },
+          {
+            "id": "ec-007",
+            "name": "The Elder Scrolls Online",
+            "rationale": "Subscription and DLC-centric monetization with initial purchase, similar to Dune's sales model, targeting gamers willing to invest in both initial and recurring content.",
+            "verified": true,
+            "steamAppId": 306130
+          },
+          {
+            "id": "ec-008",
+            "name": "Lost Ark",
+            "rationale": "High-profile MMOs on Steam, capturing audience focus within the MMO landscape and competing for player engagement on this platform.",
+            "verified": false,
+            "steamAppId": null
+          },
+          {
+            "id": "ec-009",
+            "name": "Black Desert Online",
+            "rationale": "A Steam MMO offering vibrant world exploration and PvP options, possibly drawing the same player demographic interested in MMO and open-world titles.",
+            "verified": false,
+            "steamAppId": null
+          },
+          {
+            "id": "ec-010",
+            "name": "Warframe",
+            "rationale": "Both appeal to players looking for intricate universes with evolving narrative content and a mix of cooperative and competitive multiplayer settings.",
+            "verified": true,
+            "steamAppId": 230410
+          },
+          {
+            "id": "ec-016",
+            "name": "Scum",
+            "rationale": "Offers a hardcore survival experience with detailed resource management elements, aligning closely with survival mechanics in Dune.",
+            "verified": true,
+            "steamAppId": 513710
+          },
+          {
+            "id": "ec-017",
+            "name": "The Forest",
+            "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune.",
+            "verified": true,
+            "steamAppId": 242760
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781178088.039715,
+      "data": {
+        "summary": "This revised list of competitors for 'Dune: Awakening' focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
+        "existingCompetitors": [
+          {
+            "id": "ec-002",
+            "name": "Conan Exiles",
+            "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune.",
+            "verified": true,
+            "steamAppId": 440900
+          },
+          {
+            "id": "ec-003",
+            "name": "Rust",
+            "rationale": "With its open-world survival and crafting elements, 'Rust' provides competitive multiplayer engagements, a core experience in 'Dune: Awakening.'",
+            "verified": true,
+            "steamAppId": 252490
+          },
+          {
+            "id": "ec-004",
+            "name": "Valheim",
+            "rationale": "A survival game with crafting and exploration in a large open world, emphasizing both solo and multiplayer experiences akin to Dune's sandbox nature.",
+            "verified": true,
+            "steamAppId": 892970
+          },
+          {
+            "id": "ec-005",
+            "name": "Star Wars: The Old Republic",
+            "rationale": "Appeals to fans of established sci-fi universes, offering an expansive narrative and universe exploration that can appeal to Dune fans.",
+            "verified": true,
+            "steamAppId": 1286830
+          },
+          {
+            "id": "ec-006",
+            "name": "Destiny 2",
+            "rationale": "Offers a base game with MTX and a seasonal pass model, like Dune, targeting players comfortable with ongoing monetization in multiplayer games.",
+            "verified": true,
+            "steamAppId": 1085660
+          },
+          {
+            "id": "ec-007",
+            "name": "The Elder Scrolls Online",
+            "rationale": "Subscription and DLC-centric monetization with initial purchase, similar to Dune's sales model, targeting gamers willing to invest in both initial and recurring content.",
+            "verified": true,
+            "steamAppId": 306130
+          },
+          {
+            "id": "ec-008",
+            "name": "Lost Ark",
+            "rationale": "High-profile MMOs on Steam, capturing audience focus within the MMO landscape and competing for player engagement on this platform.",
+            "verified": false,
+            "steamAppId": null
+          },
+          {
+            "id": "ec-009",
+            "name": "Black Desert Online",
+            "rationale": "A Steam MMO offering vibrant world exploration and PvP options, possibly drawing the same player demographic interested in MMO and open-world titles.",
+            "verified": false,
+            "steamAppId": null
+          },
+          {
+            "id": "ec-010",
+            "name": "Warframe",
+            "rationale": "Both appeal to players looking for intricate universes with evolving narrative content and a mix of cooperative and competitive multiplayer settings.",
+            "verified": true,
+            "steamAppId": 230410
+          },
+          {
+            "id": "ec-016",
+            "name": "Scum",
+            "rationale": "Offers a hardcore survival experience with detailed resource management elements, aligning closely with survival mechanics in Dune.",
+            "verified": true,
+            "steamAppId": 513710
+          },
+          {
+            "id": "ec-017",
+            "name": "The Forest",
+            "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune.",
+            "verified": true,
+            "steamAppId": 242760
+          },
+          {
+            "id": "ec-018",
+            "name": "Nightingale",
+            "rationale": "A survival-crafting game set in a gaslamp fantasy universe with realm-hopping mechanics, competing for players interested in open-world survival and base building with a unique narrative setting.",
+            "verified": true,
+            "steamAppId": 2455060
+          },
+          {
+            "id": "ec-019",
+            "name": "Ark: Survival Evolved",
+            "rationale": "A leading open-world survival game featuring crafting, base building, and taming mechanics in a prehistoric setting. Competes directly for survival MMO players interested in large-scale multiplayer sandboxes.",
+            "verified": true,
+            "steamAppId": 346110
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781179779.2100449,
+      "data": {
+        "summary": "This revised list of competitors for 'Dune: Awakening' focuses on survival mechanics, deep narrative-rich sci-fi settings, and expansive multiplayer experiences. The aim is to highlight games that are more closely aligned with the Dune IP’s unique characteristics and gameplay features while recognizing potent players in the genre landscape.",
+        "existingCompetitors": [
+          {
+            "id": "ec-002",
+            "name": "Conan Exiles",
+            "rationale": "This shares themes of survival and crafting in an open-world environment with multiplayer functionality, similar to the mechanics in Dune.",
+            "verified": true,
+            "steamAppId": 440900
+          },
+          {
+            "id": "ec-003",
+            "name": "Rust",
+            "rationale": "With its open-world survival and crafting elements, 'Rust' provides competitive multiplayer engagements, a core experience in 'Dune: Awakening.'",
+            "verified": true,
+            "steamAppId": 252490
+          },
+          {
+            "id": "ec-004",
+            "name": "Valheim",
+            "rationale": "A survival game with crafting and exploration in a large open world, emphasizing both solo and multiplayer experiences akin to Dune's sandbox nature.",
+            "verified": true,
+            "steamAppId": 892970
+          },
+          {
+            "id": "ec-005",
+            "name": "Star Wars: The Old Republic",
+            "rationale": "Appeals to fans of established sci-fi universes, offering an expansive narrative and universe exploration that can appeal to Dune fans.",
+            "verified": true,
+            "steamAppId": 1286830
+          },
+          {
+            "id": "ec-006",
+            "name": "Destiny 2",
+            "rationale": "Offers a base game with MTX and a seasonal pass model, like Dune, targeting players comfortable with ongoing monetization in multiplayer games.",
+            "verified": true,
+            "steamAppId": 1085660
+          },
+          {
+            "id": "ec-007",
+            "name": "The Elder Scrolls Online",
+            "rationale": "Subscription and DLC-centric monetization with initial purchase, similar to Dune's sales model, targeting gamers willing to invest in both initial and recurring content.",
+            "verified": true,
+            "steamAppId": 306130
+          },
+          {
+            "id": "ec-008",
+            "name": "Lost Ark",
+            "rationale": "High-profile MMOs on Steam, capturing audience focus within the MMO landscape and competing for player engagement on this platform.",
+            "verified": false,
+            "steamAppId": null
+          },
+          {
+            "id": "ec-009",
+            "name": "Black Desert Online",
+            "rationale": "A Steam MMO offering vibrant world exploration and PvP options, possibly drawing the same player demographic interested in MMO and open-world titles.",
+            "verified": false,
+            "steamAppId": null
+          },
+          {
+            "id": "ec-010",
+            "name": "Warframe",
+            "rationale": "Both appeal to players looking for intricate universes with evolving narrative content and a mix of cooperative and competitive multiplayer settings.",
+            "verified": true,
+            "steamAppId": 230410
+          },
+          {
+            "id": "ec-016",
+            "name": "Scum",
+            "rationale": "Offers a hardcore survival experience with detailed resource management elements, aligning closely with survival mechanics in Dune.",
+            "verified": true,
+            "steamAppId": 513710
+          },
+          {
+            "id": "ec-017",
+            "name": "The Forest",
+            "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune.",
+            "verified": true,
+            "steamAppId": 242760
+          },
+          {
+            "id": "ec-019",
+            "name": "Ark: Survival Evolved",
+            "rationale": "A leading open-world survival game featuring crafting, base building, and taming mechanics in a prehistoric setting. Competes directly for survival MMO players interested in large-scale multiplayer sandboxes.",
+            "verified": true,
+            "steamAppId": 346110
+          }
+        ]
+      }
     }
   ],
   "audienceOverview": [
-    {
-      "ts": 1781108200.3085692,
-      "data": {
-        "summary": "The segmentation identifies key player groups for 'Dune: Awakening', focusing on their distinct motivations and behaviors, which correspond to the competitive offerings in the existing market. This includes players drawn by narrative depth, competitive survival mechanics, creative sandbox options, and persistent sci-fi MMO environments, aligning them with current games these audiences are likely to engage with.",
-        "segments": [
-          {
-            "id": "seg-1",
-            "segmentName": "Narrative-Driven Explorers",
-            "description": "Behaviors: Prioritize storytelling and world-building, frequently engage with lore and community discussions, seek out games with rich narratives and expansive universes. Motivations: Desire to immerse themselves in a mythos-rich environment, driven by a quest for discovery and understanding of the game world. Boundaries: Distinct from social or competitive players; less motivated by social interactions or PvP competition, preferring exploration and narrative engagement.",
-            "selectedExistingCompetitors": [
-              "Star Wars: The Old Republic",
-              "The Elder Scrolls Online"
-            ]
-          },
-          {
-            "id": "seg-2",
-            "segmentName": "Competitive Survivalists",
-            "description": "Behaviors: Highly competitive, engaged in PvP environments, frequently involved in clan/guild activities, and enjoy competitive advantages through resource management or combat proficiency. Motivations: Thrill of competition, dominance through skill and strategic resource control. Boundaries: Distinct from purely exploration-driven or casual social players, focusing heavily on competitive mechanics and resource domination.",
-            "selectedExistingCompetitors": [
-              "Rust",
-              "Conan Exiles",
-              "Ark: Survival Evolved"
-            ]
-          },
-          {
-            "id": "seg-3",
-            "segmentName": "Sandbox Creators",
-            "description": "Behaviors: Enjoy crafting, building, and customization, frequently engage with in-game systems to modify and personalize their experience extensively. Motivations: Creativity, freedom to build and alter the world, pride in creation and sharing it with others. Boundaries: Distinct from combat-focused or story-driven players, preferring to focus on creation and optimization over direct competition or narrative progression.",
-            "selectedExistingCompetitors": [
-              "Valheim",
-              "The Forest"
-            ]
-          },
-          {
-            "id": "seg-4",
-            "segmentName": "Sci-Fi Enthusiasts and MMO Loyalists",
-            "description": "Behaviors: Enjoy genre-specific lore, frequently engage with sci-fi themed community content, drawn to games with persistent worlds and MMO structures. Motivations: Exploration of vast universes, social interaction, and cooperation with a persistent community. Boundaries: Distinct from single-player enthusiasts or those solely driven by isolated narrative experiences, valuing community and persistent scalability more than niche storytelling.",
-            "selectedExistingCompetitors": [
-              "Destiny 2",
-              "Black Desert Online"
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "ts": 1781108346.3863208,
-      "data": {
-        "summary": "The segmentation identifies key player groups for 'Dune: Awakening', focusing on their distinct motivations and behaviors, which correspond to the competitive offerings in the existing market. This includes players drawn by narrative depth, competitive survival mechanics, creative sandbox options, and persistent sci-fi MMO environments, aligning them with current games these audiences are likely to engage with.",
-        "segments": [
-          {
-            "id": "seg-1",
-            "segmentName": "Narrative-Driven Explorers",
-            "description": "Behaviors: Prioritize storytelling and world-building, frequently engage with lore and community discussions, seek out games with rich narratives and expansive universes. Motivations: Desire to immerse themselves in a mythos-rich environment, driven by a quest for discovery and understanding of the game world. Boundaries: Distinct from social or competitive players; less motivated by social interactions or PvP competition, preferring exploration and narrative engagement.",
-            "selectedExistingCompetitors": [
-              "Star Wars: The Old Republic",
-              "The Elder Scrolls Online"
-            ]
-          },
-          {
-            "id": "seg-2",
-            "segmentName": "Competitive Survivalists",
-            "description": "Behaviors: Highly competitive, engaged in PvP environments, frequently involved in clan/guild activities, and enjoy competitive advantages through resource management or combat proficiency. Motivations: Thrill of competition, dominance through skill and strategic resource control. Boundaries: Distinct from purely exploration-driven or casual social players, focusing heavily on competitive mechanics and resource domination.",
-            "selectedExistingCompetitors": [
-              "Rust",
-              "Conan Exiles",
-              "Ark: Survival Evolved"
-            ]
-          },
-          {
-            "id": "seg-3",
-            "segmentName": "Sandbox Creators",
-            "description": "Behaviors: Enjoy crafting, building, and customization, frequently engage with in-game systems to modify and personalize their experience extensively. Motivations: Creativity, freedom to build and alter the world, pride in creation and sharing it with others. Boundaries: Distinct from combat-focused or story-driven players, preferring to focus on creation and optimization over direct competition or narrative progression.",
-            "selectedExistingCompetitors": [
-              "Valheim",
-              "The Forest"
-            ]
-          },
-          {
-            "id": "seg-4",
-            "segmentName": "Sci-Fi Enthusiasts and MMO Loyalists",
-            "description": "Behaviors: Enjoy genre-specific lore, frequently engage with sci-fi themed community content, drawn to games with persistent worlds and MMO structures. Motivations: Exploration of vast universes, social interaction, and cooperation with a persistent community. Boundaries: Distinct from single-player enthusiasts or those solely driven by isolated narrative experiences, valuing community and persistent scalability more than niche storytelling.",
-            "selectedExistingCompetitors": [
-              "Destiny 2",
-              "Black Desert Online"
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "ts": 1781108426.309053,
-      "data": {
-        "summary": "The segmentation identifies key player groups for 'Dune: Awakening', focusing on their distinct motivations and behaviors, which correspond to the competitive offerings in the existing market. This includes players drawn by narrative depth, competitive survival mechanics, creative sandbox options, and persistent sci-fi MMO environments, aligning them with current games these audiences are likely to engage with.",
-        "segments": [
-          {
-            "id": "seg-1",
-            "segmentName": "Narrative-Driven Explorers",
-            "description": "Behaviors: Prioritize storytelling and world-building, frequently engage with lore and community discussions, seek out games with rich narratives and expansive universes. Motivations: Desire to immerse themselves in a mythos-rich environment, driven by a quest for discovery and understanding of the game world. Boundaries: Distinct from social or competitive players; less motivated by social interactions or PvP competition, preferring exploration and narrative engagement.",
-            "selectedExistingCompetitors": [
-              "Star Wars: The Old Republic",
-              "The Elder Scrolls Online"
-            ]
-          },
-          {
-            "id": "seg-2",
-            "segmentName": "Competitive Survivalists",
-            "description": "Behaviors: Highly competitive, engaged in PvP environments, frequently involved in clan/guild activities, and enjoy competitive advantages through resource management or combat proficiency. Motivations: Thrill of competition, dominance through skill and strategic resource control. Boundaries: Distinct from purely exploration-driven or casual social players, focusing heavily on competitive mechanics and resource domination.",
-            "selectedExistingCompetitors": [
-              "Rust",
-              "Conan Exiles",
-              "Ark: Survival Evolved"
-            ]
-          },
-          {
-            "id": "seg-3",
-            "segmentName": "Sandbox Creators",
-            "description": "Behaviors: Enjoy crafting, building, and customization, frequently engage with in-game systems to modify and personalize their experience extensively. Motivations: Creativity, freedom to build and alter the world, pride in creation and sharing it with others. Boundaries: Distinct from combat-focused or story-driven players, preferring to focus on creation and optimization over direct competition or narrative progression.",
-            "selectedExistingCompetitors": [
-              "Valheim",
-              "The Forest"
-            ]
-          },
-          {
-            "id": "seg-4",
-            "segmentName": "Sci-Fi Enthusiasts and MMO Loyalists",
-            "description": "Behaviors: Enjoy genre-specific lore, frequently engage with sci-fi themed community content, drawn to games with persistent worlds and MMO structures. Motivations: Exploration of vast universes, social interaction, and cooperation with a persistent community. Boundaries: Distinct from single-player enthusiasts or those solely driven by isolated narrative experiences, valuing community and persistent scalability more than niche storytelling.",
-            "selectedExistingCompetitors": [
-              "Destiny 2",
-              "Black Desert Online"
-            ]
-          }
-        ]
-      }
-    },
     {
       "ts": 1781108474.948149,
       "data": {
@@ -1172,690 +1177,236 @@
           }
         ]
       }
+    },
+    {
+      "ts": 1781177592.009651,
+      "data": {
+        "summary": "The analysis segments the potential audience for Dune: Awakening into five distinct groups based on primary motivations and behaviors. The segmentation logic grounds each segment in the competitive landscape by identifying existing games that currently satisfy similar needs. The Survival Hardcore segment competes with Rust, Scum, and Conan Exiles; the Open-World Explorer competes with Valheim, The Elder Scrolls Online, and Black Desert Online; the Competitive Faction Player competes with Rust, Conan Exiles, Lost Ark, and Black Desert Online; the Dune IP Fan competes with Star Wars: The Old Republic and Warframe; and the Social-Collector Sandbox Player competes with The Elder Scrolls Online, Warframe, Destiny 2, and Conan Exiles. This mapping ensures the game's features uniquely address gaps or overlaps with these existing experiences.",
+        "segments": [
+          {
+            "id": "seg-1",
+            "segmentName": "Survival Hardcore",
+            "description": "Driven by mastery of systems, thrives on tension and resource scarcity. Seeks punishing environments where poor planning equals death. Motivated by progression through skill and knowledge. Values permaloss or semi-permaloss mechanics and the wipe cycle. Plays daily in 3-6 hour sessions and is highly engaged in server politics.",
+            "selectedExistingCompetitors": [
+              "Rust",
+              "Scum",
+              "Conan Exiles"
+            ]
+          },
+          {
+            "id": "seg-2",
+            "segmentName": "Open-World Explorer",
+            "description": "Driven by curiosity and discovery. Prefers solo or small-group gameplay over large-scale conflict. Values verticality, mobility, and traversal tools. Engages with crafting to enable further exploration. Less concerned with endgame; journeys over destinations. Plays 2-4 sessions per week, 2-3 hours each.",
+            "selectedExistingCompetitors": [
+              "Valheim",
+              "The Elder Scrolls Online",
+              "Black Desert Online"
+            ]
+          },
+          {
+            "id": "seg-3",
+            "segmentName": "Competitive Faction Player",
+            "description": "Motivated by territory control, resource dominance, and server-wide influence. Drawn to guild/clan structures with defined hierarchies. Enjoys asymmetric warfare and metagame systems (politics, economy, alliances). Plays in organized groups, values recognition and status markers.",
+            "selectedExistingCompetitors": [
+              "Rust",
+              "Conan Exiles",
+              "Lost Ark",
+              "Black Desert Online"
+            ]
+          },
+          {
+            "id": "seg-4",
+            "segmentName": "Dune IP Fan",
+            "description": "Primary motivation is fidelity to the source material. Seeks authentic immersion in Herbert's universe. Values narrative depth and environmental storytelling. Often less experienced with survival/MMO gameplay but willing to learn for the IP. Plays irregularly, driven by content drops or narrative updates.",
+            "selectedExistingCompetitors": [
+              "Star Wars: The Old Republic",
+              "Warframe"
+            ]
+          },
+          {
+            "id": "seg-5",
+            "segmentName": "Social-Collector Sandbox Player",
+            "description": "Motivated by ownership, customization, and social visibility. Core loop: gather resources, craft/earn cosmetics, display them, gain social validation. Enjoys player hubs, trade economies, and showing off rare items. Engages with Battle Pass/MTX for cosmetic/status value. Plays 1-2 hours, 4-5 sessions per week. Prefers safety and opt-in PvP.",
+            "selectedExistingCompetitors": [
+              "The Elder Scrolls Online",
+              "Warframe",
+              "Destiny 2",
+              "Conan Exiles"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781178103.473192,
+      "data": {
+        "summary": "The segmentation is based on five distinct behavioral motivations: systemic PvP progression, emergent sandbox creativity, solo environmental mastery, live-service content cadence, and IP-driven narrative tourism. Each segment corresponds to specific competitors from the survival and MMO landscape, covering both genre loyalists (Rust, Valheim, Conan Exiles, Ark, The Forest, Scum, Nightingale) and service-based titles (Destiny 2, Warframe, Elder Scrolls Online, Lost Ark, Black Desert Online, Star Wars: The Old Republic).",
+        "segments": [
+          {
+            "id": "seg-1",
+            "segmentName": "The Feudal Grinder",
+            "description": "Highly competitive, goal-oriented players driven by systemic progression, faction PvP, territory control, and guild-based warfare. They value structured conflict with clear stakes and are willing to grind for long-term rewards. Distinct from Sandbox Survivalists who seek emergent chaos.",
+            "selectedExistingCompetitors": [
+              "Conan Exiles",
+              "Rust",
+              "Black Desert Online",
+              "Ark: Survival Evolved"
+            ]
+          },
+          {
+            "id": "seg-2",
+            "segmentName": "The Sandbox Survivalist",
+            "description": "Players motivated by emergent gameplay, systemic depth, and player-driven stories. They enjoy creative building, mastering complex systems, and surviving harsh environments for the sake of experience. Distinct from Feudal Grinders who prioritize outcomes over process.",
+            "selectedExistingCompetitors": [
+              "Valheim",
+              "Nightingale",
+              "The Forest",
+              "Scum"
+            ]
+          },
+          {
+            "id": "seg-3",
+            "segmentName": "The Lone Survivor (The Fremen Archetype)",
+            "description": "Self-reliant solo players who seek mastery over the environment. They prefer small groups or solo play, value punishment and knowledge, and see other players as obstacles. They engage with MMO elements only if optional or quiet.",
+            "selectedExistingCompetitors": [
+              "The Forest",
+              "Valheim",
+              "Scum"
+            ]
+          },
+          {
+            "id": "seg-4",
+            "segmentName": "The Live-Service Loyalist",
+            "description": "Players committed to long-term engagement with a single game, driven by recurring content, battle passes, seasonal updates, and FOMO. They are comfortable with MTX and demand regular new challenges. Distinct from Narrative Tourists who leave after a short playthrough.",
+            "selectedExistingCompetitors": [
+              "Destiny 2",
+              "Warframe",
+              "The Elder Scrolls Online",
+              "Lost Ark"
+            ]
+          },
+          {
+            "id": "seg-5",
+            "segmentName": "The Narrative Tourist (The Dune Fan)",
+            "description": "Players motivated by IP fidelity and lore engagement, not genre loyalty. They play for a short, intense period (30-60 hours) to experience iconic Dune moments, then move on. They tolerate unfamiliar mechanics for authentic world-building. Distinct from Sandbox Survivalists and Live-Service Loyalists.",
+            "selectedExistingCompetitors": [
+              "Star Wars: The Old Republic",
+              "The Elder Scrolls Online"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781179810.215706,
+      "data": {
+        "summary": "The audience for 'Dune: Awakening' is segmented based on player motivations and gameplay preferences, aligning with competitive titles in the survival, narrative sci-fi, MMO, creative building, and competitive gaming spaces. Understanding these segments helps identify how 'Dune: Awakening' can appeal to diverse player interests compared to existing competitors.",
+        "segments": [
+          {
+            "id": "seg-1",
+            "segmentName": "Survival Enthusiasts",
+            "description": "These players are heavily invested in the survival aspect of gaming. They enjoy managing resources, crafting tools, building shelters, and overcoming environmental challenges. This segment is distinct in its focus on survival mechanics and resource management, prioritizing those elements over narrative or social multiplayer interactions.",
+            "selectedExistingCompetitors": [
+              "Conan Exiles",
+              "Rust",
+              "The Forest",
+              "Scum",
+              "Ark: Survival Evolved"
+            ]
+          },
+          {
+            "id": "seg-2",
+            "segmentName": "Sci-Fi and Narrative Explorers",
+            "description": "Players who are drawn to rich storytelling and immersive sci-fi worlds. They value narrative depth and lore as well as exploration. This group stands apart due to its primary interest in story-driven content and lore within a sci-fi setting, over the survival mechanics.",
+            "selectedExistingCompetitors": [
+              "Star Wars: The Old Republic",
+              "Warframe",
+              "The Elder Scrolls Online"
+            ]
+          },
+          {
+            "id": "seg-3",
+            "segmentName": "MMO Socializers",
+            "description": "This group thrives on multiplayer experiences, seeking social interactions, collaboration, and competition with other players in vast, shared worlds. Unlike other segments, this group is defined by a preference for social interactions, friend-making, and community involvement in expansive MMO worlds.",
+            "selectedExistingCompetitors": [
+              "Black Desert Online",
+              "The Elder Scrolls Online",
+              "Lost Ark"
+            ]
+          },
+          {
+            "id": "seg-4",
+            "segmentName": "Creative Builders",
+            "description": "Players who enjoy creating and designing within games. They are motivated by the customization options and building mechanics to express creativity. This segment is unique in its focus on creativity and building elements, often prioritizing these over other gameplay mechanics like combat or narrative.",
+            "selectedExistingCompetitors": [
+              "Conan Exiles",
+              "Ark: Survival Evolved",
+              "Black Desert Online"
+            ]
+          },
+          {
+            "id": "seg-5",
+            "segmentName": "Competitive Gamers",
+            "description": "Players who seek competitive experiences, whether through PvP combat, rankings, or other forms of player competition. These players are specifically drawn to competitive elements and derive satisfaction from outperforming others, distinct from those seeking only social or narrative experiences.",
+            "selectedExistingCompetitors": [
+              "Destiny 2",
+              "Rust",
+              "Warframe"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781180677.0575109,
+      "data": {
+        "summary": "The audience is segmented based on their primary motivations and gameplay preferences, aligning with existing competitors in the market. Sci-Fi Enthusiasts and Lore Seekers are attracted to deep narratives, similar to titles like Star Wars: The Old Republic and Destiny 2. Survival Strategists prioritize challenging environments and resource management, aligning with games such as Conan Exiles, Rust, and Scum. Sandbox Builders enjoy creative gameplay and world-building, found in games like Valheim, The Forest, and Black Desert Online. Cooperative Multiplayer and Social Gamers seek shared experiences, similar to offerings in Nightingale, The Elder Scrolls Online, and Destiny 2.",
+        "segments": [
+          {
+            "id": "seg-1",
+            "segmentName": "Sci-Fi Enthusiasts and Lore Seekers",
+            "description": "These players are motivated by a deep interest in rich narratives and lore-heavy settings. They engage in games that offer intricate backstories and expansive worlds. Their primary motivation is narrative immersion rather than competitive gameplay or crafting mechanics.",
+            "selectedExistingCompetitors": [
+              "Star Wars: The Old Republic",
+              "Destiny 2",
+              "The Elder Scrolls Online"
+            ]
+          },
+          {
+            "id": "seg-2",
+            "segmentName": "Survival Strategists",
+            "description": "These players enjoy the challenge of resource management and environmental adaptation. They are drawn to open-world survival mechanics and prioritize strategic thinking with harsh environments and resource scarcity.",
+            "selectedExistingCompetitors": [
+              "Conan Exiles",
+              "Rust",
+              "Scum"
+            ]
+          },
+          {
+            "id": "seg-3",
+            "segmentName": "Sandbox Builders and Creators",
+            "description": "Motivated by creation and manipulation within open sandbox environments, these players enjoy building, customizing, and crafting. They prioritize creativity and customization over competitive or narrative elements.",
+            "selectedExistingCompetitors": [
+              "Valheim",
+              "The Forest",
+              "Black Desert Online"
+            ]
+          },
+          {
+            "id": "seg-4",
+            "segmentName": "Cooperative Multiplayer and Social Gamers",
+            "description": "These players enjoy playing with friends and seek shared experiences. They prioritize cooperation, social interaction, and teamwork over solo survival or crafting-heavy engagement.",
+            "selectedExistingCompetitors": [
+              "Nightingale",
+              "The Elder Scrolls Online",
+              "Destiny 2"
+            ]
+          }
+        ]
+      }
     }
   ],
   "positioningMatrix": [
-    {
-      "ts": 1781108233.570198,
-      "data": {
-        "xAxis": {
-          "axisName": "Narrative Depth vs. Mechanical Complexity",
-          "lowLabel": "Combat Focused Experience",
-          "highLabel": "Immersive Story Universe"
-        },
-        "yAxis": {
-          "axisName": "Sandbox Creativity vs. Structured MMO Dynamics",
-          "lowLabel": "Creative Sandbox Exploration",
-          "highLabel": "Competitive Driven MMO"
-        },
-        "positions": [
-          {
-            "id": "pm-001",
-            "gameName": "Dune: Awakening",
-            "xPosition": 8.0,
-            "yPosition": 7.0
-          },
-          {
-            "id": "pm-002",
-            "gameName": "Conan Exiles",
-            "xPosition": 5.0,
-            "yPosition": 5.0
-          },
-          {
-            "id": "pm-003",
-            "gameName": "Rust",
-            "xPosition": 3.0,
-            "yPosition": 4.0
-          },
-          {
-            "id": "pm-004",
-            "gameName": "Valheim",
-            "xPosition": 6.0,
-            "yPosition": 4.0
-          },
-          {
-            "id": "pm-005",
-            "gameName": "Star Wars: The Old Republic",
-            "xPosition": 9.0,
-            "yPosition": 8.0
-          },
-          {
-            "id": "pm-006",
-            "gameName": "Destiny 2",
-            "xPosition": 7.0,
-            "yPosition": 9.0
-          },
-          {
-            "id": "pm-007",
-            "gameName": "The Elder Scrolls Online",
-            "xPosition": 8.0,
-            "yPosition": 8.0
-          },
-          {
-            "id": "pm-008",
-            "gameName": "Ark: Survival Evolved",
-            "xPosition": 4.0,
-            "yPosition": 3.0
-          },
-          {
-            "id": "pm-009",
-            "gameName": "Black Desert Online",
-            "xPosition": 7.0,
-            "yPosition": 9.0
-          },
-          {
-            "id": "pm-010",
-            "gameName": "Warframe",
-            "xPosition": 6.0,
-            "yPosition": 7.0
-          }
-        ],
-        "alternativeViews": [
-          {
-            "xAxis": {
-              "axisName": "Monetization Model",
-              "lowLabel": "Initial Purchase Focus",
-              "highLabel": "Freemium Model"
-            },
-            "yAxis": {
-              "axisName": "Content Cadence",
-              "lowLabel": "Static Experience",
-              "highLabel": "Dynamic Content Rollout"
-            },
-            "positions": [
-              {
-                "id": "pm-001",
-                "gameName": "Dune: Awakening",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-002",
-                "gameName": "Conan Exiles",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-003",
-                "gameName": "Rust",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-004",
-                "gameName": "Valheim",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-005",
-                "gameName": "Star Wars: The Old Republic",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-006",
-                "gameName": "Destiny 2",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-007",
-                "gameName": "The Elder Scrolls Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-008",
-                "gameName": "Ark: Survival Evolved",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-009",
-                "gameName": "Black Desert Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-010",
-                "gameName": "Warframe",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              }
-            ]
-          },
-          {
-            "xAxis": {
-              "axisName": "Accessibility",
-              "lowLabel": "Easy to Pick Up",
-              "highLabel": "Mastery Requires Effort"
-            },
-            "yAxis": {
-              "axisName": "Depth",
-              "lowLabel": "Casual Engagement",
-              "highLabel": "Demanding Long-Term Commitment"
-            },
-            "positions": [
-              {
-                "id": "pm-001",
-                "gameName": "Dune: Awakening",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-002",
-                "gameName": "Conan Exiles",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-003",
-                "gameName": "Rust",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-004",
-                "gameName": "Valheim",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-005",
-                "gameName": "Star Wars: The Old Republic",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-006",
-                "gameName": "Destiny 2",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-007",
-                "gameName": "The Elder Scrolls Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-008",
-                "gameName": "Ark: Survival Evolved",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-009",
-                "gameName": "Black Desert Online",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-010",
-                "gameName": "Warframe",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "ts": 1781108372.138289,
-      "data": {
-        "xAxis": {
-          "axisName": "Narrative Depth vs. Mechanical Complexity",
-          "lowLabel": "Combat Focused Experience",
-          "highLabel": "Immersive Story Universe"
-        },
-        "yAxis": {
-          "axisName": "Sandbox Creativity vs. Structured MMO Dynamics",
-          "lowLabel": "Creative Sandbox Exploration",
-          "highLabel": "Competitive Driven MMO"
-        },
-        "positions": [
-          {
-            "id": "pm-001",
-            "gameName": "Dune: Awakening",
-            "xPosition": 8.0,
-            "yPosition": 7.0
-          },
-          {
-            "id": "pm-002",
-            "gameName": "Conan Exiles",
-            "xPosition": 5.0,
-            "yPosition": 5.0
-          },
-          {
-            "id": "pm-003",
-            "gameName": "Rust",
-            "xPosition": 3.0,
-            "yPosition": 4.0
-          },
-          {
-            "id": "pm-004",
-            "gameName": "Valheim",
-            "xPosition": 6.0,
-            "yPosition": 4.0
-          },
-          {
-            "id": "pm-005",
-            "gameName": "Star Wars: The Old Republic",
-            "xPosition": 9.0,
-            "yPosition": 8.0
-          },
-          {
-            "id": "pm-006",
-            "gameName": "Destiny 2",
-            "xPosition": 7.0,
-            "yPosition": 9.0
-          },
-          {
-            "id": "pm-007",
-            "gameName": "The Elder Scrolls Online",
-            "xPosition": 8.0,
-            "yPosition": 8.0
-          },
-          {
-            "id": "pm-008",
-            "gameName": "Ark: Survival Evolved",
-            "xPosition": 4.0,
-            "yPosition": 3.0
-          },
-          {
-            "id": "pm-009",
-            "gameName": "Black Desert Online",
-            "xPosition": 7.0,
-            "yPosition": 9.0
-          },
-          {
-            "id": "pm-010",
-            "gameName": "Warframe",
-            "xPosition": 6.0,
-            "yPosition": 7.0
-          }
-        ],
-        "alternativeViews": [
-          {
-            "xAxis": {
-              "axisName": "Monetization Model",
-              "lowLabel": "Initial Purchase Focus",
-              "highLabel": "Freemium Model"
-            },
-            "yAxis": {
-              "axisName": "Content Cadence",
-              "lowLabel": "Static Experience",
-              "highLabel": "Dynamic Content Rollout"
-            },
-            "positions": [
-              {
-                "id": "pm-001",
-                "gameName": "Dune: Awakening",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-002",
-                "gameName": "Conan Exiles",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-003",
-                "gameName": "Rust",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-004",
-                "gameName": "Valheim",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-005",
-                "gameName": "Star Wars: The Old Republic",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-006",
-                "gameName": "Destiny 2",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-007",
-                "gameName": "The Elder Scrolls Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-008",
-                "gameName": "Ark: Survival Evolved",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-009",
-                "gameName": "Black Desert Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-010",
-                "gameName": "Warframe",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              }
-            ]
-          },
-          {
-            "xAxis": {
-              "axisName": "Accessibility",
-              "lowLabel": "Easy to Pick Up",
-              "highLabel": "Mastery Requires Effort"
-            },
-            "yAxis": {
-              "axisName": "Depth",
-              "lowLabel": "Casual Engagement",
-              "highLabel": "Demanding Long-Term Commitment"
-            },
-            "positions": [
-              {
-                "id": "pm-001",
-                "gameName": "Dune: Awakening",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-002",
-                "gameName": "Conan Exiles",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-003",
-                "gameName": "Rust",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-004",
-                "gameName": "Valheim",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-005",
-                "gameName": "Star Wars: The Old Republic",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-006",
-                "gameName": "Destiny 2",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-007",
-                "gameName": "The Elder Scrolls Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-008",
-                "gameName": "Ark: Survival Evolved",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-009",
-                "gameName": "Black Desert Online",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-010",
-                "gameName": "Warframe",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "ts": 1781108445.047474,
-      "data": {
-        "xAxis": {
-          "axisName": "Narrative Depth vs. Mechanical Complexity",
-          "lowLabel": "Combat Focused Experience",
-          "highLabel": "Immersive Story Universe"
-        },
-        "yAxis": {
-          "axisName": "Sandbox Creativity vs. Structured MMO Dynamics",
-          "lowLabel": "Creative Sandbox Exploration",
-          "highLabel": "Competitive Driven MMO"
-        },
-        "positions": [
-          {
-            "id": "pm-001",
-            "gameName": "Dune: Awakening",
-            "xPosition": 8.0,
-            "yPosition": 7.0
-          },
-          {
-            "id": "pm-002",
-            "gameName": "Conan Exiles",
-            "xPosition": 5.0,
-            "yPosition": 5.0
-          },
-          {
-            "id": "pm-003",
-            "gameName": "Rust",
-            "xPosition": 3.0,
-            "yPosition": 4.0
-          },
-          {
-            "id": "pm-004",
-            "gameName": "Valheim",
-            "xPosition": 6.0,
-            "yPosition": 4.0
-          },
-          {
-            "id": "pm-005",
-            "gameName": "Star Wars: The Old Republic",
-            "xPosition": 9.0,
-            "yPosition": 8.0
-          },
-          {
-            "id": "pm-006",
-            "gameName": "Destiny 2",
-            "xPosition": 7.0,
-            "yPosition": 9.0
-          },
-          {
-            "id": "pm-007",
-            "gameName": "The Elder Scrolls Online",
-            "xPosition": 8.0,
-            "yPosition": 8.0
-          },
-          {
-            "id": "pm-008",
-            "gameName": "Ark: Survival Evolved",
-            "xPosition": 4.0,
-            "yPosition": 3.0
-          },
-          {
-            "id": "pm-009",
-            "gameName": "Black Desert Online",
-            "xPosition": 7.0,
-            "yPosition": 9.0
-          },
-          {
-            "id": "pm-010",
-            "gameName": "Warframe",
-            "xPosition": 6.0,
-            "yPosition": 7.0
-          }
-        ],
-        "alternativeViews": [
-          {
-            "xAxis": {
-              "axisName": "Monetization Model",
-              "lowLabel": "Initial Purchase Focus",
-              "highLabel": "Freemium Model"
-            },
-            "yAxis": {
-              "axisName": "Content Cadence",
-              "lowLabel": "Static Experience",
-              "highLabel": "Dynamic Content Rollout"
-            },
-            "positions": [
-              {
-                "id": "pm-001",
-                "gameName": "Dune: Awakening",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-002",
-                "gameName": "Conan Exiles",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-003",
-                "gameName": "Rust",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-004",
-                "gameName": "Valheim",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-005",
-                "gameName": "Star Wars: The Old Republic",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-006",
-                "gameName": "Destiny 2",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-007",
-                "gameName": "The Elder Scrolls Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-008",
-                "gameName": "Ark: Survival Evolved",
-                "xPosition": 2.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-009",
-                "gameName": "Black Desert Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-010",
-                "gameName": "Warframe",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              }
-            ]
-          },
-          {
-            "xAxis": {
-              "axisName": "Accessibility",
-              "lowLabel": "Easy to Pick Up",
-              "highLabel": "Mastery Requires Effort"
-            },
-            "yAxis": {
-              "axisName": "Depth",
-              "lowLabel": "Casual Engagement",
-              "highLabel": "Demanding Long-Term Commitment"
-            },
-            "positions": [
-              {
-                "id": "pm-001",
-                "gameName": "Dune: Awakening",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-002",
-                "gameName": "Conan Exiles",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-003",
-                "gameName": "Rust",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-004",
-                "gameName": "Valheim",
-                "xPosition": 5.0,
-                "yPosition": 5.0
-              },
-              {
-                "id": "pm-005",
-                "gameName": "Star Wars: The Old Republic",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-006",
-                "gameName": "Destiny 2",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              },
-              {
-                "id": "pm-007",
-                "gameName": "The Elder Scrolls Online",
-                "xPosition": 5.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-008",
-                "gameName": "Ark: Survival Evolved",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-009",
-                "gameName": "Black Desert Online",
-                "xPosition": 2.0,
-                "yPosition": 9.0
-              },
-              {
-                "id": "pm-010",
-                "gameName": "Warframe",
-                "xPosition": 10.0,
-                "yPosition": 10.0
-              }
-            ]
-          }
-        ]
-      }
-    },
     {
       "ts": 1781108496.3241248,
       "data": {
@@ -2887,240 +2438,677 @@
           }
         ]
       }
+    },
+    {
+      "ts": 1781177703.624058,
+      "data": {
+        "xAxis": {
+          "axisName": "Narrative Depth vs Mechanical Complexity",
+          "lowLabel": "Narrative-Driven",
+          "highLabel": "Mechanically-Driven"
+        },
+        "yAxis": {
+          "axisName": "Sandbox Creativity vs Structured MMO Dynamics",
+          "lowLabel": "Structured MMO Dynamics",
+          "highLabel": "Sandbox Creativity"
+        },
+        "positions": [
+          {
+            "id": "pm-001",
+            "gameName": "Dune: Awakening",
+            "xPosition": 5.0,
+            "yPosition": 6.0
+          },
+          {
+            "id": "pm-002",
+            "gameName": "Rust",
+            "xPosition": 1.0,
+            "yPosition": 9.5
+          },
+          {
+            "id": "pm-003",
+            "gameName": "Conan Exiles",
+            "xPosition": 4.0,
+            "yPosition": 7.0
+          },
+          {
+            "id": "pm-004",
+            "gameName": "Star Wars: The Old Republic",
+            "xPosition": 9.5,
+            "yPosition": 2.0
+          },
+          {
+            "id": "pm-005",
+            "gameName": "Valheim",
+            "xPosition": 4.0,
+            "yPosition": 7.5
+          },
+          {
+            "id": "pm-006",
+            "gameName": "Destiny 2",
+            "xPosition": 7.0,
+            "yPosition": 3.0
+          },
+          {
+            "id": "pm-007",
+            "gameName": "The Forest",
+            "xPosition": 7.0,
+            "yPosition": 6.5
+          },
+          {
+            "id": "pm-008",
+            "gameName": "Warframe",
+            "xPosition": 5.0,
+            "yPosition": 3.5
+          },
+          {
+            "id": "pm-009",
+            "gameName": "Lost Ark",
+            "xPosition": 6.0,
+            "yPosition": 2.0
+          },
+          {
+            "id": "pm-010",
+            "gameName": "Scum",
+            "xPosition": 2.0,
+            "yPosition": 8.0
+          }
+        ],
+        "alternativeViews": [
+          {
+            "xAxis": {
+              "axisName": "Individual Progression vs World Permanence",
+              "lowLabel": "Low Character Power / Flat",
+              "highLabel": "Steep Character Power / Persistent"
+            },
+            "yAxis": {
+              "axisName": "World Permanence vs Cyclical Wipes",
+              "lowLabel": "Static / Never Wipes",
+              "highLabel": "Dynamic / Frequent Wipes"
+            },
+            "positions": [
+              {
+                "id": "av1-001",
+                "gameName": "Dune: Awakening",
+                "xPosition": 5.0,
+                "yPosition": 4.0
+              },
+              {
+                "id": "av1-002",
+                "gameName": "Rust",
+                "xPosition": 9.0,
+                "yPosition": 9.0
+              },
+              {
+                "id": "av1-003",
+                "gameName": "Conan Exiles",
+                "xPosition": 7.0,
+                "yPosition": 5.0
+              },
+              {
+                "id": "av1-004",
+                "gameName": "Star Wars: The Old Republic",
+                "xPosition": 9.0,
+                "yPosition": 0.0
+              },
+              {
+                "id": "av1-005",
+                "gameName": "Valheim",
+                "xPosition": 6.0,
+                "yPosition": 7.0
+              },
+              {
+                "id": "av1-006",
+                "gameName": "Destiny 2",
+                "xPosition": 8.0,
+                "yPosition": 0.0
+              },
+              {
+                "id": "av1-007",
+                "gameName": "The Forest",
+                "xPosition": 5.0,
+                "yPosition": 6.0
+              },
+              {
+                "id": "av1-008",
+                "gameName": "Warframe",
+                "xPosition": 10.0,
+                "yPosition": 1.0
+              },
+              {
+                "id": "av1-009",
+                "gameName": "Lost Ark",
+                "xPosition": 8.0,
+                "yPosition": 0.0
+              },
+              {
+                "id": "av1-010",
+                "gameName": "Scum",
+                "xPosition": 8.0,
+                "yPosition": 8.0
+              }
+            ]
+          },
+          {
+            "xAxis": {
+              "axisName": "Monetization Harshness vs Time Commitment",
+              "lowLabel": "One-Time Purchase / Minimal MTX",
+              "highLabel": "FOMO & Pay-to-Progress / Full-Time Grind"
+            },
+            "yAxis": {
+              "axisName": "Time Commitment Required",
+              "lowLabel": "Casual Sessions (30 min)",
+              "highLabel": "Full-Time Grind (40+ hrs/week)"
+            },
+            "positions": [
+              {
+                "id": "av2-001",
+                "gameName": "Dune: Awakening",
+                "xPosition": 5.0,
+                "yPosition": 6.0
+              },
+              {
+                "id": "av2-002",
+                "gameName": "Rust",
+                "xPosition": 4.0,
+                "yPosition": 9.0
+              },
+              {
+                "id": "av2-003",
+                "gameName": "Conan Exiles",
+                "xPosition": 4.0,
+                "yPosition": 6.0
+              },
+              {
+                "id": "av2-004",
+                "gameName": "Star Wars: The Old Republic",
+                "xPosition": 8.0,
+                "yPosition": 5.0
+              },
+              {
+                "id": "av2-005",
+                "gameName": "Valheim",
+                "xPosition": 2.0,
+                "yPosition": 4.0
+              },
+              {
+                "id": "av2-006",
+                "gameName": "Destiny 2",
+                "xPosition": 8.0,
+                "yPosition": 8.0
+              },
+              {
+                "id": "av2-007",
+                "gameName": "The Forest",
+                "xPosition": 2.0,
+                "yPosition": 3.0
+              },
+              {
+                "id": "av2-008",
+                "gameName": "Warframe",
+                "xPosition": 6.0,
+                "yPosition": 7.0
+              },
+              {
+                "id": "av2-009",
+                "gameName": "Lost Ark",
+                "xPosition": 9.0,
+                "yPosition": 9.0
+              },
+              {
+                "id": "av2-010",
+                "gameName": "Scum",
+                "xPosition": 4.0,
+                "yPosition": 7.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781178123.570338,
+      "data": {
+        "xAxis": {
+          "axisName": "Authored Progression vs. Emergent Systems",
+          "lowLabel": "Authored Progression",
+          "highLabel": "Emergent Systems"
+        },
+        "yAxis": {
+          "axisName": "Survival Intimacy vs. Political Scale",
+          "lowLabel": "Survival Intimacy",
+          "highLabel": "Political Scale"
+        },
+        "positions": [
+          {
+            "id": "pm-001",
+            "gameName": "The Forest",
+            "xPosition": 2.0,
+            "yPosition": 3.0
+          },
+          {
+            "id": "pm-002",
+            "gameName": "Valheim",
+            "xPosition": 5.0,
+            "yPosition": 4.0
+          },
+          {
+            "id": "pm-003",
+            "gameName": "Nightingale",
+            "xPosition": 4.0,
+            "yPosition": 4.0
+          },
+          {
+            "id": "pm-004",
+            "gameName": "Conan Exiles",
+            "xPosition": 7.0,
+            "yPosition": 7.0
+          },
+          {
+            "id": "pm-005",
+            "gameName": "Rust",
+            "xPosition": 9.0,
+            "yPosition": 8.0
+          },
+          {
+            "id": "pm-006",
+            "gameName": "Ark: Survival Evolved",
+            "xPosition": 8.0,
+            "yPosition": 8.0
+          },
+          {
+            "id": "pm-007",
+            "gameName": "Scum",
+            "xPosition": 8.0,
+            "yPosition": 6.0
+          },
+          {
+            "id": "pm-008",
+            "gameName": "Dune: Awakening",
+            "xPosition": 5.0,
+            "yPosition": 8.0
+          },
+          {
+            "id": "pm-009",
+            "gameName": "Star Wars: The Old Republic",
+            "xPosition": 1.0,
+            "yPosition": 5.0
+          },
+          {
+            "id": "pm-010",
+            "gameName": "Destiny 2",
+            "xPosition": 3.0,
+            "yPosition": 3.0
+          }
+        ],
+        "alternativeViews": [
+          {
+            "xAxis": {
+              "axisName": "Monetization Value Driver",
+              "lowLabel": "Functional Power",
+              "highLabel": "Status & Moments"
+            },
+            "yAxis": {
+              "axisName": "Engagement Hook",
+              "lowLabel": "Completionist FOMO",
+              "highLabel": "Mastery Loop"
+            },
+            "positions": [
+              {
+                "id": "alt1-001",
+                "gameName": "Destiny 2",
+                "xPosition": 6.0,
+                "yPosition": 2.0
+              },
+              {
+                "id": "alt1-002",
+                "gameName": "Warframe",
+                "xPosition": 8.0,
+                "yPosition": 9.0
+              },
+              {
+                "id": "alt1-003",
+                "gameName": "The Elder Scrolls Online",
+                "xPosition": 7.0,
+                "yPosition": 6.0
+              },
+              {
+                "id": "alt1-004",
+                "gameName": "Rust",
+                "xPosition": 3.0,
+                "yPosition": 9.0
+              },
+              {
+                "id": "alt1-005",
+                "gameName": "Conan Exiles",
+                "xPosition": 6.0,
+                "yPosition": 8.0
+              },
+              {
+                "id": "alt1-006",
+                "gameName": "Ark: Survival Evolved",
+                "xPosition": 5.0,
+                "yPosition": 8.0
+              },
+              {
+                "id": "alt1-007",
+                "gameName": "Dune: Awakening",
+                "xPosition": 8.0,
+                "yPosition": 6.0
+              }
+            ]
+          },
+          {
+            "xAxis": {
+              "axisName": "World State",
+              "lowLabel": "Static Pre-Built World",
+              "highLabel": "Reactive, Player-Built World"
+            },
+            "yAxis": {
+              "axisName": "Player Impact",
+              "lowLabel": "Individual Avatar Progression",
+              "highLabel": "Guild Sovereignty & State Control"
+            },
+            "positions": [
+              {
+                "id": "alt2-001",
+                "gameName": "The Forest",
+                "xPosition": 1.0,
+                "yPosition": 1.0
+              },
+              {
+                "id": "alt2-002",
+                "gameName": "Valheim",
+                "xPosition": 4.0,
+                "yPosition": 2.0
+              },
+              {
+                "id": "alt2-003",
+                "gameName": "Nightingale",
+                "xPosition": 3.0,
+                "yPosition": 1.0
+              },
+              {
+                "id": "alt2-004",
+                "gameName": "Conan Exiles",
+                "xPosition": 6.0,
+                "yPosition": 7.0
+              },
+              {
+                "id": "alt2-005",
+                "gameName": "Rust",
+                "xPosition": 8.0,
+                "yPosition": 8.0
+              },
+              {
+                "id": "alt2-006",
+                "gameName": "Ark: Survival Evolved",
+                "xPosition": 7.0,
+                "yPosition": 8.0
+              },
+              {
+                "id": "alt2-007",
+                "gameName": "Dune: Awakening",
+                "xPosition": 9.0,
+                "yPosition": 9.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781179841.955133,
+      "data": {
+        "xAxis": {
+          "axisName": "Authored Progression vs. Emergent Systems",
+          "lowLabel": "Authored Progression",
+          "highLabel": "Emergent Systems"
+        },
+        "yAxis": {
+          "axisName": "Survival Intimacy vs. Political Scale",
+          "lowLabel": "Survival Intimacy",
+          "highLabel": "Political Scale"
+        },
+        "positions": [
+          {
+            "id": "pm-001",
+            "gameName": "Dune: Awakening",
+            "xPosition": 7.0,
+            "yPosition": 8.0
+          },
+          {
+            "id": "pm-002",
+            "gameName": "Conan Exiles",
+            "xPosition": 6.0,
+            "yPosition": 4.0
+          },
+          {
+            "id": "pm-003",
+            "gameName": "Rust",
+            "xPosition": 7.0,
+            "yPosition": 4.0
+          },
+          {
+            "id": "pm-004",
+            "gameName": "Valheim",
+            "xPosition": 5.0,
+            "yPosition": 3.0
+          },
+          {
+            "id": "pm-005",
+            "gameName": "Star Wars: The Old Republic",
+            "xPosition": 3.0,
+            "yPosition": 7.0
+          },
+          {
+            "id": "pm-006",
+            "gameName": "Destiny 2",
+            "xPosition": 5.0,
+            "yPosition": 6.0
+          },
+          {
+            "id": "pm-007",
+            "gameName": "The Elder Scrolls Online",
+            "xPosition": 4.0,
+            "yPosition": 7.0
+          },
+          {
+            "id": "pm-008",
+            "gameName": "Ark: Survival Evolved",
+            "xPosition": 8.0,
+            "yPosition": 5.0
+          }
+        ],
+        "alternativeViews": [
+          {
+            "xAxis": {
+              "axisName": "Monetization Structure",
+              "lowLabel": "Fixed Purchase & MTX",
+              "highLabel": "Subscription & MTX"
+            },
+            "yAxis": {
+              "axisName": "Content Update Frequency",
+              "lowLabel": "Infrequent Updates",
+              "highLabel": "Regular Updates"
+            },
+            "positions": [
+              {
+                "id": "am-001",
+                "gameName": "Dune: Awakening",
+                "xPosition": 2.0,
+                "yPosition": 8.0
+              }
+            ]
+          },
+          {
+            "xAxis": {
+              "axisName": "Accessibility",
+              "lowLabel": "Casual Friendly",
+              "highLabel": "Hardcore Depth"
+            },
+            "yAxis": {
+              "axisName": "Depth",
+              "lowLabel": "Easy to Learn",
+              "highLabel": "Complex Mastery"
+            },
+            "positions": [
+              {
+                "id": "am-002",
+                "gameName": "Dune: Awakening",
+                "xPosition": 8.0,
+                "yPosition": 9.0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781180705.001898,
+      "data": {
+        "xAxis": {
+          "axisName": "Authored Progression vs. Emergent Systems",
+          "lowLabel": "Authored Progression",
+          "highLabel": "Emergent Systems"
+        },
+        "yAxis": {
+          "axisName": "Survival Intimacy vs. Political Scale",
+          "lowLabel": "Survival Intimacy",
+          "highLabel": "Political Scale"
+        },
+        "positions": [
+          {
+            "id": "pm-001",
+            "gameName": "Dune: Awakening",
+            "xPosition": 7.0,
+            "yPosition": 9.0
+          },
+          {
+            "id": "pm-002",
+            "gameName": "Conan Exiles",
+            "xPosition": 4.0,
+            "yPosition": 4.0
+          },
+          {
+            "id": "pm-003",
+            "gameName": "Rust",
+            "xPosition": 6.0,
+            "yPosition": 5.0
+          },
+          {
+            "id": "pm-004",
+            "gameName": "Valheim",
+            "xPosition": 5.0,
+            "yPosition": 3.0
+          },
+          {
+            "id": "pm-005",
+            "gameName": "Star Wars: The Old Republic",
+            "xPosition": 8.0,
+            "yPosition": 8.0
+          },
+          {
+            "id": "pm-006",
+            "gameName": "Destiny 2",
+            "xPosition": 8.0,
+            "yPosition": 7.0
+          },
+          {
+            "id": "pm-007",
+            "gameName": "The Elder Scrolls Online",
+            "xPosition": 7.0,
+            "yPosition": 8.0
+          },
+          {
+            "id": "pm-008",
+            "gameName": "Black Desert Online",
+            "xPosition": 6.0,
+            "yPosition": 8.0
+          },
+          {
+            "id": "pm-009",
+            "gameName": "Warframe",
+            "xPosition": 7.0,
+            "yPosition": 5.0
+          },
+          {
+            "id": "pm-010",
+            "gameName": "Scum",
+            "xPosition": 5.0,
+            "yPosition": 4.0
+          }
+        ],
+        "alternativeViews": [
+          {
+            "xAxis": {
+              "axisName": "Monetization Model vs. Content Cadence",
+              "lowLabel": "Upfront Purchase/Subscription",
+              "highLabel": "Free-to-Play"
+            },
+            "yAxis": {
+              "axisName": "Static Releases vs. Dynamic Updates",
+              "lowLabel": "Static Releases",
+              "highLabel": "Dynamic Updates"
+            },
+            "positions": [
+              {
+                "id": "pm-001",
+                "gameName": "Dune: Awakening",
+                "xPosition": 7.0,
+                "yPosition": 9.0
+              },
+              {
+                "id": "pm-002",
+                "gameName": "Conan Exiles",
+                "xPosition": 8.0,
+                "yPosition": 8.0
+              },
+              {
+                "id": "pm-009",
+                "gameName": "Warframe",
+                "xPosition": 4.0,
+                "yPosition": 10.0
+              }
+            ]
+          },
+          {
+            "xAxis": {
+              "axisName": "PvP Intensity vs. Creative Expression",
+              "lowLabel": "Competitive Focus",
+              "highLabel": "Cooperative Play"
+            },
+            "yAxis": {
+              "axisName": "Functional Crafting vs. Aesthetic Customization",
+              "lowLabel": "Functional Crafting",
+              "highLabel": "Aesthetic Customization"
+            },
+            "positions": [
+              {
+                "id": "pm-001",
+                "gameName": "Dune: Awakening",
+                "xPosition": 6.0,
+                "yPosition": 7.0
+              },
+              {
+                "id": "pm-006",
+                "gameName": "Destiny 2",
+                "xPosition": 7.0,
+                "yPosition": 6.0
+              },
+              {
+                "id": "pm-007",
+                "gameName": "The Elder Scrolls Online",
+                "xPosition": 6.0,
+                "yPosition": 7.0
+              }
+            ]
+          }
+        ]
+      }
     }
   ],
   "swot": [
-    {
-      "ts": 1781108233.573222,
-      "data": {
-        "strengths": [
-          {
-            "id": "sw-001",
-            "text": "Dune: Awakening's IP offers a deep narrative that appeals to 'Narrative-Driven Explorers,' competing with 'Star Wars: The Old Republic' and 'The Elder Scrolls Online.'"
-          },
-          {
-            "id": "sw-002",
-            "text": "Arrakis setting with unique survival mechanics differentiates it from 'Rust' and 'Conan Exiles,' appealing to 'Competitive Survivalists.'"
-          },
-          {
-            "id": "sw-003",
-            "text": "Varied playstyles and comprehensive building mechanics rival 'Valheim' and 'The Forest,' attracting 'Sandbox Creators.'"
-          },
-          {
-            "id": "sw-004",
-            "text": "Dune IP's cultural recognition captures attention faster than less-known IPs like 'Scum' or 'The Forest.'"
-          }
-        ],
-        "weaknesses": [
-          {
-            "id": "wk-001",
-            "text": "Limited to Steam at launch with no crossplay, unlike 'Destiny 2' or 'Warframe' which have broader platform availability."
-          },
-          {
-            "id": "wk-002",
-            "text": "High purchase price and MTX model could deter players compared to free-to-play 'Lost Ark' or 'Black Desert Online.'"
-          },
-          {
-            "id": "wk-003",
-            "text": "Lacks targeted influencer strategy, potentially impacting visibility unlike competitors with strong partnerships."
-          },
-          {
-            "id": "wk-004",
-            "text": "Quarterly DLC and monthly updates may lose player engagement versus 'Warframe' and 'Destiny 2's' frequent content."
-          }
-        ],
-        "opportunities": [
-          {
-            "id": "op-001",
-            "text": "Capture 'Sandbox Creators' in the sci-fi genre as most focus on fantasy themes, offering a new narrative backdrop."
-          },
-          {
-            "id": "op-002",
-            "text": "Leverage Dune's lore for community-driven engagement, similar to 'The Elder Scrolls Online,' enhancing retention."
-          },
-          {
-            "id": "op-003",
-            "text": "Introduce strategic PvP dynamics like Landsraad control, attracting competitive players not fully captured by 'Conan Exiles.'"
-          },
-          {
-            "id": "op-004",
-            "text": "Expand localization to surpass competitors like 'Scum' or 'The Forest,' widening appeal in less competitive regions."
-          }
-        ],
-        "threats": [
-          {
-            "id": "th-001",
-            "text": "High competition in survival-MMO market with titles like 'Ark: Survival Evolved' may dilute market share."
-          },
-          {
-            "id": "th-002",
-            "text": "Risk of IP saturation with Dune's media presence could lead to fatigue if game doesn't expand uniquely."
-          },
-          {
-            "id": "th-003",
-            "text": "New competitors like 'SCUM' might shift market expectations towards more realistic survival mechanics."
-          },
-          {
-            "id": "th-004",
-            "text": "Monetization model may face backlash compared to free-to-play or low-cost games like 'Destiny 2' or 'Lost Ark.'"
-          }
-        ]
-      }
-    },
-    {
-      "ts": 1781108372.141442,
-      "data": {
-        "strengths": [
-          {
-            "id": "sw-001",
-            "text": "Dune: Awakening's IP offers a deep narrative that appeals to 'Narrative-Driven Explorers,' competing with 'Star Wars: The Old Republic' and 'The Elder Scrolls Online.'"
-          },
-          {
-            "id": "sw-002",
-            "text": "Arrakis setting with unique survival mechanics differentiates it from 'Rust' and 'Conan Exiles,' appealing to 'Competitive Survivalists.'"
-          },
-          {
-            "id": "sw-003",
-            "text": "Varied playstyles and comprehensive building mechanics rival 'Valheim' and 'The Forest,' attracting 'Sandbox Creators.'"
-          },
-          {
-            "id": "sw-004",
-            "text": "Dune IP's cultural recognition captures attention faster than less-known IPs like 'Scum' or 'The Forest.'"
-          }
-        ],
-        "weaknesses": [
-          {
-            "id": "wk-001",
-            "text": "Limited to Steam at launch with no crossplay, unlike 'Destiny 2' or 'Warframe' which have broader platform availability."
-          },
-          {
-            "id": "wk-002",
-            "text": "High purchase price and MTX model could deter players compared to free-to-play 'Lost Ark' or 'Black Desert Online.'"
-          },
-          {
-            "id": "wk-003",
-            "text": "Lacks targeted influencer strategy, potentially impacting visibility unlike competitors with strong partnerships."
-          },
-          {
-            "id": "wk-004",
-            "text": "Quarterly DLC and monthly updates may lose player engagement versus 'Warframe' and 'Destiny 2's' frequent content."
-          }
-        ],
-        "opportunities": [
-          {
-            "id": "op-001",
-            "text": "Capture 'Sandbox Creators' in the sci-fi genre as most focus on fantasy themes, offering a new narrative backdrop."
-          },
-          {
-            "id": "op-002",
-            "text": "Leverage Dune's lore for community-driven engagement, similar to 'The Elder Scrolls Online,' enhancing retention."
-          },
-          {
-            "id": "op-003",
-            "text": "Introduce strategic PvP dynamics like Landsraad control, attracting competitive players not fully captured by 'Conan Exiles.'"
-          },
-          {
-            "id": "op-004",
-            "text": "Expand localization to surpass competitors like 'Scum' or 'The Forest,' widening appeal in less competitive regions."
-          }
-        ],
-        "threats": [
-          {
-            "id": "th-001",
-            "text": "High competition in survival-MMO market with titles like 'Ark: Survival Evolved' may dilute market share."
-          },
-          {
-            "id": "th-002",
-            "text": "Risk of IP saturation with Dune's media presence could lead to fatigue if game doesn't expand uniquely."
-          },
-          {
-            "id": "th-003",
-            "text": "New competitors like 'SCUM' might shift market expectations towards more realistic survival mechanics."
-          },
-          {
-            "id": "th-004",
-            "text": "Monetization model may face backlash compared to free-to-play or low-cost games like 'Destiny 2' or 'Lost Ark.'"
-          }
-        ]
-      }
-    },
-    {
-      "ts": 1781108445.051754,
-      "data": {
-        "strengths": [
-          {
-            "id": "sw-001",
-            "text": "Dune: Awakening's IP offers a deep narrative that appeals to 'Narrative-Driven Explorers,' competing with 'Star Wars: The Old Republic' and 'The Elder Scrolls Online.'"
-          },
-          {
-            "id": "sw-002",
-            "text": "Arrakis setting with unique survival mechanics differentiates it from 'Rust' and 'Conan Exiles,' appealing to 'Competitive Survivalists.'"
-          },
-          {
-            "id": "sw-003",
-            "text": "Varied playstyles and comprehensive building mechanics rival 'Valheim' and 'The Forest,' attracting 'Sandbox Creators.'"
-          },
-          {
-            "id": "sw-004",
-            "text": "Dune IP's cultural recognition captures attention faster than less-known IPs like 'Scum' or 'The Forest.'"
-          }
-        ],
-        "weaknesses": [
-          {
-            "id": "wk-001",
-            "text": "Limited to Steam at launch with no crossplay, unlike 'Destiny 2' or 'Warframe' which have broader platform availability."
-          },
-          {
-            "id": "wk-002",
-            "text": "High purchase price and MTX model could deter players compared to free-to-play 'Lost Ark' or 'Black Desert Online.'"
-          },
-          {
-            "id": "wk-003",
-            "text": "Lacks targeted influencer strategy, potentially impacting visibility unlike competitors with strong partnerships."
-          },
-          {
-            "id": "wk-004",
-            "text": "Quarterly DLC and monthly updates may lose player engagement versus 'Warframe' and 'Destiny 2's' frequent content."
-          }
-        ],
-        "opportunities": [
-          {
-            "id": "op-001",
-            "text": "Capture 'Sandbox Creators' in the sci-fi genre as most focus on fantasy themes, offering a new narrative backdrop."
-          },
-          {
-            "id": "op-002",
-            "text": "Leverage Dune's lore for community-driven engagement, similar to 'The Elder Scrolls Online,' enhancing retention."
-          },
-          {
-            "id": "op-003",
-            "text": "Introduce strategic PvP dynamics like Landsraad control, attracting competitive players not fully captured by 'Conan Exiles.'"
-          },
-          {
-            "id": "op-004",
-            "text": "Expand localization to surpass competitors like 'Scum' or 'The Forest,' widening appeal in less competitive regions."
-          }
-        ],
-        "threats": [
-          {
-            "id": "th-001",
-            "text": "High competition in survival-MMO market with titles like 'Ark: Survival Evolved' may dilute market share."
-          },
-          {
-            "id": "th-002",
-            "text": "Risk of IP saturation with Dune's media presence could lead to fatigue if game doesn't expand uniquely."
-          },
-          {
-            "id": "th-003",
-            "text": "New competitors like 'SCUM' might shift market expectations towards more realistic survival mechanics."
-          },
-          {
-            "id": "th-004",
-            "text": "Monetization model may face backlash compared to free-to-play or low-cost games like 'Destiny 2' or 'Lost Ark.'"
-          }
-        ]
-      }
-    },
     {
       "ts": 1781108496.3284328,
       "data": {
@@ -3587,6 +3575,350 @@
           {
             "id": "th-004",
             "text": "Closed beta limitations can hinder early momentum compared to successful feedback-driven strategies by 'Rust.'"
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781177703.631289,
+      "data": {
+        "strengths": [
+          {
+            "id": "sw-001",
+            "text": "Unique IP differentiation in a homogenous survival market — no competitor like Conan Exiles (fantasy), Rust (modern/post-apoc), or Scum (island prison) offers the Dune sci-fi universe, giving the Dune IP Fan segment zero survival alternatives that deliver authentic Arrakis."
+          },
+          {
+            "id": "sw-002",
+            "text": "Optional PvP creates a wider funnel than Rust or Conan Exiles by directly addressing the ~40% of the audience (Open-World Explorer and Social-Collector Sandbox Player) underserved by mandatory PvP in those games."
+          },
+          {
+            "id": "sw-003",
+            "text": "Dynamic world with Coriolis storms reshaping terrain offers recurring discovery loops that no competitor matches — Valheim has static biomes, Conan Exiles fixed maps, Rust identical wipes — targeting the Open-World Explorer segment's need for novelty."
+          },
+          {
+            "id": "sw-004",
+            "text": "Faction politics with server-wide consequences (Landsraad) provides asymmetric warfare and status recognition beyond Rust's shallow clan cycle or Conan Exiles' PvE-only purge, directly appealing to Competitive Faction Players."
+          }
+        ],
+        "weaknesses": [
+          {
+            "id": "wk-001",
+            "text": "$50 purchase price plus MTX/Battle Pass is a higher barrier than free-to-play MMO competitors like Lost Ark, Warframe, and Destiny 2, particularly risking the Social-Collector Sandbox Player segment accustomed to free entry."
+          },
+          {
+            "id": "wk-002",
+            "text": "No crossplay and Steam-only launch severely limits addressable audience compared to Rust and Conan Exiles, which both have console versions, leaving Dune IP Fans and Competitive Faction Players on console with no path to entry until 2026."
+          },
+          {
+            "id": "wk-003",
+            "text": "NDA-locked beta with limited participants (10,000 → 2,000 → 12,000) creates a visibility gap versus open-beta competitors like Warframe and Destiny 2, minimizing pre-launch content and preventing Open-World Explorer influencer engagement."
+          },
+          {
+            "id": "wk-004",
+            "text": "Survival systems risk feeling generic to the Survival Hardcore segment because crafting stillsuits and extracting water are mechanically similar to Conan Exiles, and if depth is lower, the IP alone won't retain players from Rust or Scum."
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "op-001",
+            "text": "No survival game currently serves the narrative-driven MMO survival niche — The Elder Scrolls Online and Star Wars: The Old Republic offer story but no survival; Conan Exiles has lore but no structured quests, leaving a white space for Dune IP Fans and Open-World Explorers."
+          },
+          {
+            "id": "op-002",
+            "text": "The Social-Collector Sandbox Player segment lacks a survival game with safe social hubs, player economy, and cosmetic display — Destiny 2 and Warframe offer hubs but not survival, while Conan Exiles lacks robust trading; Dune's social hubs with transmog target this gap, and its Battle Pass aligns with conditioned players."
+          },
+          {
+            "id": "op-003",
+            "text": "Private servers with shared Worlds create a hybrid model no competitor offers — Rust and Conan Exiles have binary official/private choices; Dune's model of private servers plus shared social hubs and Deep Desert attracts Open-World Explorers seeking safe bases with optional large-scale events and supports community RP servers."
+          },
+          {
+            "id": "op-004",
+            "text": "The Dune movie franchise momentum (2021, 2024) provides a cultural tailwind — Dune: Part Two released March 2024, 14 months before PC launch, at peak Dune IP Fan awareness; a $1-2M marketing budget can leverage Warner Bros.' global film spend, unlike Star Wars: The Old Republic which launched during a content drought."
+          }
+        ],
+        "threats": [
+          {
+            "id": "th-001",
+            "text": "Conan Exiles' Age of War chapter system (2023-2024) directly threatens Dune's faction warfare USP with siege warfare, clan alliances, and server-wide events — if it adds political factions before May 2025, Competitive Faction Players have no reason to switch."
+          },
+          {
+            "id": "th-002",
+            "text": "The Survival Hardcore segment is hostile to MTX/Battle Pass systems — Rust has no Battle Pass and Scum no MTX — and expecting a one-time purchase model; aggressive monetization risks review-bombing that turns away Dune IP Fans before they evaluate the game."
+          },
+          {
+            "id": "th-003",
+            "text": "Destiny 2 and Warframe have already captured the sci-fi shooter with seasons and MTX player — the Social-Collector Sandbox Player and Competitive Faction Player segments have sunk cost in established accounts, making conversion from a $50 entry fee with no cross-save challenging."
+          },
+          {
+            "id": "th-004",
+            "text": "Steam-only launch makes the game vulnerable to ecosystem risks like algorithm changes, server outages, or Valve promoting competitors (e.g., Rust update or Nightingale), whereas Conan Exiles mitigated by launching on GOG, Epic, and consoles sequentially."
+          },
+          {
+            "id": "th-005",
+            "text": "Localization into 14 languages without crossplay or console presence creates support overhead without proportional revenue, especially in Korean and Japanese markets where Competitive Faction Players already have established MMOs like Lost Ark and Black Desert with decades of content."
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781178123.577877,
+      "data": {
+        "strengths": [
+          {
+            "id": "sw-001",
+            "text": "Monopoly on the 'Narrative Tourist' (Dune Fan) segment; no sci-fi political-survival alternative exists for Seg-5, unlike Star Wars: The Old Republic or The Elder Scrolls Online."
+          },
+          {
+            "id": "sw-002",
+            "text": "Superior environmental 'mastery' loop with dynamic Deep Desert and Coriolis storms, differentiating from static maps in Conan Exiles and Nightingale for Seg-3."
+          },
+          {
+            "id": "sw-003",
+            "text": "Structured faction PvP with optionality via Landsraad and Atreides/Harkonnen allegiance, mitigating offline raiding toxicity of Rust for Seg-1."
+          },
+          {
+            "id": "sw-004",
+            "text": "World of private servers retains social hubs and shared Deep Desert, solving loneliness issues of Ark and Conan Exiles for Seg-2."
+          },
+          {
+            "id": "sw-005",
+            "text": "Stronger 'prestige' monetization with player-driven economy for cosmetics via blueprints exchange, absent in Destiny 2’s Eververse for Seg-4."
+          }
+        ],
+        "weaknesses": [
+          {
+            "id": "wk-001",
+            "text": "No console or crossplay ecosystem; Steam-only with 2026 console gap limits Seg-4 pool compared to The Elder Scrolls Online, Ark, and Warframe."
+          },
+          {
+            "id": "wk-002",
+            "text": "Niche Dune IP risk for Seg-2; political intrigue and desert aesthetic may feel restrictive versus broad fantasy of Valheim or Ark."
+          },
+          {
+            "id": "wk-003",
+            "text": "Lack of free-to-play entry at $50 + MTX + Battle Pass; Destiny 2, Warframe, Lost Ark, and Black Desert Online offer infinite trial, raising barrier for Seg-4."
+          },
+          {
+            "id": "wk-004",
+            "text": "Persistent closed NDA beta kills organic viral momentum; Valheim succeeded with open early access, while Dune: Awakening limits hype for Seg-1."
+          },
+          {
+            "id": "wk-005",
+            "text": "Thin $1-2M marketing budget for global 14-language launch; cannot compete with The Elder Scrolls Online or Destiny 2 awareness, reliant on suppressed influencer word-of-mouth."
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "op-001",
+            "text": "Underserved demand for faction PvP without full-loot griefing; optional PvP and guild-vs-guild Landsraad can capture Seg-1 players fatigued by Rust and Scum."
+          },
+          {
+            "id": "op-002",
+            "text": "Viable home for Lone Survivors wanting MMO persistence; first solo survival experience inside living MMO world, unlike finite The Forest or co-op Valheim."
+          },
+          {
+            "id": "op-003",
+            "text": "Shifted Desert creates unique live-service hook via Coriolis storm weekly world changes; procedural content generator distinct from Destiny 2 and Warframe narrative seasons."
+          },
+          {
+            "id": "op-004",
+            "text": "Blueprints-as-assets economy on central exchange absent in Rust and Ark; attracts casual builders from Seg-2 and creates organic acquisition via trading communities."
+          },
+          {
+            "id": "op-005",
+            "text": "Momentum for sci-fi survival after Nightingale’s mixed reception; Seg-2 hungry for polished dense alternative delivering lore-rich world and meaningful building."
+          }
+        ],
+        "threats": [
+          {
+            "id": "th-001",
+            "text": "Ark 2 (UE5) launch in late 2025/early 2026 dominates survival mindshare, directly competing for Seg-1 and Seg-2 peak audience window."
+          },
+          {
+            "id": "th-002",
+            "text": "Narrative Tourist (Seg-5) departs within 30 days; if retention fails, game bleeds to 10-20% CCU like Star Wars: The Old Republic initial collapse."
+          },
+          {
+            "id": "th-003",
+            "text": "Destiny 2: The Final Shape or TESO 2025 Chapter landing within 4 weeks of May 2025 launch steals Seg-4 and Seg-5 window."
+          },
+          {
+            "id": "th-004",
+            "text": "No crossplay compounds no F2P penalty; Warframe and Destiny 2 offer zero upfront cost and broader friend-network compatibility, creating premium walled garden risk."
+          },
+          {
+            "id": "th-005",
+            "text": "Scum or Rust releasing 'PvE Official' server mode with NPC faction gameplay negates Dune: Awakening's primary optional PvP hook for solo Seg-3 players."
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781179841.963079,
+      "data": {
+        "strengths": [
+          {
+            "id": "sw-001",
+            "text": "Leveraging the prestigious Dune IP attracts the 'Sci-Fi and Narrative Explorers' segment, providing a narrative depth advantage over competitors like 'Rust' and 'Ark: Survival Evolved.'"
+          },
+          {
+            "id": "sw-002",
+            "text": "The game's sandbox flexibility appeals to 'Creative Builders' and 'MMO Socializers,' offering an engaging platform unlike 'Star Wars: The Old Republic.'"
+          },
+          {
+            "id": "sw-003",
+            "text": "For 'Survival Enthusiasts,' detailed survival mechanics offer unique experiences compared to 'The Forest' and 'Scum.'"
+          },
+          {
+            "id": "sw-004",
+            "text": "Cross-audience appeal with optional exploration, survival, and PvP features attracts a broad range of players including 'Survival Enthusiasts,' 'Competitive Gamers,' and 'MMO Socializers.'"
+          }
+        ],
+        "weaknesses": [
+          {
+            "id": "wk-001",
+            "text": "Exclusive release on Steam may hinder reaching console players unlike 'Destiny 2' and 'The Elder Scrolls Online' with multi-platform capabilities."
+          },
+          {
+            "id": "wk-002",
+            "text": "Late entry in the survival genre with competitors like 'Conan Exiles' and 'Ark: Survival Evolved' poses challenges in market penetration."
+          },
+          {
+            "id": "wk-003",
+            "text": "Combining a $50 purchase price with microtransactions and a Battle Pass may deter players accustomed to F2P models as seen in 'Destiny 2' and 'Warframe.'"
+          },
+          {
+            "id": "wk-004",
+            "text": "NDA-bound beta testing limits early community buzz unlike transparent testing approaches used by games like 'Valheim.'"
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "op-001",
+            "text": "Dune: Awakening can capture market interest by offering a sophisticated sci-fi survival narrative, unlike many survival games with other themes."
+          },
+          {
+            "id": "op-002",
+            "text": "Strategic use of Dune IP in marketing could draw additional interest from 'Sci-Fi and Narrative Explorers,' similar to media tie-ins with 'Star Wars: The Old Republic.'"
+          },
+          {
+            "id": "op-003",
+            "text": "Offering robust customization features engages 'Creative Builders' who find competitors like 'Black Desert Online' lacking in creativity."
+          },
+          {
+            "id": "op-004",
+            "text": "Targeting global markets with robust localization could capture non-English speaking players more effectively than competitors like 'Warframe.'"
+          }
+        ],
+        "threats": [
+          {
+            "id": "th-001",
+            "text": "Titles like 'Rust' and 'Ark: Survival Evolved' dominate the niche, offering seasoned experiences that could overshadow new entries."
+          },
+          {
+            "id": "th-002",
+            "text": "Discrepancies between the game's depiction and existing fan expectations could alienate the Dune fan base if not closely aligned with the IP's narrative."
+          },
+          {
+            "id": "th-003",
+            "text": "The initial purchase price and ongoing monetization strategy may face resistance where F2P models thrive, reducing sales potential."
+          },
+          {
+            "id": "th-004",
+            "text": "High expectations from the Dune IP pressure delivery on quality and gameplay, with failure risking adverse reactions similar to other storied IP adaptations."
+          }
+        ]
+      }
+    },
+    {
+      "ts": 1781180705.009304,
+      "data": {
+        "strengths": [
+          {
+            "id": "sw-001",
+            "text": "\"Dune: Awakening\" benefits from an established IP like \"Star Wars: The Old Republic,\" attracting Sci-Fi Enthusiasts and Lore Seekers."
+          },
+          {
+            "id": "sw-002",
+            "text": "Unique survival mechanics involving sandworms differentiate it from \"Conan Exiles\" and \"Scum,\" appealing to Survival Strategists."
+          },
+          {
+            "id": "sw-003",
+            "text": "Lore-driven gameplay with factions like Atreides and Harkonnen offers immersive narrative experiences unlike \"The Forest.\""
+          },
+          {
+            "id": "sw-004",
+            "text": "Extensive customization and crafting options appeal to Sandbox Builders, similar to \"Valheim\" but enriched by Dune's lore."
+          },
+          {
+            "id": "sw-005",
+            "text": "The large-scale persistent world of Arrakis stands out against smaller competitors like \"Rust\" and \"Nightingale.\""
+          }
+        ],
+        "weaknesses": [
+          {
+            "id": "wk-001",
+            "text": "Platform limited to Steam, unlike multi-platform games like \"Destiny 2,\" potentially impacting player reach."
+          },
+          {
+            "id": "wk-002",
+            "text": "No crossplay available, a feature that could be offered by \"Warframe,\" limiting player engagement across systems."
+          },
+          {
+            "id": "wk-003",
+            "text": "Survival mechanics risk monotony, potentially failing to differentiate from \"Rust\" or \"Conan Exiles.\""
+          },
+          {
+            "id": "wk-004",
+            "text": "Reliance on microtransactions could result in backlash similar to \"Destiny 2\" if not balanced with meaningful content."
+          },
+          {
+            "id": "wk-005",
+            "text": "Delayed console release, risking lost momentum compared to broader initial platform reach of \"The Elder Scrolls Online.\""
+          }
+        ],
+        "opportunities": [
+          {
+            "id": "op-001",
+            "text": "Deep lore presents an opportunity to capture Sci-Fi Enthusiasts, widening appeal where \"Valheim\" may be less narrative-rich."
+          },
+          {
+            "id": "op-002",
+            "text": "Customization depth appeals to players from \"The Forest\" and \"Valheim,\" enhancing personal expression for Sandbox Builders."
+          },
+          {
+            "id": "op-003",
+            "text": "Optional PvP broadens competitive gameplay without the full-time nature of \"Rust\" or \"Black Desert Online.\""
+          },
+          {
+            "id": "op-004",
+            "text": "Focus on lore and community events can build a tight-knit community distinct from broader appeal of \"Destiny 2.\""
+          },
+          {
+            "id": "op-005",
+            "text": "Private server flexibility can attract guilds from \"The Elder Scrolls Online\" and \"Nightingale,\" offering community-driven experiences."
+          }
+        ],
+        "threats": [
+          {
+            "id": "th-001",
+            "text": "Saturated survival genre with games like \"Rust\" and \"Conan Exiles\" makes it hard to stand out as another survival MMO."
+          },
+          {
+            "id": "th-002",
+            "text": "Competing IPs like \"Star Wars: The Old Republic\" capture Sci-Fi Enthusiasts, challenging \"Dune: Awakening\" to differentiate."
+          },
+          {
+            "id": "th-003",
+            "text": "Player sentiment against microtransactions, as seen in \"Destiny 2,\" risks alienating players if perceived as over-monetized."
+          },
+          {
+            "id": "th-004",
+            "text": "Delayed market entry versus upcoming titles like \"Nightingale\" and evolving features in \"Warframe\" intensifies competition."
+          },
+          {
+            "id": "th-005",
+            "text": "Limited marketing budget compared to competitors might hinder penetration in the competitive narrative-focused market."
           }
         ]
       }

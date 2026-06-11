@@ -10,9 +10,10 @@ interface Props {
   ctx?: EntityContext;
   pmLens?: number;
   onQuote?: (text: string) => void;
+  pmPrevPositions?: PrevPositions;
 }
 
-export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0, onQuote }: Props) {
+export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens = 0, onQuote, pmPrevPositions }: Props) {
   const meta = MODULE_META[name];
 
   return (
@@ -63,7 +64,7 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens 
       {/* Body */}
       <div className={`px-5 py-4 h-72 overflow-y-auto transition-opacity ${module.status === 'generating' ? 'opacity-40' : ''}`}>
         {module.data ? (
-          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} />
+          <ModulePreview name={name} data={module.data} changes={module.changes} onEntityClick={onEntityClick} ctx={ctx} pmLens={pmLens} pmPrevPositions={pmPrevPositions} />
         ) : (
           <div className="h-full flex items-center justify-center">
             <p className="text-sm text-gray-300 dark:text-slate-600 italic">Awaiting generation</p>
@@ -74,6 +75,8 @@ export function ModuleCard({ name, module, onExpand, onEntityClick, ctx, pmLens 
   );
 }
 
+export type PrevPositions = Array<{ gameName: string; xPosition: number; yPosition: number }> | null;
+
 interface PreviewProps {
   name: ModuleName;
   data: ModuleData;
@@ -81,6 +84,7 @@ interface PreviewProps {
   onEntityClick: (entity: EntityRef) => void;
   ctx?: EntityContext;
   pmLens?: number;
+  pmPrevPositions?: PrevPositions;
 }
 
 export function selectLensView(data: ModuleData, lens: number): ModuleData {
@@ -89,7 +93,7 @@ export function selectLensView(data: ModuleData, lens: number): ModuleData {
   return data;
 }
 
-function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0 }: PreviewProps) {
+function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0, pmPrevPositions }: PreviewProps) {
   if (name === 'competitiveLandscape') {
     const competitors = (data.existingCompetitors as Array<{ name: string; rationale: string }>) || [];
     const { added, removed } = fieldChanges(changes, 'existingCompetitors');
@@ -159,7 +163,15 @@ function ModulePreview({ name, data, changes, onEntityClick, ctx, pmLens = 0 }: 
 
   if (name === 'positioningMatrix') {
     const view = selectLensView(data, pmLens);
-    return <PositioningChart data={view} changes={pmLens === 0 ? changes : undefined} compact onEntityClick={onEntityClick} />;
+    return (
+      <PositioningChart
+        data={view}
+        changes={pmLens === 0 ? changes : undefined}
+        compact
+        onEntityClick={onEntityClick}
+        prevPositions={pmLens === 0 ? pmPrevPositions : undefined}
+      />
+    );
   }
 
   if (name === 'swot') {
@@ -202,13 +214,23 @@ interface ChartProps {
   onEntityClick?: (entity: EntityRef) => void;
   /** Names to emphasize; all other competitor dots are dimmed */
   highlight?: string[];
+  /** Positions from the previous generation — powers green(new)/red(gone) dots */
+  prevPositions?: PrevPositions;
 }
 
-export function PositioningChart({ data, changes, compact = false, onEntityClick, highlight }: ChartProps) {
+export function PositioningChart({ data, changes, compact = false, onEntityClick, highlight, prevPositions }: ChartProps) {
   const positions = (data.positions as Array<{ gameName: string; xPosition: number; yPosition: number }>) || [];
   const xAxis = data.xAxis as { axisName: string; lowLabel: string; highLabel: string };
   const yAxis = data.yAxis as { axisName: string; lowLabel: string; highLabel: string };
   const { removed } = fieldChanges(changes, 'positions');
+
+  // Plot diff vs the previous generation (suppressed in highlight mode —
+  // the entity popover's mini matrix has its own color language)
+  const diffOn = !highlight && Array.isArray(prevPositions) && prevPositions.length > 0;
+  const prevNames = diffOn ? new Set(prevPositions!.map((p) => p.gameName)) : new Set<string>();
+  const curNames = new Set(positions.map((p) => p.gameName));
+  const ghosts = diffOn ? prevPositions!.filter((p) => !curNames.has(p.gameName)) : [];
+  const hasNew = diffOn && positions.some((p, i) => !(i === 0 || p.gameName.includes('Dune')) && !prevNames.has(p.gameName));
 
   return (
     <div className="h-full flex flex-col">
@@ -237,12 +259,30 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
           ↓ {axisLabel(yAxis?.lowLabel, yAxis?.axisName)}
         </span>
 
+        {/* Ghosts: plotted last generation, gone from this one */}
+        {ghosts.map((g, i) => (
+          <div
+            key={`ghost-${i}`}
+            className="absolute transform -translate-x-1/2 translate-y-1/2 flex flex-col items-center opacity-60 pointer-events-none z-[1]"
+            style={{
+              left: `${8 + (g.xPosition / 10) * 84}%`,
+              bottom: `${8 + (g.yPosition / 10) * 84}%`,
+            }}
+          >
+            <div className="w-2.5 h-2.5 rounded-full bg-red-400 ring-2 ring-red-200 dark:ring-red-900" />
+            <span className={`mt-1 whitespace-nowrap rounded px-1 line-through ${compact ? 'text-[9px]' : 'text-[11px]'} text-red-400 bg-white/90 dark:bg-slate-800/90`}>
+              {g.gameName}
+            </span>
+          </div>
+        ))}
+
         {positions.map((p, i) => {
           const isDune = i === 0 || p.gameName.includes('Dune');
+          const isNew = diffOn && !isDune && !prevNames.has(p.gameName);
           const isHighlighted = highlight?.includes(p.gameName) ?? false;
           const isDimmed = !!highlight && !isHighlighted && !isDune;
           const labelAbove = !isDune && i % 2 === 1;
-          const hoverOnly = compact && !isDune && !isHighlighted;
+          const hoverOnly = compact && !isDune && !isHighlighted && !isNew;
           return (
             <div
               key={i}
@@ -260,7 +300,9 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
                   ? 'bg-black w-3 h-3 ring-4 ring-black/10'
                   : isHighlighted
                     ? 'bg-blue-500 w-3 h-3 ring-4 ring-blue-100'
-                    : `bg-gray-300 dark:bg-slate-600 w-2.5 h-2.5 group-hover/dot:bg-gray-700 dark:group-hover/dot:bg-slate-300 group-hover/dot:scale-125 group-hover/dot:ring-4 group-hover/dot:ring-gray-200 dark:group-hover/dot:ring-slate-600 ${isDimmed ? 'opacity-30' : ''}`
+                    : isNew
+                      ? 'bg-emerald-500 w-3 h-3 ring-4 ring-emerald-100 dark:ring-emerald-900'
+                      : `bg-gray-300 dark:bg-slate-600 w-2.5 h-2.5 group-hover/dot:bg-gray-700 dark:group-hover/dot:bg-slate-300 group-hover/dot:scale-125 group-hover/dot:ring-4 group-hover/dot:ring-gray-200 dark:group-hover/dot:ring-slate-600 ${isDimmed ? 'opacity-30' : ''}`
               }`} />
               <span
                 className={`whitespace-nowrap rounded px-1 transition-all ${labelAbove ? 'mb-1' : 'mt-1'} ${compact ? 'text-[9px]' : 'text-[11px]'} ${
@@ -268,7 +310,9 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
                     ? 'text-gray-900 dark:text-slate-100 font-semibold bg-white/80 dark:bg-slate-800/80'
                     : isHighlighted
                       ? 'text-blue-600 dark:text-blue-400 font-semibold bg-white/90 dark:bg-slate-800/90'
-                      : `text-gray-500 dark:text-slate-400 bg-white/90 dark:bg-slate-800/90 group-hover/dot:text-gray-900 dark:group-hover/dot:text-slate-100 group-hover/dot:font-medium group-hover/dot:bg-white dark:group-hover/dot:bg-slate-800 group-hover/dot:shadow-md group-hover/dot:border group-hover/dot:border-gray-200 dark:group-hover/dot:border-slate-600 ${isDimmed ? 'opacity-30' : ''}`
+                      : isNew
+                        ? 'text-emerald-600 dark:text-emerald-400 font-semibold bg-white/90 dark:bg-slate-800/90'
+                        : `text-gray-500 dark:text-slate-400 bg-white/90 dark:bg-slate-800/90 group-hover/dot:text-gray-900 dark:group-hover/dot:text-slate-100 group-hover/dot:font-medium group-hover/dot:bg-white dark:group-hover/dot:bg-slate-800 group-hover/dot:shadow-md group-hover/dot:border group-hover/dot:border-gray-200 dark:group-hover/dot:border-slate-600 ${isDimmed ? 'opacity-30' : ''}`
                 } ${hoverOnly ? 'opacity-0 group-hover/dot:opacity-100' : ''}`}
               >
                 {p.gameName}
@@ -277,6 +321,20 @@ export function PositioningChart({ data, changes, compact = false, onEntityClick
           );
         })}
       </div>
+      {(hasNew || ghosts.length > 0) && (
+        <p className={`${compact ? 'text-[9px]' : 'text-[10px]'} text-gray-400 dark:text-slate-500 mt-1.5 flex items-center gap-3`}>
+          {hasNew && (
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" /> new this generation
+            </span>
+          )}
+          {ghosts.length > 0 && (
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-red-400 inline-block" /> no longer plotted
+            </span>
+          )}
+        </p>
+      )}
       {removed.length > 0 && (
         <p className="text-[10px] text-red-300 mt-1.5">
           Removed: {removed.map((r) => <span key={String(r.gameName)} className="line-through mr-1.5">{String(r.gameName)}</span>)}
