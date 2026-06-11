@@ -262,7 +262,10 @@ export function ChatPanel({
             </div>
           </div>
         )}
-        {isLoading && !streamingText && <WorkingIndicator modules={modules} />}
+        {/* Module progress renders alongside the draft — some models (e.g.
+            DeepSeek) narrate before calling tools, and the regeneration
+            spinners must stay visible through that */}
+        {isLoading && <WorkingIndicator modules={modules} hideIdle={!!streamingText} />}
 
         <div ref={messagesEndRef} />
       </div>
@@ -328,7 +331,7 @@ export function ChatPanel({
 /** Shown while the agent works. Lists only the modules touched THIS turn
  *  with their live status; before any module starts, shows a thinking row.
  *  Mounted only while isLoading, so the seen-set resets every turn. */
-function WorkingIndicator({ modules }: { modules: AppState }) {
+function WorkingIndicator({ modules, hideIdle = false }: { modules: AppState; hideIdle?: boolean }) {
   const [seen, setSeen] = useState<Set<ModuleName>>(new Set());
 
   useEffect(() => {
@@ -339,6 +342,10 @@ function WorkingIndicator({ modules }: { modules: AppState }) {
   }, [modules, seen]);
 
   const rows = MODULE_ORDER.filter((m) => seen.has(m));
+
+  // When a streaming draft is on screen, suppress the bare "Thinking…"
+  // fallback — only show this box once modules are actually in flight
+  if (rows.length === 0 && hideIdle) return null;
 
   return (
     <div className="flex justify-start">

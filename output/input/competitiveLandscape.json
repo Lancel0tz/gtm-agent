@@ -77,13 +77,6 @@
       "rationale": "Features strong survival mechanics set in a mysterious, lore-rich world that involves exploration and resource gathering, akin to Dune.",
       "verified": true,
       "steamAppId": 242760
-    },
-    {
-      "id": "ec-020",
-      "name": "Ark: Survival Evolved",
-      "rationale": "A well-known survival game with multiplayer engagement, crafting, and exploration features, aligning with the survival elements in Dune.",
-      "verified": true,
-      "steamAppId": 346110
     }
   ]
 }

@@ -1,41 +1,55 @@
 {
-  "summary": "The audience segmentation is crafted to align with the specific preferences and motivations of potential players for 'Dune: Awakening'. Each segment mirrors distinct player behaviors, whether it's a focus on narrative immersion, survival mechanics, social and competitive gameplay, or crafting and customization. The segmentation also considers the competitive gaming landscape, especially identifying competitors offering similar experiences within each audience's interest area.",
+  "summary": "The analysis segments the potential audience for Dune: Awakening into five distinct groups based on primary motivations and behaviors. The segmentation logic grounds each segment in the competitive landscape by identifying existing games that currently satisfy similar needs. The Survival Hardcore segment competes with Rust, Scum, and Conan Exiles; the Open-World Explorer competes with Valheim, The Elder Scrolls Online, and Black Desert Online; the Competitive Faction Player competes with Rust, Conan Exiles, Lost Ark, and Black Desert Online; the Dune IP Fan competes with Star Wars: The Old Republic and Warframe; and the Social-Collector Sandbox Player competes with The Elder Scrolls Online, Warframe, Destiny 2, and Conan Exiles. This mapping ensures the game's features uniquely address gaps or overlaps with these existing experiences.",
   "segments": [
     {
       "id": "seg-1",
-      "segmentName": "Sci-Fi Story-driven Explorers",
-      "description": "These players are motivated by deep storytelling and narrative exploration within expansive sci-fi worlds. They're drawn to Dune: Awakening for its rich lore and the opportunity to engage with faction-based politics and a narrative-rich environment. Unlike survivalists or PvP enthusiasts, their primary motivation is a compelling sci-fi narrative.",
+      "segmentName": "Survival Hardcore",
+      "description": "Driven by mastery of systems, thrives on tension and resource scarcity. Seeks punishing environments where poor planning equals death. Motivated by progression through skill and knowledge. Values permaloss or semi-permaloss mechanics and the wipe cycle. Plays daily in 3-6 hour sessions and is highly engaged in server politics.",
       "selectedExistingCompetitors": [
-        "Star Wars: The Old Republic",
-        "The Elder Scrolls Online"
+        "Rust",
+        "Scum",
+        "Conan Exiles"
       ]
     },
     {
       "id": "seg-2",
-      "segmentName": "Hardcore Survival Enthusiasts",
-      "description": "Motivated by challenging gameplay with elements of survival and resource management. They enjoy mastering hostile environments, which is why the survival challenges of Dune's Arrakis appeal to them. They prioritize survival aspects over story or social interactions.",
+      "segmentName": "Open-World Explorer",
+      "description": "Driven by curiosity and discovery. Prefers solo or small-group gameplay over large-scale conflict. Values verticality, mobility, and traversal tools. Engages with crafting to enable further exploration. Less concerned with endgame; journeys over destinations. Plays 2-4 sessions per week, 2-3 hours each.",
       "selectedExistingCompetitors": [
-        "Conan Exiles",
-        "Scum",
-        "Rust"
+        "Valheim",
+        "The Elder Scrolls Online",
+        "Black Desert Online"
       ]
     },
     {
       "id": "seg-3",
-      "segmentName": "Social and Competitive MMO Players",
-      "description": "Primarily driven by social interactions and competition. They appreciate cooperative gameplay and are drawn to the opportunities in Dune: Awakening for forming alliances and engaging in guild-based politics. They differ from solo explorers, focusing on community dynamics and PvP.",
+      "segmentName": "Competitive Faction Player",
+      "description": "Motivated by territory control, resource dominance, and server-wide influence. Drawn to guild/clan structures with defined hierarchies. Enjoys asymmetric warfare and metagame systems (politics, economy, alliances). Plays in organized groups, values recognition and status markers.",
       "selectedExistingCompetitors": [
-        "Destiny 2",
+        "Rust",
+        "Conan Exiles",
+        "Lost Ark",
         "Black Desert Online"
       ]
     },
     {
       "id": "seg-4",
-      "segmentName": "Crafting and Customization Enthusiasts",
-      "description": "Driven by the ability to craft and personalize within an open-world environment, they find satisfaction in customization. Dune: Awakening's crafting options, from building fortresses to customizing characters, appeal to their creative desires. They stand apart from those focused on narrative or pure survival.",
+      "segmentName": "Dune IP Fan",
+      "description": "Primary motivation is fidelity to the source material. Seeks authentic immersion in Herbert's universe. Values narrative depth and environmental storytelling. Often less experienced with survival/MMO gameplay but willing to learn for the IP. Plays irregularly, driven by content drops or narrative updates.",
       "selectedExistingCompetitors": [
-        "Valheim",
-        "Ark: Survival Evolved"
+        "Star Wars: The Old Republic",
+        "Warframe"
+      ]
+    },
+    {
+      "id": "seg-5",
+      "segmentName": "Social-Collector Sandbox Player",
+      "description": "Motivated by ownership, customization, and social visibility. Core loop: gather resources, craft/earn cosmetics, display them, gain social validation. Enjoys player hubs, trade economies, and showing off rare items. Engages with Battle Pass/MTX for cosmetic/status value. Plays 1-2 hours, 4-5 sessions per week. Prefers safety and opt-in PvP.",
+      "selectedExistingCompetitors": [
+        "The Elder Scrolls Online",
+        "Warframe",
+        "Destiny 2",
+        "Conan Exiles"
       ]
     }
   ]

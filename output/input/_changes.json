@@ -1,9 +1,7 @@
 {
   "competitiveLandscape": {
     "added": {
-      "existingCompetitors": [
-        "Ark: Survival Evolved"
-      ]
+      "existingCompetitors": []
     },
     "removed": {
       "existingCompetitors": [
@@ -13,6 +11,13 @@
           "rationale": "Features survival crafting mechanics in a shared world environment with a focus on exploration and lore, similar to Dune's atmospheric and survival focus.",
           "verified": true,
           "steamAppId": 1928980
+        },
+        {
+          "id": "ec-020",
+          "name": "Ark: Survival Evolved",
+          "rationale": "A well-known survival game with multiplayer engagement, crafting, and exploration features, aligning with the survival elements in Dune.",
+          "verified": true,
+          "steamAppId": 346110
         }
       ]
     }

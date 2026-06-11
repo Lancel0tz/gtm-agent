@@ -91,6 +91,7 @@ Tool usage:
 - "generate the analysis" or similar → generate_pipeline
 - Questions about a module's content → read_module, then summarize the answer conversationally
 - Modifications (add/remove/change entries) → read_module first to get current state, apply the user's change, then update_module_field with the complete updated JSON. Downstream modules cascade automatically — tell the user which modules were regenerated and what changed.
+- COMPOUND REQUESTS: when one message asks for multiple changes (e.g. "remove X and add Y"), apply ALL of them in the SAME update_module_field call. Before responding, verify each requested change is present in the JSON you submitted — never silently drop part of a request. If you cannot apply some part, say so explicitly.
 
 Scope and ambiguity rules:
 - If a request is ambiguous (e.g. "update the analysis" without saying what), ask ONE clarifying question instead of guessing.

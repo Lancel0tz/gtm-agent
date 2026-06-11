@@ -166,9 +166,16 @@ function App() {
     if (tid === activeThread) {
       setActiveThread(null);
       setMessages([]);
-      if (remaining.length > 0) handleSelectThread(remaining[0].id);
+      // Stay on the current brief: prefer one of ITS threads; otherwise
+      // start a fresh one here rather than jumping to another brief's thread
+      const sameBrief = remaining.find((t) => t.brief === activeInput);
+      if (sameBrief) {
+        handleSelectThread(sameBrief.id);
+      } else {
+        handleNewThread();
+      }
     }
-  }, [activeThread, loadThreads, handleSelectThread]);
+  }, [activeThread, activeInput, loadThreads, handleSelectThread, handleNewThread]);
 
   const handleRegenerate = useCallback(async () => {
     if (!activeThread || isLoading) return;

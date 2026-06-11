@@ -1,114 +1,222 @@
 {
   "xAxis": {
-    "axisName": "Narrative Depth vs. Mechanical Complexity",
-    "lowLabel": "Combat-Focused Experience",
-    "highLabel": "Immersive Story Universe"
+    "axisName": "Narrative Depth vs Mechanical Complexity",
+    "lowLabel": "Narrative-Driven",
+    "highLabel": "Mechanically-Driven"
   },
   "yAxis": {
-    "axisName": "Sandbox Creativity vs. Structured MMO Dynamics",
-    "lowLabel": "Creative Sandbox Exploration",
-    "highLabel": "Competitive Driven MMO"
+    "axisName": "Sandbox Creativity vs Structured MMO Dynamics",
+    "lowLabel": "Structured MMO Dynamics",
+    "highLabel": "Sandbox Creativity"
   },
   "positions": [
     {
       "id": "pm-001",
       "gameName": "Dune: Awakening",
-      "xPosition": 8.0,
-      "yPosition": 7.0
-    },
-    {
-      "id": "pm-002",
-      "gameName": "Conan Exiles",
-      "xPosition": 3.0,
-      "yPosition": 5.0
-    },
-    {
-      "id": "pm-003",
-      "gameName": "Rust",
-      "xPosition": 2.0,
-      "yPosition": 4.0
-    },
-    {
-      "id": "pm-004",
-      "gameName": "Valheim",
       "xPosition": 5.0,
       "yPosition": 6.0
     },
     {
-      "id": "pm-005",
+      "id": "pm-002",
+      "gameName": "Rust",
+      "xPosition": 1.0,
+      "yPosition": 9.5
+    },
+    {
+      "id": "pm-003",
+      "gameName": "Conan Exiles",
+      "xPosition": 4.0,
+      "yPosition": 7.0
+    },
+    {
+      "id": "pm-004",
       "gameName": "Star Wars: The Old Republic",
-      "xPosition": 9.0,
-      "yPosition": 9.0
+      "xPosition": 9.5,
+      "yPosition": 2.0
+    },
+    {
+      "id": "pm-005",
+      "gameName": "Valheim",
+      "xPosition": 4.0,
+      "yPosition": 7.5
     },
     {
       "id": "pm-006",
       "gameName": "Destiny 2",
-      "xPosition": 5.0,
-      "yPosition": 8.0
+      "xPosition": 7.0,
+      "yPosition": 3.0
     },
     {
       "id": "pm-007",
-      "gameName": "The Elder Scrolls Online",
-      "xPosition": 8.0,
-      "yPosition": 9.0
+      "gameName": "The Forest",
+      "xPosition": 7.0,
+      "yPosition": 6.5
     },
     {
       "id": "pm-008",
       "gameName": "Warframe",
-      "xPosition": 6.0,
-      "yPosition": 7.0
+      "xPosition": 5.0,
+      "yPosition": 3.5
     },
     {
       "id": "pm-009",
-      "gameName": "Scum",
-      "xPosition": 2.0,
-      "yPosition": 5.0
+      "gameName": "Lost Ark",
+      "xPosition": 6.0,
+      "yPosition": 2.0
     },
     {
       "id": "pm-010",
-      "gameName": "Ark: Survival Evolved",
-      "xPosition": 4.0,
-      "yPosition": 5.0
+      "gameName": "Scum",
+      "xPosition": 2.0,
+      "yPosition": 8.0
     }
   ],
   "alternativeViews": [
     {
       "xAxis": {
-        "axisName": "Monetization Model vs. Content Cadence",
-        "lowLabel": "F2P & Frequent Updates",
-        "highLabel": "Premium Purchase & Quarterly DLC"
+        "axisName": "Individual Progression vs World Permanence",
+        "lowLabel": "Low Character Power / Flat",
+        "highLabel": "Steep Character Power / Persistent"
       },
       "yAxis": {
-        "axisName": "Microtransactions Heavy vs. Subscriptions & Value-added Services",
-        "lowLabel": "Microtransactions Heavy",
-        "highLabel": "Subscriptions & Value-added Services"
+        "axisName": "World Permanence vs Cyclical Wipes",
+        "lowLabel": "Static / Never Wipes",
+        "highLabel": "Dynamic / Frequent Wipes"
       },
       "positions": [
         {
-          "id": "av1-pm-001",
+          "id": "av1-001",
           "gameName": "Dune: Awakening",
+          "xPosition": 5.0,
+          "yPosition": 4.0
+        },
+        {
+          "id": "av1-002",
+          "gameName": "Rust",
+          "xPosition": 9.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "av1-003",
+          "gameName": "Conan Exiles",
           "xPosition": 7.0,
+          "yPosition": 5.0
+        },
+        {
+          "id": "av1-004",
+          "gameName": "Star Wars: The Old Republic",
+          "xPosition": 9.0,
+          "yPosition": 0.0
+        },
+        {
+          "id": "av1-005",
+          "gameName": "Valheim",
+          "xPosition": 6.0,
           "yPosition": 7.0
+        },
+        {
+          "id": "av1-006",
+          "gameName": "Destiny 2",
+          "xPosition": 8.0,
+          "yPosition": 0.0
+        },
+        {
+          "id": "av1-007",
+          "gameName": "The Forest",
+          "xPosition": 5.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "av1-008",
+          "gameName": "Warframe",
+          "xPosition": 10.0,
+          "yPosition": 1.0
+        },
+        {
+          "id": "av1-009",
+          "gameName": "Lost Ark",
+          "xPosition": 8.0,
+          "yPosition": 0.0
+        },
+        {
+          "id": "av1-010",
+          "gameName": "Scum",
+          "xPosition": 8.0,
+          "yPosition": 8.0
         }
       ]
     },
     {
       "xAxis": {
-        "axisName": "Accessibility vs. Gameplay Depth",
-        "lowLabel": "Casual-Friendly Mechanics",
-        "highLabel": "Complex Systems & Mechanics"
+        "axisName": "Monetization Harshness vs Time Commitment",
+        "lowLabel": "One-Time Purchase / Minimal MTX",
+        "highLabel": "FOMO & Pay-to-Progress / Full-Time Grind"
       },
       "yAxis": {
-        "axisName": "Entry-Level Content vs. Advanced Mastery & Lore",
-        "lowLabel": "Entry-Level Content",
-        "highLabel": "Advanced Mastery & Lore"
+        "axisName": "Time Commitment Required",
+        "lowLabel": "Casual Sessions (30 min)",
+        "highLabel": "Full-Time Grind (40+ hrs/week)"
       },
       "positions": [
         {
-          "id": "av2-pm-001",
+          "id": "av2-001",
           "gameName": "Dune: Awakening",
+          "xPosition": 5.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "av2-002",
+          "gameName": "Rust",
+          "xPosition": 4.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "av2-003",
+          "gameName": "Conan Exiles",
+          "xPosition": 4.0,
+          "yPosition": 6.0
+        },
+        {
+          "id": "av2-004",
+          "gameName": "Star Wars: The Old Republic",
+          "xPosition": 8.0,
+          "yPosition": 5.0
+        },
+        {
+          "id": "av2-005",
+          "gameName": "Valheim",
+          "xPosition": 2.0,
+          "yPosition": 4.0
+        },
+        {
+          "id": "av2-006",
+          "gameName": "Destiny 2",
           "xPosition": 8.0,
           "yPosition": 8.0
+        },
+        {
+          "id": "av2-007",
+          "gameName": "The Forest",
+          "xPosition": 2.0,
+          "yPosition": 3.0
+        },
+        {
+          "id": "av2-008",
+          "gameName": "Warframe",
+          "xPosition": 6.0,
+          "yPosition": 7.0
+        },
+        {
+          "id": "av2-009",
+          "gameName": "Lost Ark",
+          "xPosition": 9.0,
+          "yPosition": 9.0
+        },
+        {
+          "id": "av2-010",
+          "gameName": "Scum",
+          "xPosition": 4.0,
+          "yPosition": 7.0
         }
       ]
     }
