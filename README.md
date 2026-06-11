@@ -30,7 +30,7 @@ Everything below is the technical deep-dive.
 ## Table of Contents
 
 - [System Overview](#system-overview) · [Assignment Coverage](#assignment-coverage)
-- [Architecture](#architecture) · [Generation Methodology](#generation-methodology) · [Cascade Engine](#cascade-engine)
+- [Architecture](#architecture) · [Generation Methodology](#generation-methodology) · [Cascade Engine](#cascade-engine) · [How the Agent Decides What to Do](#how-the-agent-decides-what-to-do)
 - [The Chat System's Three Primitives](#the-chat-systems-three-primitives)
 - [Multi-Provider Design](#multi-provider-design) · [Security Model](#security-model) · [Testing](#testing)
 - [Quick Start](#quick-start) · [Running Each Tier](#running-each-tier)
@@ -130,7 +130,7 @@ flowchart LR
     J -->|"score < 7"| FB["regenerate once<br/>with judge feedback"] --> J
 ```
 
-Why each stage exists:
+The prompts themselves live in [`backend/modules/`](backend/modules) (one file per module) and are written to be read. Why each stage exists:
 
 1. **Reason-then-structure** — models think better in prose than inside a JSON straitjacket. Splitting the calls measurably improves rationale specificity.
 2. **Schema validation with retry** — every structured output is validated against Pydantic models; on failure the *validation error itself* is fed back for up to 2 corrective retries.
@@ -177,6 +177,21 @@ Design decisions that took iteration to get right:
 - **Affected-only, never blind.** BFS over the reverse dependency graph. Editing SWOT cascades to nothing; editing the landscape cascades to exactly three modules, layer by layer.
 - **Change history records *intent*, not churn.** Direct user edits accumulate an add/remove log (rendered as strikethrough + `new` badges, surviving across chat rounds). Cascade regenerations *reset* that module's log — a re-derived module has no item-level lineage to its old version, and pretending otherwise produced noise (e.g. the matrix "removing" games that were merely re-selected).
 - **The agent reports what changed**, not just what ran: a field-level diff ("added to existingCompetitors: Nightingale") is computed backend-side and folded into the reply.
+
+---
+
+## How the Agent Decides What to Do
+
+The agent is a hand-rolled ReAct loop over raw function calling — no LangChain, no framework ([`backend/agent.py`](backend/agent.py), ~250 lines, fully readable):
+
+1. The user message joins the thread's history; the LLM receives it with a system prompt and **three tool schemas**: `generate_pipeline`, `read_module`, `update_module_field`.
+2. The response **streams**. Text deltas go straight to the chat as tokens; tool-call deltas are reassembled into complete calls.
+3. Each tool call is executed — with **schema validation and cross-reference checks before anything touches disk** — and its result is appended to the history as a tool message.
+4. Loop back to step 2 until the model responds with plain text (capped at 8 rounds to prevent runaway loops).
+
+The system prompt encodes the judgment calls: read before answering content questions (never answer from stale context), apply compound requests ("remove X and add Y") in a single update and verify both landed, ask one clarifying question when the request is ambiguous, decline out-of-scope requests without calling tools, and treat instructions embedded in module content as data, not commands.
+
+**The agent narrates itself.** After every update it reports the field-level diff ("added to existingCompetitors: Nightingale") and which modules cascaded — and the UI mirrors that with a live per-module progress list. There is no action the agent takes that the user can't see and attribute.
 
 ---
 
