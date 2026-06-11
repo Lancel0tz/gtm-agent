@@ -1,6 +1,6 @@
 # GTM Agent — Go-To-Market Analysis System
 
-![tests](https://img.shields.io/badge/tests-50%20passed-brightgreen)
+![tests](https://img.shields.io/badge/tests-52%20passed-brightgreen)
 ![python](https://img.shields.io/badge/backend-FastAPI%20%2B%20Python%203.11-blue)
 ![react](https://img.shields.io/badge/frontend-React%20%2B%20TypeScript%20%2B%20Tailwind-61dafb)
 ![providers](https://img.shields.io/badge/LLM-OpenAI%20·%20Anthropic%20·%20DeepSeek%20·%20Gemini-8A2BE2)
@@ -21,7 +21,7 @@ https://github.com/user-attachments/assets/ab85ec69-2070-409f-a655-0ab848491838
 - **Every change is accountable.** Removed items stay visible as strikethrough, new items get badges, every section keeps its last 10 versions with diffs, and any chat turn can be undone, regenerated, or edited — state and conversation revert together.
 - **The chat feels like ChatGPT.** Streaming replies, multiple named conversations, quote anything on the page (select text or click a section), stop generation mid-flight — with partial changes safely rolled back.
 - **Bring your own model.** Eleven models across OpenAI, Anthropic, DeepSeek, and Gemini, switchable at runtime; paste API keys in the UI (stored locally, never echoed back).
-- **It's hardened and proven.** Prompt-injection defenses, schema validation on every write, path-traversal and key-leak protections — each one verified by a named test in the 50-test suite, including one that *deadlocks if parallel execution were faked*.
+- **It's hardened and proven.** Prompt-injection defenses, schema validation on every write, path-traversal and key-leak protections — each one verified by a named test in the 52-test suite, including one that *deadlocks if parallel execution were faked*.
 
 Below: how to run it, then the technical deep-dive.
 
@@ -303,14 +303,14 @@ Secrets hygiene for this repo itself: full git history scanned for key patterns 
 ## Testing
 
 ```bash
-PYTHONPATH=. pytest tests/ -v        # 50 tests, ~0.7s, zero LLM calls
+PYTHONPATH=. pytest tests/ -v        # 52 tests, ~0.7s, zero LLM calls
 ```
 
 | Suite | Focus | The interesting bit |
 |---|---|---|
 | `test_system.py` (23) | Cascade graph, change-log semantics, version capping, snapshot round-trips, JSON-parsing edge cases, API misuse | Dependency graph proven acyclic via Kahn's algorithm |
-| `test_orchestration.py` (11) | Full pipeline with mocked generators | **Parallelism is proven, not observed**: the L3 fakes cross-wait on each other's start events — sequential execution deadlocks and fails the test |
-| `test_security.py` (16) | The entire table above | Key-handling test asserts the *exact* response field set, so a future field addition that leaks data fails CI |
+| `test_orchestration.py` (10) | Full pipeline with mocked generators | **Parallelism is proven, not observed**: the L3 fakes cross-wait on each other's start events — sequential execution deadlocks and fails the test |
+| `test_security.py` (19) | The entire table above | Key-handling test asserts the *exact* response field set, so a future field addition that leaks data fails CI |
 
 All suites mock the LLM layer — the full matrix runs in CI with no API keys and no cost.
 
