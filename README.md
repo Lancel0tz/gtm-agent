@@ -35,7 +35,7 @@ Below: how to run it, then the technical deep-dive.
 | **Run it** | [Quick Start](#quick-start) · [Running Each Tier](#running-each-tier) |
 | **How it works** | [Architecture](#architecture) · [Generation Methodology](#generation-methodology) · [Cascade Engine](#cascade-engine) · [How the Agent Decides What to Do](#how-the-agent-decides-what-to-do) · [Chat Primitives](#the-chat-systems-three-primitives) · [Multi-Provider Design](#multi-provider-design) |
 | **Verified** | [Security Model](#security-model) · [Testing](#testing) |
-| **Reflections** | [Design Details Worth Noticing](#design-details-worth-noticing) · [Trade-offs](#trade-offs) |
+| **Reflections** | [Design Details Worth Noticing](#design-details-worth-noticing) · [Extending It](#extending-it) · [Trade-offs](#trade-offs) |
 
 ---
 
@@ -328,6 +328,19 @@ Small decisions that don't fit a diagram:
 - **Suggestion prompts adapt.** The Dune brief offers the spec's official Nightingale test case as a one-click suggestion; other briefs get suggestions built from their own competitors.
 - **Generic brief parsing.** Key facts (title/genre/platform/price) are regex-extracted from any brief structure — nothing about the Dune brief is hardcoded (an early bug: SWOT prompts said "Dune: Awakening" literally; now everything derives from the brief).
 - **Export carries the evidence.** The one-click Markdown report includes Steam verification flags, all three positioning lenses, and the judge's scores — the methodology travels with the output.
+
+## Extending It
+
+The architecture is registry- and schema-driven, so the common growth paths are local, mechanical changes:
+
+| To add… | You touch | Why it's cheap |
+|---|---|---|
+| **A new LLM provider** | one ~5-line entry in the provider registry ([`backend/llm.py`](backend/llm.py)) | DeepSeek and Gemini already ride the OpenAI-compatible client path; only the `base_url` and model list differ |
+| **A new analysis module** | a Pydantic schema, a generator file, one edge in `DEPENDENCY_GRAPH` | Cascade order, parallel batching, quality gate, versioning, change tracking, and the SSE pipeline all derive from the graph — none of them are per-module code |
+| **A new game brief** | drop a `.md` into [`inputs/`](inputs) | Workspaces, threads, and the brief switcher pick it up automatically; fact parsing is structure-based, not Dune-specific |
+| **A new grounding source** (IGDB, console storefronts) | the verification step in [`backend/modules/competitive.py`](backend/modules/competitive.py) | `verified` is deliberately tri-state (`true/false/null`), so additional sources slot in without schema or UI changes |
+| **A real database** | the `Pipeline` class ([`backend/pipeline.py`](backend/pipeline.py)) | It is the single owner of all persisted state — modules, versions, change logs, quality reviews — so swapping JSON files for SQLite touches one file |
+| **A new judge rubric** | one entry in [`backend/evaluator.py`](backend/evaluator.py) | Rubrics are data, not code |
 
 ## Trade-offs
 
