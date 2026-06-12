@@ -9,7 +9,7 @@
 
 The analysis isn't a static report. It's a **living document you talk to**: tell the chat agent *"add Nightingale as a competitor"* and it updates the competitive landscape, then automatically rewrites every downstream section that depends on it — while you watch each card regenerate in real time. Disagree with a change? One click undoes it, modules and all.
 
-> 🎬 **Full demo (4 min, with narration)** — generating the analysis, chat-driven cascade updates with live parallel regeneration, quality reviews and Steam verification, cross-module exploration, quoting, undo, and export:
+> 🎬 **Full demo** — generating the analysis, chat-driven cascade updates with live parallel regeneration, quality reviews and Steam verification, cross-module exploration, quoting, undo, and export:
 
 https://github.com/user-attachments/assets/ab85ec69-2070-409f-a655-0ab848491838
 
